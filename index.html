@@ -1,0 +1,2074 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 
+      ⠀⠀⣠⣤⣤⣤⣀
+   ⠀⣴⣿⣿⣿⣿⣿⣿⣦
+  ⣾⣿⣿⡿⠿⠿⠿⣿⣿⣿⣷
+ ⣿⣿⣿⡇   ╭╮   ⢸⣿⣿⣿
+ ⣿⣿⣿⡇  (╬ಠ益ಠ)  ⢸⣿⣿⣿
+ ⠹⣿⣿⣧    ╰─╯    ⣸⣿⣿⠏
+   ⠙⠻⢿⣿⣶⣶⣿⡿⠟⠋
+
+nyari apa bang?
+-->
+
+<head>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-YMWDE0VTD3");
+  </script>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#000" />
+  <meta name="description"
+    content="David Saputra | Portfolio, Visit and know about me & my projects/designs. I value simple content structure, clean design patterns, and thoughtful interactions." />
+  <meta name="keywords"
+    content="david saputra,david saputra portfolio,David Saputra Portfolio,davidsaputra,david saputra site,David Saputra Site,david saputra me,david saputra web,david saputra github,davidsaputra site,davidsaputra uiverse,uiverse,david saputra uiverse,david saputra frontend developer,frontend developer,david saputra jaipur,david jaipur" />
+  <meta name="author" content="David Saputra" />
+  <meta property="og:image" content="https://www.vinodjangid.site/src/png/Preview-card-min.png" />
+  <meta property="og:title" content="David Saputra | Portfolio" />
+  <meta property="og:description"
+    content="Hi! My name is David. I'm a web developer and digital visual artist. Visit and know about me & my projects/designs. I value simple content structure, clean design patterns, and thoughtful interactions." />
+
+  <meta property="og:url" content="https://vinodjangid.site" />
+  <meta property="og:site_name" content="David Saputra Portfolio" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@David_Saputra07" />
+  <meta name="twitter:title" content="David Saputra | Portfolio" />
+  <meta name="twitter:description"
+    content="Hi! My name is David. I'm a web developer and digital visual artist. Visit and know about me & my projects/designs. I value simple content structure, clean design patterns, and thoughtful interactions." />
+  <meta name="twitter:image" content="https://www.vinodjangid.site/src/png/Preview-card-min.png" />
+  <title>David Saputra | Portfolio</title>
+  <link rel="icon" type="image/x-icon" href="src/png/nav-avatar.png" />
+  <!-- aos cdn -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <!-- vanilla-tilt for 3D effect -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+  <!-- stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- google fonts-->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Passions+Conflict&family=Orbitron&family=Fira+Code&family=Six+Caps" />
+
+<body class="body">
+  <!-- Page Transition -->
+  <div class="page-transition" id="pageTransition">
+    <div class="page-transition-text">Loading...</div>
+  </div>
+
+  <!-- Easter Egg Element -->
+  <div class="easter-egg" id="easterEgg">🎉</div>
+
+  <audio loop="" id="audioPlayer" style="display: none">
+    <source src="src/mp3/preloader.mp3" type="audio/mp3" />
+  </audio>
+  <div id="preloader"></div>
+  <noscript>Allow Javascript</noscript>
+
+  <header>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+    <!-- Particle Canvas Background -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+    <!-- Spotlight Cursor Effect -->
+    <div class="spotlight" id="spotlight"></div>
+
+    <div class="cursor-inner" id="cursor-inner"></div>
+    <div class="cursor-outer" id="cursor-outer"></div>
+
+    <div class="navbar" id="navbar">
+      <div class="hey">Hey!</div>
+      <div class="logo" tabindex="0" aria-label="david saputra logo">
+        <div class="logo-top">
+          <img src="src/png/nav-avatar.png" alt="animation-head" id="nav-avatar" />
+        </div>
+      </div>
+      <div class="navbar-tabs" id="navbar-tabs">
+        <ul class="navbar-tabs-ul">
+          <li class="home activeThistab" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="100">
+            <a href="#home" tabindex="0" aria-label="Home menu button">
+              &#60;/Home&#62;
+            </a>
+          </li>
+
+          <li class="about" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="300">
+            <a href="#about" aria-label="about menu button">
+              &#60;/AboutMe&#62;
+            </a>
+          </li>
+
+          <li class="skills" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="500">
+            <a href="#skills" aria-label="skills menu button">
+              &#60;/Skills&#62;
+            </a>
+          </li>
+
+          <li class="projects" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="700">
+            <a href="#projects" aria-label="projects menu button">
+              &#60;/Projects&#62;
+            </a>
+          </li>
+
+          <li class="blog" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="900">
+            <a href="blog.html" aria-label="blog menu button">
+              &#60;/Blog&#62;
+            </a>
+          </li>
+
+          <li class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="1100">
+            <a href="#footer" aria-label="Contact menu button">
+              &#60;/Contact&#62;
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- navbar tabs ends -->
+    </div>
+  </header>
+  <!-- header ends here -->
+
+  <main>
+    <!-- hamburger -->
+    <div class="hamburger" id="hamburger" data-aos="fade">
+      <div class="hamburgerbase">
+        <button id="hamburger-button" onclick="hamburgerMenu()" tabindex="0" aria-label="Menu Button">
+          <span class="burger-bar" id="burger-bar1"></span>
+          <span class="burger-bar" id="burger-bar2"></span>
+          <span class="burger-bar" id="burger-bar3"></span>
+        </button>
+      </div>
+    </div>
+    <!-- hamburger -->
+    <div class="mobiletogglemenu" id="mobiletogglemenu">
+      <ul class="mobile-navbar-tabs-ul" id="mobile-ul">
+        <li id="home-mobile-tab" class="mobile-navbar-tabs-li home activeThismobiletab" onclick="hidemenubyli()">
+          <a href="#home" tabindex="0" aria-label="Home menu button">
+            &#60;/Home&#62;
+          </a>
+        </li>
+
+        <li id="aboutme-mobile-tab" class="mobile-navbar-tabs-li about" onclick="hidemenubyli()">
+          <a href="#about" tabindex="0" aria-label="about menu button">
+            &#60;/AboutMe&#62;
+          </a>
+        </li>
+        <li id="skills-mobile-tab" class="mobile-navbar-tabs-li skills" onclick="hidemenubyli()">
+          <a href="#skills" tabindex="0" aria-label="skills menu button">
+            &#60;/Skills&#62;
+          </a>
+        </li>
+        <li id="projects-mobile-tab" class="mobile-navbar-tabs-li projects" onclick="hidemenubyli()">
+          <a href="#projects" tabindex="0" aria-label="projects menu button">
+            &#60;/Projects&#62;
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- mobile toggle menu ends -->
+
+    <section class="landing-page-container" id="home">
+      <div class="blob"></div>
+
+      <div class="text-content">
+        <article id="hello-friend" data-aos="fade-up" data-aos-delay="0">
+          <p class="jello">h</p>
+          <p class="jello">a</p>
+          <p class="jello">l</p>
+          <p class="jello">l</p>
+          <p class="jello">o</p>
+          <p class="jello">(</p>
+          <p class="jello">)</p>
+          <p class="jello">;</p>
+          &nbsp;
+          <p class="jello">I</p>
+          <p class="jello">'</p>
+          <p class="jello">m</p>
+        </article>
+        <article id="name" data-aos="fade-up" data-aos-delay="200">
+          <p class="jello">D</p>
+          <p class="jello">a</p>
+          <p class="jello">v</p>
+          <p class="jello">i</p>
+          <p class="jello">d</p>
+          &nbsp;
+          <p class="jello">S</p>
+          <p class="jello">a</p>
+          <p class="jello">p</p>
+          <p class="jello">u</p>
+          <p class="jello">t</p>
+          <p class="jello">r</p>
+          <p class="jello">a</p>
+          <p class="jello">.</p>
+        </article>
+
+        <article id="work" data-aos="fade-up" data-aos-delay="400">
+          <div>
+            <p class="jello">I</p>
+          </div>
+          <div>
+            <p class="jello">d</p>
+            <p class="jello">e</p>
+            <p class="jello">s</p>
+            <p class="jello">i</p>
+            <p class="jello">g</p>
+            <p class="jello">n</p>
+          </div>
+          <div>
+            <p class="jello">&</p>
+          </div>
+          <div>
+            <p class="jello">c</p>
+            <p class="jello">o</p>
+            <p class="jello">d</p>
+            <p class="jello">e</p>
+          </div>
+          <div>
+            <p class="jello">f</p>
+            <p class="jello">o</p>
+            <p class="jello">r</p>
+          </div>
+          <div>
+            <p class="jello">w</p>
+            <p class="jello">e</p>
+            <p class="jello">b</p>
+            <p class="jello">.</p>
+          </div>
+        </article>
+        <p id="info-para" data-aos="fade-up" data-aos-delay="600">
+          Web Developer with experience of Digital Concept Arts, Frontend Web
+          Designs. I Love fun Web UI, collaboration and making products.<br />
+          <br />
+          I value simple content structure, clean design patterns, and
+          thoughtful interactions.
+        </p>
+        <div class="contact-btn-div" data-aos="fade-up" data-aos-delay="800">
+          <a href="mailto:infovinodjangid@gmail.com" tabindex="-1">
+            <button class="letsTalkBtn">
+              <p class="letsTalkBtn-text">Let's Talk!</p>
+              <span class="letsTalkBtn-BG"></span>
+            </button></a>
+          <div class="setting-container" id="setting-container">
+            <input type="checkbox" id="switchforsetting" onclick="settingtoggle()" />
+
+            <label for="switchforsetting" class="needtobeinvert" id="labelforsetting" tabindex="0"
+              aria-label="settings for sound and appearance"></label>
+
+            <div class="visualmodetogglebuttoncontainer" id="visualmodetogglebuttoncontainer">
+              <input type="checkbox" id="switchforvisualmode" onclick="visualmode()" />
+              <label for="switchforvisualmode" id="labelforvisualmode" tabindex="0"
+                aria-label="switch appearance"></label>
+            </div>
+
+            <div class="soundtogglebuttoncontainer" id="soundtogglebuttoncontainer">
+              <input type="checkbox" id="switchforsound" onclick="playpause()" />
+              <label for="switchforsound" id="labelforsound" tabindex="0" aria-label="switch sound"
+                class="needtobeinvert"></label>
+            </div>
+          </div>
+          <!-- setting div ends -->
+        </div>
+        <!-- contact-btn-div -->
+      </div>
+
+    </section>
+    <!-- landing page ends here -->
+    <section class="about-section-container" id="about" data-aos="fade-up">
+      <div class="about-section">
+        <div class="section-heading">
+          <h2 class="section-heading-article" tabindex="0" aria-label="About me heading">
+            &#60;/AboutMe&#62;
+          </h2>
+          <p class="sectionHeadingP"></p>
+        </div>
+
+        <div class="info-dp-section">
+          <div class="about-info">
+            <p tabindex="0">
+              Hi! My name is David. I'm a web developer and digital visual artist. I love creating things that exist on
+              the internet. My interest in web development started in 2021 when I decided to upload my digital concept
+              arts online.
+            </p>
+            <br />
+            <p tabindex="0">
+              Instead of creating an online Concepts Art website, i started
+              enjoying web development. Creating custom things for web taught
+              me a lot about design & development!
+            </p>
+            <br />
+            <p tabindex="0">
+              My main focus these days is building interesting & creative web
+              designs, I like to code things from scratch, and enjoy bringing
+              ideas to life in the browser.
+            </p>
+            <!-- Resume button -->
+            <button class="resume-btn" id="resume-btn" onclick="openURL()">
+              <div class="sign">
+                <svg viewBox="0 0 640 512">
+                  <path
+                    d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-167l80 80c9.4 9.4 24.6 9.4 33.9 0l80-80c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-39 39V184c0-13.3-10.7-24-24-24s-24 10.7-24 24V318.1l-39-39c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9z" />
+                </svg>
+              </div>
+
+              <div class="text">Resume</div>
+            </button>
+          </div>
+
+          <div class="dp" data-aos="fade-up">
+            <img src="src/webp/about.png" alt="David Saputra" tabindex="0" aria-label="image of david" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- about section ends  -->
+
+    <section class="skills-section-container" id="skills">
+      <div class="skills-section">
+        <div class="section-heading" data-aos="fade-up">
+          <h2 class="section-heading-article" tabindex="0" aria-label="skills heading">
+            &#60;/Skills&#62;
+          </h2>
+          <p class="sectionHeadingP"></p>
+        </div>
+
+        <div class="frontend-dev-section">
+          <h3 class="frontend-dev-heading" data-aos="fade-up" tabindex="0"
+            aria-label="As a frontend a developer these are the skills i have">
+            Tech Stack
+          </h3>
+          <ul class="tech-stack-wrapper">
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/htmllogo.png" alt="Html skill" class="tech-stack-logo" />
+              <span class="tooltip">HTML</span>
+            </li>
+
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/csslogo.png" alt="css skill" class="tech-stack-logo" />
+              <span class="tooltip">CSS</span>
+            </li>
+
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/jslogo.png" alt="js skill" class="tech-stack-logo" />
+              <span class="tooltip">JS</span>
+            </li>
+
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/tailwind.png" alt="tailwind skill" class="tech-stack-logo" />
+              <span class="tooltip">TAILWIND</span>
+            </li>
+
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/reactlogo.png" alt="react skill" class="tech-stack-logo" />
+              <span class="tooltip">REACTJS</span>
+            </li>
+
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/nextlogo.png" alt="nextjs skill" class="tech-stack-logo" />
+              <span class="tooltip">NEXTJS</span>
+            </li>
+
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/node.png" alt="nodejs skill" class="tech-stack-logo" />
+              <span class="tooltip">NODEJS</span>
+            </li>
+
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/githublogo.png" alt="github skill" class="tech-stack-logo needtobeinvert" />
+              <span class="tooltip">GITHUB</span>
+            </li>
+
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/gitlogo.png" alt="git skill" class="tech-stack-logo" />
+              <span class="tooltip">GIT</span>
+            </li>
+
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/tinacms.png" alt="tinacms skill" class="tech-stack-logo" />
+              <span class="tooltip">TINACMS</span>
+            </li>
+
+
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/clogo.png" alt="c language skill" class="tech-stack-logo" />
+              <span class="tooltip">C</span>
+            </li>
+
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/cpplogo.png" alt="c++ language skill" class="tech-stack-logo" />
+              <span class="tooltip">C++</span>
+            </li>
+
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/pslogo.png" alt="photoshop skill" class="tech-stack-logo" />
+              <span class="tooltip">ADOBE PS</span>
+            </li>
+
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/figmalogo.png" alt="figma skill" class="tech-stack-logo" />
+              <span class="tooltip">FIGMA</span>
+            </li>
+
+            <li class="tech-stack-box" data-aos="fade-up">
+              <img src="./src/png/ailogo.png" alt="adobe illustrator skill" class="tech-stack-logo" />
+              <span class="tooltip">ADOBE AI</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- skills section ends -->
+
+    <!-- Fun Facts Bento Grid Section -->
+    <section class="fun-facts-section" id="funfacts">
+      <div class="fun-facts-container">
+        <div class="section-heading" data-aos="fade-up">
+          <h2 class="section-heading-article scramble-text" tabindex="0">
+            &#60;/FunFacts&#62;
+          </h2>
+          <p class="sectionHeadingP"></p>
+        </div>
+
+        <div class="bento-grid" data-aos="fade-up">
+          <!-- Large Card - Current Status -->
+          <div class="bento-card bento-large status-card" data-tilt>
+            <div class="bento-emoji">💻</div>
+            <h3>Currently</h3>
+            <p class="status-text">Building cool stuff & breaking things (then fixing them)</p>
+            <div class="status-indicator">
+              <span class="pulse-dot"></span>
+              <span>Available for work</span>
+            </div>
+          </div>
+
+          <!-- Medium Card - Coffee Counter -->
+          <div class="bento-card bento-medium coffee-card" data-tilt>
+            <div class="bento-emoji">☕</div>
+            <h3>Coffee Today</h3>
+            <div class="counter-display" id="coffeeCounter">0</div>
+            <button class="counter-btn" onclick="incrementCoffee()">+1 Cup</button>
+          </div>
+
+          <!-- Small Card - Music -->
+          <div class="bento-card bento-small music-card" data-tilt>
+            <div class="bento-emoji rotating">🎵</div>
+            <p>Coding to Lo-Fi beats</p>
+          </div>
+
+          <!-- Medium Card - Code Stats -->
+          <div class="bento-card bento-medium stats-card" data-tilt>
+            <h3>This Week</h3>
+            <div class="stats-grid">
+              <div class="stat-item">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Bugs Fixed</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">404</div>
+                <div class="stat-label">Errors Found</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Small Card - Location -->
+          <div class="bento-card bento-small location-card" data-tilt>
+            <div class="bento-emoji">📍</div>
+            <p>Indonesia 🇮🇩</p>
+          </div>
+
+          <!-- Large Card - Tech Marquee -->
+          <div class="bento-card bento-wide marquee-card">
+            <h3>Favorite Stack</h3>
+            <div class="marquee">
+              <div class="marquee-content">
+                <span>React ⚛️</span>
+                <span>Next.js ▲</span>
+                <span>TypeScript 💙</span>
+                <span>Tailwind 🎨</span>
+                <span>Node.js 🟢</span>
+                <span>React ⚛️</span>
+                <span>Next.js ▲</span>
+                <span>TypeScript 💙</span>
+                <span>Tailwind 🎨</span>
+                <span>Node.js 🟢</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Small Card - Random Fact -->
+          <div class="bento-card bento-small random-card" data-tilt onclick="randomFact()">
+            <div class="bento-emoji">🎲</div>
+            <p id="randomFactText">Click me!</p>
+          </div>
+
+          <!-- Medium Card - Quote -->
+          <div class="bento-card bento-medium quote-card" data-tilt>
+            <div class="quote-icon">"</div>
+            <p class="quote-text">Code is poetry written in logic</p>
+            <p class="quote-author">- Some Developer</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- fun facts section ends -->
+
+    <section class="projects-section-container" id="projects">
+      <div class="projects-section-div">
+        <div class="section-heading" data-aos="fade-up">
+          <h2 class="section-heading-article" tabindex="0" aria-label="My projects starts from here">
+            &#60;/Projects&#62;
+          </h2>
+          <p class="sectionHeadingP"></p>
+        </div>
+        <div class="projects-slider-container">
+          <!-- Projects Grid (formerly slider) -->
+          <div class="projects-grid">
+
+            <!-- Project Card 1 -->
+            <div class="gallery-card project-card" data-aos="fade-up">
+              <div class="gallery-card-image">
+                <img src="src/webp/jarwinn.png" alt="jarwinn website preview image" />
+              </div>
+              <div class="gallery-card-content">
+                <h3>Jarwinn Official Website</h3>
+                <p>A professional company website showcasing services and portfolio with modern design and seamless user
+                  experience.</p>
+                <div class="gallery-buttons">
+                  <a href="https://jarwinn.co.id/" target="_blank" class="gallery-btn" aria-label="Visit Jarwinn Live">
+                    <span>View Project</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div class="gallery-card project-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="gallery-card-image">
+                <img src="src/webp/solis.png" alt="solis inverters website preview image" />
+              </div>
+              <div class="gallery-card-content">
+                <h3>Solis Inverters Indonesia</h3>
+                <p>Official website for Solis Inverters Indonesia, featuring solar energy solutions with clean interface
+                  and comprehensive product information.</p>
+                <div class="gallery-buttons">
+                  <a href="https://www.solisinverters.co.id/" target="_blank" class="gallery-btn"
+                    aria-label="Visit Solis Inverters Live">
+                    <span>View Project</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Card 3 -->
+            <div class="gallery-card project-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="gallery-card-image">
+                <img src="src/webp/webkarbit.png" alt="webkarbit website preview image" />
+              </div>
+              <div class="gallery-card-content">
+                <h3>WebKarbit UI Design</h3>
+                <p>A creative UI/UX design showcase featuring modern web interface concepts with attention to detail and
+                  user experience.</p>
+                <div class="gallery-buttons">
+                  <a href="https://dav-uiweb.netlify.app/" target="_blank" class="gallery-btn"
+                    aria-label="Visit WebKarbit Live">
+                    <span>View Project</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Card 4 -->
+            <div class="gallery-card project-card" data-aos="fade-up">
+              <div class="gallery-card-image">
+                <img src="src/webp/sefashion.png" alt="sefashion website preview image" />
+              </div>
+              <div class="gallery-card-content">
+                <h3>SEFashion</h3>
+                <p>A creative UI/UX design showcase featuring payment gateaway modern web interface concepts with
+                  attention to detail and user experience.</p>
+                <div class="gallery-buttons">
+                  <a href="http://sefashion.my.id/" target="_blank" class="gallery-btn"
+                    aria-label="Visit SEFashion Live">
+                    <span>View Project</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Card 5 -->
+            <div class="gallery-card project-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="gallery-card-image">
+                <img src="src/webp/antbox.png" alt="antbox website preview image" />
+              </div>
+              <div class="gallery-card-content">
+                <h3>ANTBOX Storage Website</h3>
+                <p>Official website for Antbox Indonesia featuring modern energy storage solutions with professional
+                  design and detailed product showcase.</p>
+                <div class="gallery-buttons">
+                  <a href="https://antboxindonesia.com/" target="_blank" class="gallery-btn"
+                    aria-label="Visit Antbox Live">
+                    <span>View Project</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Card 6 -->
+            <div class="gallery-card project-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="gallery-card-image">
+                <img src="src/webp/car-rental.png" alt="car rental website preview image" />
+              </div>
+              <div class="gallery-card-content">
+                <h3>Car Rental System</h3>
+                <p>Complete car rental web application with PHP Native featuring booking system, vehicle management, and
+                  family-friendly interface.</p>
+                <div class="gallery-buttons">
+                  <a href="#" target="_blank" class="gallery-btn" aria-label="View Car Rental Project">
+                    <span>View Project</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Card 7 -->
+            <div class="gallery-card project-card" data-aos="fade-up">
+              <div class="gallery-card-image">
+                <img src="src/webp/portfolio.png" alt="portfolio website preview image" />
+              </div>
+              <div class="gallery-card-content">
+                <h3>Personal Portfolio</h3>
+                <p>Modern portfolio website built with Laravel showcasing creative 3D character design and interactive
+                  user interface elements.</p>
+                <div class="gallery-buttons">
+                  <a href="#" target="_blank" class="gallery-btn" aria-label="View Portfolio Project">
+                    <span>View Project</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Card 8 -->
+            <div class="gallery-card project-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="gallery-card-image">
+                <img src="src/webp/hotel.png" alt="hotel reservation website preview image" />
+              </div>
+              <div class="gallery-card-content">
+                <h3>Hotel Reservation System</h3>
+                <p>PHP-based hotel reservation system with elegant interface, room booking features, and complete
+                  management dashboard.</p>
+                <div class="gallery-buttons">
+                  <a href="#" target="_blank" class="gallery-btn" aria-label="View Hotel Reservation Project">
+                    <span>View Project</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Card 9 -->
+            <div class="gallery-card project-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="gallery-card-image">
+                <img src="src/webp/campus.png" alt="campus profile website preview image" />
+              </div>
+              <div class="gallery-card-content">
+                <h3>Campus Profile</h3>
+                <p>University profile website with PHP Native featuring anime-themed design, comprehensive information
+                  system, and student portal.</p>
+                <div class="gallery-buttons">
+                  <a href="#" target="_blank" class="gallery-btn" aria-label="View Campus Profile Project">
+                    <span>View Project</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Card 10 -->
+            <div class="gallery-card project-card" data-aos="fade-up">
+              <div class="gallery-card-image">
+                <img src="src/webp/konveksi.png" alt="konveksi app preview image" />
+              </div>
+              <div class="gallery-card-content">
+                <h3>Konveksi Management App</h3>
+                <p>Laravel-based convection management application with order tracking, inventory system, and modern
+                  minimalist design.</p>
+                <div class="gallery-buttons">
+                  <a href="#" target="_blank" class="gallery-btn" aria-label="View Konveksi App Project">
+                    <span>View Project</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Chat Room Section -->
+    <section class="chat-section-container" id="chat">
+      <div class="chat-section">
+        <div class="section-heading" data-aos="fade-up">
+          <h2 class="section-heading-article" tabindex="0" aria-label="Chat Room">
+            &#60;/ChatRoom&#62;
+          </h2>
+          <p class="sectionHeadingP"></p>
+        </div>
+
+        <div class="chat-container" data-aos="fade-up">
+          <div class="chat-header">
+            <div class="chat-header-info">
+              <span class="chat-icon">💬</span>
+              <h3>Community Chat</h3>
+            </div>
+            <div id="user-info" class="user-info hidden">
+              <img id="user-avatar" src="" alt="User Avatar" class="user-avatar">
+              <span id="user-name"></span>
+              <button id="logout-btn" class="logout-btn">Logout</button>
+            </div>
+          </div>
+
+          <div class="chat-messages" id="chat-messages">
+            <!-- Messages will be loaded here -->
+            <div class="chat-message system-message">
+              <p>Welcome to the chat room! Please login to join the conversation.</p>
+            </div>
+          </div>
+
+          <div class="chat-input-area">
+            <div id="login-overlay" class="login-overlay">
+              <button id="google-login-btn" class="google-login-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                    fill="#4285F4" />
+                  <path
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                    fill="#34A853" />
+                  <path
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                    fill="#FBBC05" />
+                  <path
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                    fill="#EA4335" />
+                </svg>
+                Login with Google
+              </button>
+            </div>
+            <form id="chat-form" class="chat-form hidden">
+              <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off">
+              <button type="submit" class="send-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <!-- main ends here -->
+
+  <footer id="footer">
+    <button class="fas" id="backtotopbutton" onclick="scrolltoTopfunction()">
+      <svg class="progress-ring" width="70" height="70">
+        <circle class="progress-ring-circle" stroke-width="3" fill="transparent" r="35" cx="35" cy="35" />
+      </svg>
+      <article aria-label="Back to top">&#8592;BACK TO TOP</article>
+    </button>
+    <div class="footer-background">
+      <div class="footer-blob"></div>
+    </div>
+    <div class="footer-foreground">
+      <div class="footercontainer">
+        <div class="two-words">
+          <article tabindex="0" aria-label="Learning, Living, and Leveling Up, my quote">
+            "Learning, Living, and Leveling Up."
+          </article>
+        </div>
+        <div class="social-media-container">
+          <div class="getintouch-heading">
+            <article>GetinTouch();</article>
+          </div>
+          <div class="logos">
+            <a href="https://www.instagram.com/pexel_ui/" target="_blank" tabindex="0" aria-label="My instagram"><svg
+                viewBox="0 0 448 512" class="SocialHandle">
+                <path
+                  d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+              </svg></a>
+
+            <a href="https://www.linkedin.com/in/vinod-jangid-b401111a1?original_referer=" target="_blank"
+              aria-label="My Linkdin"><svg class="SocialHandle" viewBox="0 0 448 512">
+                <path
+                  d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+              </svg></a>
+
+            <a href="https://github.com/DavidDSaputra" target="_blank" aria-label="My github"><svg viewBox="0 0 496 512"
+                class="SocialHandle">
+                <path
+                  d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
+              </svg></a>
+
+            <a href="mailto:infovinodjangid@gmail.com" target="_blank" aria-label="My G mail"><svg id="GmailLogo"
+                viewBox="0 0 512 512">
+                <path
+                  d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" />
+              </svg></a>
+          </div>
+        </div>
+        <div class="footer-avatar-container">
+
+        </div>
+        <div class="footer-bottom">
+          <article>
+            &#169; Design & Built by David Saputra
+          </article>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- footer ends here -->
+
+  <script src="main.js"></script>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+  <script>
+    function openURL() {
+      var url = "src/pdf/David's Resume.pdf";
+
+      window.open(url, "_blank");
+    }
+  </script>
+
+  <script>
+    const cursorInner = document.getElementById("cursor-inner");
+    const cursorOuter = document.getElementById("cursor-outer");
+    const links = document.querySelectorAll("a,label,button");
+
+    document.addEventListener("mousemove", function (e) {
+      const posX = e.clientX;
+      const posY = e.clientY;
+
+      cursorInner.style.left = `${posX}px`;
+      cursorInner.style.top = `${posY}px`;
+
+      // cursorOuter.style.left = `${posX}px`;
+      // cursorOuter.style.top = `${posY}px`;
+
+      cursorOuter.animate(
+        {
+          left: `${posX}px`,
+          top: `${posY}px`,
+        },
+        { duration: 500, fill: "forwards" }
+      );
+
+      links.forEach((link) => {
+        link.addEventListener("mouseenter", () => {
+          cursorInner.classList.add("hover");
+          cursorOuter.classList.add("hover");
+        });
+        link.addEventListener("mouseleave", () => {
+          cursorInner.classList.remove("hover");
+          cursorOuter.classList.remove("hover");
+        });
+      });
+    });
+  </script>
+
+  <!-- Scroll Progress Bar Script -->
+  <script>
+    const scrollProgressBar = document.getElementById('scrollProgressBar');
+
+    window.addEventListener('scroll', () => {
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (window.scrollY / windowHeight) * 100;
+      scrollProgressBar.style.width = scrolled + '%';
+    });
+  </script>
+
+  <!-- Spotlight Cursor Effect Script -->
+  <script>
+    const spotlight = document.getElementById('spotlight');
+
+    document.addEventListener('mousemove', (e) => {
+      spotlight.style.left = e.clientX + 'px';
+      spotlight.style.top = e.clientY + 'px';
+    });
+
+    document.addEventListener('mouseleave', () => {
+      spotlight.style.opacity = '0';
+    });
+
+    document.addEventListener('mouseenter', () => {
+      spotlight.style.opacity = '1';
+    });
+  </script>
+
+  <!-- Particle Canvas Script -->
+  <script>
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particlesArray = [];
+    let mouse = {
+      x: null,
+      y: null,
+      radius: 150
+    };
+
+    window.addEventListener('mousemove', function (event) {
+      mouse.x = event.x;
+      mouse.y = event.y;
+    });
+
+    window.addEventListener('resize', function () {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    class Particle {
+      constructor(x, y, directionX, directionY, size, color) {
+        this.x = x;
+        this.y = y;
+        this.directionX = directionX;
+        this.directionY = directionY;
+        this.size = size;
+        this.color = color;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+
+      update() {
+        if (this.x > canvas.width || this.x < 0) {
+          this.directionX = -this.directionX;
+        }
+        if (this.y > canvas.height || this.y < 0) {
+          this.directionY = -this.directionY;
+        }
+
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < mouse.radius + this.size) {
+          if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
+            this.x += 2;
+          }
+          if (mouse.x > this.x && this.x > this.size * 10) {
+            this.x -= 2;
+          }
+          if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
+            this.y += 2;
+          }
+          if (mouse.y > this.y && this.y > this.size * 10) {
+            this.y -= 2;
+          }
+        }
+
+        this.x += this.directionX;
+        this.y += this.directionY;
+        this.draw();
+      }
+    }
+
+    function init() {
+      particlesArray = [];
+      let numberOfParticles = (canvas.height * canvas.width) / 9000;
+
+      for (let i = 0; i < numberOfParticles; i++) {
+        let size = (Math.random() * 2) + 1;
+        let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+        let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+        let directionX = (Math.random() * 0.4) - 0.2;
+        let directionY = (Math.random() * 0.4) - 0.2;
+        let color = 'rgba(91, 143, 185, 0.8)';
+
+        particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+      }
+    }
+
+    function connect() {
+      let opacityValue = 1;
+      for (let a = 0; a < particlesArray.length; a++) {
+        for (let b = a; b < particlesArray.length; b++) {
+          let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+            + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+
+          if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+            opacityValue = 1 - (distance / 20000);
+            ctx.strokeStyle = 'rgba(74, 123, 167,' + opacityValue + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+      }
+      connect();
+    }
+
+    init();
+    animate();
+  </script>
+
+  <!-- 3D Tilt Effect for Tech Stack Only -->
+  <script>
+    setTimeout(() => {
+      // Apply tilt to tech stack boxes only
+      const techBoxes = document.querySelectorAll('.tech-stack-box');
+      VanillaTilt.init(techBoxes, {
+        max: 20,
+        speed: 300,
+        glare: true,
+        "max-glare": 0.5,
+        scale: 1.1
+      });
+    }, 1000);
+  </script>
+
+  <!-- Magnetic Button Effect -->
+  <script>
+    const buttons = document.querySelectorAll('.gallery-btn, .cta');
+
+    buttons.forEach(button => {
+      button.addEventListener('mousemove', function (e) {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        button.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+      });
+
+      button.addEventListener('mouseleave', function () {
+        button.style.transform = 'translate(0px, 0px)';
+      });
+    });
+  </script>
+
+  <!-- Reveal Animation on Scroll -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-active');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    // Observe all sections
+    document.querySelectorAll('.skills-section, .projects-section, .about-section, .fun-facts-section').forEach((section) => {
+      section.classList.add('reveal-element');
+      observer.observe(section);
+    });
+  </script>
+
+  <!-- Bento Cards Interactive Scripts -->
+  <script>
+    // Coffee Counter
+    let coffeeCount = 0;
+    function incrementCoffee() {
+      coffeeCount++;
+      document.getElementById('coffeeCounter').textContent = coffeeCount;
+
+      // Add animation
+      const counter = document.getElementById('coffeeCounter');
+      counter.style.transform = 'scale(1.2)';
+      setTimeout(() => {
+        counter.style.transform = 'scale(1)';
+      }, 200);
+    }
+
+    // Random Facts
+    const facts = [
+      "I debug in my sleep! 😴",
+      "Coffee = Code fuel ☕",
+      "CSS is my superpower! 🎨",
+      "Console.log() is life! 📝",
+      "I speak fluent emoji! 😎",
+      "Ctrl+Z is my best friend! ⌨️",
+      "Dark mode forever! 🌙",
+      "Semicolons are optional! 😏",
+      "I dream in code! 💭",
+      "404: Social life not found! 🤖"
+    ];
+
+    function randomFact() {
+      const randomIndex = Math.floor(Math.random() * facts.length);
+      const factElement = document.getElementById('randomFactText');
+      factElement.style.opacity = '0';
+
+      setTimeout(() => {
+        factElement.textContent = facts[randomIndex];
+        factElement.style.opacity = '1';
+      }, 200);
+    }
+
+    // Text Scramble Effect for Headings
+    class TextScramble {
+      constructor(el) {
+        this.el = el;
+        this.chars = '!<>-_\\/[]{}—=+*^?#________';
+        this.update = this.update.bind(this);
+      }
+
+      setText(newText) {
+        const oldText = this.el.innerText;
+        const length = Math.max(oldText.length, newText.length);
+        const promise = new Promise((resolve) => this.resolve = resolve);
+        this.queue = [];
+
+        for (let i = 0; i < length; i++) {
+          const from = oldText[i] || '';
+          const to = newText[i] || '';
+          const start = Math.floor(Math.random() * 40);
+          const end = start + Math.floor(Math.random() * 40);
+          this.queue.push({ from, to, start, end });
+        }
+
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+        this.update();
+        return promise;
+      }
+
+      update() {
+        let output = '';
+        let complete = 0;
+
+        for (let i = 0, n = this.queue.length; i < n; i++) {
+          let { from, to, start, end, char } = this.queue[i];
+
+          if (this.frame >= end) {
+            complete++;
+            output += to;
+          } else if (this.frame >= start) {
+            if (!char || Math.random() < 0.28) {
+              char = this.randomChar();
+              this.queue[i].char = char;
+            }
+            output += `<span class="dud">${char}</span>`;
+          } else {
+            output += from;
+          }
+        }
+
+        this.el.innerHTML = output;
+
+        if (complete === this.queue.length) {
+          this.resolve();
+        } else {
+          this.frameRequest = requestAnimationFrame(this.update);
+          this.frame++;
+        }
+      }
+
+      randomChar() {
+        return this.chars[Math.floor(Math.random() * this.chars.length)];
+      }
+    }
+
+    // Apply scramble effect on hover
+    setTimeout(() => {
+      const scrambleElements = document.querySelectorAll('.scramble-text');
+      scrambleElements.forEach(el => {
+        const fx = new TextScramble(el);
+        const originalText = el.textContent;
+
+        el.addEventListener('mouseenter', () => {
+          fx.setText(originalText);
+        });
+      });
+    }, 2000);
+  </script>
+
+  <!-- Blog Modal Scripts -->
+  <script>
+    // Blog content database
+    const blogContent = {
+      blog1: `
+        <h1>📦 Cara Membuat Repository di GitHub</h1>
+        <p>Repository adalah tempat penyimpanan project kode kamu di GitHub. Mari kita belajar cara membuat repository dari awal!</p>
+
+        <h2>1. Persiapan Awal</h2>
+        <p>Sebelum membuat repository, pastikan kamu sudah:</p>
+        <ul>
+          <li>Punya akun GitHub (daftar di <code>github.com</code>)</li>
+          <li>Install Git di komputer</li>
+          <li>Setup Git config dengan nama dan email kamu</li>
+        </ul>
+
+        <h2>2. Membuat Repository Baru</h2>
+        <h3>Lewat GitHub Website:</h3>
+        <ol>
+          <li>Login ke GitHub</li>
+          <li>Klik tombol <strong>"+"</strong> di pojok kanan atas</li>
+          <li>Pilih <strong>"New repository"</strong></li>
+          <li>Isi nama repository (contoh: <code>my-first-project</code>)</li>
+          <li>Tambahkan deskripsi (opsional)</li>
+          <li>Pilih Public atau Private</li>
+          <li>Centang "Add README file" (recommended)</li>
+          <li>Klik <strong>"Create repository"</strong></li>
+        </ol>
+
+        <h2>3. Clone Repository ke Local</h2>
+        <pre><code>git clone https://github.com/username/my-first-project.git
+cd my-first-project</code></pre>
+
+        <h2>4. Menambahkan File dan Push</h2>
+        <pre><code># Buat file baru
+echo "# My Project" > index.html
+
+# Add file ke staging
+git add .
+
+# Commit perubahan
+git commit -m "Initial commit: add index.html"
+
+# Push ke GitHub
+git push origin main</code></pre>
+
+        <h2>5. Tips Best Practices</h2>
+        <ul>
+          <li>Gunakan nama repository yang <strong>jelas</strong> dan <strong>deskriptif</strong></li>
+          <li>Selalu tambahkan <code>README.md</code> untuk dokumentasi</li>
+          <li>Buat <code>.gitignore</code> untuk exclude files yang tidak perlu</li>
+          <li>Gunakan commit message yang <strong>meaningful</strong></li>
+        </ul>
+
+        <h3>Contoh .gitignore:</h3>
+        <pre><code># Node modules
+node_modules/
+
+# Environment files
+.env
+
+# OS files
+.DS_Store
+Thumbs.db</code></pre>
+
+        <p>Selamat! Kamu sudah berhasil membuat repository GitHub pertama kamu! 🎉</p>
+      `,
+
+      blog2: `
+        <h1>👥 Git Collaboration: Kerja Bareng dengan Tim</h1>
+        <p>Belajar berkolaborasi dengan tim menggunakan Git workflow yang proper!</p>
+
+        <h2>1. Git Branching Strategy</h2>
+        <p>Branch adalah cara untuk develop fitur baru tanpa mengganggu main branch.</p>
+
+        <h3>Membuat Branch Baru:</h3>
+        <pre><code># Buat dan pindah ke branch baru
+git checkout -b feature/login-page
+
+# Atau dengan cara baru
+git switch -c feature/login-page</code></pre>
+
+        <h2>2. Workflow Collaboration</h2>
+        <ol>
+          <li><strong>Clone repository</strong> tim kamu</li>
+          <li><strong>Buat branch</strong> untuk fitur baru</li>
+          <li><strong>Develop</strong> fitur di branch tersebut</li>
+          <li><strong>Commit</strong> perubahan secara berkala</li>
+          <li><strong>Push</strong> branch ke remote</li>
+          <li>Buat <strong>Pull Request</strong> untuk review</li>
+          <li>Merge setelah approved</li>
+        </ol>
+
+        <h2>3. Menangani Merge Conflicts</h2>
+        <p>Conflict terjadi ketika dua orang edit file yang sama. Begini cara handlenya:</p>
+
+        <pre><code># Update main branch terlebih dahulu
+git checkout main
+git pull origin main
+
+# Pindah ke branch kamu
+git checkout feature/login-page
+
+# Merge main ke branch kamu
+git merge main
+
+# Jika ada conflict, resolve manually
+# Edit file yang conflict
+# Lalu add dan commit
+
+git add .
+git commit -m "Resolve merge conflict"</code></pre>
+
+        <h2>4. Pull Request Best Practices</h2>
+        <ul>
+          <li>Buat <strong>PR title</strong> yang jelas</li>
+          <li>Tambahkan <strong>description</strong> lengkap tentang perubahan</li>
+          <li>Link ke <strong>issue</strong> terkait jika ada</li>
+          <li>Request <strong>review</strong> dari teammates</li>
+          <li>Respond to feedback dengan baik</li>
+        </ul>
+
+        <h2>5. Git Commands untuk Collaboration</h2>
+        <pre><code># Fetch semua perubahan dari remote
+git fetch origin
+
+# Pull perubahan dari main
+git pull origin main
+
+# Push branch ke remote
+git push origin feature/login-page
+
+# Delete branch setelah merge
+git branch -d feature/login-page
+git push origin --delete feature/login-page</code></pre>
+
+        <h3>Tips Pro:</h3>
+        <ul>
+          <li>Selalu <code>pull</code> sebelum mulai coding</li>
+          <li>Commit sering dengan message yang jelas</li>
+          <li>Review kode teammates dengan konstruktif</li>
+          <li>Gunakan branch naming convention: <code>feature/</code>, <code>bugfix/</code>, <code>hotfix/</code></li>
+        </ul>
+
+        <p>Happy collaborating! 🚀</p>
+      `,
+
+      blog3: `
+        <h1>🚀 Install Laravel: Setup Development Environment</h1>
+        <p>Laravel adalah framework PHP modern yang powerful. Mari setup environment untuk development!</p>
+
+        <h2>1. Prerequisites</h2>
+        <p>Sebelum install Laravel, pastikan sudah install:</p>
+        <ul>
+          <li><strong>PHP</strong> >= 8.1</li>
+          <li><strong>Composer</strong> (PHP dependency manager)</li>
+          <li><strong>Database</strong> (MySQL/PostgreSQL/SQLite)</li>
+          <li><strong>Node.js & npm</strong> (untuk asset compilation)</li>
+        </ul>
+
+        <h2>2. Install Composer</h2>
+        <p>Download dan install dari <code>getcomposer.org</code></p>
+
+        <h3>Verifikasi Installation:</h3>
+        <pre><code>composer --version</code></pre>
+
+        <h2>3. Install Laravel via Composer</h2>
+        <h3>Metode 1: Laravel Installer (Recommended)</h3>
+        <pre><code># Install Laravel Installer globally
+composer global require laravel/installer
+
+# Buat project baru
+laravel new my-app
+
+# Atau dengan version spesifik
+laravel new my-app --version=10.x</code></pre>
+
+        <h3>Metode 2: Via Composer Create-Project</h3>
+        <pre><code>composer create-project laravel/laravel my-app
+
+# Dengan version spesifik
+composer create-project laravel/laravel my-app "10.*"</code></pre>
+
+        <h2>4. Setup Environment</h2>
+        <pre><code># Masuk ke folder project
+cd my-app
+
+# Copy .env.example ke .env
+cp .env.example .env
+
+# Generate app key
+php artisan key:generate</code></pre>
+
+        <h2>5. Konfigurasi Database</h2>
+        <p>Edit file <code>.env</code>:</p>
+        <pre><code>DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=my_app
+DB_USERNAME=root
+DB_PASSWORD=</code></pre>
+
+        <h3>Buat Database:</h3>
+        <pre><code># Login ke MySQL
+mysql -u root -p
+
+# Buat database
+CREATE DATABASE my_app;
+
+# Exit
+exit;</code></pre>
+
+        <h2>6. Run Migration</h2>
+        <pre><code>php artisan migrate</code></pre>
+
+        <h2>7. Start Development Server</h2>
+        <pre><code># Start Laravel development server
+php artisan serve
+
+# Server akan running di:
+# http://127.0.0.1:8000</code></pre>
+
+        <h2>8. Install Frontend Dependencies</h2>
+        <pre><code># Install npm packages
+npm install
+
+# Compile assets
+npm run dev
+
+# Atau watch untuk auto-compile
+npm run watch</code></pre>
+
+        <h2>9. Struktur Folder Laravel</h2>
+        <ul>
+          <li><code>app/</code> - Application logic (Models, Controllers)</li>
+          <li><code>routes/</code> - Route definitions</li>
+          <li><code>resources/</code> - Views, assets</li>
+          <li><code>database/</code> - Migrations, seeders</li>
+          <li><code>public/</code> - Publicly accessible files</li>
+          <li><code>config/</code> - Configuration files</li>
+        </ul>
+
+        <h2>10. Useful Artisan Commands</h2>
+        <pre><code># Lihat semua commands
+php artisan list
+
+# Make controller
+php artisan make:controller UserController
+
+# Make model dengan migration
+php artisan make:model Post -m
+
+# Clear cache
+php artisan cache:clear
+php artisan config:clear
+php artisan view:clear</code></pre>
+
+        <p>Selamat! Laravel development environment kamu sudah siap! 🎉</p>
+      `,
+
+      blog4: `
+        <h1>⚡ Git Commands yang Wajib Kamu Tahu</h1>
+        <p>Daftar lengkap Git commands essential untuk workflow development sehari-hari!</p>
+
+        <h2>1. Setup & Configuration</h2>
+        <pre><code># Set username
+git config --global user.name "Your Name"
+
+# Set email
+git config --global user.email "your@email.com"
+
+# Check config
+git config --list</code></pre>
+
+        <h2>2. Repository Basics</h2>
+        <pre><code># Initialize new repo
+git init
+
+# Clone existing repo
+git clone https://github.com/user/repo.git
+
+# Check status
+git status
+
+# Check remote
+git remote -v</code></pre>
+
+        <h2>3. Staging & Committing</h2>
+        <pre><code># Add specific file
+git add filename.js
+
+# Add all changes
+git add .
+
+# Commit with message
+git commit -m "Add new feature"
+
+# Commit with detailed message
+git commit -m "Title" -m "Detailed description"
+
+# Amend last commit
+git commit --amend</code></pre>
+
+        <h2>4. Branching</h2>
+        <pre><code># List all branches
+git branch
+
+# Create new branch
+git branch feature/new-feature
+
+# Switch to branch
+git checkout feature/new-feature
+
+# Create and switch (shorthand)
+git checkout -b feature/new-feature
+
+# Delete branch
+git branch -d feature/new-feature
+
+# Force delete branch
+git branch -D feature/new-feature</code></pre>
+
+        <h2>5. Merging</h2>
+        <pre><code># Merge branch into current branch
+git merge feature/new-feature
+
+# Abort merge
+git merge --abort</code></pre>
+
+        <h2>6. Remote Operations</h2>
+        <pre><code># Fetch changes from remote
+git fetch origin
+
+# Pull changes (fetch + merge)
+git pull origin main
+
+# Push to remote
+git push origin main
+
+# Push new branch
+git push -u origin feature/new-feature
+
+# Force push (dangerous!)
+git push --force</code></pre>
+
+        <h2>7. Viewing History</h2>
+        <pre><code># View commit history
+git log
+
+# Compact log
+git log --oneline
+
+# Graph view
+git log --graph --oneline --all
+
+# Show specific commit
+git show <commit-hash>
+
+# View file changes
+git diff
+
+# View staged changes
+git diff --staged</code></pre>
+
+        <h2>8. Undoing Changes</h2>
+        <pre><code># Discard changes in working directory
+git checkout -- filename.js
+
+# Unstage file
+git reset HEAD filename.js
+
+# Reset to previous commit (keep changes)
+git reset --soft HEAD~1
+
+# Reset to previous commit (discard changes)
+git reset --hard HEAD~1
+
+# Revert commit (create new commit)
+git revert <commit-hash></code></pre>
+
+        <h2>9. Stashing</h2>
+        <pre><code># Stash changes
+git stash
+
+# Stash with message
+git stash save "Work in progress"
+
+# List stashes
+git stash list
+
+# Apply latest stash
+git stash apply
+
+# Apply specific stash
+git stash apply stash@{0}
+
+# Pop stash (apply + delete)
+git stash pop
+
+# Delete stash
+git stash drop</code></pre>
+
+        <h2>10. Useful Shortcuts</h2>
+        <pre><code># Quick commit
+git commit -am "Message"  # add + commit
+
+# Pull with rebase
+git pull --rebase
+
+# Show branch with last commit
+git branch -v
+
+# Delete remote branch
+git push origin --delete branch-name
+
+# Clean untracked files
+git clean -fd</code></pre>
+
+        <h3>Git Aliases (Bonus!):</h3>
+        <p>Buat shortcut custom di <code>~/.gitconfig</code>:</p>
+        <pre><code>[alias]
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    visual = log --graph --oneline --all</code></pre>
+
+        <p>Sekarang kamu bisa pakai: <code>git st</code> instead of <code>git status</code>! 🔥</p>
+      `,
+
+      blog5: `
+        <h1>🤖 GitHub Actions: Automate Your Workflow</h1>
+        <p>Belajar membuat CI/CD pipeline dengan GitHub Actions untuk automate testing dan deployment!</p>
+
+        <h2>1. Apa itu GitHub Actions?</h2>
+        <p>GitHub Actions adalah platform CI/CD yang built-in di GitHub. Kamu bisa automate:</p>
+        <ul>
+          <li>Running tests</li>
+          <li>Building applications</li>
+          <li>Deploying ke production</li>
+          <li>Code linting & formatting</li>
+        </ul>
+
+        <h2>2. Struktur Workflow File</h2>
+        <p>Workflow file disimpan di <code>.github/workflows/</code></p>
+
+        <h3>Basic Workflow Example:</h3>
+        <pre><code># .github/workflows/ci.yml
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Run Tests
+      run: npm test</code></pre>
+
+        <h2>3. CI untuk Laravel Project</h2>
+        <pre><code>name: Laravel CI
+
+on: [push, pull_request]
+
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, mysql
+
+    - name: Install Dependencies
+      run: composer install
+
+    - name: Copy .env
+      run: php -r "copy('.env.example', '.env');"
+
+    - name: Generate Key
+      run: php artisan key:generate
+
+    - name: Run Tests
+      run: php artisan test</code></pre>
+
+        <h2>4. Deploy ke Netlify</h2>
+        <pre><code>name: Deploy to Netlify
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build
+
+    - name: Deploy to Netlify
+      uses: nwtgck/actions-netlify@v2
+      with:
+        publish-dir: './dist'
+        production-deploy: true
+      env:
+        NETLIFY_AUTH_TOKEN: \${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: \${{ secrets.NETLIFY_SITE_ID }}</code></pre>
+
+        <h2>5. Environment Secrets</h2>
+        <p>Setup secrets di GitHub:</p>
+        <ol>
+          <li>Go to repository <strong>Settings</strong></li>
+          <li>Click <strong>Secrets and variables</strong> → <strong>Actions</strong></li>
+          <li>Click <strong>New repository secret</strong></li>
+          <li>Add your secrets</li>
+        </ol>
+
+        <h3>Using Secrets:</h3>
+        <pre><code>- name: Deploy
+  env:
+    API_KEY: \${{ secrets.API_KEY }}
+    DATABASE_URL: \${{ secrets.DATABASE_URL }}
+  run: npm run deploy</code></pre>
+
+        <h2>6. Matrix Strategy</h2>
+        <p>Test pada multiple versions:</p>
+        <pre><code>jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16, 18, 20]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node \${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: \${{ matrix.node-version }}
+
+    - run: npm install
+    - run: npm test</code></pre>
+
+        <h2>7. Useful Actions dari Marketplace</h2>
+        <ul>
+          <li><code>actions/checkout@v3</code> - Clone repository</li>
+          <li><code>actions/setup-node@v3</code> - Setup Node.js</li>
+          <li><code>actions/setup-python@v4</code> - Setup Python</li>
+          <li><code>shivammathur/setup-php@v2</code> - Setup PHP</li>
+          <li><code>docker/build-push-action@v4</code> - Build Docker images</li>
+        </ul>
+
+        <h2>8. Conditional Execution</h2>
+        <pre><code>steps:
+  - name: Deploy to Production
+    if: github.ref == 'refs/heads/main'
+    run: npm run deploy:prod
+
+  - name: Deploy to Staging
+    if: github.ref == 'refs/heads/develop'
+    run: npm run deploy:staging</code></pre>
+
+        <h2>9. Caching Dependencies</h2>
+        <pre><code>- name: Cache node modules
+  uses: actions/cache@v3
+  with:
+    path: node_modules
+    key: \${{ runner.os }}-node-\${{ hashFiles('**/package-lock.json') }}
+    restore-keys: |
+      \${{ runner.os }}-node-</code></pre>
+
+        <h3>Benefits:</h3>
+        <ul>
+          <li>⚡ Faster workflow execution</li>
+          <li>💰 Reduced build minutes usage</li>
+          <li>🚀 Better developer experience</li>
+        </ul>
+
+        <p>Now automate everything! 🤖✨</p>
+      `
+    };
+
+    // Open blog modal
+    function openBlogModal(blogId) {
+      const modal = document.getElementById('blogModal');
+      const modalBody = document.getElementById('blogModalBody');
+
+      modalBody.innerHTML = blogContent[blogId];
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close blog modal
+    function closeBlogModal() {
+      const modal = document.getElementById('blogModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('blogModal').addEventListener('click', function (e) {
+      if (e.target === this) {
+        closeBlogModal();
+      }
+    });
+
+    // Close modal with ESC key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeBlogModal();
+      }
+    });
+
+    // Apply tilt to blog cards
+    setTimeout(() => {
+      const blogCards = document.querySelectorAll('.blog-card');
+      if (typeof VanillaTilt !== 'undefined') {
+        VanillaTilt.init(blogCards, {
+          max: 10,
+          speed: 400,
+          glare: true,
+          "max-glare": 0.2
+        });
+      }
+    }, 1500);
+  </script>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/6289504631048" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" width="32" height="32">
+      <path fill="currentColor"
+        d="M16 0C7.164 0 0 7.163 0 16c0 2.826.739 5.488 2.03 7.788L.047 31.406l7.853-2.058A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.455A13.455 13.455 0 1 1 29.455 16 13.47 13.47 0 0 1 16 29.455z" />
+      <path fill="currentColor"
+        d="M22.916 18.802c-.324-.162-1.917-.946-2.214-1.054-.297-.108-.513-.162-.73.162-.216.324-.838 1.054-1.027 1.27-.189.217-.378.244-.702.081-.324-.162-1.367-.504-2.604-1.607-.963-.859-1.613-1.92-1.802-2.244-.189-.324-.02-.5.142-.662.146-.146.324-.378.486-.567.162-.189.216-.324.324-.54.108-.217.054-.405-.027-.567-.081-.162-.73-1.758-1-2.406-.263-.63-.53-.544-.73-.554-.189-.009-.405-.011-.621-.011s-.567.081-.863.405c-.297.324-1.135 1.108-1.135 2.703s1.162 3.135 1.324 3.352c.162.216 2.284 3.486 5.535 4.888 3.251 1.401 3.251.934 3.838.875.587-.059 1.917-.783 2.187-1.54.27-.756.27-1.405.189-1.54-.081-.135-.297-.216-.621-.378z" />
+    </svg>
+    <span>Chat</span>
+  </a>
+
+  <!-- Page Transition Script -->
+  <script>
+    // Page Transition Animation
+    document.addEventListener('DOMContentLoaded', function () {
+      const pageTransition = document.getElementById('pageTransition');
+
+      // Hide transition on page load
+      setTimeout(() => {
+        pageTransition.classList.remove('active');
+      }, 500);
+
+      // Add transition to all internal links
+      document.querySelectorAll('a[href^="index.html"], a[href^="blog.html"]').forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = this.getAttribute('href');
+
+          pageTransition.classList.add('active');
+
+          setTimeout(() => {
+            window.location.href = target;
+          }, 500);
+        });
+      });
+    });
+
+    // Back to Top Progress Circle
+    function updateProgressCircle() {
+      const progressCircle = document.querySelector('.progress-ring-circle');
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = (scrollTop / scrollHeight) * 100;
+
+      // Calculate stroke-dashoffset (220 is the circumference)
+      const offset = 220 - (220 * scrollPercent) / 100;
+      progressCircle.style.strokeDashoffset = offset;
+    }
+
+    window.addEventListener('scroll', updateProgressCircle);
+
+    // Lazy Loading Images
+    document.addEventListener('DOMContentLoaded', function () {
+      const lazyImages = document.querySelectorAll('img.lazy');
+
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
+            observer.unobserve(img);
+          }
+        });
+      });
+
+      lazyImages.forEach(img => imageObserver.observe(img));
+    });
+
+    // Easter Eggs - Konami Code (↑ ↑ ↓ ↓ ← → ← → B A)
+    let konamiCode = [];
+    const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
+    document.addEventListener('keydown', function (e) {
+      konamiCode.push(e.key);
+      konamiCode = konamiCode.slice(-10);
+
+      if (konamiCode.join('') === konamiSequence.join('')) {
+        activateEasterEgg();
+      }
+    });
+
+    function activateEasterEgg() {
+      const easterEgg = document.getElementById('easterEgg');
+      easterEgg.classList.add('active');
+
+      // Create confetti
+      createConfetti();
+
+      setTimeout(() => {
+        easterEgg.classList.remove('active');
+      }, 2000);
+
+      // Show alert
+      setTimeout(() => {
+        alert('🎉 You found the secret! You\'re awesome! 🚀');
+      }, 500);
+    }
+
+    function createConfetti() {
+      const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.animationDelay = Math.random() * 2 + 's';
+          document.body.appendChild(confetti);
+
+          setTimeout(() => confetti.remove(), 3000);
+        }, i * 30);
+      }
+    }
+
+    // Secret: Triple Click Logo for Rainbow Mode
+    let logoClickCount = 0;
+    let logoClickTimer = null;
+
+    document.querySelector('.logo').addEventListener('click', function () {
+      logoClickCount++;
+
+      if (logoClickTimer) clearTimeout(logoClickTimer);
+
+      logoClickTimer = setTimeout(() => {
+        logoClickCount = 0;
+      }, 1000);
+
+      if (logoClickCount === 3) {
+        document.body.classList.toggle('rainbow-mode');
+        logoClickCount = 0;
+
+        if (document.body.classList.contains('rainbow-mode')) {
+          alert('🌈 Rainbow Mode Activated! 🌈');
+        } else {
+          alert('Rainbow Mode Deactivated');
+        }
+      }
+    });
+
+    // Secret: Press 'S' key to shake the page
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 's' || e.key === 'S') {
+        document.body.classList.add('shake');
+        setTimeout(() => {
+          document.body.classList.remove('shake');
+        }, 500);
+      }
+    });
+  </script>
+  <script type="module" src="chat.js"></script>
+</body>
+
+</html>

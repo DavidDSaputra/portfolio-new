@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#000" />
+  <meta name="description" content="David Saputra | Blog - Tutorial seputar Git, GitHub, Laravel dan Development" />
+  <meta name="keywords" content="blog, tutorial, git, github, laravel, web development" />
+  <meta name="author" content="David Saputra" />
+  <title>David Saputra | Blog</title>
+  <link rel="icon" type="image/x-icon" href="src/png/nav-avatar.png" />
+  <!-- aos cdn -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <!-- vanilla-tilt for 3D effect -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+  <!-- stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- google fonts-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Passions+Conflict&family=Orbitron&family=Fira+Code&family=Six+Caps" />
+</head>
+
+<body class="body">
+  <!-- Page Transition -->
+  <div class="page-transition" id="pageTransition">
+    <div class="page-transition-text">Loading...</div>
+  </div>
+
+  <!-- Easter Egg Element -->
+  <div class="easter-egg" id="easterEgg">🎉</div>
+
+  <div id="preloader"></div>
+  <noscript>Allow Javascript</noscript>
+
+  <header>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+    <!-- Particle Canvas Background -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+    <!-- Spotlight Cursor Effect -->
+    <div class="spotlight" id="spotlight"></div>
+
+    <div class="cursor-inner" id="cursor-inner"></div>
+    <div class="cursor-outer" id="cursor-outer"></div>
+
+    <div class="navbar" id="navbar">
+      <div class="hey">Hey!</div>
+      <div class="logo" tabindex="0" aria-label="david saputra logo">
+        <div class="logo-top">
+          <a href="index.html">
+            <img src="src/png/nav-avatar.png" alt="animation-head" id="nav-avatar" />
+          </a>
+        </div>
+      </div>
+      <div class="navbar-tabs" id="navbar-tabs">
+        <ul class="navbar-tabs-ul">
+          <li class="home" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="100">
+            <a href="index.html#home" tabindex="0" aria-label="Home menu button">
+              &#60;/Home&#62;
+            </a>
+          </li>
+
+          <li class="about" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="300">
+            <a href="index.html#about" aria-label="about menu button">
+              &#60;/AboutMe&#62;
+            </a>
+          </li>
+
+          <li class="skills" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="500">
+            <a href="index.html#skills" aria-label="skills menu button">
+              &#60;/Skills&#62;
+            </a>
+          </li>
+
+          <li class="projects" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="700">
+            <a href="index.html#projects" aria-label="projects menu button">
+              &#60;/Projects&#62;
+            </a>
+          </li>
+
+          <li class="blog activeThistab" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="900">
+            <a href="blog.html" aria-label="blog menu button">
+              &#60;/Blog&#62;
+            </a>
+          </li>
+
+          <li class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="1100">
+            <a href="index.html#footer" aria-label="Contact menu button">
+              &#60;/Contact&#62;
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- navbar tabs ends -->
+
+      <div class="togglemode" id="togglemode">
+        <input type="checkbox" class="checkbox" id="checkbox" />
+        <label for="checkbox" class="checkbox-label" tabindex="0" aria-label="Toggle Theme button">
+          <i class="fas fa-moon"></i>
+          <i class="fas fa-sun"></i>
+          <span class="ball" id="ball"></span>
+        </label>
+      </div>
+
+    </div>
+    <!-- navbar tabs ends -->
+  </header>
+  <!-- header ends here -->
+
+  <main>
+    <!-- hamburger -->
+    <div class="hamburger" id="hamburger" data-aos="fade">
+      <div class="hamburgerbase">
+        <button id="hamburger-button" onclick="hamburgerMenu()" tabindex="0" aria-label="Menu Button">
+          <span class="burger-bar" id="burger-bar1"></span>
+          <span class="burger-bar" id="burger-bar2"></span>
+          <span class="burger-bar" id="burger-bar3"></span>
+        </button>
+      </div>
+    </div>
+    <!-- hamburger -->
+    <div class="mobiletogglemenu" id="mobiletogglemenu">
+      <ul class="mobile-navbar-tabs-ul" id="mobile-ul">
+        <li id="home-mobile-tab" class="mobile-navbar-tabs-li home" onclick="hidemenubyli()">
+          <a href="index.html#home" tabindex="0" aria-label="Home menu button">
+            &#60;/Home&#62;
+          </a>
+        </li>
+
+        <li id="aboutme-mobile-tab" class="mobile-navbar-tabs-li about" onclick="hidemenubyli()">
+          <a href="index.html#about" tabindex="0" aria-label="about menu button">
+            &#60;/AboutMe&#62;
+          </a>
+        </li>
+        <li id="skills-mobile-tab" class="mobile-navbar-tabs-li skills" onclick="hidemenubyli()">
+          <a href="index.html#skills" tabindex="0" aria-label="skills menu button">
+            &#60;/Skills&#62;
+          </a>
+        </li>
+        <li id="projects-mobile-tab" class="mobile-navbar-tabs-li projects" onclick="hidemenubyli()">
+          <a href="index.html#projects" tabindex="0" aria-label="projects menu button">
+            &#60;/Projects&#62;
+          </a>
+        </li>
+        <li id="blog-mobile-tab" class="mobile-navbar-tabs-li blog activeThismobiletab" onclick="hidemenubyli()">
+          <a href="blog.html" tabindex="0" aria-label="blog menu button">
+            &#60;/Blog&#62;
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- mobile toggle menu ends -->
+    <!-- Blog Hero Section -->
+    <section class="blog-hero-section">
+      <div class="blog-hero-content" data-aos="fade-up">
+        <h1 class="blog-hero-title scramble-text">📚 My Blog</h1>
+        <p class="blog-hero-subtitle">Tutorials, guides, and tips about web development</p>
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section" id="blog">
+      <div class="blog-container">
+        <div class="blog-grid">
+          <!-- Blog Card 1 -->
+          <article class="blog-card" data-tilt onclick="openBlogModal('blog1')">
+            <div class="blog-card-header">
+              <div class="blog-category">Git & GitHub</div>
+              <div class="blog-date">Dec 2024</div>
+            </div>
+            <div class="blog-icon">📦</div>
+            <h3 class="blog-title">Cara Membuat Repository di GitHub</h3>
+            <p class="blog-excerpt">Panduan lengkap untuk membuat dan mengelola repository di GitHub dari awal hingga push pertama kamu.</p>
+            <div class="blog-footer">
+              <span class="read-time">⏱️ 5 min read</span>
+              <span class="blog-arrow">→</span>
+            </div>
+          </article>
+
+          <!-- Blog Card 2 -->
+          <article class="blog-card" data-tilt onclick="openBlogModal('blog2')">
+            <div class="blog-card-header">
+              <div class="blog-category">Git Collaboration</div>
+              <div class="blog-date">Dec 2024</div>
+            </div>
+            <div class="blog-icon">👥</div>
+            <h3 class="blog-title">Git Collaboration: Kerja Bareng dengan Tim</h3>
+            <p class="blog-excerpt">Pelajari cara berkolaborasi dengan tim menggunakan Git: branching, merging, dan pull requests.</p>
+            <div class="blog-footer">
+              <span class="read-time">⏱️ 8 min read</span>
+              <span class="blog-arrow">→</span>
+            </div>
+          </article>
+
+          <!-- Blog Card 3 -->
+          <article class="blog-card" data-tilt onclick="openBlogModal('blog3')">
+            <div class="blog-card-header">
+              <div class="blog-category">Laravel</div>
+              <div class="blog-date">Dec 2024</div>
+            </div>
+            <div class="blog-icon">🚀</div>
+            <h3 class="blog-title">Install Laravel: Setup Development Environment</h3>
+            <p class="blog-excerpt">Tutorial step-by-step install Laravel dengan Composer dan setup development environment yang optimal.</p>
+            <div class="blog-footer">
+              <span class="read-time">⏱️ 10 min read</span>
+              <span class="blog-arrow">→</span>
+            </div>
+          </article>
+
+          <!-- Blog Card 4 -->
+          <article class="blog-card" data-tilt onclick="openBlogModal('blog4')">
+            <div class="blog-card-header">
+              <div class="blog-category">Git Commands</div>
+              <div class="blog-date">Dec 2024</div>
+            </div>
+            <div class="blog-icon">⚡</div>
+            <h3 class="blog-title">Git Commands yang Wajib Kamu Tahu</h3>
+            <p class="blog-excerpt">Daftar lengkap Git commands essential untuk workflow development sehari-hari dengan contoh praktis.</p>
+            <div class="blog-footer">
+              <span class="read-time">⏱️ 6 min read</span>
+              <span class="blog-arrow">→</span>
+            </div>
+          </article>
+
+          <!-- Blog Card 5 -->
+          <article class="blog-card" data-tilt onclick="openBlogModal('blog5')">
+            <div class="blog-card-header">
+              <div class="blog-category">GitHub Actions</div>
+              <div class="blog-date">Dec 2024</div>
+            </div>
+            <div class="blog-icon">🤖</div>
+            <h3 class="blog-title">GitHub Actions: Automate Your Workflow</h3>
+            <p class="blog-excerpt">Belajar membuat CI/CD pipeline dengan GitHub Actions untuk automate testing dan deployment.</p>
+            <div class="blog-footer">
+              <span class="read-time">⏱️ 12 min read</span>
+              <span class="blog-arrow">→</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Modal -->
+    <div class="blog-modal" id="blogModal">
+      <div class="blog-modal-content">
+        <button class="blog-modal-close" onclick="closeBlogModal()">&times;</button>
+        <div class="blog-modal-body" id="blogModalBody">
+          <!-- Content will be loaded dynamically -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="footer">
+    <button class="fas" id="backtotopbutton" onclick="scrolltoTopfunction()">
+      <svg class="progress-ring" width="70" height="70">
+        <circle class="progress-ring-circle" stroke-width="3" fill="transparent" r="35" cx="35" cy="35"/>
+      </svg>
+      <article aria-label="Back to top">&#8592;BACK TO TOP</article>
+    </button>
+    <div class="footer-background">
+      <div class="footer-blob"></div>
+    </div>
+    <div class="footer-foreground">
+      <div class="footercontainer">
+        <div class="two-words">
+          <article tabindex="0" aria-label="Learning, Living, and Leveling Up, my quote">
+            "Learning, Living, and Leveling Up."
+          </article>
+        </div>
+        <div class="social-media-container">
+          <div class="getintouch-heading">
+            <article>GetinTouch();</article>
+          </div>
+          <div class="logos">
+            <a href="https://www.instagram.com/pexel_ui/" target="_blank" tabindex="0" aria-label="My instagram"><svg
+                viewBox="0 0 448 512" class="SocialHandle">
+                <path
+                  d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+              </svg></a>
+
+            <a href="https://www.linkedin.com/in/vinod-jangid-b401111a1?original_referer=" target="_blank"
+              aria-label="My Linkdin"><svg class="SocialHandle" viewBox="0 0 448 512">
+                <path
+                  d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+              </svg></a>
+
+            <a href="https://github.com/DavidDSaputra" target="_blank" aria-label="My github"><svg viewBox="0 0 496 512"
+                class="SocialHandle">
+                <path
+                  d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
+              </svg></a>
+
+            <a href="mailto:infovinodjangid@gmail.com" target="_blank" aria-label="My G mail"><svg id="GmailLogo"
+                viewBox="0 0 512 512">
+                <path
+                  d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" />
+              </svg></a>
+          </div>
+        </div>
+        <div class="footer-avatar-container">
+
+        </div>
+        <div class="footer-bottom">
+          <article>
+            &#169; Design & Built by David Saputra
+          </article>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <script src="https://kit.fontawesome.com/57957a6f59.js" crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+
+  <!-- Scroll Progress Bar Script -->
+  <script>
+    const scrollProgressBar = document.getElementById('scrollProgressBar');
+    window.addEventListener('scroll', () => {
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (window.scrollY / windowHeight) * 100;
+      scrollProgressBar.style.width = scrolled + '%';
+    });
+  </script>
+
+  <!-- Cursor Scripts -->
+  <script>
+    const cursorInner = document.getElementById("cursor-inner");
+    const cursorOuter = document.getElementById("cursor-outer");
+    const links = document.querySelectorAll("a,label,button");
+
+    document.addEventListener("mousemove", function (e) {
+      const posX = e.clientX;
+      const posY = e.clientY;
+
+      cursorInner.style.left = `${posX}px`;
+      cursorInner.style.top = `${posY}px`;
+
+      cursorOuter.animate(
+        {
+          left: `${posX}px`,
+          top: `${posY}px`,
+        },
+        { duration: 500, fill: "forwards" }
+      );
+
+      links.forEach((link) => {
+        link.addEventListener("mouseenter", () => {
+          cursorInner.classList.add("hover");
+          cursorOuter.classList.add("hover");
+        });
+        link.addEventListener("mouseleave", () => {
+          cursorInner.classList.remove("hover");
+          cursorOuter.classList.remove("hover");
+        });
+      });
+    });
+  </script>
+
+  <!-- Spotlight Cursor Effect Script -->
+  <script>
+    const spotlight = document.getElementById('spotlight');
+    document.addEventListener('mousemove', (e) => {
+      spotlight.style.left = e.clientX + 'px';
+      spotlight.style.top = e.clientY + 'px';
+    });
+    document.addEventListener('mouseleave', () => { spotlight.style.opacity = '0'; });
+    document.addEventListener('mouseenter', () => { spotlight.style.opacity = '1'; });
+  </script>
+
+  <!-- Particle Canvas Script -->
+  <script>
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particlesArray = [];
+    let mouse = {
+      x: null,
+      y: null,
+      radius: 150
+    };
+
+    window.addEventListener('mousemove', function(event) {
+      mouse.x = event.x;
+      mouse.y = event.y;
+    });
+
+    window.addEventListener('resize', function() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    class Particle {
+      constructor(x, y, directionX, directionY, size, color) {
+        this.x = x;
+        this.y = y;
+        this.directionX = directionX;
+        this.directionY = directionY;
+        this.size = size;
+        this.color = color;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+
+      update() {
+        if (this.x > canvas.width || this.x < 0) {
+          this.directionX = -this.directionX;
+        }
+        if (this.y > canvas.height || this.y < 0) {
+          this.directionY = -this.directionY;
+        }
+
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < mouse.radius + this.size) {
+          if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
+            this.x += 2;
+          }
+          if (mouse.x > this.x && this.x > this.size * 10) {
+            this.x -= 2;
+          }
+          if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
+            this.y += 2;
+          }
+          if (mouse.y > this.y && this.y > this.size * 10) {
+            this.y -= 2;
+          }
+        }
+
+        this.x += this.directionX;
+        this.y += this.directionY;
+        this.draw();
+      }
+    }
+
+    function init() {
+      particlesArray = [];
+      let numberOfParticles = (canvas.height * canvas.width) / 9000;
+
+      for (let i = 0; i < numberOfParticles; i++) {
+        let size = (Math.random() * 2) + 1;
+        let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+        let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+        let directionX = (Math.random() * 0.4) - 0.2;
+        let directionY = (Math.random() * 0.4) - 0.2;
+        let color = 'rgba(91, 143, 185, 0.8)';
+
+        particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+      }
+    }
+
+    function connect() {
+      let opacityValue = 1;
+      for (let a = 0; a < particlesArray.length; a++) {
+        for (let b = a; b < particlesArray.length; b++) {
+          let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+            + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+
+          if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+            opacityValue = 1 - (distance / 20000);
+            ctx.strokeStyle = 'rgba(74, 123, 167,' + opacityValue + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+      }
+      connect();
+    }
+
+    init();
+    animate();
+  </script>
+
+  <!-- Blog Modal Scripts -->
+  <script src="blog-content.js"></script>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/6289504631048" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" width="32" height="32">
+      <path fill="currentColor" d="M16 0C7.164 0 0 7.163 0 16c0 2.826.739 5.488 2.03 7.788L.047 31.406l7.853-2.058A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.455A13.455 13.455 0 1 1 29.455 16 13.47 13.47 0 0 1 16 29.455z"/>
+      <path fill="currentColor" d="M22.916 18.802c-.324-.162-1.917-.946-2.214-1.054-.297-.108-.513-.162-.73.162-.216.324-.838 1.054-1.027 1.27-.189.217-.378.244-.702.081-.324-.162-1.367-.504-2.604-1.607-.963-.859-1.613-1.92-1.802-2.244-.189-.324-.02-.5.142-.662.146-.146.324-.378.486-.567.162-.189.216-.324.324-.54.108-.217.054-.405-.027-.567-.081-.162-.73-1.758-1-2.406-.263-.63-.53-.544-.73-.554-.189-.009-.405-.011-.621-.011s-.567.081-.863.405c-.297.324-1.135 1.108-1.135 2.703s1.162 3.135 1.324 3.352c.162.216 2.284 3.486 5.535 4.888 3.251 1.401 3.251.934 3.838.875.587-.059 1.917-.783 2.187-1.54.27-.756.27-1.405.189-1.54-.081-.135-.297-.216-.621-.378z"/>
+    </svg>
+    <span>Chat</span>
+  </a>
+
+  <!-- Page Transition & Easter Eggs Script -->
+  <script>
+    // Page Transition Animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const pageTransition = document.getElementById('pageTransition');
+
+      // Hide transition on page load
+      setTimeout(() => {
+        pageTransition.classList.remove('active');
+      }, 500);
+
+      // Add transition to all internal links
+      document.querySelectorAll('a[href^="index.html"], a[href^="blog.html"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+
+          // Skip if it's a hash link
+          if (href.includes('#') && href.startsWith('index.html')) {
+            return;
+          }
+
+          e.preventDefault();
+          const target = href;
+
+          pageTransition.classList.add('active');
+
+          setTimeout(() => {
+            window.location.href = target;
+          }, 500);
+        });
+      });
+    });
+
+    // Back to Top Progress Circle (only if exists)
+    function updateProgressCircle() {
+      const progressCircle = document.querySelector('.progress-ring-circle');
+      if (!progressCircle) return;
+
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = (scrollTop / scrollHeight) * 100;
+
+      const offset = 220 - (220 * scrollPercent) / 100;
+      progressCircle.style.strokeDashoffset = offset;
+    }
+
+    window.addEventListener('scroll', updateProgressCircle);
+
+    // Lazy Loading Images
+    document.addEventListener('DOMContentLoaded', function() {
+      const lazyImages = document.querySelectorAll('img.lazy');
+
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
+            observer.unobserve(img);
+          }
+        });
+      });
+
+      lazyImages.forEach(img => imageObserver.observe(img));
+    });
+
+    // Easter Eggs - Konami Code
+    let konamiCode = [];
+    const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
+    document.addEventListener('keydown', function(e) {
+      konamiCode.push(e.key);
+      konamiCode = konamiCode.slice(-10);
+
+      if (konamiCode.join('') === konamiSequence.join('')) {
+        activateEasterEgg();
+      }
+    });
+
+    function activateEasterEgg() {
+      const easterEgg = document.getElementById('easterEgg');
+      easterEgg.classList.add('active');
+
+      createConfetti();
+
+      setTimeout(() => {
+        easterEgg.classList.remove('active');
+      }, 2000);
+
+      setTimeout(() => {
+        alert('🎉 You found the secret! You\'re a legend! 🚀');
+      }, 500);
+    }
+
+    function createConfetti() {
+      const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.animationDelay = Math.random() * 2 + 's';
+          document.body.appendChild(confetti);
+
+          setTimeout(() => confetti.remove(), 3000);
+        }, i * 30);
+      }
+    }
+
+    // Secret: Triple Click Logo for Rainbow Mode
+    let logoClickCount = 0;
+    let logoClickTimer = null;
+
+    const logoEl = document.querySelector('.logo');
+    if (logoEl) {
+      logoEl.addEventListener('click', function() {
+        logoClickCount++;
+
+        if (logoClickTimer) clearTimeout(logoClickTimer);
+
+        logoClickTimer = setTimeout(() => {
+          logoClickCount = 0;
+        }, 1000);
+
+        if (logoClickCount === 3) {
+          document.body.classList.toggle('rainbow-mode');
+          logoClickCount = 0;
+
+          if (document.body.classList.contains('rainbow-mode')) {
+            alert('🌈 Rainbow Mode Activated! 🌈');
+          } else {
+            alert('Rainbow Mode Deactivated');
+          }
+        }
+      });
+    }
+
+    // Secret: Press 'S' key to shake the page
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 's' || e.key === 'S') {
+        document.body.classList.add('shake');
+        setTimeout(() => {
+          document.body.classList.remove('shake');
+        }, 500);
+      }
+    });
+  </script>
+</body>
+</html>
