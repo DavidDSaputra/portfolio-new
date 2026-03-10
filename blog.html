@@ -6,586 +6,1117 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#000" />
+  <meta name="theme-color" content="#fff" />
   <meta name="description" content="David Saputra | Blog - Tutorial seputar Git, GitHub, Laravel dan Development" />
   <meta name="keywords" content="blog, tutorial, git, github, laravel, web development" />
   <meta name="author" content="David Saputra" />
   <title>David Saputra | Blog</title>
   <link rel="icon" type="image/x-icon" href="src/png/nav-avatar.png" />
-  <!-- aos cdn -->
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <!-- vanilla-tilt for 3D effect -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
-  <!-- stylesheet -->
   <link rel="stylesheet" href="style.css" />
-  <!-- google fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Passions+Conflict&family=Orbitron&family=Fira+Code&family=Six+Caps" />
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" />
+
+  <style>
+    /* =====================================================
+       BLOG PAGE — WHITE THEME (matches homepage palette)
+       ===================================================== */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: var(--color-white, #f4f4f0);
+      color: #111;
+      cursor: none;
+    }
+
+    /* ---- Custom cursor ---- */
+    .cursor-inner {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: #111;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999999;
+      transform: translate(-50%, -50%);
+      transition: width .2s, height .2s, background .2s;
+    }
+
+    .cursor-outer {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      border: 1.5px solid rgba(0, 0, 0, 0.35);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999998;
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor-inner.hover {
+      width: 14px;
+      height: 14px;
+      background: #4a7ba7;
+    }
+
+    .cursor-outer.hover {
+      border-color: #4a7ba7;
+    }
+
+    /* ---- Scroll progress ---- */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0;
+      background: linear-gradient(90deg, #4a7ba7, #c85f6f);
+      z-index: 99999;
+      transition: width .1s linear;
+    }
+
+    /* Navbar is handled by style.css .navbar class */
+
+    /* =====================================================
+       HERO
+       ===================================================== */
+    .blog-hero {
+      min-height: 100vh;
+      padding: 120px 7% 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .blog-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 45% at 75% 15%, rgba(74, 123, 167, 0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 35% 35% at 15% 85%, rgba(200, 95, 111, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .blog-hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .blog-hero-eyebrow-line {
+      width: 36px;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .blog-hero-eyebrow-label {
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.35);
+      font-family: 'Fira Code', monospace;
+    }
+
+    .blog-hero-title {
+      font-size: clamp(6rem, 14vw, 16rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -4px;
+      text-transform: uppercase;
+      color: #111;
+      margin-bottom: 48px;
+    }
+
+    .blog-hero-title .outline {
+      -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.15);
+      color: transparent;
+    }
+
+    .blog-hero-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .blog-hero-count {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.1rem;
+      color: rgba(0, 0, 0, 0.35);
+      letter-spacing: 1px;
+    }
+
+    .blog-hero-count strong {
+      color: #111;
+    }
+
+    .blog-hero-desc {
+      max-width: 380px;
+      font-size: 1.4rem;
+      color: rgba(0, 0, 0, 0.45);
+      line-height: 1.65;
+      text-align: right;
+    }
+
+    /* =====================================================
+       BLOG SECTION
+       ===================================================== */
+    .blog-section {
+      padding: 80px 7%;
+    }
+
+    .blog-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .blog-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      margin-bottom: 40px;
+    }
+
+    .blog-section-label {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.0rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.3);
+    }
+
+    .blog-section-count {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.0rem;
+      color: rgba(0, 0, 0, 0.2);
+    }
+
+    /* =====================================================
+       BLOG GRID
+       ===================================================== */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Featured card — full width */
+    .blog-card:first-child {
+      grid-column: 1 / -1;
+    }
+
+    /* ---- Card ---- */
+    .blog-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 36px 36px 28px;
+      cursor: pointer;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.14);
+    }
+
+    .blog-card-top {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Row: number + category + date */
+    .blog-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .blog-number {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.0rem;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.12);
+      letter-spacing: 2px;
+    }
+
+    .blog-meta-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .blog-category {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #111;
+      color: #fff;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 100px;
+    }
+
+    /* Different category colors */
+    .blog-category.cat-git {
+      background: #f05033;
+    }
+
+    .blog-category.cat-collab {
+      background: #3c8e5e;
+    }
+
+    .blog-category.cat-laravel {
+      background: #ff2d20;
+    }
+
+    .blog-category.cat-commands {
+      background: #e67e22;
+    }
+
+    .blog-category.cat-actions {
+      background: #2088ff;
+    }
+
+    .blog-date {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.0rem;
+      color: rgba(0, 0, 0, 0.3);
+      white-space: nowrap;
+    }
+
+    .blog-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #111;
+      line-height: 1.25;
+      letter-spacing: -0.4px;
+    }
+
+    .blog-card:first-child .blog-title {
+      font-size: 2.6rem;
+    }
+
+    .blog-excerpt {
+      font-size: 1.35rem;
+      color: rgba(0, 0, 0, 0.45);
+      line-height: 1.65;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .blog-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .read-time {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.0rem;
+      color: rgba(0, 0, 0, 0.28);
+      letter-spacing: 1px;
+    }
+
+    .blog-arrow {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: rgba(0, 0, 0, 0.3);
+      transition: all .25s ease;
+    }
+
+    .blog-card:hover .blog-arrow {
+      border-color: #4a7ba7;
+      color: #4a7ba7;
+      transform: translateX(3px);
+    }
+
+    /* =====================================================
+       MODAL — Slide-in reader panel
+       ===================================================== */
+    .blog-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 99999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .35s ease;
+    }
+
+    .blog-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .blog-modal-content {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 720px;
+      height: 100vh;
+      background: #fff;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform .4s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .blog-modal.active .blog-modal-content {
+      transform: translateX(0);
+    }
+
+    .blog-modal-content::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .blog-modal-content::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    /* Close bar */
+    .blog-modal-close {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 56px;
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 32px;
+      cursor: pointer;
+      z-index: 10;
+      color: rgba(0, 0, 0, 0.4);
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+      transition: color .2s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .blog-modal-close:hover {
+      color: #111;
+    }
+
+    .blog-modal-close::before {
+      content: '←';
+      font-size: 1.3rem;
+      color: rgba(0, 0, 0, 0.3);
+      transition: transform .3s ease;
+    }
+
+    .blog-modal-close:hover::before {
+      transform: translateX(-4px);
+    }
+
+    .blog-modal-body {
+      padding: 48px 52px 80px;
+    }
+
+    /* Modal typography */
+    .blog-modal-body h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #111;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin: 0 0 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .blog-modal-body h2 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: #111;
+      margin: 36px 0 14px;
+    }
+
+    .blog-modal-body h3 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.55);
+      margin: 24px 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .blog-modal-body p {
+      font-size: 1.5rem;
+      line-height: 1.75;
+      color: rgba(0, 0, 0, 0.6);
+      margin-bottom: 18px;
+    }
+
+    .blog-modal-body ul,
+    .blog-modal-body ol {
+      padding-left: 22px;
+      margin-bottom: 18px;
+    }
+
+    .blog-modal-body li {
+      font-size: 1.4rem;
+      line-height: 1.7;
+      color: rgba(0, 0, 0, 0.55);
+      margin-bottom: 6px;
+    }
+
+    .blog-modal-body strong {
+      color: #111;
+      font-weight: 600;
+    }
+
+    .blog-modal-body code {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.15rem;
+      background: #f2f2f2;
+      color: #d63031;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .blog-modal-body pre {
+      background: #1a1a2e;
+      border-radius: 8px;
+      padding: 24px 28px;
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    .blog-modal-body pre code {
+      background: none;
+      color: #a8d8f0;
+      font-size: 1.15rem;
+      padding: 0;
+      border-radius: 0;
+      line-height: 1.7;
+    }
+
+    /* Code block wrapper + copy btn */
+    .code-block-wrapper {
+      position: relative;
+      margin: 20px 0;
+    }
+
+    .code-block-wrapper pre {
+      margin: 0;
+    }
+
+    .copy-code-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1.1rem;
+      font-family: 'Fira Code', monospace;
+      padding: 5px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all .2s ease;
+    }
+
+    .copy-code-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+    }
+
+    .copy-code-btn.copied {
+      color: #4a7ba7;
+      border-color: #4a7ba7;
+    }
+
+    .copy-code-btn svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+    }
+
+    /* Share buttons */
+    .share-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 100px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: transparent;
+      color: rgba(0, 0, 0, 0.55);
+      font-family: 'Space Grotesk', sans-serif;
+      transition: all .2s ease;
+    }
+
+    .share-btn:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: #111;
+    }
+
+    .share-btn.copied {
+      color: #4a7ba7;
+      border-color: #4a7ba7;
+    }
+
+    .share-btn svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
+    }
+
+    /* =====================================================
+       BLOG FOOTER
+       ===================================================== */
+    .blog-footer {
+      padding: 48px 7%;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      background: #f8f8f6;
+    }
+
+    .blog-footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .blog-footer-copy {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.1rem;
+      color: rgba(0, 0, 0, 0.28);
+      letter-spacing: 1px;
+    }
+
+    .blog-footer-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.4);
+      text-decoration: none;
+      transition: color .25s ease;
+    }
+
+    .blog-footer-back:hover {
+      color: #111;
+    }
+
+    .blog-footer-back svg {
+      width: 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      transition: transform .25s ease;
+    }
+
+    .blog-footer-back:hover svg {
+      transform: translateX(-4px);
+    }
+
+    /* =====================================================
+       WHATSAPP FLOAT
+       ===================================================== */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 52px;
+      height: 52px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, .35);
+      z-index: 9990;
+      transition: transform .2s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+    }
+
+    .whatsapp-float span {
+      display: none;
+    }
+
+    /* =====================================================
+       PAGE TRANSITION
+       ===================================================== */
+    .page-transition {
+      position: fixed;
+      inset: 0;
+      background: #111;
+      z-index: 999999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s ease;
+    }
+
+    .page-transition.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .page-transition-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 1.4rem;
+      font-family: 'Fira Code', monospace;
+      letter-spacing: 3px;
+    }
+
+    /* =====================================================
+       RESPONSIVE
+       ===================================================== */
+    @media (max-width: 900px) {
+      .blog-nav {
+        width: calc(100% - 32px);
+        padding: 0 16px;
+      }
+
+      .blog-nav-links {
+        display: none;
+      }
+
+      .blog-hamburger {
+        display: flex;
+      }
+
+      .blog-hero {
+        padding: 100px 5% 60px;
+      }
+
+      .blog-hero-title {
+        font-size: clamp(5rem, 18vw, 10rem);
+        letter-spacing: -2px;
+      }
+
+      .blog-hero-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .blog-hero-desc {
+        text-align: left;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .blog-card:first-child {
+        grid-column: auto;
+      }
+
+      .blog-card:first-child .blog-title {
+        font-size: 2rem;
+      }
+
+      .blog-modal-content {
+        max-width: 100%;
+      }
+
+      .blog-modal-body {
+        padding: 32px 24px 60px;
+      }
+
+      .blog-section {
+        padding: 60px 5%;
+      }
+
+      .blog-footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+    }
+  </style>
 </head>
 
-<body class="body">
+<body>
   <!-- Page Transition -->
   <div class="page-transition" id="pageTransition">
     <div class="page-transition-text">Loading...</div>
   </div>
 
-  <div id="preloader"></div>
-  <noscript>Allow Javascript</noscript>
+  <!-- Cursor -->
+  <div class="cursor-inner" id="cursor-inner"></div>
+  <div class="cursor-outer" id="cursor-outer"></div>
 
+  <!-- Scroll Progress -->
+  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+  <!-- ======================================================
+       NAVBAR (same as homepage)
+       ====================================================== -->
   <header>
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
-
-    <!-- Particle Canvas Background -->
-    <canvas id="particleCanvas" class="particle-canvas"></canvas>
-
-    <!-- Spotlight Cursor Effect -->
-    <div class="spotlight" id="spotlight"></div>
-
-    <div class="cursor-inner" id="cursor-inner"></div>
-    <div class="cursor-outer" id="cursor-outer"></div>
-
     <div class="navbar" id="navbar">
       <div class="hey">Hey!</div>
       <div class="logo" tabindex="0" aria-label="david saputra logo">
-        <div class="logo-top">
-          <a href="index.html">
-            <img src="src/png/nav-avatar.png" alt="animation-head" id="nav-avatar" />
-          </a>
+        <div class="logo-top"
+          style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;cursor:pointer;"
+          onclick="window.location.href='index.html'">
+          <span
+            style="font-size:2rem;font-weight:900;font-family:'Space Grotesk',sans-serif;letter-spacing:-1px;color:#111;text-decoration:none;">DAVID.</span>
         </div>
       </div>
       <div class="navbar-tabs" id="navbar-tabs">
         <ul class="navbar-tabs-ul">
-          <li class="home" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="100">
+          <li class="home navbar-tabs-li" data-aos="fade-down" data-aos-delay="100">
             <a href="index.html#home" tabindex="0" aria-label="Home menu button">
-              &#60;/Home&#62;
+              <span>Home</span><span>Home</span>
             </a>
           </li>
-
-          <li class="about" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="300">
+          <li class="about navbar-tabs-li" data-aos="fade-down" data-aos-delay="300">
             <a href="index.html#about" aria-label="about menu button">
-              &#60;/AboutMe&#62;
+              <span>About Me</span><span>About Me</span>
             </a>
           </li>
-
-          <li class="skills" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="500">
+          <li class="skills navbar-tabs-li" data-aos="fade-down" data-aos-delay="500">
             <a href="index.html#skills" aria-label="skills menu button">
-              &#60;/Skills&#62;
+              <span>Skills</span><span>Skills</span>
             </a>
           </li>
-
-          <li class="projects" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="700">
+          <li class="projects navbar-tabs-li" data-aos="fade-down" data-aos-delay="700">
             <a href="index.html#projects" aria-label="projects menu button">
-              &#60;/Projects&#62;
+              <span>Projects</span><span>Projects</span>
             </a>
           </li>
-
-          <li class="blog activeThistab" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="900">
+          <li class="blog activeThistab navbar-tabs-li" data-aos="fade-down" data-aos-delay="900">
             <a href="blog.html" aria-label="blog menu button">
-              &#60;/Blog&#62;
+              <span>Blog</span><span>Blog</span>
             </a>
           </li>
-
           <li class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="1100">
             <a href="index.html#footer" aria-label="Contact menu button">
-              &#60;/Contact&#62;
+              <span>Contact</span><span>Contact</span>
             </a>
           </li>
         </ul>
       </div>
-      <!-- navbar tabs ends -->
-
-      <div class="togglemode" id="togglemode">
-        <input type="checkbox" class="checkbox" id="checkbox" />
-        <label for="checkbox" class="checkbox-label" tabindex="0" aria-label="Toggle Theme button">
-          <i class="fas fa-moon"></i>
-          <i class="fas fa-sun"></i>
-          <span class="ball" id="ball"></span>
-        </label>
-      </div>
-
     </div>
-    <!-- navbar tabs ends -->
   </header>
-  <!-- header ends here -->
 
-  <main>
-    <!-- hamburger -->
-    <div class="hamburger" id="hamburger" data-aos="fade">
-      <div class="hamburgerbase">
-        <button id="hamburger-button" onclick="hamburgerMenu()" tabindex="0" aria-label="Menu Button">
-          <span class="burger-bar" id="burger-bar1"></span>
-          <span class="burger-bar" id="burger-bar2"></span>
-          <span class="burger-bar" id="burger-bar3"></span>
-        </button>
-      </div>
+  <!-- hamburger -->
+  <div class="hamburger" id="hamburger" data-aos="fade">
+    <div class="hamburgerbase">
+      <button id="hamburger-button" onclick="hamburgerMenu()" tabindex="0" aria-label="Menu Button">
+        <span class="burger-bar" id="burger-bar1"></span>
+        <span class="burger-bar" id="burger-bar2"></span>
+        <span class="burger-bar" id="burger-bar3"></span>
+      </button>
     </div>
-    <!-- hamburger -->
-    <div class="mobiletogglemenu" id="mobiletogglemenu">
-      <ul class="mobile-navbar-tabs-ul" id="mobile-ul">
-        <li id="home-mobile-tab" class="mobile-navbar-tabs-li home" onclick="hidemenubyli()">
-          <a href="index.html#home" tabindex="0" aria-label="Home menu button">
-            &#60;/Home&#62;
-          </a>
-        </li>
+  </div>
+  <div class="mobiletogglemenu" id="mobiletogglemenu">
+    <ul class="mobile-navbar-tabs-ul" id="mobile-ul">
+      <li class="mobile-navbar-tabs-li home" onclick="hidemenubyli()">
+        <a href="index.html#home">&#60;/Home&#62;</a>
+      </li>
+      <li class="mobile-navbar-tabs-li about" onclick="hidemenubyli()">
+        <a href="index.html#about">&#60;/AboutMe&#62;</a>
+      </li>
+      <li class="mobile-navbar-tabs-li skills" onclick="hidemenubyli()">
+        <a href="index.html#skills">&#60;/Skills&#62;</a>
+      </li>
+      <li class="mobile-navbar-tabs-li projects" onclick="hidemenubyli()">
+        <a href="index.html#projects">&#60;/Projects&#62;</a>
+      </li>
+      <li class="mobile-navbar-tabs-li blog activeThismobiletab" onclick="hidemenubyli()">
+        <a href="blog.html">&#60;/Blog&#62;</a>
+      </li>
+    </ul>
+  </div>
 
-        <li id="aboutme-mobile-tab" class="mobile-navbar-tabs-li about" onclick="hidemenubyli()">
-          <a href="index.html#about" tabindex="0" aria-label="about menu button">
-            &#60;/AboutMe&#62;
-          </a>
-        </li>
-        <li id="skills-mobile-tab" class="mobile-navbar-tabs-li skills" onclick="hidemenubyli()">
-          <a href="index.html#skills" tabindex="0" aria-label="skills menu button">
-            &#60;/Skills&#62;
-          </a>
-        </li>
-        <li id="projects-mobile-tab" class="mobile-navbar-tabs-li projects" onclick="hidemenubyli()">
-          <a href="index.html#projects" tabindex="0" aria-label="projects menu button">
-            &#60;/Projects&#62;
-          </a>
-        </li>
-        <li id="blog-mobile-tab" class="mobile-navbar-tabs-li blog activeThismobiletab" onclick="hidemenubyli()">
-          <a href="blog.html" tabindex="0" aria-label="blog menu button">
-            &#60;/Blog&#62;
-          </a>
-        </li>
-      </ul>
+  <!-- ======================================================
+       HERO
+       ====================================================== -->
+  <section class="blog-hero">
+    <div class="blog-hero-eyebrow" data-aos="fade-up" data-aos-delay="100">
+      <div class="blog-hero-eyebrow-line"></div>
+      <span class="blog-hero-eyebrow-label">David Saputra / Blog</span>
     </div>
-    <!-- mobile toggle menu ends -->
-    <!-- Blog Hero Section -->
-    <section class="blog-hero-section">
-      <div class="blog-hero-content" data-aos="fade-up">
-        <h1 class="blog-hero-title scramble-text">My Blog</h1>
-        <p class="blog-hero-subtitle">Tutorials, guides, and tips about web development</p>
-      </div>
-    </section>
+    <h1 class="blog-hero-title" data-aos="fade-up" data-aos-delay="200">
+      MY<br><span class="outline">BLOG</span>
+    </h1>
+    <div class="blog-hero-bottom" data-aos="fade-up" data-aos-delay="300">
+      <div class="blog-hero-count"><strong>5</strong> articles published</div>
+      <p class="blog-hero-desc">Tutorials, guides &amp; notes on web development, Git, and modern tooling.</p>
+    </div>
+  </section>
 
-    <!-- Blog Section -->
-    <section class="blog-section" id="blog">
-      <div class="blog-container">
-        <div class="blog-grid">
-          <!-- Blog Card 1 -->
-          <article class="blog-card" data-tilt onclick="openBlogModal('blog1')">
-            <div class="blog-card-header">
-              <div class="blog-category">Git & GitHub</div>
-              <div class="blog-date">Dec 2024</div>
+  <!-- ======================================================
+       BLOG GRID
+       ====================================================== -->
+  <section class="blog-section" id="blog">
+    <div class="blog-container">
+
+      <div class="blog-section-header" data-aos="fade-up">
+        <span class="blog-section-label">All Posts</span>
+        <span class="blog-section-count">01 — 05</span>
+      </div>
+
+      <div class="blog-grid">
+
+        <!-- Card 1 — featured -->
+        <article class="blog-card" data-aos="fade-up" data-aos-delay="0" onclick="openBlogModal('blog1')">
+          <div class="blog-card-top">
+            <div class="blog-card-meta">
+              <span class="blog-number">001</span>
+              <div class="blog-meta-right">
+                <span class="blog-category cat-git">Git &amp; GitHub</span>
+                <span class="blog-date">Dec 2026</span>
+              </div>
             </div>
-
             <h3 class="blog-title">Cara Membuat Repository di GitHub</h3>
             <p class="blog-excerpt">Panduan lengkap untuk membuat dan mengelola repository di GitHub dari awal hingga
               push pertama kamu.</p>
-            <div class="blog-footer">
-              <span class="read-time">5 min read</span>
-              <span class="blog-arrow">→</span>
-            </div>
-          </article>
+          </div>
+          <div class="blog-card-footer">
+            <span class="read-time">5 min read</span>
+            <span class="blog-arrow">→</span>
+          </div>
+        </article>
 
-          <!-- Blog Card 2 -->
-          <article class="blog-card" data-tilt onclick="openBlogModal('blog2')">
-            <div class="blog-card-header">
-              <div class="blog-category">Git Collaboration</div>
-              <div class="blog-date">Dec 2024</div>
+        <!-- Card 2 -->
+        <article class="blog-card" data-aos="fade-up" data-aos-delay="60" onclick="openBlogModal('blog2')">
+          <div class="blog-card-top">
+            <div class="blog-card-meta">
+              <span class="blog-number">002</span>
+              <div class="blog-meta-right">
+                <span class="blog-category cat-collab">Git Collaboration</span>
+                <span class="blog-date">Dec 2026</span>
+              </div>
             </div>
-
             <h3 class="blog-title">Git Collaboration: Kerja Bareng dengan Tim</h3>
             <p class="blog-excerpt">Pelajari cara berkolaborasi dengan tim menggunakan Git: branching, merging, dan pull
               requests.</p>
-            <div class="blog-footer">
-              <span class="read-time">8 min read</span>
-              <span class="blog-arrow">→</span>
-            </div>
-          </article>
+          </div>
+          <div class="blog-card-footer">
+            <span class="read-time">8 min read</span>
+            <span class="blog-arrow">→</span>
+          </div>
+        </article>
 
-          <!-- Blog Card 3 -->
-          <article class="blog-card" data-tilt onclick="openBlogModal('blog3')">
-            <div class="blog-card-header">
-              <div class="blog-category">Laravel</div>
-              <div class="blog-date">Dec 2024</div>
+        <!-- Card 3 -->
+        <article class="blog-card" data-aos="fade-up" data-aos-delay="100" onclick="openBlogModal('blog3')">
+          <div class="blog-card-top">
+            <div class="blog-card-meta">
+              <span class="blog-number">003</span>
+              <div class="blog-meta-right">
+                <span class="blog-category cat-laravel">Laravel</span>
+                <span class="blog-date">Dec 2026</span>
+              </div>
             </div>
-
             <h3 class="blog-title">Install Laravel: Setup Development Environment</h3>
             <p class="blog-excerpt">Tutorial step-by-step install Laravel dengan Composer dan setup development
               environment yang optimal.</p>
-            <div class="blog-footer">
-              <span class="read-time">10 min read</span>
-              <span class="blog-arrow">→</span>
-            </div>
-          </article>
+          </div>
+          <div class="blog-card-footer">
+            <span class="read-time">10 min read</span>
+            <span class="blog-arrow">→</span>
+          </div>
+        </article>
 
-          <!-- Blog Card 4 -->
-          <article class="blog-card" data-tilt onclick="openBlogModal('blog4')">
-            <div class="blog-card-header">
-              <div class="blog-category">Git Commands</div>
-              <div class="blog-date">Dec 2024</div>
+        <!-- Card 4 -->
+        <article class="blog-card" data-aos="fade-up" data-aos-delay="140" onclick="openBlogModal('blog4')">
+          <div class="blog-card-top">
+            <div class="blog-card-meta">
+              <span class="blog-number">004</span>
+              <div class="blog-meta-right">
+                <span class="blog-category cat-commands">Git Commands</span>
+                <span class="blog-date">Dec 2026</span>
+              </div>
             </div>
-
             <h3 class="blog-title">Git Commands yang Wajib Kamu Tahu</h3>
             <p class="blog-excerpt">Daftar lengkap Git commands essential untuk workflow development sehari-hari dengan
               contoh praktis.</p>
-            <div class="blog-footer">
-              <span class="read-time">6 min read</span>
-              <span class="blog-arrow">→</span>
-            </div>
-          </article>
+          </div>
+          <div class="blog-card-footer">
+            <span class="read-time">6 min read</span>
+            <span class="blog-arrow">→</span>
+          </div>
+        </article>
 
-          <!-- Blog Card 5 -->
-          <article class="blog-card" data-tilt onclick="openBlogModal('blog5')">
-            <div class="blog-card-header">
-              <div class="blog-category">GitHub Actions</div>
-              <div class="blog-date">Dec 2024</div>
+        <!-- Card 5 -->
+        <article class="blog-card" data-aos="fade-up" data-aos-delay="180" onclick="openBlogModal('blog5')">
+          <div class="blog-card-top">
+            <div class="blog-card-meta">
+              <span class="blog-number">005</span>
+              <div class="blog-meta-right">
+                <span class="blog-category cat-actions">GitHub Actions</span>
+                <span class="blog-date">Dec 2026</span>
+              </div>
             </div>
-
             <h3 class="blog-title">GitHub Actions: Automate Your Workflow</h3>
             <p class="blog-excerpt">Belajar membuat CI/CD pipeline dengan GitHub Actions untuk automate testing dan
               deployment.</p>
-            <div class="blog-footer">
-              <span class="read-time">12 min read</span>
-              <span class="blog-arrow">→</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Blog Modal -->
-    <div class="blog-modal" id="blogModal">
-      <div class="blog-modal-content">
-        <button class="blog-modal-close" onclick="closeBlogModal()">&times;</button>
-        <div class="blog-modal-body" id="blogModalBody">
-          <!-- Content will be loaded dynamically -->
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <footer id="footer">
-    <button class="fas" id="backtotopbutton" onclick="scrolltoTopfunction()">
-      <svg class="progress-ring" width="70" height="70">
-        <circle class="progress-ring-circle" stroke-width="3" fill="transparent" r="35" cx="35" cy="35" />
-      </svg>
-      <article aria-label="Back to top">&#8592;BACK TO TOP</article>
-    </button>
-    <div class="footer-background">
-      <div class="footer-blob"></div>
-    </div>
-    <div class="footer-foreground">
-      <div class="footercontainer">
-        <div class="two-words">
-          <article tabindex="0" aria-label="Learning, Living, and Leveling Up, my quote">
-            "Learning, Living, and Leveling Up."
-          </article>
-        </div>
-        <div class="social-media-container">
-          <div class="getintouch-heading">
-            <article>GetinTouch();</article>
           </div>
-          <div class="logos">
-            <a href="https://www.instagram.com/pexel_ui/" target="_blank" tabindex="0" aria-label="My instagram"><svg
-                viewBox="0 0 448 512" class="SocialHandle">
-                <path
-                  d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
-              </svg></a>
-
-            <a href="https://www.linkedin.com/in/vinod-jangid-b401111a1?original_referer=" target="_blank"
-              aria-label="My Linkdin"><svg class="SocialHandle" viewBox="0 0 448 512">
-                <path
-                  d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
-              </svg></a>
-
-            <a href="https://github.com/DavidDSaputra" target="_blank" aria-label="My github"><svg viewBox="0 0 496 512"
-                class="SocialHandle">
-                <path
-                  d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
-              </svg></a>
-
-            <a href="mailto:infovinodjangid@gmail.com" target="_blank" aria-label="My G mail"><svg id="GmailLogo"
-                viewBox="0 0 512 512">
-                <path
-                  d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" />
-              </svg></a>
+          <div class="blog-card-footer">
+            <span class="read-time">12 min read</span>
+            <span class="blog-arrow">→</span>
           </div>
-        </div>
-        <div class="footer-avatar-container">
+        </article>
 
-        </div>
-        <div class="footer-bottom">
-          <article>
-            &#169; Design & Built by David Saputra
-          </article>
-        </div>
-      </div>
+      </div><!-- /blog-grid -->
+    </div>
+  </section>
+
+  <!-- ======================================================
+       MODAL — Slide-in reader
+       ====================================================== -->
+  <div class="blog-modal" id="blogModal">
+    <div class="blog-modal-content">
+      <button class="blog-modal-close" onclick="closeBlogModal()">Close Article</button>
+      <div class="blog-modal-body" id="blogModalBody"></div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       FOOTER
+       ====================================================== -->
+  <footer class="blog-footer" id="footer">
+    <div class="blog-footer-inner">
+      <span class="blog-footer-copy">© 2026 David Saputra. All rights reserved.</span>
+      <a href="index.html" class="blog-footer-back">
+        <svg viewBox="0 0 24 24">
+          <polyline points="19 12 5 12" />
+          <polyline points="12 19 5 12 12 5" />
+        </svg>
+        Back to Portfolio
+      </a>
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
-  <script src="https://kit.fontawesome.com/57957a6f59.js" crossorigin="anonymous"></script>
-  <script src="main.js"></script>
-
-  <!-- Scroll Progress Bar Script -->
-  <script>
-    const scrollProgressBar = document.getElementById('scrollProgressBar');
-    window.addEventListener('scroll', () => {
-      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (window.scrollY / windowHeight) * 100;
-      scrollProgressBar.style.width = scrolled + '%';
-    });
-  </script>
-
-  <!-- Cursor Scripts -->
-  <script>
-    const cursorInner = document.getElementById("cursor-inner");
-    const cursorOuter = document.getElementById("cursor-outer");
-    const links = document.querySelectorAll("a,label,button");
-
-    document.addEventListener("mousemove", function (e) {
-      const posX = e.clientX;
-      const posY = e.clientY;
-
-      cursorInner.style.left = `${posX}px`;
-      cursorInner.style.top = `${posY}px`;
-
-      cursorOuter.animate(
-        {
-          left: `${posX}px`,
-          top: `${posY}px`,
-        },
-        { duration: 500, fill: "forwards" }
-      );
-
-      links.forEach((link) => {
-        link.addEventListener("mouseenter", () => {
-          cursorInner.classList.add("hover");
-          cursorOuter.classList.add("hover");
-        });
-        link.addEventListener("mouseleave", () => {
-          cursorInner.classList.remove("hover");
-          cursorOuter.classList.remove("hover");
-        });
-      });
-    });
-  </script>
-
-  <!-- Spotlight Cursor Effect Script -->
-  <script>
-    const spotlight = document.getElementById('spotlight');
-    document.addEventListener('mousemove', (e) => {
-      spotlight.style.left = e.clientX + 'px';
-      spotlight.style.top = e.clientY + 'px';
-    });
-    document.addEventListener('mouseleave', () => { spotlight.style.opacity = '0'; });
-    document.addEventListener('mouseenter', () => { spotlight.style.opacity = '1'; });
-  </script>
-
-  <!-- Particle Canvas Script -->
-  <script>
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let particlesArray = [];
-    let mouse = {
-      x: null,
-      y: null,
-      radius: 150
-    };
-
-    window.addEventListener('mousemove', function (event) {
-      mouse.x = event.x;
-      mouse.y = event.y;
-    });
-
-    window.addEventListener('resize', function () {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      init();
-    });
-
-    class Particle {
-      constructor(x, y, directionX, directionY, size, color) {
-        this.x = x;
-        this.y = y;
-        this.directionX = directionX;
-        this.directionY = directionY;
-        this.size = size;
-        this.color = color;
-      }
-
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-      }
-
-      update() {
-        if (this.x > canvas.width || this.x < 0) {
-          this.directionX = -this.directionX;
-        }
-        if (this.y > canvas.height || this.y < 0) {
-          this.directionY = -this.directionY;
-        }
-
-        let dx = mouse.x - this.x;
-        let dy = mouse.y - this.y;
-        let distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < mouse.radius + this.size) {
-          if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
-            this.x += 2;
-          }
-          if (mouse.x > this.x && this.x > this.size * 10) {
-            this.x -= 2;
-          }
-          if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
-            this.y += 2;
-          }
-          if (mouse.y > this.y && this.y > this.size * 10) {
-            this.y -= 2;
-          }
-        }
-
-        this.x += this.directionX;
-        this.y += this.directionY;
-        this.draw();
-      }
-    }
-
-    function init() {
-      particlesArray = [];
-      let numberOfParticles = (canvas.height * canvas.width) / 9000;
-
-      for (let i = 0; i < numberOfParticles; i++) {
-        let size = (Math.random() * 2) + 1;
-        let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-        let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-        let directionX = (Math.random() * 0.4) - 0.2;
-        let directionY = (Math.random() * 0.4) - 0.2;
-        let color = 'rgba(91, 143, 185, 0.8)';
-
-        particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-      }
-    }
-
-    function connect() {
-      let opacityValue = 1;
-      for (let a = 0; a < particlesArray.length; a++) {
-        for (let b = a; b < particlesArray.length; b++) {
-          let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
-            + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-
-          if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-            opacityValue = 1 - (distance / 20000);
-            ctx.strokeStyle = 'rgba(74, 123, 167,' + opacityValue + ')';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-            ctx.stroke();
-          }
-        }
-      }
-    }
-
-    function animate() {
-      requestAnimationFrame(animate);
-      ctx.clearRect(0, 0, innerWidth, innerHeight);
-
-      for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-      }
-      connect();
-    }
-
-    init();
-    animate();
-  </script>
-
-  <!-- Blog Modal Scripts -->
-  <script src="blog-content.js"></script>
-
-  <!-- WhatsApp Floating Button -->
+  <!-- WhatsApp -->
   <a href="https://wa.me/6289504631048" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
-    <svg viewBox="0 0 32 32" width="32" height="32">
+    <svg viewBox="0 0 32 32" width="26" height="26">
       <path fill="currentColor"
         d="M16 0C7.164 0 0 7.163 0 16c0 2.826.739 5.488 2.03 7.788L.047 31.406l7.853-2.058A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.455A13.455 13.455 0 1 1 29.455 16 13.47 13.47 0 0 1 16 29.455z" />
       <path fill="currentColor"
-        d="M22.916 18.802c-.324-.162-1.917-.946-2.214-1.054-.297-.108-.513-.162-.73.162-.216.324-.838 1.054-1.027 1.27-.189.217-.378.244-.702.081-.324-.162-1.367-.504-2.604-1.607-.963-.859-1.613-1.92-1.802-2.244-.189-.324-.02-.5.142-.662.146-.146.324-.378.486-.567.162-.189.216-.324.324-.54.108-.217.054-.405-.027-.567-.081-.162-.73-1.758-1-2.406-.263-.63-.53-.544-.73-.554-.189-.009-.405-.011-.621-.011s-.567.081-.863.405c-.297.324-1.135 1.108-1.135 2.703s1.162 3.135 1.324 3.352c.162.216 2.284 3.486 5.535 4.888 3.251 1.401 3.251.934 3.838.875.587-.059 1.917-.783 2.187-1.54.27-.756.27-1.405.189-1.54-.081-.135-.297-.216-.621-.378z" />
+        d="M22.916 18.802c-.324-.162-1.917-.946-2.214-1.054-.297-.108-.513-.162-.73.162-.216.324-.838 1.054-1.027 1.27-.189.217-.378.244-.702.081-.324-.162-1.367-.504-2.604-1.607-.963-.859-1.613-1.92-1.802-2.244-.189-.324-.02-.5.142-.662.146-.146.324-.378.486-.567.162-.189.216-.324.324-.54.108-.217.054-.405-.027-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.081-.135-.297-.216-.621-.378z" />
     </svg>
     <span>Chat</span>
   </a>
 
-  <!-- Page Transition & Easter Eggs Script -->
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>AOS.init({ duration: 650, easing: 'ease-out-cubic', once: true, offset: 40 });</script>
+
+  <!-- Scroll Progress -->
   <script>
-    // Page Transition Animation
-    document.addEventListener('DOMContentLoaded', function () {
-      const pageTransition = document.getElementById('pageTransition');
+    const scrollBar = document.getElementById('scrollProgressBar');
+    window.addEventListener('scroll', () => {
+      const total = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      scrollBar.style.width = (window.scrollY / total * 100) + '%';
+    });
+  </script>
 
-      // Hide transition on page load
-      setTimeout(() => {
-        pageTransition.classList.remove('active');
-      }, 500);
+  <!-- Cursor -->
+  <script>
+    const ci = document.getElementById('cursor-inner');
+    const co = document.getElementById('cursor-outer');
+    document.addEventListener('mousemove', e => {
+      ci.style.left = e.clientX + 'px'; ci.style.top = e.clientY + 'px';
+      co.animate({ left: e.clientX + 'px', top: e.clientY + 'px' }, { duration: 500, fill: 'forwards' });
+    });
+    document.querySelectorAll('a,button,article').forEach(el => {
+      el.addEventListener('mouseenter', () => { ci.classList.add('hover'); co.classList.add('hover'); });
+      el.addEventListener('mouseleave', () => { ci.classList.remove('hover'); co.classList.remove('hover'); });
+    });
+  </script>
 
-      // Add transition to all internal links
+  <!-- Main JS (hamburger, cursor, scroll) -->
+  <script src="main.js"></script>
+  <!-- Blog Modal Scripts -->
+  <script src="blog-content.js"></script>
+
+  <!-- Page Transition -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const pt = document.getElementById('pageTransition');
+      setTimeout(() => pt.classList.remove('active'), 500);
       document.querySelectorAll('a[href^="index.html"], a[href^="blog.html"]').forEach(link => {
-        link.addEventListener('click', function (e) {
-          const href = this.getAttribute('href');
-
-          // Skip if it's a hash link
-          if (href.includes('#') && href.startsWith('index.html')) {
-            return;
-          }
-
+        link.addEventListener('click', e => {
+          const href = link.getAttribute('href');
+          if (href.includes('#') && href.startsWith('index.html')) return;
           e.preventDefault();
-          const target = href;
-
-          pageTransition.classList.add('active');
-
-          setTimeout(() => {
-            window.location.href = target;
-          }, 500);
+          pt.classList.add('active');
+          setTimeout(() => window.location.href = href, 500);
         });
       });
     });
-
-    // Back to Top Progress Circle (only if exists)
-    function updateProgressCircle() {
-      const progressCircle = document.querySelector('.progress-ring-circle');
-      if (!progressCircle) return;
-
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrollPercent = (scrollTop / scrollHeight) * 100;
-
-      const offset = 220 - (220 * scrollPercent) / 100;
-      progressCircle.style.strokeDashoffset = offset;
-    }
-
-    window.addEventListener('scroll', updateProgressCircle);
-
-    // Lazy Loading Images
-    document.addEventListener('DOMContentLoaded', function () {
-      const lazyImages = document.querySelectorAll('img.lazy');
-
-      const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.dataset.src;
-            img.classList.add('loaded');
-            observer.unobserve(img);
-          }
-        });
-      });
-
-      lazyImages.forEach(img => imageObserver.observe(img));
-    });
-
   </script>
 </body>
 

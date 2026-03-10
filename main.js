@@ -44,3 +44,13 @@ function resetInterval() {
 if (slides.length > 0) {
     slideInterval = setInterval(brewNext, 5000);
 }
+
+// Navbar scroll effect
+const navbarEl = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbarEl.classList.add('scrolled');
+    } else {
+        navbarEl.classList.remove('scrolled');
+    }
+});
