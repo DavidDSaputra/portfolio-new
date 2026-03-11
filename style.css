@@ -4228,6 +4228,258 @@ footer {
     }
 }
 
+/* Chat Room Styles */
+.chat-section-container {
+    padding: 100px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-section {
+    width: 80%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chat-container {
+    width: 100%;
+    height: 600px;
+    background: rgba(15, 20, 25, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    position: relative;
+    /* Force light theme colors back for this dark component inside a light page */
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.chat-header {
+    padding: 20px 30px;
+    background: #f8f9fa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.chat-icon {
+    font-size: 2.4rem;
+}
+
+.chat-header h3 {
+    color: #111;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid #000;
+}
+
+#user-name {
+    color: #111;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid rgba(200, 95, 111, 0.5);
+    color: #d63031;
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #d63031;
+    color: white;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.chat-message {
+    max-width: 70%;
+    padding: 12px 18px;
+    border-radius: 15px;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.system-message {
+    align-self: center;
+    background: rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.6);
+    font-style: italic;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 1.2rem;
+}
+
+.message-received {
+    align-self: flex-start;
+    background: #f1f2f6;
+    color: #111;
+    border-bottom-left-radius: 5px;
+}
+
+.message-sent {
+    align-self: flex-end;
+    background: #111;
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+
+.message-author {
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 5px;
+    display: block;
+}
+
+.message-sent .message-author {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.chat-input-area {
+    padding: 20px;
+    background: #f8f9fa;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.login-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.google-login-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    color: #3c4043;
+    border: 1px solid #dfe1e5;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.google-login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.chat-form {
+    display: flex;
+    gap: 15px;
+}
+
+#message-input {
+    flex: 1;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 12px 20px;
+    border-radius: 25px;
+    color: #111;
+    font-family: inherit;
+    font-size: 1.4rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#message-input:focus {
+    border-color: #111;
+}
+
+.send-btn {
+    background: #111;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.2s ease;
+}
+
+.send-btn:hover {
+    transform: scale(1.1);
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media screen and (max-width: 768px) {
+    .chat-section {
+        width: 95%;
+    }
+
+    .chat-container {
+        height: 500px;
+    }
+}
+
 /* AKITO BRUTALIST FOOTER CSS */
 /* ============================================
    FOOTER — Full Dark Redesign
