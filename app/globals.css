@@ -1,0 +1,24 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  min-height: 100vh;
+  background: #fff7df;
+}
+
+.site-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.reactbits-demo-title {
+  max-width: 920px;
+  margin: 0;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
