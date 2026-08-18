@@ -7046,3 +7046,433 @@ body,
         margin-bottom: 1rem !important;
     }
 }
+
+/* Navbar floats above the hero; header must not reserve empty page space. */
+header {
+    position: relative !important;
+    z-index: 999 !important;
+    width: 100% !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.landing-page-container {
+    margin-top: 0 !important;
+}
+
+/* ================================================================
+   FINAL MOBILE SYSTEM
+   Explicit overrides for the legacy breakpoints and mobile menu.
+   ================================================================ */
+@media screen and (max-width: 998px) {
+    html {
+        font-size: 58% !important;
+    }
+
+    body {
+        overflow-x: hidden !important;
+    }
+
+    body.stopscrolling {
+        overflow: hidden !important;
+        touch-action: none;
+    }
+
+    .navbar,
+    .navbar.scrolled {
+        width: calc(100% - 24px) !important;
+        height: 64px !important;
+        top: 12px !important;
+        padding: 0 74px 0 12px !important;
+        border-width: 3px !important;
+        box-shadow: 5px 5px 0 var(--neo-ink) !important;
+    }
+
+    .navbar-tabs,
+    .navbar-tabs-ul,
+    .hey {
+        display: none !important;
+    }
+
+    .logo {
+        display: flex !important;
+        width: auto !important;
+        min-width: 112px !important;
+        height: 42px !important;
+        padding-inline: 13px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    .hamburger {
+        position: fixed !important;
+        top: 18px !important;
+        right: 20px !important;
+        left: auto !important;
+        z-index: 10003 !important;
+        display: flex !important;
+        width: 50px !important;
+        height: 50px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: transparent !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+    }
+
+    .hamburgerbase {
+        display: flex !important;
+        width: 50px !important;
+        height: 50px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: transparent !important;
+    }
+
+    #hamburger-button {
+        position: relative !important;
+        z-index: 1;
+        display: flex !important;
+        width: 46px !important;
+        height: 46px !important;
+        margin: 0 !important;
+        padding: 10px 9px !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: space-between !important;
+        background: var(--neo-orange) !important;
+        border: 3px solid var(--neo-ink) !important;
+        box-shadow: 3px 3px 0 var(--neo-ink) !important;
+    }
+
+    #burger-bar1,
+    #burger-bar2,
+    #burger-bar3 {
+        display: block !important;
+        width: 100% !important;
+        height: 3px !important;
+        flex: 0 0 3px;
+        background: var(--neo-ink) !important;
+        border-radius: 0 !important;
+        transform-origin: center !important;
+        transition: transform .22s ease, opacity .18s ease !important;
+    }
+
+    #burger-bar1.hamburger-animation1 {
+        transform: translateY(10px) rotate(45deg) !important;
+    }
+
+    #burger-bar2.hamburger-animation2 {
+        opacity: 0 !important;
+        transform: scaleX(0) !important;
+    }
+
+    #burger-bar3.hamburger-animation3 {
+        transform: translateY(-10px) rotate(-45deg) !important;
+    }
+
+    .mobiletogglemenu {
+        position: fixed !important;
+        inset: 0 !important;
+        z-index: 10001 !important;
+        display: flex !important;
+        width: 100% !important;
+        height: 100dvh !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        background: rgba(17, 17, 17, .35) !important;
+        border: 0 !important;
+        transform: translateX(105%) !important;
+        transition: transform .3s cubic-bezier(.2, .8, .2, 1), opacity .2s ease, visibility 0s linear .3s !important;
+    }
+
+    .mobiletogglemenu.show-toggle-menu {
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: translateX(0) !important;
+        transition-delay: 0s !important;
+    }
+
+    .mobile-navbar-tabs-ul {
+        width: min(88vw, 390px) !important;
+        height: 100% !important;
+        margin: 0 0 0 auto !important;
+        padding: 105px 28px 42px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: center !important;
+        gap: 14px !important;
+        overflow-y: auto;
+        background: var(--neo-pink) !important;
+        border-left: 4px solid var(--neo-ink) !important;
+        box-shadow: -9px 0 0 var(--neo-ink) !important;
+    }
+
+    .mobile-navbar-tabs-li {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: left !important;
+    }
+
+    .mobile-navbar-tabs-li::before {
+        display: none !important;
+    }
+
+    .mobile-navbar-tabs-li a {
+        display: block !important;
+        width: 100% !important;
+        padding: 14px 16px !important;
+        background: var(--neo-white) !important;
+        color: var(--neo-ink) !important;
+        border: 3px solid var(--neo-ink) !important;
+        box-shadow: 4px 4px 0 var(--neo-ink) !important;
+        font: 400 clamp(2rem, 7vw, 3.2rem)/1 'Archivo Black', sans-serif !important;
+        letter-spacing: -.04em !important;
+        text-decoration: none !important;
+        transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease !important;
+    }
+
+    .mobile-navbar-tabs-li:nth-child(2n) a {
+        background: var(--neo-yellow) !important;
+    }
+
+    .mobile-navbar-tabs-li.activeThismobiletab a,
+    .mobile-navbar-tabs-li a:hover {
+        background: var(--neo-green) !important;
+        color: var(--neo-white) !important;
+        transform: translate(3px, 3px) !important;
+        box-shadow: 1px 1px 0 var(--neo-ink) !important;
+    }
+
+    .landing-page-container {
+        min-height: max(100svh, 720px) !important;
+        padding: 11rem 0 12rem !important;
+    }
+
+    .akito-hero-content {
+        width: calc(100% - 32px) !important;
+        padding: 0 0 2rem !important;
+        gap: 1.25rem !important;
+    }
+
+    .akito-hero-title {
+        max-width: 100% !important;
+        font-size: clamp(5.5rem, 20vw, 10rem) !important;
+        line-height: .84 !important;
+        letter-spacing: -.075em !important;
+        overflow-wrap: normal;
+    }
+
+    .akito-hero-desc {
+        width: min(100%, 560px) !important;
+        max-width: none !important;
+        font-size: 1.45rem !important;
+        line-height: 1.55 !important;
+    }
+
+    .landing-page-container::before {
+        display: none !important;
+    }
+
+    .landing-page-container::after {
+        overflow: hidden;
+        font-size: 1rem !important;
+        text-align: left !important;
+        text-indent: 16px;
+    }
+
+    .about-section,
+    .skills-section,
+    .projects-section-div,
+    .chat-section {
+        width: calc(100% - 32px) !important;
+    }
+
+    .section-heading-article {
+        max-width: 100%;
+        font-size: clamp(2.6rem, 10vw, 4.4rem) !important;
+        overflow-wrap: anywhere;
+    }
+
+    .info-dp-section {
+        gap: 3rem !important;
+    }
+
+    .about-info {
+        width: 100% !important;
+        padding: 2.6rem !important;
+    }
+
+    .about-info p {
+        font-size: 1.5rem !important;
+        line-height: 1.65 !important;
+    }
+
+    .dp,
+    .reactbits-about-frame,
+    .reactbits-about-image,
+    .dp > img {
+        width: 100% !important;
+        min-height: 360px !important;
+    }
+
+    .frontend-dev-heading {
+        font-size: clamp(3.2rem, 12vw, 5rem) !important;
+    }
+
+    .tech-stack-wrapper {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 16px !important;
+        width: 100% !important;
+    }
+
+    .tech-stack-box {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 1 !important;
+    }
+
+    .reactbits-projects-shell {
+        min-height: 0 !important;
+        gap: 3.5rem !important;
+    }
+
+    .reactbits-projects-panel {
+        padding: 2.6rem !important;
+        transform: none !important;
+    }
+
+    .reactbits-projects-title {
+        font-size: clamp(3.2rem, 11vw, 4.8rem) !important;
+    }
+
+    .brew-slider-container.reactbits-projects-mounted {
+        min-height: 0 !important;
+    }
+
+    .reactbits-projects-stage {
+        width: 100% !important;
+        min-height: 430px !important;
+        transform: none !important;
+    }
+
+    .reactbits-projects-stage > div {
+        right: auto !important;
+        bottom: 18px !important;
+        left: 2% !important;
+        transform: scale(.72) !important;
+        transform-origin: bottom left !important;
+    }
+
+    .chat-container {
+        width: 100% !important;
+        height: min(620px, 78svh) !important;
+    }
+
+    .chat-header,
+    .chat-input-area {
+        padding-inline: 14px !important;
+    }
+
+    .akito-footer .footercontainer {
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    html {
+        font-size: 56% !important;
+    }
+
+    .navbar,
+    .navbar.scrolled {
+        width: calc(100% - 16px) !important;
+        top: 8px !important;
+    }
+
+    .hamburger {
+        top: 14px !important;
+        right: 14px !important;
+    }
+
+    .landing-page-container {
+        padding-top: 10rem !important;
+    }
+
+    .blob::before,
+    .blob::after,
+    .reactbits-hero-aurora::before,
+    .reactbits-hero-aurora::after {
+        display: none !important;
+    }
+
+    .akito-hero-title {
+        font-size: clamp(5.1rem, 22vw, 8rem) !important;
+    }
+
+    .akito-hero-subtitle {
+        max-width: 100%;
+        font-size: 1.1rem !important;
+        letter-spacing: .08em !important;
+    }
+
+    .letsTalkBtn {
+        min-height: 50px !important;
+        padding: 14px 20px !important;
+    }
+
+    .tech-stack-wrapper {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .reactbits-projects-stage {
+        min-height: 365px !important;
+    }
+
+    .reactbits-projects-stage > div {
+        left: 0 !important;
+        transform: scale(.6) !important;
+    }
+
+    .reactbits-project-cardContent {
+        padding: 2rem !important;
+    }
+
+    .reactbits-project-card h4 {
+        font-size: 2.2rem !important;
+    }
+
+    .chat-header h3 {
+        font-size: 1.7rem !important;
+    }
+
+    .user-info {
+        max-width: 48%;
+    }
+
+    .akito-footer .two-words article {
+        font-size: clamp(3.7rem, 13vw, 5.6rem) !important;
+    }
+}

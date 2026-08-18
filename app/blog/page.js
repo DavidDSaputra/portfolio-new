@@ -15,6 +15,7 @@ export default function BlogPage() {
       inlineStyle={page.inlineStyle}
       scripts={[
         "/main.js",
+        "/js/mobile-menu.js",
         "https://unpkg.com/aos@next/dist/aos.js",
         "/blog-content.js",
         "https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js",
