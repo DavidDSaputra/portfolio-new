@@ -213,7 +213,7 @@ function ProjectsExperience() {
                 key={project.title}
                 className="reactbits-project-card"
                 style={{
-                  backgroundImage: `linear-gradient(180deg, rgba(15, 17, 21, 0.18) 0%, rgba(15, 17, 21, 0.92) 100%), url(${project.image})`,
+                  backgroundImage: `url(${project.image})`,
                 }}
               >
                 <div className="reactbits-project-cardContent">
