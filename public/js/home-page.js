@@ -532,50 +532,63 @@
     }
   });
 
-  // Project filter dock: AssistiveTouch-style — the frosted toggle springs in
-  // when the section enters view; pressing it reveals the filter tabs.
+  // Project filter: a big centered button (before the first pick) and the
+  // sticky dock toggle both open a full-screen blurred category overlay;
+  // picking a category closes it and reveals the matching cards.
   const filterDock = document.querySelector(".mn-filter-dock");
+  const filterOverlay = document.getElementById("filterOverlay");
   const filterBar = document.querySelector(".mn-filter");
   const filterEmpty = document.getElementById("filterEmpty");
   const projectsSection = document.getElementById("projects");
-  if (filterDock && filterBar) {
-    const filterToggle = filterDock.querySelector(".mn-filter-toggle");
+  if (filterOverlay && filterBar) {
+    const filterToggle = filterDock?.querySelector(".mn-filter-toggle");
+    const bigButton = filterEmpty?.querySelector(".mn-filter-big");
+    const closeButton = filterOverlay.querySelector(".mn-filter-overlay-close");
 
-    const dockObserver = new IntersectionObserver(
-      (entries, observerRef) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            filterDock.classList.add("in-view");
-            observerRef.unobserve(filterDock);
-          }
-        });
-      },
-      { threshold: 0.4 }
-    );
-    dockObserver.observe(filterDock);
-
-    const setDockOpen = (open) => {
-      filterDock.classList.toggle("open", open);
-      filterToggle.setAttribute("aria-expanded", String(open));
-      filterToggle.setAttribute(
-        "aria-label",
-        open ? "Tutup filter project" : "Buka filter project"
+    if (filterDock && filterToggle) {
+      const dockObserver = new IntersectionObserver(
+        (entries, observerRef) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              filterDock.classList.add("in-view");
+              observerRef.unobserve(filterDock);
+            }
+          });
+        },
+        { threshold: 0.4 }
       );
+      dockObserver.observe(filterDock);
+    }
+
+    const setOverlayOpen = (open) => {
+      if (!open && filterOverlay.contains(document.activeElement)) {
+        // Keep focus out of the aria-hidden overlay once it closes.
+        const fallback =
+          filterToggle && projectsSection?.classList.contains("is-revealed")
+            ? filterToggle
+            : bigButton;
+        fallback?.focus({ preventScroll: true });
+      }
+      filterOverlay.classList.toggle("open", open);
+      filterOverlay.setAttribute("aria-hidden", String(!open));
+      document.body.style.overflow = open ? "hidden" : "";
+      filterDock?.classList.toggle("open", open);
+      filterToggle?.setAttribute("aria-expanded", String(open));
+      bigButton?.setAttribute("aria-expanded", String(open));
     };
 
-    filterToggle.addEventListener("click", () => {
-      setDockOpen(!filterDock.classList.contains("open"));
+    [filterToggle, bigButton].forEach((trigger) => {
+      trigger?.addEventListener("click", () => setOverlayOpen(true));
     });
-
-    document.addEventListener("click", (event) => {
-      if (filterDock.classList.contains("open") && !filterDock.contains(event.target)) {
-        setDockOpen(false);
+    closeButton?.addEventListener("click", () => setOverlayOpen(false));
+    filterOverlay.addEventListener("click", (event) => {
+      if (event.target === filterOverlay) {
+        setOverlayOpen(false);
       }
     });
-
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && filterDock.classList.contains("open")) {
-        setDockOpen(false);
+      if (event.key === "Escape" && filterOverlay.classList.contains("open")) {
+        setOverlayOpen(false);
       }
     });
 
@@ -586,26 +599,23 @@
       button.addEventListener("click", () => {
         const filter = button.getAttribute("data-filter");
 
-        // AssistiveTouch-style spring pop on the pressed tab.
-        button.classList.remove("pop");
-        void button.offsetWidth;
-        button.classList.add("pop");
-
         filterButtons.forEach((other) => {
           const isActive = other === button;
           other.classList.toggle("active", isActive);
           other.setAttribute("aria-pressed", String(isActive));
         });
 
-        filterToggle.classList.toggle("has-filter", filter !== "all");
+        filterToggle?.classList.toggle("has-filter", filter !== "all");
 
-        // First tab pick reveals the grid; the empty-state dialog steps aside.
+        // First pick reveals the grid; the empty-state dialog steps aside and
+        // the dock toggle takes over as the overlay trigger.
         if (projectsSection) {
           projectsSection.classList.add("is-revealed");
         }
         if (filterEmpty) {
           filterEmpty.hidden = true;
         }
+        setOverlayOpen(false);
 
         projectCards.forEach((card) => {
           const matches =

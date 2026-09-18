@@ -399,30 +399,42 @@
         </header>
 
         <div class="mn-filter-dock" role="group" aria-label="Filter projects by category">
-          <button class="mn-filter-toggle" type="button" aria-expanded="false" aria-label="Buka filter project">
+          <button class="mn-filter-toggle" type="button" aria-expanded="false" aria-label="Buka pilihan kategori">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M4 6h16M7 12h10M10 18h4" />
             </svg>
           </button>
-          <div class="mn-filter">
-            <button class="mn-filter-btn active" type="button" data-filter="all" aria-pressed="true">All</button>
-            <button class="mn-filter-btn" type="button" data-filter="website" aria-pressed="false">Website</button>
-            <button class="mn-filter-btn" type="button" data-filter="mobile" aria-pressed="false">Mobile</button>
-            <button class="mn-filter-btn" type="button" data-filter="system" aria-pressed="false">System</button>
-            <button class="mn-filter-btn" type="button" data-filter="design" aria-pressed="false">Design</button>
-          </div>
         </div>
 
         <div class="mn-filter-empty" id="filterEmpty">
-          <span class="mn-filter-empty-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
+          <button class="mn-filter-big" type="button" aria-expanded="false" aria-label="Buka pilihan kategori project">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M4 6h16M7 12h10M10 18h4" />
             </svg>
-          </span>
+          </button>
           <p class="mn-filter-empty-title">Project-nya masih tersembunyi.</p>
-          <p class="mn-filter-empty-text">Pencet tombol bulat di atas, lalu pilih kategori untuk melihat projectnya.</p>
+          <p class="mn-filter-empty-text">Pencet tombolnya, pilih kategori, dan project-nya langsung muncul.</p>
+        </div>
+
+        <div class="mn-filter-overlay" id="filterOverlay" aria-hidden="true">
+          <button class="mn-filter-overlay-close" type="button" aria-label="Tutup pilihan kategori">✕</button>
+          <div class="mn-filter-overlay-panel" role="dialog" aria-modal="true" aria-label="Pilih kategori project">
+            <span class="mn-filter-overlay-kicker">Pilih kategori</span>
+            <div class="mn-filter">
+              <button class="mn-filter-btn active" type="button" data-filter="all" aria-pressed="true"><span
+                  class="mn-filter-opt-num">01</span>All</button>
+              <button class="mn-filter-btn" type="button" data-filter="website" aria-pressed="false"><span
+                  class="mn-filter-opt-num">02</span>Website</button>
+              <button class="mn-filter-btn" type="button" data-filter="mobile" aria-pressed="false"><span
+                  class="mn-filter-opt-num">03</span>Mobile</button>
+              <button class="mn-filter-btn" type="button" data-filter="system" aria-pressed="false"><span
+                  class="mn-filter-opt-num">04</span>System</button>
+              <button class="mn-filter-btn" type="button" data-filter="design" aria-pressed="false"><span
+                  class="mn-filter-opt-num">05</span>Design</button>
+            </div>
+          </div>
         </div>
 
         <div class="mn-projects-grid">
@@ -551,6 +563,18 @@
               <span class="mn-project-tag">Experiment</span>
               <h3>Personal Social Media</h3>
               <p>Social media concept built from scratch with HTML, CSS and JavaScript.</p>
+              <span class="mn-project-link">View project <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+
+          <a class="mn-project" href="https://yudhabhas.web.id/" target="_blank" rel="noreferrer"
+            data-aos="fade-up" data-category="website">
+            <div class="mn-project-media"><img src="src/webp/yudha-portfolio.jpg"
+                alt="Yudha Bhaskara creative producer portfolio homepage" loading="lazy" /></div>
+            <div class="mn-project-body">
+              <span class="mn-project-tag">Web · Portfolio</span>
+              <h3>Yudha Bhaskara Portfolio</h3>
+              <p>Creative producer portfolio with oversized typography and an editorial layout.</p>
               <span class="mn-project-link">View project <span aria-hidden="true">→</span></span>
             </div>
           </a>
