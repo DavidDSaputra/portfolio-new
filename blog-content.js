@@ -617,6 +617,10 @@ function openBlogModal(blogId) {
   const modal = document.getElementById('blogModal');
   const modalBody = document.getElementById('blogModalBody');
 
+  if (!modal || !modalBody) {
+    return;
+  }
+
   // Get blog title for sharing
   const blogTitles = {
     blog1: 'Cara Membuat Repository di GitHub',
@@ -669,20 +673,26 @@ function openBlogModal(blogId) {
 // Close blog modal
 function closeBlogModal() {
   const modal = document.getElementById('blogModal');
+  if (!modal) {
+    return;
+  }
   modal.classList.remove('active');
   document.body.style.overflow = 'auto';
 }
 
 // Close modal when clicking outside
-document.getElementById('blogModal').addEventListener('click', function(e) {
-  if (e.target === this) {
-    closeBlogModal();
-  }
-});
+const blogModal = document.getElementById('blogModal');
+if (blogModal) {
+  blogModal.addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeBlogModal();
+    }
+  });
+}
 
 // Close modal with ESC key
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
+  if (e.key === 'Escape' && blogModal) {
     closeBlogModal();
   }
 });

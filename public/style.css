@@ -447,15 +447,23 @@ noscript {
     flex-direction: column;
     height: 1.25rem;
     overflow: hidden;
-    transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1), color 0.2s ease;
+    transition: color 0.2s ease;
 }
 
 .navbar-tabs-ul a span {
-    display: block;
-    line-height: 1;
+    display: flex;
+    flex: 0 0 100%;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.25rem;
+    transition: transform 0.22s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 .navbar-tabs-ul li:hover a {
+    transform: none;
+}
+
+.navbar-tabs-ul li:hover a span {
     transform: translateY(-100%);
 }
 
@@ -4922,6 +4930,1351 @@ footer {
     }
 }
 
+/* ================================================================
+   NEOBRUTALISM ARCHITECTURE — 2026 REFRESH
+   Palette: #FEBE0F / #FF94BF / #FE6622 / #4580B2 / #00A56B
+   ================================================================ */
+:root {
+    --neo-yellow: #FEBE0F;
+    --neo-pink: #FF94BF;
+    --neo-orange: #FE6622;
+    --neo-blue: #4580B2;
+    --neo-green: #00A56B;
+    --neo-ink: #111111;
+    --neo-paper: #FFF8E7;
+    --neo-white: #FFFFFF;
+    --neo-border: 4px solid var(--neo-ink);
+    --neo-shadow: 8px 8px 0 var(--neo-ink);
+    --neo-shadow-lg: 12px 12px 0 var(--neo-ink);
+}
+
+html,
+body,
+body * {
+    cursor: url('/cursorr.png') 3 2, auto !important;
+}
+
+a,
+button,
+label,
+input,
+textarea,
+[onclick],
+[role='button'],
+a *,
+button * {
+    cursor: url('/click.png') 5 2, pointer !important;
+}
+
+body,
+noscript {
+    background-color: var(--neo-paper) !important;
+    background-image:
+        linear-gradient(rgba(17, 17, 17, .075) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17, 17, 17, .075) 1px, transparent 1px) !important;
+    background-size: 32px 32px !important;
+    color: var(--neo-ink) !important;
+    font-family: 'Space Grotesk', sans-serif !important;
+}
+
+::selection {
+    background: var(--neo-pink);
+    color: var(--neo-ink);
+}
+
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--neo-paper);
+    border-left: 3px solid var(--neo-ink);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--neo-orange);
+    border: 3px solid var(--neo-ink);
+}
+
+.cursor-inner,
+.cursor-outer,
+#spotlight,
+#particleCanvas,
+.page-transition {
+    display: none !important;
+}
+
+.scroll-progress-bar {
+    height: 8px !important;
+    background: var(--neo-orange) !important;
+    border-bottom: 3px solid var(--neo-ink);
+    box-shadow: none !important;
+}
+
+.navbar {
+    width: min(1060px, calc(100% - 48px)) !important;
+    height: 60px !important;
+    top: 16px !important;
+    padding: 0 10px 0 14px !important;
+    background: var(--neo-yellow) !important;
+    border: 3px solid var(--neo-ink) !important;
+    border-radius: 0 !important;
+    box-shadow: 6px 6px 0 var(--neo-ink) !important;
+    backdrop-filter: none !important;
+    overflow: visible !important;
+    animation: neo-drop .7s cubic-bezier(.2, .9, .25, 1.25) both !important;
+}
+
+.navbar.scrolled {
+    width: min(980px, calc(100% - 48px)) !important;
+    top: 10px !important;
+    background: var(--neo-yellow) !important;
+    border: 3px solid var(--neo-ink) !important;
+    box-shadow: 4px 4px 0 var(--neo-ink) !important;
+}
+
+.logo {
+    width: auto !important;
+    min-width: 104px;
+    height: 38px !important;
+    padding: 0 12px;
+    background: var(--neo-white) !important;
+    border: 2px solid var(--neo-ink) !important;
+    border-radius: 0 !important;
+    box-shadow: 3px 3px 0 var(--neo-ink);
+    color: var(--neo-ink) !important;
+    overflow: hidden;
+}
+
+.logo span {
+    font-family: 'Archivo Black', sans-serif !important;
+}
+
+.hey {
+    top: -13px !important;
+    bottom: auto !important;
+    left: -13px !important;
+    padding: 3px 7px !important;
+    background: var(--neo-pink) !important;
+    color: var(--neo-ink) !important;
+    border: 2px solid var(--neo-ink);
+    border-radius: 0 !important;
+    font-family: 'Fira Code', monospace !important;
+    font-size: .95rem !important;
+    line-height: 1 !important;
+    font-weight: 800;
+    white-space: nowrap;
+    transform: rotate(-7deg);
+}
+
+.navbar-tabs-ul {
+    gap: 3px !important;
+}
+
+.navbar-tabs-ul li {
+    padding: 7px 10px !important;
+    border: 2px solid transparent;
+    border-radius: 0 !important;
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: 1.15rem !important;
+    font-weight: 800 !important;
+    letter-spacing: .02em !important;
+    text-transform: uppercase;
+    transition: transform .16s ease, box-shadow .16s ease, background-color .16s ease !important;
+}
+
+.navbar-tabs-ul li:not(.activeThistab):hover {
+    background: var(--neo-pink) !important;
+    border-color: var(--neo-ink);
+    box-shadow: 2px 2px 0 var(--neo-ink);
+    transform: translate(-1px, -1px);
+}
+
+.navbar-tabs-ul a,
+.navbar-tabs-ul a span {
+    color: var(--neo-ink) !important;
+}
+
+.activeThistab {
+    background: var(--neo-ink) !important;
+    border-color: var(--neo-ink) !important;
+    box-shadow: 2px 2px 0 var(--neo-orange) !important;
+    animation: none !important;
+}
+
+.activeThistab a,
+.activeThistab a span {
+    color: var(--neo-white) !important;
+}
+
+.landing-page-container {
+    position: relative;
+    min-height: 100vh !important;
+    padding: 12.5rem 0 10rem !important;
+    background: var(--neo-yellow) !important;
+    border-bottom: var(--neo-border);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.landing-page-container::before {
+    content: 'WEB DEVELOPER  /  VISUAL ARTIST  /  UI EXPLORER';
+    position: absolute;
+    top: 96px;
+    right: -74px;
+    z-index: 1;
+    width: 410px;
+    padding: 12px 22px;
+    background: var(--neo-green);
+    color: var(--neo-white);
+    border: 3px solid var(--neo-ink);
+    font: 700 1.15rem/1 'Fira Code', monospace;
+    letter-spacing: .08em;
+    text-align: center;
+    transform: rotate(6deg);
+    box-shadow: 6px 6px 0 var(--neo-ink);
+}
+
+.landing-page-container::after {
+    content: 'AVAILABLE FOR SELECT PROJECTS  ✦  LET\2019S MAKE SOMETHING LOUD  ✦  AVAILABLE FOR SELECT PROJECTS';
+    position: absolute;
+    right: -2%;
+    bottom: 34px;
+    left: -2%;
+    z-index: 3;
+    padding: 14px 0;
+    background: var(--neo-pink);
+    color: var(--neo-ink);
+    border-block: 3px solid var(--neo-ink);
+    font: 800 1.3rem/1 'Fira Code', monospace;
+    letter-spacing: .06em;
+    text-align: center;
+    white-space: nowrap;
+    transform: rotate(-1deg);
+}
+
+.blob {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 1 !important;
+    filter: none !important;
+    background: none !important;
+    pointer-events: none;
+}
+
+.blob::before,
+.blob::after,
+.reactbits-hero-aurora::before,
+.reactbits-hero-aurora::after {
+    content: '';
+    position: absolute;
+    border: var(--neo-border);
+    box-shadow: var(--neo-shadow);
+}
+
+.blob::before {
+    content: 'OPEN\A FOR WORK';
+    display: grid;
+    place-items: center;
+    width: clamp(170px, 20vw, 310px);
+    aspect-ratio: 1;
+    right: 8%;
+    top: 28%;
+    background: var(--neo-blue);
+    color: var(--neo-white);
+    border-radius: 50%;
+    outline: 3px dashed var(--neo-white);
+    outline-offset: -18px;
+    font: 800 clamp(1.3rem, 1.8vw, 2.2rem)/1.15 'Fira Code', monospace;
+    letter-spacing: .08em;
+    text-align: center;
+    white-space: pre;
+    text-shadow: 3px 3px 0 var(--neo-ink);
+    animation: neo-float 4s ease-in-out infinite;
+}
+
+.blob::after {
+    content: '✦';
+    display: grid;
+    place-items: center;
+    width: 150px;
+    height: 150px;
+    right: 27%;
+    bottom: 18%;
+    background: var(--neo-orange);
+    color: var(--neo-ink);
+    font: 900 7rem/1 'Archivo Black', sans-serif;
+    text-shadow: 4px 4px 0 var(--neo-white);
+    transform: rotate(13deg);
+    animation: neo-rotate 10s linear infinite;
+}
+
+.reactbits-hero-aurora {
+    position: absolute;
+    inset: 0;
+}
+
+.reactbits-hero-aurora::before {
+    content: '01';
+    display: grid;
+    place-items: center;
+    width: 92px;
+    height: 92px;
+    top: 17%;
+    right: 26%;
+    background: var(--neo-pink);
+    color: var(--neo-ink);
+    font: 900 2.6rem/1 'Archivo Black', sans-serif;
+    transform: rotate(45deg);
+    box-shadow: 6px 6px 0 var(--neo-ink);
+    animation: neo-diamond-float 3.6s ease-in-out infinite;
+}
+
+.reactbits-hero-aurora::after {
+    content: 'SCROLL  ↓';
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 168px;
+    right: 6%;
+    bottom: 15%;
+    background: var(--neo-white);
+    color: var(--neo-ink);
+    font: 800 1.05rem/1 'Fira Code', monospace;
+    letter-spacing: .08em;
+    text-align: center;
+    writing-mode: vertical-rl;
+    transform: rotate(-18deg);
+    box-shadow: 6px 6px 0 var(--neo-ink);
+}
+
+.akito-hero-content {
+    position: relative;
+    z-index: 2;
+    width: min(1320px, calc(100% - 64px)) !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 1.6rem !important;
+}
+
+.akito-hero-content::before {
+    content: 'PORTFOLIO  /  2026';
+    position: absolute;
+    top: 12%;
+    left: -54px;
+    padding: 12px 8px;
+    background: var(--neo-white);
+    color: var(--neo-ink);
+    border: 2px solid var(--neo-ink);
+    box-shadow: 3px 3px 0 var(--neo-ink);
+    font: 800 1rem/1 'Fira Code', monospace;
+    letter-spacing: .12em;
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+}
+
+.akito-hero-title,
+.reactbits-hero-title-wrap,
+.reactbits-hero-title-char,
+.reactbits-hero-title-encrypted {
+    font-family: 'Archivo Black', sans-serif !important;
+}
+
+.akito-hero-title {
+    max-width: 8ch !important;
+    margin: 0 !important;
+    color: var(--neo-ink) !important;
+    background: none !important;
+    font-size: clamp(6.8rem, 12vw, 13.5rem) !important;
+    font-weight: 900 !important;
+    line-height: .8 !important;
+    letter-spacing: -.075em !important;
+    text-transform: uppercase !important;
+    -webkit-text-fill-color: var(--neo-ink) !important;
+    text-shadow: 7px 7px 0 var(--neo-white);
+}
+
+.reactbits-hero-title-wrap {
+    display: block;
+    white-space: pre-line;
+}
+
+.reactbits-hero-title-encrypted {
+    color: var(--neo-orange) !important;
+    -webkit-text-fill-color: var(--neo-orange) !important;
+}
+
+.akito-hero-subtitle {
+    position: relative;
+    margin: .8rem 0 0 !important;
+    padding: 9px 15px !important;
+    background: var(--neo-pink);
+    color: var(--neo-ink) !important;
+    border: 3px solid var(--neo-ink);
+    box-shadow: 4px 4px 0 var(--neo-ink);
+    font-family: 'Fira Code', monospace !important;
+    font-size: clamp(1.2rem, 1.5vw, 1.7rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: .12em !important;
+    transform: rotate(-1deg);
+}
+
+.akito-hero-subtitle::before,
+.akito-hero-subtitle::after {
+    display: none !important;
+}
+
+.akito-hero-desc {
+    max-width: 55ch !important;
+    margin: .6rem 0 0 !important;
+    padding: 18px 22px;
+    background: var(--neo-white);
+    color: var(--neo-ink) !important;
+    border: 3px solid var(--neo-ink);
+    box-shadow: 6px 6px 0 var(--neo-ink);
+    font: 600 1.6rem/1.65 'Space Grotesk', sans-serif !important;
+}
+
+.contact-btn-div {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    justify-content: flex-start !important;
+    margin-top: 1.2rem !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.contact-btn-div::after {
+    content: 'BASED IN TANGERANG, INDONESIA ↗';
+    display: inline-flex;
+    align-items: center;
+    min-height: 42px;
+    margin-left: 0;
+    padding: 10px 18px;
+    background: var(--neo-blue);
+    color: #000000;
+    border: 3px solid #000000;
+    border-radius: 12px;
+    box-shadow: 4px 4px 0 #000000;
+    font: 800 1.1rem/1 'Space Grotesk', sans-serif;
+    letter-spacing: .04em;
+    white-space: nowrap;
+    transform: none;
+}
+
+.letsTalkBtn,
+.reactbits-contact-link,
+.reactbits-projects-link,
+.brew-btn,
+.google-login-btn,
+.send-btn,
+.logout-btn,
+.blog-footer-back {
+    border-radius: 0 !important;
+}
+
+.letsTalkBtn {
+    position: relative;
+    padding: 16px 30px !important;
+    background: var(--neo-green) !important;
+    color: var(--neo-white) !important;
+    border: var(--neo-border) !important;
+    box-shadow: var(--neo-shadow) !important;
+    font: 800 1.4rem/1 'Space Grotesk', sans-serif !important;
+    letter-spacing: .08em !important;
+    text-transform: uppercase;
+    transition: transform .15s ease, box-shadow .15s ease !important;
+}
+
+.letsTalkBtn-text {
+    position: relative;
+    z-index: 2;
+}
+
+.letsTalkBtn-BG {
+    display: none !important;
+}
+
+.letsTalkBtn:hover {
+    background: var(--neo-orange) !important;
+    color: var(--neo-ink) !important;
+    transform: translate(5px, 5px) rotate(1deg) !important;
+    box-shadow: 3px 3px 0 var(--neo-ink) !important;
+}
+
+.about-section-container,
+.skills-section-container,
+.projects-section-container,
+.chat-section-container {
+    position: relative;
+    margin: 0 !important;
+    padding: 10rem 0 !important;
+    border-bottom: var(--neo-border);
+}
+
+.about-section-container {
+    background: var(--neo-pink) !important;
+}
+
+.skills-section-container {
+    background: var(--neo-paper) !important;
+}
+
+.projects-section-container {
+    background: var(--neo-blue) !important;
+}
+
+.chat-section-container {
+    background: var(--neo-orange) !important;
+}
+
+.about-section,
+.skills-section,
+.projects-section-div,
+.chat-section {
+    width: min(1180px, calc(100% - 48px)) !important;
+}
+
+.section-heading {
+    position: relative;
+    margin-bottom: 4.5rem !important;
+}
+
+.section-heading-article {
+    display: inline-block;
+    padding: 8px 15px;
+    background: var(--neo-white) !important;
+    color: var(--neo-ink) !important;
+    border: 3px solid var(--neo-ink);
+    box-shadow: 5px 5px 0 var(--neo-ink);
+    font-family: 'Fira Code', monospace !important;
+    font-size: clamp(2.8rem, 5vw, 5rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: -.05em !important;
+    -webkit-text-fill-color: var(--neo-ink) !important;
+    transform: rotate(-1deg);
+}
+
+.sectionHeadingP {
+    height: 4px !important;
+    margin-top: 2.2rem !important;
+    background: var(--neo-ink) !important;
+}
+
+.info-dp-section {
+    align-items: stretch !important;
+    gap: 5rem !important;
+}
+
+.about-info {
+    width: 58% !important;
+    padding: clamp(2.8rem, 5vw, 5rem) !important;
+    background: var(--neo-yellow) !important;
+    border: var(--neo-border) !important;
+    border-radius: 0 !important;
+    box-shadow: var(--neo-shadow-lg) !important;
+}
+
+.about-info p {
+    color: var(--neo-ink) !important;
+    font: 600 1.65rem/1.8 'Space Grotesk', sans-serif !important;
+}
+
+.resume-btn {
+    width: auto !important;
+    min-width: 180px;
+    height: 58px !important;
+    margin-top: 2rem !important;
+    padding: 0 20px 0 8px !important;
+    background: var(--neo-green) !important;
+    border: 3px solid var(--neo-ink) !important;
+    border-radius: 0 !important;
+    box-shadow: 5px 5px 0 var(--neo-ink);
+}
+
+.resume-btn:hover {
+    width: auto !important;
+    transform: translate(4px, 4px) !important;
+    box-shadow: 1px 1px 0 var(--neo-ink);
+}
+
+.resume-btn .sign {
+    width: 40px !important;
+    height: 40px !important;
+    margin: 0 12px 0 0 !important;
+    background: var(--neo-white) !important;
+    border: 2px solid var(--neo-ink);
+    border-radius: 0 !important;
+}
+
+.resume-btn .sign svg path {
+    fill: var(--neo-ink) !important;
+}
+
+.resume-btn .text {
+    position: static !important;
+    width: auto !important;
+    padding: 0 !important;
+    color: var(--neo-white) !important;
+    font: 800 1.3rem/1 'Space Grotesk', sans-serif !important;
+    opacity: 1 !important;
+}
+
+.dp {
+    width: 38% !important;
+    min-height: 480px;
+    overflow: visible !important;
+}
+
+.dp::before,
+.dp::after {
+    display: none !important;
+}
+
+.reactbits-about-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 480px;
+    background: var(--neo-green);
+    border: var(--neo-border);
+    box-shadow: var(--neo-shadow-lg);
+    transform: rotate(2deg);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.reactbits-about-frame:hover {
+    transform: rotate(-1deg) translate(5px, 5px);
+    box-shadow: 5px 5px 0 var(--neo-ink);
+}
+
+.reactbits-about-image {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 480px;
+    object-fit: cover;
+    border: 0 !important;
+    border-radius: 0 !important;
+    filter: saturate(.92) contrast(1.05) !important;
+}
+
+.dp > img {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 480px;
+    object-fit: cover;
+    background: var(--neo-green);
+    border: var(--neo-border) !important;
+    border-radius: 0 !important;
+    box-shadow: var(--neo-shadow-lg);
+    filter: saturate(.92) contrast(1.05) !important;
+    transform: rotate(2deg);
+}
+
+.reactbits-about-sticker {
+    position: absolute;
+    top: -26px;
+    right: -28px;
+    z-index: 3;
+    padding: 12px 16px;
+    background: var(--neo-orange);
+    border: 3px solid var(--neo-ink);
+    box-shadow: 4px 4px 0 var(--neo-ink);
+    font: 800 1.5rem/1 'Archivo Black', sans-serif;
+    transform: rotate(8deg);
+    animation: neo-wiggle 2.6s ease-in-out infinite;
+}
+
+.frontend-dev-heading {
+    margin-bottom: 3rem !important;
+    color: var(--neo-ink) !important;
+    background: none !important;
+    font-family: 'Archivo Black', sans-serif !important;
+    font-size: clamp(3.4rem, 5vw, 5.8rem) !important;
+    letter-spacing: -.05em !important;
+    -webkit-text-fill-color: var(--neo-ink) !important;
+}
+
+.tech-stack-wrapper {
+    gap: 2.4rem !important;
+}
+
+.tech-stack-box {
+    width: 148px !important;
+    height: 148px !important;
+    background: var(--neo-yellow) !important;
+    border: var(--neo-border) !important;
+    border-radius: 0 !important;
+    box-shadow: 7px 7px 0 var(--neo-ink) !important;
+    transition: transform .16s ease, box-shadow .16s ease !important;
+}
+
+.tech-stack-box:nth-child(5n + 2) { background: var(--neo-pink) !important; }
+.tech-stack-box:nth-child(5n + 3) { background: var(--neo-orange) !important; }
+.tech-stack-box:nth-child(5n + 4) { background: var(--neo-blue) !important; }
+.tech-stack-box:nth-child(5n + 5) { background: var(--neo-green) !important; }
+
+.tech-stack-box:hover {
+    background: var(--neo-white) !important;
+    border-color: var(--neo-ink) !important;
+    transform: translate(5px, 5px) rotate(-2deg) !important;
+    box-shadow: 2px 2px 0 var(--neo-ink) !important;
+}
+
+.tech-stack-box img {
+    width: 58% !important;
+    filter: drop-shadow(3px 3px 0 rgba(255, 255, 255, .65));
+}
+
+.tooltip {
+    bottom: -22px !important;
+    padding: 7px 10px !important;
+    background: var(--neo-ink) !important;
+    color: var(--neo-white) !important;
+    border: 2px solid var(--neo-white);
+    border-radius: 0 !important;
+    font: 700 1rem/1 'Fira Code', monospace !important;
+}
+
+.brew-slider-container.reactbits-projects-mounted {
+    height: auto !important;
+    min-height: 650px;
+    overflow: visible !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) {
+    height: 620px !important;
+    overflow: hidden;
+    background: var(--neo-white) !important;
+    border: var(--neo-border) !important;
+    border-radius: 0 !important;
+    box-shadow: var(--neo-shadow-lg) !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-slide {
+    border-radius: 0 !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-slide::after {
+    background: linear-gradient(90deg, var(--neo-yellow) 0 43%, rgba(254, 190, 15, .92) 53%, transparent 76%) !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-slide-bg img {
+    filter: saturate(.8) contrast(1.1) !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-slide-content {
+    max-width: 48% !important;
+    padding: 5rem !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-title {
+    color: var(--neo-ink) !important;
+    font-family: 'Archivo Black', sans-serif !important;
+    font-size: clamp(3.8rem, 5vw, 6rem) !important;
+    font-weight: 400 !important;
+    line-height: .95 !important;
+    letter-spacing: -.06em !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-desc {
+    color: var(--neo-ink) !important;
+    font-weight: 650;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-btn {
+    background: var(--neo-green) !important;
+    color: var(--neo-white) !important;
+    border: 3px solid var(--neo-ink) !important;
+    box-shadow: 5px 5px 0 var(--neo-ink);
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-slider-controls {
+    background: var(--neo-pink) !important;
+    border-top: 3px solid var(--neo-ink) !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-prev,
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-next {
+    background: var(--neo-white) !important;
+    color: var(--neo-ink) !important;
+    border: 2px solid var(--neo-ink) !important;
+    border-radius: 0 !important;
+    box-shadow: 3px 3px 0 var(--neo-ink);
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-dot {
+    background: var(--neo-white) !important;
+    border: 2px solid var(--neo-ink);
+    border-radius: 0 !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-dot.active {
+    background: var(--neo-orange) !important;
+}
+
+.reactbits-projects-shell {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(420px, 1.1fr);
+    align-items: center;
+    gap: 6rem;
+    min-height: 640px;
+}
+
+.reactbits-projects-panel {
+    position: relative;
+    z-index: 2;
+    padding: clamp(3rem, 5vw, 5rem);
+    background: var(--neo-white);
+    border: var(--neo-border);
+    box-shadow: var(--neo-shadow-lg);
+    transform: rotate(-1deg);
+}
+
+.reactbits-projects-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.reactbits-projects-kicker {
+    display: inline-block;
+    padding: 8px 11px;
+    background: var(--neo-yellow);
+    border: 2px solid var(--neo-ink);
+    font: 800 1.05rem/1 'Fira Code', monospace;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.reactbits-projects-title {
+    margin: 0;
+    color: var(--neo-ink);
+    font: 400 clamp(3.6rem, 5.6vw, 6.6rem)/.95 'Archivo Black', sans-serif;
+    letter-spacing: -.06em;
+}
+
+.reactbits-projects-desc {
+    margin: 0;
+    color: var(--neo-ink);
+    font: 600 1.5rem/1.65 'Space Grotesk', sans-serif;
+}
+
+.reactbits-projects-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    border: 3px solid var(--neo-ink);
+}
+
+.reactbits-projects-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px;
+    background: var(--neo-pink);
+}
+
+.reactbits-projects-stat + .reactbits-projects-stat {
+    background: var(--neo-green);
+    color: var(--neo-white);
+    border-left: 3px solid var(--neo-ink);
+}
+
+.reactbits-projects-stat strong {
+    font: 400 3rem/1 'Archivo Black', sans-serif;
+}
+
+.reactbits-projects-stat span {
+    font: 700 1rem/1.2 'Fira Code', monospace;
+    text-transform: uppercase;
+}
+
+.reactbits-projects-link {
+    display: inline-flex;
+    padding: 14px 18px;
+    background: var(--neo-orange);
+    color: var(--neo-ink) !important;
+    border: 3px solid var(--neo-ink);
+    box-shadow: 5px 5px 0 var(--neo-ink);
+    font: 800 1.15rem/1 'Space Grotesk', sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.reactbits-projects-link:hover,
+.reactbits-project-cardLink:hover {
+    transform: translate(4px, 4px);
+    box-shadow: 1px 1px 0 var(--neo-ink);
+}
+
+.reactbits-projects-stage {
+    position: relative;
+    min-height: 570px;
+}
+
+.reactbits-project-card {
+    overflow: hidden !important;
+    border: var(--neo-border) !important;
+    border-radius: 0 !important;
+    background-position: center !important;
+    background-size: cover !important;
+    box-shadow: var(--neo-shadow-lg) !important;
+}
+
+.reactbits-project-card::after {
+    content: '';
+    position: absolute;
+    inset: 42% 0 0;
+    background: linear-gradient(180deg, transparent, rgba(17, 17, 17, .92) 24%);
+}
+
+.reactbits-project-cardContent {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 2.4rem;
+    color: var(--neo-white);
+}
+
+.reactbits-project-cardTag {
+    padding: 6px 9px;
+    background: var(--neo-yellow);
+    color: var(--neo-ink);
+    border: 2px solid var(--neo-ink);
+    font: 800 .95rem/1 'Fira Code', monospace;
+    text-transform: uppercase;
+}
+
+.reactbits-project-card h4 {
+    margin: 0;
+    color: var(--neo-white);
+    font: 400 2.5rem/1 'Archivo Black', sans-serif;
+    letter-spacing: -.04em;
+}
+
+.reactbits-project-card p {
+    margin: 0;
+    font: 500 1.15rem/1.45 'Space Grotesk', sans-serif;
+}
+
+.reactbits-project-cardLink {
+    display: inline-flex;
+    margin-top: 4px;
+    padding: 9px 12px;
+    background: var(--neo-pink);
+    color: var(--neo-ink) !important;
+    border: 2px solid var(--neo-ink);
+    box-shadow: 3px 3px 0 var(--neo-white);
+    font: 800 1rem/1 'Space Grotesk', sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.chat-container {
+    overflow: hidden;
+    background: var(--neo-white) !important;
+    border: var(--neo-border) !important;
+    border-radius: 0 !important;
+    box-shadow: var(--neo-shadow-lg) !important;
+}
+
+.chat-header {
+    background: var(--neo-yellow) !important;
+    border-bottom: 3px solid var(--neo-ink) !important;
+}
+
+.chat-header h3,
+#user-name {
+    color: var(--neo-ink) !important;
+    font-family: 'Archivo Black', sans-serif !important;
+}
+
+.chat-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    background: var(--neo-pink);
+    border: 2px solid var(--neo-ink);
+}
+
+.chat-messages {
+    background-color: var(--neo-paper) !important;
+    background-image: radial-gradient(var(--neo-ink) 1px, transparent 1px) !important;
+    background-size: 18px 18px !important;
+}
+
+.system-message,
+.message-received,
+.message-sent {
+    color: var(--neo-ink) !important;
+    border: 2px solid var(--neo-ink) !important;
+    border-radius: 0 !important;
+    box-shadow: 3px 3px 0 var(--neo-ink);
+}
+
+.system-message { background: var(--neo-white) !important; }
+.message-received { background: var(--neo-pink) !important; }
+.message-sent { background: var(--neo-green) !important; color: var(--neo-white) !important; }
+
+.chat-input-area {
+    background: var(--neo-blue) !important;
+    border-top: 3px solid var(--neo-ink) !important;
+}
+
+.login-overlay {
+    background: var(--neo-blue) !important;
+}
+
+.google-login-btn,
+.send-btn,
+.logout-btn {
+    background: var(--neo-white) !important;
+    color: var(--neo-ink) !important;
+    border: 3px solid var(--neo-ink) !important;
+    box-shadow: 4px 4px 0 var(--neo-ink) !important;
+    font-weight: 800 !important;
+}
+
+#message-input {
+    background: var(--neo-white) !important;
+    color: var(--neo-ink) !important;
+    border: 3px solid var(--neo-ink) !important;
+    border-radius: 0 !important;
+}
+
+#message-input::placeholder {
+    color: rgba(17, 17, 17, .55) !important;
+}
+
+.akito-footer {
+    margin: 0 !important;
+    padding-top: 8rem !important;
+    background: var(--neo-green) !important;
+    border-top: 0 !important;
+    color: var(--neo-ink) !important;
+}
+
+.akito-footer::before,
+.footer-background,
+.footer-blob,
+.footer-foreground {
+    display: none !important;
+}
+
+.akito-footer .footercontainer {
+    width: min(1180px, calc(100% - 48px)) !important;
+}
+
+.akito-footer .two-words {
+    padding-bottom: 5rem !important;
+    border-bottom: var(--neo-border) !important;
+}
+
+.akito-footer .two-words article {
+    color: var(--neo-white) !important;
+    background: none !important;
+    font-family: 'Archivo Black', sans-serif !important;
+    font-size: clamp(5rem, 9vw, 11rem) !important;
+    font-weight: 400 !important;
+    line-height: .9 !important;
+    letter-spacing: -.07em !important;
+    text-shadow: 6px 6px 0 var(--neo-ink);
+    -webkit-text-fill-color: var(--neo-white) !important;
+    animation: none !important;
+}
+
+.akito-footer .getintouch-heading article,
+.akito-footer .footer-bottom article {
+    color: var(--neo-ink) !important;
+    font-family: 'Fira Code', monospace !important;
+    font-weight: 800 !important;
+}
+
+.akito-footer .social-media-container,
+.akito-footer .footer-bottom {
+    border-color: var(--neo-ink) !important;
+}
+
+.akito-footer .social-media-container a {
+    background: var(--neo-yellow) !important;
+    border: 3px solid var(--neo-ink) !important;
+    border-radius: 0 !important;
+    box-shadow: 5px 5px 0 var(--neo-ink);
+}
+
+.akito-footer .social-media-container a:nth-child(2) { background: var(--neo-pink) !important; }
+.akito-footer .social-media-container a:nth-child(3) { background: var(--neo-blue) !important; }
+.akito-footer .social-media-container a:nth-child(4) { background: var(--neo-orange) !important; }
+
+.akito-footer .social-media-container a:hover {
+    transform: translate(4px, 4px) rotate(-2deg) !important;
+    box-shadow: 1px 1px 0 var(--neo-ink);
+}
+
+.akito-footer .SocialHandle {
+    fill: var(--neo-ink) !important;
+}
+
+.mobiletogglemenu {
+    background: var(--neo-pink) !important;
+    backdrop-filter: none !important;
+    border-left: var(--neo-border);
+}
+
+.mobile-navbar-tabs-li a {
+    color: var(--neo-ink) !important;
+    font-family: 'Archivo Black', sans-serif !important;
+}
+
+#hamburger-button {
+    background: var(--neo-orange) !important;
+    border: 3px solid var(--neo-ink) !important;
+    border-radius: 0 !important;
+    box-shadow: 4px 4px 0 var(--neo-ink);
+}
+
+.burger-bar,
+.hamburger-animation1,
+.hamburger-animation2,
+.hamburger-animation3 {
+    background: var(--neo-ink) !important;
+}
+
+[data-aos] {
+    transition-timing-function: cubic-bezier(.18, .89, .32, 1.22) !important;
+}
+
+@keyframes neo-drop {
+    from { opacity: 0; transform: translate(-50%, -30px) rotate(-1deg); }
+    to { opacity: 1; transform: translate(-50%, 0) rotate(0); }
+}
+
+@keyframes neo-float {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-18px) rotate(3deg); }
+}
+
+@keyframes neo-rotate {
+    to { transform: rotate(373deg); }
+}
+
+@keyframes neo-wiggle {
+    0%, 100% { transform: rotate(8deg); }
+    50% { transform: rotate(3deg) scale(1.04); }
+}
+
+@keyframes neo-diamond-float {
+    0%, 100% { transform: translateY(0) rotate(45deg); }
+    50% { transform: translateY(-10px) rotate(49deg); }
+}
+
+@media screen and (max-width: 1100px) {
+    .navbar-tabs-ul li {
+        padding-inline: 9px !important;
+        font-size: 1.08rem !important;
+    }
+
+    .reactbits-projects-shell {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .reactbits-projects-stage {
+        min-height: 540px;
+    }
+}
+
+@media screen and (max-width: 998px) {
+    .navbar {
+        width: calc(100% - 28px) !important;
+        height: 66px !important;
+        top: 14px !important;
+    }
+
+    .landing-page-container {
+        padding-top: 13rem !important;
+    }
+
+    .landing-page-container::before {
+        top: 98px;
+        right: -160px;
+    }
+
+    .akito-hero-content {
+        align-items: flex-start !important;
+        text-align: left !important;
+    }
+
+    .blob::before {
+        right: -8%;
+        top: 34%;
+        opacity: .72;
+    }
+
+    .blob::after,
+    .reactbits-hero-aurora::before,
+    .reactbits-hero-aurora::after {
+        opacity: .65;
+    }
+
+    .contact-btn-div {
+        justify-content: flex-start !important;
+    }
+
+    .info-dp-section {
+        flex-direction: column-reverse !important;
+    }
+
+    .about-info,
+    .dp {
+        width: 100% !important;
+    }
+
+    .dp {
+        min-height: 430px;
+    }
+
+    .reactbits-about-frame,
+    .reactbits-about-image,
+    .dp > img {
+        min-height: 430px;
+    }
+
+    .brew-slider-container:not(.reactbits-projects-mounted) .brew-slide::after {
+        background: linear-gradient(180deg, transparent 5%, rgba(254, 190, 15, .82) 45%, var(--neo-yellow) 68%) !important;
+    }
+
+    .brew-slider-container:not(.reactbits-projects-mounted) .brew-slide-content {
+        max-width: 100% !important;
+        padding: 3rem !important;
+    }
+
+    .brew-slider-container.reactbits-projects-mounted {
+        min-height: 1000px;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    :root {
+        --neo-border: 3px solid var(--neo-ink);
+        --neo-shadow: 5px 5px 0 var(--neo-ink);
+        --neo-shadow-lg: 7px 7px 0 var(--neo-ink);
+    }
+
+    .landing-page-container {
+        min-height: 800px !important;
+        padding-bottom: 11rem !important;
+    }
+
+    .landing-page-container::after {
+        font-size: 1.05rem;
+    }
+
+    .akito-hero-title {
+        font-size: clamp(5.8rem, 24vw, 9rem) !important;
+        text-shadow: 4px 4px 0 var(--neo-white);
+    }
+
+    .akito-hero-desc {
+        padding: 14px 16px;
+        font-size: 1.4rem !important;
+    }
+
+    .about-section-container,
+    .skills-section-container,
+    .projects-section-container,
+    .chat-section-container {
+        padding: 7rem 0 !important;
+    }
+
+    .about-section,
+    .skills-section,
+    .projects-section-div,
+    .chat-section,
+    .akito-hero-content,
+    .akito-footer .footercontainer {
+        width: calc(100% - 28px) !important;
+    }
+
+    .about-info {
+        padding: 2.4rem !important;
+    }
+
+    .dp,
+    .reactbits-about-frame,
+    .reactbits-about-image,
+    .dp > img {
+        min-height: 340px;
+    }
+
+    .tech-stack-wrapper {
+        gap: 1.5rem !important;
+    }
+
+    .tech-stack-box {
+        width: 118px !important;
+        height: 118px !important;
+    }
+
+    .reactbits-projects-panel {
+        padding: 2.5rem;
+    }
+
+    .reactbits-projects-title {
+        font-size: 3.6rem;
+    }
+
+    .reactbits-projects-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .reactbits-projects-stat + .reactbits-projects-stat {
+        border-top: 3px solid var(--neo-ink);
+        border-left: 0;
+    }
+
+    .reactbits-projects-stage {
+        min-height: 430px;
+        transform: scale(.8);
+        transform-origin: top left;
+    }
+
+    .brew-slider-container.reactbits-projects-mounted {
+        min-height: 900px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
+
 /* ============================================
    MINIMALIST UI THEME
    ============================================ */
@@ -5532,362 +6885,1153 @@ body,
         background: linear-gradient(180deg, rgba(23, 25, 29, 0.2) 0%, rgba(23, 25, 29, 0.68) 45%, rgba(23, 25, 29, 0.94) 100%);
     }
 
-.brew-slide-content {
+    .brew-slide-content {
         max-width: 100%;
         padding: 3rem;
         align-self: flex-end;
     }
 }
 
-.cursor-inner.cursor-on-light {
-    background-color: #17191d !important;
-    mix-blend-mode: normal !important;
+/* ================================================================
+   FINAL FOOTER POLISH
+   Kept at EOF so legacy footer sizing cannot override the new layout.
+   ================================================================ */
+.akito-footer {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: var(--neo-green) !important;
+    border: 0 !important;
+    border-top: 4px solid var(--neo-ink) !important;
 }
 
-.cursor-outer.cursor-on-light {
-    border-color: rgba(23, 25, 29, 0.88) !important;
+.akito-footer .footercontainer {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
 }
 
+.akito-footer .two-words {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: clamp(7rem, 9vw, 11rem) clamp(2rem, 5vw, 8rem) clamp(5rem, 7vw, 8rem) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 0 !important;
+    border-bottom: 4px solid var(--neo-ink) !important;
+}
+
+.akito-footer .two-words article {
+    width: min(1600px, 100%) !important;
+    margin: 0 auto !important;
+    color: var(--neo-white) !important;
+    font-family: 'Archivo Black', sans-serif !important;
+    font-size: clamp(4.8rem, 6.7vw, 8.2rem) !important;
+    font-weight: 400 !important;
+    line-height: .94 !important;
+    letter-spacing: -.065em !important;
+    text-align: center !important;
+    text-wrap: balance;
+    text-shadow: 6px 6px 0 var(--neo-ink) !important;
+    -webkit-text-fill-color: var(--neo-white) !important;
+}
+
+.akito-footer .social-media-container {
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: clamp(4rem, 6vw, 7rem) 2rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 2.8rem !important;
+    border: 0 !important;
+}
+
+.akito-footer .getintouch-heading {
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+}
+
+.akito-footer .getintouch-heading article {
+    display: inline-block;
+    padding: 9px 13px;
+    background: var(--neo-white) !important;
+    color: var(--neo-ink) !important;
+    border: 3px solid var(--neo-ink);
+    box-shadow: 4px 4px 0 var(--neo-ink);
+    font: 800 1.1rem/1 'Fira Code', monospace !important;
+    letter-spacing: .28em !important;
+    -webkit-text-fill-color: var(--neo-ink) !important;
+    transform: rotate(-1deg);
+}
+
+.akito-footer .logos {
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 2rem !important;
+    flex-wrap: wrap !important;
+}
+
+.akito-footer .social-media-container a {
+    width: 70px !important;
+    height: 70px !important;
+    padding: 14px !important;
+    flex: 0 0 70px;
+    overflow: visible !important;
+}
+
+.akito-footer .social-media-container a::before {
+    display: none !important;
+}
+
+.akito-footer .SocialHandle {
+    width: 28px !important;
+    height: 28px !important;
+}
+
+.akito-footer .footer-bottom {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 76px !important;
+    margin: 0 !important;
+    padding: 22px 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: var(--neo-ink) !important;
+    border: 0 !important;
+    border-top: 4px solid var(--neo-ink) !important;
+}
+
+.akito-footer .footer-bottom article {
+    margin: 0 !important;
+    color: var(--neo-white) !important;
+    font: 800 1.05rem/1.4 'Fira Code', monospace !important;
+    letter-spacing: .22em !important;
+    text-align: center !important;
+    opacity: 1 !important;
+}
+
+@media screen and (max-width: 768px) {
+    .akito-footer .two-words {
+        padding: 6rem 1.8rem 5rem !important;
+    }
+
+    .akito-footer .two-words article {
+        font-size: clamp(4rem, 15vw, 6.6rem) !important;
+        line-height: .98 !important;
+        text-shadow: 4px 4px 0 var(--neo-ink) !important;
+    }
+
+    .akito-footer .social-media-container {
+        padding: 4.5rem 1.5rem !important;
+    }
+
+    .akito-footer .logos {
+        gap: 1.4rem !important;
+    }
+
+    .akito-footer .social-media-container a {
+        width: 58px !important;
+        height: 58px !important;
+        flex-basis: 58px;
+        padding: 11px !important;
+    }
+
+    .akito-footer .footer-bottom {
+        min-height: 68px !important;
+        padding-inline: 18px !important;
+    }
+}
+
+/* ================================================================
+   FINAL HERO SPACING POLISH
+   Keeps the CTA clear of the bottom ticker on short viewports.
+   ================================================================ */
 .landing-page-container {
+    min-height: max(100vh, 820px) !important;
+    padding-bottom: 15rem !important;
+}
+
+.landing-page-container::after {
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 4 !important;
+    transform: rotate(-.45deg) scale(1.01) !important;
+    transform-origin: center;
+}
+
+.akito-hero-content {
+    height: auto !important;
+    padding-bottom: 3rem !important;
+}
+
+.contact-btn-div {
     position: relative;
-    overflow: hidden;
+    z-index: 6;
+    width: auto !important;
+    height: auto !important;
+    margin-top: 1.2rem !important;
+    margin-bottom: 2rem !important;
+    padding-top: 0 !important;
 }
 
-.blob.reactbits-hero-host {
-    display: block !important;
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: .92;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.reactbits-hero-aurora {
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(circle at 18% 22%, rgba(236, 230, 220, .16), transparent 26%),
-        radial-gradient(circle at 78% 14%, rgba(142, 153, 165, .18), transparent 24%),
-        radial-gradient(circle at 70% 70%, rgba(74, 123, 167, .14), transparent 28%);
-    filter: blur(8px);
+.contact-btn-div > div {
+    display: inline-block !important;
+    width: auto !important;
+    height: auto !important;
 }
 
 .reactbits-contact-link {
-    display: inline-flex;
-    text-decoration: none;
-}
-
-.akito-hero-content.reactbits-hero-copy {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 18px;
-}
-
-.akito-hero-content.reactbits-hero-copy .akito-hero-desc {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.akito-hero-content.reactbits-hero-copy .akito-hero-subtitle {
-    padding-left: 0;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.akito-hero-content.reactbits-hero-copy .akito-hero-subtitle::before {
-    left: 50%;
-    top: -16px;
-    width: 48px;
-    transform: translateX(-50%);
-}
-
-.reactbits-contact-mounted .letsTalkBtn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 0;
-    padding: 0;
-    background-color: #ece6dc;
-    color: #17191d;
-    border: 1px solid transparent;
-    border-radius: 999px;
-    overflow: hidden;
-}
-
-.reactbits-contact-mounted .letsTalkBtn-text {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px 36px;
-    margin: 0;
-    color: #17191d;
-    font-family: 'Manrope', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 800;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    line-height: 1;
-}
-
-.reactbits-contact-mounted .letsTalkBtn-BG {
-    display: none;
-}
-
-.reactbits-contact-mounted .letsTalkBtn:hover {
-    background-color: transparent;
-    color: #ece6dc;
-    border: 1px solid rgba(236, 230, 220, 0.24);
-}
-
-.reactbits-contact-mounted .letsTalkBtn:hover .letsTalkBtn-text {
-    color: #ece6dc;
-}
-
-.akito-hero-title.reactbits-hero-title-mounted {
-    display: block;
-    width: 100%;
-    max-width: none !important;
-    margin: 0 auto !important;
-    text-align: center;
-    white-space: pre-wrap;
-    font-family: 'Space Grotesk', sans-serif !important;
-    color: #ece6dc !important;
-    line-height: .9;
-    text-transform: uppercase;
-    background: none !important;
-    -webkit-text-fill-color: #ece6dc !important;
-    text-shadow: none !important;
-    mix-blend-mode: normal !important;
-}
-
-.reactbits-hero-title-wrap {
-    display: block;
-    width: 100%;
-    max-width: none !important;
-    white-space: pre-wrap;
-    line-height: .9;
-    font-family: 'Space Grotesk', sans-serif;
-    text-align: center;
-}
-
-.reactbits-hero-title-char,
-.reactbits-hero-title-encrypted {
-    display: inline;
-    background: none !important;
-    -webkit-text-fill-color: #ece6dc !important;
-    text-shadow: none !important;
-    filter: none !important;
-    opacity: 1 !important;
-    mix-blend-mode: normal !important;
-}
-
-.reactbits-hero-title-char {
-    color: #ece6dc !important;
-}
-
-.reactbits-hero-title-encrypted {
-    color: #ece6dc !important;
-}
-
-.dp.reactbits-about-mounted {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.reactbits-about-glow {
-    width: min(100%, 360px);
-}
-
-.reactbits-about-image {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 22px;
-    object-fit: cover;
-}
-
-.brew-slider-container.reactbits-projects-mounted {
+    display: inline-flex !important;
+    width: auto !important;
     height: auto !important;
-    min-height: 630px;
-    overflow: visible;
-    border: none;
-    background: transparent;
 }
 
-.reactbits-projects-shell {
-    display: grid;
-    grid-template-columns: minmax(0, .88fr) minmax(320px, 1.12fr);
-    gap: 28px;
-    align-items: center;
-    min-height: 630px;
+.letsTalkBtn {
+    min-height: 54px !important;
 }
 
-.reactbits-projects-panel {
-    min-height: 100%;
+.letsTalkBtn-text {
+    display: inline-block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 1.4rem !important;
+    line-height: 1 !important;
 }
 
-.reactbits-projects-copy {
-    padding: 28px;
-    display: grid;
-    gap: 18px;
+@media screen and (max-width: 768px) {
+    .landing-page-container {
+        min-height: max(100svh, 760px) !important;
+        padding-bottom: 13rem !important;
+    }
+
+    .landing-page-container::after {
+        padding-block: 12px !important;
+        font-size: 1rem !important;
+    }
+
+    .akito-hero-content {
+        padding-bottom: 2rem !important;
+    }
+
+    .contact-btn-div {
+        margin-bottom: 1rem !important;
+    }
 }
 
-.reactbits-projects-kicker {
-    font-family: 'Fira Code', monospace;
-    font-size: .92rem;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: rgba(236, 230, 220, .52);
+/* Navbar floats above the hero; header must not reserve empty page space. */
+header {
+    position: relative !important;
+    z-index: 999 !important;
+    width: 100% !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-.reactbits-projects-title {
-    margin: 0;
-    font-size: clamp(2.4rem, 4vw, 4rem);
-    line-height: .98;
-    color: #ece6dc;
+main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
-.reactbits-projects-desc {
-    margin: 0;
-    font-size: 1.35rem;
-    line-height: 1.75;
-    color: rgba(236, 230, 220, .72);
+.landing-page-container {
+    margin-top: 0 !important;
 }
 
-.reactbits-projects-stats {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-}
+/* ================================================================
+   FINAL MOBILE SYSTEM
+   Explicit overrides for the legacy breakpoints and mobile menu.
+   ================================================================ */
+@media screen and (max-width: 998px) {
+    html {
+        font-size: 58% !important;
+    }
 
-.reactbits-projects-stat {
-    border: 1px solid rgba(236, 230, 220, .1);
-    background: rgba(236, 230, 220, .04);
-    border-radius: 18px;
-    padding: 16px 18px;
-}
+    body {
+        overflow-x: hidden !important;
+    }
 
-.reactbits-projects-stat strong {
-    display: block;
-    font-size: 2.4rem;
-    line-height: 1;
-    color: #ece6dc;
-}
+    body.stopscrolling {
+        overflow: hidden !important;
+        touch-action: none;
+    }
 
-.reactbits-projects-stat span {
-    display: block;
-    margin-top: 8px;
-    font-size: .95rem;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: rgba(236, 230, 220, .52);
-}
+    .blob {
+        display: none !important;
+    }
 
-.reactbits-projects-link,
-.reactbits-project-cardLink {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 50px;
-    padding: 0 20px;
-    border-radius: 999px;
-    background: #ece6dc;
-    color: #17191d;
-    text-decoration: none;
-    font-size: .95rem;
-    font-weight: 800;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    border: 1px solid rgba(23, 25, 29, .12);
-    width: fit-content;
-}
+    .akito-hero-content::before,
+    .contact-btn-div::after {
+        display: none !important;
+    }
 
-.reactbits-projects-stage {
-    position: relative;
-    min-height: 560px;
-}
+    .navbar,
+    .navbar.scrolled {
+        width: calc(100% - 24px) !important;
+        height: 64px !important;
+        top: 12px !important;
+        padding: 0 74px 0 12px !important;
+        border-width: 3px !important;
+        box-shadow: 5px 5px 0 var(--neo-ink) !important;
+    }
 
-.reactbits-project-card {
-    background-size: cover;
-    background-position: center center;
-    border-color: rgba(236, 230, 220, .65) !important;
-    overflow: hidden;
-}
+    .navbar-tabs,
+    .navbar-tabs-ul,
+    .hey {
+        display: none !important;
+    }
 
-.reactbits-project-cardContent {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 12px;
-    padding: 24px;
-    background: linear-gradient(180deg, rgba(12, 12, 16, .05) 0%, rgba(12, 12, 16, .78) 55%, rgba(12, 12, 16, .94) 100%);
-}
+    .logo {
+        display: flex !important;
+        width: auto !important;
+        min-width: 112px !important;
+        height: 42px !important;
+        padding-inline: 13px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
 
-.reactbits-project-cardTag {
-    width: fit-content;
-    padding: 7px 12px;
-    border-radius: 999px;
-    background: rgba(236, 230, 220, .14);
-    border: 1px solid rgba(236, 230, 220, .18);
-    color: #ece6dc;
-    font-family: 'Fira Code', monospace;
-    font-size: .84rem;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-}
+    .hamburger {
+        position: fixed !important;
+        top: 18px !important;
+        right: 20px !important;
+        left: auto !important;
+        z-index: 10003 !important;
+        display: flex !important;
+        width: 50px !important;
+        height: 50px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: transparent !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+    }
 
-.reactbits-project-card h4 {
-    margin: 0;
-    font-size: 2rem;
-    line-height: 1.02;
-    color: #fffaf4;
-}
+    .hamburgerbase {
+        display: flex !important;
+        width: 50px !important;
+        height: 50px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: transparent !important;
+    }
 
-.reactbits-project-card p {
-    margin: 0;
-    font-size: 1.2rem;
-    line-height: 1.65;
-    color: rgba(255, 250, 244, .76);
-}
+    #hamburger-button {
+        position: relative !important;
+        z-index: 1;
+        display: flex !important;
+        width: 46px !important;
+        height: 46px !important;
+        margin: 0 !important;
+        padding: 10px 9px !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: space-between !important;
+        background: var(--neo-orange) !important;
+        border: 3px solid var(--neo-ink) !important;
+        box-shadow: 3px 3px 0 var(--neo-ink) !important;
+    }
 
-@media screen and (max-width: 980px) {
+    #burger-bar1,
+    #burger-bar2,
+    #burger-bar3 {
+        display: block !important;
+        width: 100% !important;
+        height: 3px !important;
+        flex: 0 0 3px;
+        background: var(--neo-ink) !important;
+        border-radius: 0 !important;
+        transform-origin: center !important;
+        transition: transform .22s ease, opacity .18s ease !important;
+    }
+
+    #burger-bar1.hamburger-animation1 {
+        transform: translateY(10px) rotate(45deg) !important;
+    }
+
+    #burger-bar2.hamburger-animation2 {
+        opacity: 0 !important;
+        transform: scaleX(0) !important;
+    }
+
+    #burger-bar3.hamburger-animation3 {
+        transform: translateY(-10px) rotate(-45deg) !important;
+    }
+
+    .mobiletogglemenu {
+        position: fixed !important;
+        inset: 0 !important;
+        z-index: 10001 !important;
+        display: flex !important;
+        width: 100% !important;
+        height: 100dvh !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        background: rgba(17, 17, 17, .35) !important;
+        border: 0 !important;
+        transform: translateX(105%) !important;
+        transition: transform .3s cubic-bezier(.2, .8, .2, 1), opacity .2s ease, visibility 0s linear .3s !important;
+    }
+
+    .mobiletogglemenu.show-toggle-menu {
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: translateX(0) !important;
+        transition-delay: 0s !important;
+    }
+
+    .mobile-navbar-tabs-ul {
+        width: min(88vw, 390px) !important;
+        height: 100% !important;
+        margin: 0 0 0 auto !important;
+        padding: 105px 28px 42px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: center !important;
+        gap: 14px !important;
+        overflow-y: auto;
+        background: var(--neo-pink) !important;
+        border-left: 4px solid var(--neo-ink) !important;
+        box-shadow: -9px 0 0 var(--neo-ink) !important;
+    }
+
+    .mobile-navbar-tabs-li {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: left !important;
+    }
+
+    .mobile-navbar-tabs-li::before {
+        display: none !important;
+    }
+
+    .mobile-navbar-tabs-li a {
+        display: block !important;
+        width: 100% !important;
+        padding: 14px 16px !important;
+        background: var(--neo-white) !important;
+        color: var(--neo-ink) !important;
+        border: 3px solid var(--neo-ink) !important;
+        box-shadow: 4px 4px 0 var(--neo-ink) !important;
+        font: 400 clamp(2rem, 7vw, 3.2rem)/1 'Archivo Black', sans-serif !important;
+        letter-spacing: -.04em !important;
+        text-decoration: none !important;
+        transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease !important;
+    }
+
+    .mobile-navbar-tabs-li:nth-child(2n) a {
+        background: var(--neo-yellow) !important;
+    }
+
+    .mobile-navbar-tabs-li.activeThismobiletab a,
+    .mobile-navbar-tabs-li a:hover {
+        background: var(--neo-green) !important;
+        color: var(--neo-white) !important;
+        transform: translate(3px, 3px) !important;
+        box-shadow: 1px 1px 0 var(--neo-ink) !important;
+    }
+
+    .landing-page-container {
+        min-height: max(100svh, 720px) !important;
+        padding: 11rem 0 12rem !important;
+    }
+
+    .akito-hero-content {
+        width: calc(100% - 32px) !important;
+        padding: 0 0 2rem !important;
+        gap: 1.25rem !important;
+    }
+
+    .akito-hero-title {
+        max-width: 100% !important;
+        font-size: clamp(5.5rem, 20vw, 10rem) !important;
+        line-height: .84 !important;
+        letter-spacing: -.075em !important;
+        overflow-wrap: normal;
+    }
+
+    .akito-hero-desc {
+        width: min(100%, 560px) !important;
+        max-width: none !important;
+        font-size: 1.45rem !important;
+        line-height: 1.55 !important;
+    }
+
+    .landing-page-container::before {
+        display: none !important;
+    }
+
+    .landing-page-container::after {
+        overflow: hidden;
+        font-size: 1rem !important;
+        text-align: left !important;
+        text-indent: 16px;
+    }
+
+    .about-section,
+    .skills-section,
+    .projects-section-div,
+    .chat-section {
+        width: calc(100% - 32px) !important;
+    }
+
+    .section-heading-article {
+        max-width: 100%;
+        font-size: clamp(2.6rem, 10vw, 4.4rem) !important;
+        overflow-wrap: anywhere;
+    }
+
+    .info-dp-section {
+        gap: 3rem !important;
+    }
+
+    .about-info {
+        width: 100% !important;
+        padding: 2.6rem !important;
+    }
+
+    .about-info p {
+        font-size: 1.5rem !important;
+        line-height: 1.65 !important;
+    }
+
+    .dp,
+    .reactbits-about-frame,
+    .reactbits-about-image,
+    .dp > img {
+        width: 100% !important;
+        min-height: 360px !important;
+    }
+
+    .frontend-dev-heading {
+        font-size: clamp(3.2rem, 12vw, 5rem) !important;
+    }
+
+    .tech-stack-wrapper {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 16px !important;
+        width: 100% !important;
+    }
+
+    .tech-stack-box {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 1 !important;
+    }
+
     .reactbits-projects-shell {
-        grid-template-columns: 1fr;
+        min-height: 0 !important;
+        gap: 3.5rem !important;
+    }
+
+    .reactbits-projects-panel {
+        padding: 2.6rem !important;
+        transform: none !important;
+    }
+
+    .reactbits-projects-title {
+        font-size: clamp(3.2rem, 11vw, 4.8rem) !important;
+    }
+
+    .brew-slider-container.reactbits-projects-mounted {
+        min-height: 0 !important;
     }
 
     .reactbits-projects-stage {
-        min-height: 500px;
+        width: 100% !important;
+        min-height: 430px !important;
+        transform: none !important;
+    }
+
+    .reactbits-projects-stage > div {
+        right: auto !important;
+        bottom: 18px !important;
+        left: 2% !important;
+        transform: scale(.72) !important;
+        transform-origin: bottom left !important;
+    }
+
+    .chat-container {
+        width: 100% !important;
+        height: min(620px, 78svh) !important;
+    }
+
+    .chat-header,
+    .chat-input-area {
+        padding-inline: 14px !important;
+    }
+
+    .akito-footer .footercontainer {
+        width: 100% !important;
     }
 }
 
-@media screen and (max-width: 640px) {
-    .brew-slider-container.reactbits-projects-mounted {
-        min-height: 760px;
+@media screen and (max-width: 520px) {
+    html {
+        font-size: 56% !important;
     }
 
-    .reactbits-projects-shell {
-        min-height: 760px;
+    .navbar,
+    .navbar.scrolled {
+        width: calc(100% - 16px) !important;
+        top: 8px !important;
     }
 
-    .reactbits-projects-copy {
-        padding: 22px;
+    .hamburger {
+        top: 14px !important;
+        right: 14px !important;
     }
 
-    .reactbits-projects-stats {
-        grid-template-columns: 1fr;
+    .landing-page-container {
+        padding-top: 10rem !important;
+    }
+
+    .blob::before,
+    .blob::after,
+    .reactbits-hero-aurora::before,
+    .reactbits-hero-aurora::after {
+        display: none !important;
+    }
+
+    .akito-hero-title {
+        font-size: clamp(5.1rem, 22vw, 8rem) !important;
+    }
+
+    .akito-hero-subtitle {
+        max-width: 100%;
+        font-size: 1.1rem !important;
+        letter-spacing: .08em !important;
+    }
+
+    .letsTalkBtn {
+        min-height: 50px !important;
+        padding: 14px 20px !important;
+    }
+
+    .tech-stack-wrapper {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .reactbits-projects-stage {
+        min-height: 365px !important;
+    }
+
+    .reactbits-projects-stage > div {
+        left: 0 !important;
+        transform: scale(.6) !important;
+    }
+
+    .reactbits-project-cardContent {
+        padding: 2rem !important;
     }
 
     .reactbits-project-card h4 {
-        font-size: 1.6rem;
+        font-size: 2.2rem !important;
     }
 
-    .reactbits-project-card p {
-        font-size: 1.05rem;
+    .chat-header h3 {
+        font-size: 1.7rem !important;
+    }
+
+    .user-info {
+        max-width: 48%;
+    }
+
+    .akito-footer .two-words article {
+        font-size: clamp(3.7rem, 13vw, 5.6rem) !important;
+    }
+}
+
+/* ================================================================
+   FINAL WHITE RESPONSIVE SYSTEM
+   A single flat-color layout layer for both the static and Next pages.
+   ================================================================ */
+:root {
+    --neo-paper: #ffffff;
+    --page-gutter: clamp(18px, 4vw, 48px);
+    --content-width: 1180px;
+}
+
+html {
+    overflow-x: hidden;
+    background: #ffffff !important;
+}
+
+body,
+noscript,
+.site-shell,
+main {
+    background-color: #ffffff !important;
+    background-image: none !important;
+}
+
+body {
+    width: 100%;
+    overflow-x: clip !important;
+}
+
+.scroll-progress-bar {
+    background: var(--neo-orange) !important;
+    background-image: none !important;
+}
+
+.navbar,
+.navbar.scrolled {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: min(var(--content-width), calc(100% - (2 * var(--page-gutter)))) !important;
+}
+
+.landing-page-container,
+.about-section-container,
+.skills-section-container,
+.projects-section-container,
+.chat-section-container {
+    width: 100% !important;
+    background: #ffffff !important;
+    background-image: none !important;
+    border-bottom: 3px solid var(--neo-ink) !important;
+}
+
+.landing-page-container {
+    min-height: max(100svh, 720px) !important;
+    padding: clamp(12rem, 15vh, 15rem) 0 clamp(10rem, 13vh, 13rem) !important;
+}
+
+.landing-page-container::after {
+    background: var(--neo-yellow) !important;
+    background-image: none !important;
+}
+
+.akito-hero-content,
+.about-section,
+.skills-section,
+.projects-section-div,
+.chat-section {
+    width: min(var(--content-width), calc(100% - (2 * var(--page-gutter)))) !important;
+    max-width: var(--content-width) !important;
+    margin-inline: auto !important;
+}
+
+.akito-hero-content {
+    padding-inline: 0 !important;
+}
+
+.about-section-container,
+.skills-section-container,
+.projects-section-container,
+.chat-section-container {
+    padding-block: clamp(8rem, 10vw, 13rem) !important;
+}
+
+.about-section,
+.skills-section,
+.projects-section-div,
+.chat-section,
+.about-info,
+.tech-stack-box,
+.brew-slider-container,
+.chat-container,
+.reactbits-projects-panel {
+    background-image: none !important;
+}
+
+.section-heading {
+    margin-bottom: clamp(3rem, 5vw, 6rem) !important;
+}
+
+.sectionHeadingP {
+    width: 100% !important;
+    max-width: 180px;
+    height: 7px !important;
+    margin-top: 1.5rem !important;
+    background: var(--neo-orange) !important;
+    background-image: none !important;
+    border: 0 !important;
+}
+
+.info-dp-section {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr) !important;
+    align-items: stretch !important;
+    gap: clamp(3rem, 5vw, 6rem) !important;
+}
+
+.about-info,
+.dp {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+.about-info {
+    padding: clamp(3rem, 5vw, 5rem) !important;
+    background: #ffffff !important;
+}
+
+.tech-stack-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    gap: clamp(16px, 2vw, 24px) !important;
+}
+
+.tech-stack-box {
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0 !important;
+    aspect-ratio: 1 !important;
+}
+
+/* Static HTML project slider: flat split layout with readable content. */
+.brew-slider-container:not(.reactbits-projects-mounted) {
+    position: relative !important;
+    height: clamp(560px, 48vw, 620px) !important;
+    max-height: 620px;
+    background: #ffffff !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-slide {
+    overflow: hidden !important;
+    background: #ffffff !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-slide::after {
+    inset: 0 auto 88px 0 !important;
+    width: 44% !important;
+    height: auto !important;
+    background: #ffffff !important;
+    background-image: none !important;
+    border-right: 3px solid var(--neo-ink);
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-slide-bg {
+    inset: 0 0 88px 44% !important;
+    width: auto !important;
+    height: auto !important;
+    background: #f4f4f4 !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-slide-bg img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    filter: none !important;
+    transform: none !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-slide-content {
+    position: relative !important;
+    z-index: 3 !important;
+    width: 44% !important;
+    max-width: 44% !important;
+    height: calc(100% - 88px) !important;
+    padding: clamp(3rem, 4vw, 5rem) !important;
+    justify-content: center !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-title {
+    font-size: clamp(3.5rem, 4.2vw, 5.5rem) !important;
+}
+
+.brew-slider-container:not(.reactbits-projects-mounted) .brew-slider-controls {
+    height: 88px !important;
+    padding: 18px clamp(18px, 3vw, 36px) !important;
+    background: var(--neo-pink) !important;
+    background-image: none !important;
+}
+
+/* React-enhanced projects: remove overlays and keep the card copy flat. */
+.brew-slider-container.reactbits-projects-mounted {
+    width: 100% !important;
+    min-height: 600px !important;
+}
+
+.reactbits-projects-shell {
+    grid-template-columns: minmax(0, .95fr) minmax(390px, 1.05fr) !important;
+    gap: clamp(4rem, 6vw, 7rem) !important;
+    min-height: 600px !important;
+}
+
+.reactbits-projects-panel {
+    padding: clamp(3rem, 5vw, 5rem) !important;
+    background: #ffffff !important;
+    transform: none !important;
+}
+
+.reactbits-project-card {
+    background-color: #f2f2f2 !important;
+    background-position: center top !important;
+    background-size: 100% 48% !important;
+    background-repeat: no-repeat !important;
+}
+
+.reactbits-project-card::after {
+    display: none !important;
+}
+
+.reactbits-project-cardContent {
+    min-height: 54%;
+    padding: 2.2rem !important;
+    background: #ffffff !important;
+    background-image: none !important;
+    color: var(--neo-ink) !important;
+    border-top: 3px solid var(--neo-ink);
+}
+
+.reactbits-project-card h4,
+.reactbits-project-card p {
+    color: var(--neo-ink) !important;
+}
+
+.chat-messages,
+.brew-slider-controls,
+.akito-footer,
+.akito-footer::before {
+    background-image: none !important;
+}
+
+@media screen and (max-width: 1100px) {
+    .tech-stack-wrapper {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+
+    .reactbits-projects-shell {
+        grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr) !important;
+        gap: 3rem !important;
+    }
+}
+
+@media screen and (max-width: 998px) {
+    :root {
+        --page-gutter: clamp(16px, 4vw, 28px);
+    }
+
+    .navbar,
+    .navbar.scrolled {
+        width: calc(100% - (2 * var(--page-gutter))) !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+
+    .landing-page-container {
+        min-height: max(100svh, 680px) !important;
+        padding: 11rem 0 11rem !important;
+    }
+
+    .akito-hero-content {
+        align-items: flex-start !important;
+        text-align: left !important;
+    }
+
+    .contact-btn-div {
+        justify-content: flex-start !important;
+    }
+
+    .info-dp-section {
+        grid-template-columns: 1fr !important;
+    }
+
+    .dp {
+        max-width: 640px;
+        margin-inline: auto !important;
+    }
+
+    .reactbits-projects-shell {
+        grid-template-columns: 1fr !important;
+        gap: 5rem !important;
+    }
+
+    .reactbits-projects-stage {
+        min-height: 480px !important;
+    }
+
+    .reactbits-projects-stage > div {
+        right: 50% !important;
+        bottom: 16px !important;
+        left: auto !important;
+        transform: translateX(50%) scale(.9) !important;
+        transform-origin: bottom center !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .about-section-container,
+    .skills-section-container,
+    .projects-section-container,
+    .chat-section-container {
+        padding-block: 8rem !important;
+    }
+
+    .section-heading-article {
+        line-height: 1 !important;
+    }
+
+    .about-info {
+        padding: 2.6rem !important;
+    }
+
+    .dp,
+    .reactbits-about-frame,
+    .reactbits-about-image,
+    .dp > img {
+        min-height: 0 !important;
+        aspect-ratio: 4 / 5 !important;
+    }
+
+    .tech-stack-wrapper {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+
+    .brew-slider-container:not(.reactbits-projects-mounted) {
+        height: 720px !important;
+        max-height: none;
+    }
+
+    .brew-slider-container:not(.reactbits-projects-mounted) .brew-slide-bg {
+        inset: 0 0 auto 0 !important;
+        width: 100% !important;
+        height: 40% !important;
+        border-bottom: 3px solid var(--neo-ink);
+    }
+
+    .brew-slider-container:not(.reactbits-projects-mounted) .brew-slide::after {
+        inset: 40% 0 82px 0 !important;
+        width: 100% !important;
+        border-right: 0;
+    }
+
+    .brew-slider-container:not(.reactbits-projects-mounted) .brew-slide-content {
+        position: absolute !important;
+        inset: 40% 0 82px 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+        height: auto !important;
+        padding: 2.6rem !important;
+    }
+
+    .brew-slider-container:not(.reactbits-projects-mounted) .brew-title {
+        font-size: clamp(3rem, 9vw, 4.2rem) !important;
+    }
+
+    .brew-slider-container:not(.reactbits-projects-mounted) .brew-desc {
+        font-size: 1.4rem !important;
+        line-height: 1.5 !important;
+    }
+
+    .brew-slider-container:not(.reactbits-projects-mounted) .brew-slider-controls {
+        height: 82px !important;
+        padding: 16px !important;
+    }
+
+    .brew-prev,
+    .brew-next {
+        width: 48px !important;
+        height: 48px !important;
+    }
+
+    .brew-indicators {
+        gap: 7px !important;
+    }
+
+    .brew-dot {
+        width: 24px !important;
+    }
+
+    .reactbits-projects-panel {
+        padding: 2.6rem !important;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    :root {
+        --page-gutter: 14px;
+    }
+
+    .navbar,
+    .navbar.scrolled {
+        width: calc(100% - 20px) !important;
+    }
+
+    .landing-page-container {
+        min-height: max(100svh, 640px) !important;
+        padding: 10rem 0 10rem !important;
+    }
+
+    .akito-hero-title {
+        font-size: clamp(5rem, 21vw, 7.5rem) !important;
+    }
+
+    .akito-hero-desc {
+        font-size: 1.45rem !important;
+    }
+
+    .tech-stack-wrapper {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 14px !important;
+    }
+
+    .brew-slider-container:not(.reactbits-projects-mounted) {
+        height: 680px !important;
+    }
+
+    .brew-slider-container:not(.reactbits-projects-mounted) .brew-slide-bg {
+        height: 36% !important;
+    }
+
+    .brew-slider-container:not(.reactbits-projects-mounted) .brew-slide::after,
+    .brew-slider-container:not(.reactbits-projects-mounted) .brew-slide-content {
+        top: 36% !important;
+    }
+
+    .reactbits-projects-stage {
+        min-height: 360px !important;
+    }
+
+    .reactbits-projects-stage > div {
+        bottom: 0 !important;
+        transform: translateX(50%) scale(.62) !important;
+    }
+
+    .reactbits-projects-stats {
+        grid-template-columns: 1fr !important;
+    }
+
+    .reactbits-projects-stat + .reactbits-projects-stat {
+        border-top: 3px solid var(--neo-ink);
+        border-left: 0;
     }
 }

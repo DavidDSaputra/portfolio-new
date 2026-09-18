@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const rootDir = process.cwd();
@@ -57,3 +57,18 @@ export function getLegacyPage(filename) {
 
 await mkdir(path.dirname(outputFile), { recursive: true });
 await writeFile(outputFile, fileContents, "utf8");
+
+// Standalone legacy pages (static hosting) link the minimalist stylesheet
+// directly, so keep root/public mirrors of app/globals.css in sync.
+const globalsSource = path.join(rootDir, "app", "globals.css");
+await copyFile(globalsSource, path.join(rootDir, "public", "globals.css"));
+await copyFile(globalsSource, path.join(rootDir, "globals.css"));
+
+// Static hosting serves the root mirrors while Next serves the public/ copies:
+// canonical runtime JS lives in public/, canonical neo base CSS in root style.css.
+await copyFile(path.join(rootDir, "public", "main.js"), path.join(rootDir, "main.js"));
+await copyFile(
+  path.join(rootDir, "public", "blog-content.js"),
+  path.join(rootDir, "blog-content.js")
+);
+await copyFile(path.join(rootDir, "style.css"), path.join(rootDir, "public", "style.css"));
