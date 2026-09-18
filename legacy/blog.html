@@ -6,15 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#1f2227" />
+  <meta name="theme-color" content="#FBFBFA" />
   <meta name="description" content="David Saputra | Blog - Tutorial seputar Git, GitHub, Laravel dan Development" />
   <meta name="keywords" content="blog, tutorial, git, github, laravel, web development" />
   <meta name="author" content="David Saputra" />
-  <link rel="canonical" href="https://davidsaputra.my.id/blog.html" />
+  <link rel="canonical" href="https://davidsaputra.my.id/blog" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="David Saputra | Blog" />
   <meta property="og:description" content="David Saputra | Blog - Tutorial seputar Git, GitHub, Laravel dan Development" />
-  <meta property="og:url" content="https://davidsaputra.my.id/blog.html" />
+  <meta property="og:url" content="https://davidsaputra.my.id/blog" />
   <meta property="og:site_name" content="David Saputra Blog" />
   <meta property="og:image" content="https://davidsaputra.my.id/src/png/nav-avatar.png" />
   <meta property="og:image:alt" content="David Saputra blog preview" />
@@ -29,562 +29,338 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fira+Code:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" />
 
   <style>
     /* =====================================================
-       BLOG PAGE — WHITE THEME (matches homepage palette)
+       BLOG PAGE — minimalist theme (matches homepage system)
        ===================================================== */
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Space Grotesk', sans-serif;
-      background-color: var(--color-white, #f4f4f0);
-      color: #111;
-      cursor: none;
-    }
-
-    /* ---- Custom cursor ---- */
-    .cursor-inner {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background: #111;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 999999;
-      transform: translate(-50%, -50%);
-      transition: width .2s, height .2s, background .2s;
-    }
-
-    .cursor-outer {
-      position: fixed;
-      width: 32px;
-      height: 32px;
-      border: 1.5px solid rgba(0, 0, 0, 0.35);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 999998;
-      transform: translate(-50%, -50%);
-    }
-
-    .cursor-inner.hover {
-      width: 14px;
-      height: 14px;
-      background: #4a7ba7;
-    }
-
-    .cursor-outer.hover {
-      border-color: #4a7ba7;
-    }
-
-    /* ---- Scroll progress ---- */
-    .scroll-progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
-      width: 0;
-      background: linear-gradient(90deg, #4a7ba7, #c85f6f);
-      z-index: 99999;
-      transition: width .1s linear;
-    }
-
-    /* Navbar is handled by style.css .navbar class */
-
-    /* =====================================================
-       HERO
-       ===================================================== */
-    .blog-hero {
-      min-height: 100vh;
-      padding: 120px 7% 80px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      position: relative;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      overflow: hidden;
-    }
-
-    .blog-hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 55% 45% at 75% 15%, rgba(74, 123, 167, 0.07) 0%, transparent 70%),
-        radial-gradient(ellipse 35% 35% at 15% 85%, rgba(200, 95, 111, 0.05) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .blog-hero-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .blog-hero-eyebrow-line {
-      width: 36px;
-      height: 1px;
-      background: rgba(0, 0, 0, 0.2);
-    }
-
-    .blog-hero-eyebrow-label {
-      font-size: 1.1rem;
-      font-weight: 500;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(0, 0, 0, 0.35);
-      font-family: 'Fira Code', monospace;
-    }
-
-    .blog-hero-title {
-      font-size: clamp(6rem, 14vw, 16rem);
-      font-weight: 900;
-      line-height: 0.9;
-      letter-spacing: -4px;
-      text-transform: uppercase;
-      color: #111;
-      margin-bottom: 48px;
-    }
-
-    .blog-hero-title .outline {
-      -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.15);
-      color: transparent;
-    }
-
-    .blog-hero-bottom {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 32px;
-    }
-
-    .blog-hero-count {
-      font-family: 'Fira Code', monospace;
-      font-size: 1.1rem;
-      color: rgba(0, 0, 0, 0.35);
-      letter-spacing: 1px;
-    }
-
-    .blog-hero-count strong {
-      color: #111;
-    }
-
-    .blog-hero-desc {
-      max-width: 380px;
-      font-size: 1.4rem;
-      color: rgba(0, 0, 0, 0.45);
-      line-height: 1.65;
-      text-align: right;
-    }
-
-    /* =====================================================
-       BLOG SECTION
-       ===================================================== */
-    .blog-section {
-      padding: 80px 7%;
-    }
-
-    .blog-container {
-      max-width: 1200px;
+    .mn-blog-wrap {
+      width: min(1120px, 100%);
       margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 48px);
     }
 
-    .blog-section-header {
+    /* ---------- Hero ---------- */
+
+    .mn-blog-hero {
+      padding: calc(96px + clamp(36px, 6vw, 72px)) 0 clamp(28px, 4vw, 48px);
+    }
+
+    .mn-blog-kicker {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      margin-bottom: 40px;
-    }
-
-    .blog-section-label {
-      font-family: 'Fira Code', monospace;
-      font-size: 1.0rem;
-      font-weight: 600;
-      letter-spacing: 4px;
+      gap: 12px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: rgba(0, 0, 0, 0.3);
+      color: #74747e;
+      margin: 0 0 clamp(16px, 2.4vw, 24px);
     }
 
-    .blog-section-count {
-      font-family: 'Fira Code', monospace;
-      font-size: 1.0rem;
-      color: rgba(0, 0, 0, 0.2);
+    .mn-blog-kicker-sep {
+      color: #d9d9d3;
     }
 
-    /* =====================================================
-       BLOG GRID
-       ===================================================== */
-    .blog-grid {
+    .mn-blog-title {
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-size: clamp(2.8rem, 8vw, 5.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.015em;
+      color: #16161a;
+      margin: 0 0 clamp(14px, 2vw, 20px);
+    }
+
+    .mn-blog-lede {
+      max-width: 56ch;
+      font-size: clamp(1rem, 1.5vw, 1.12rem);
+      line-height: 1.65;
+      color: #3d3d45;
+      margin: 0 0 clamp(10px, 1.6vw, 14px);
+    }
+
+    .mn-blog-count {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #74747e;
+    }
+
+    /* ---------- Grid & cards ---------- */
+
+    .mn-blog-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(16px, 2.4vw, 22px);
+      padding-bottom: clamp(48px, 7vw, 88px);
     }
 
-    /* Featured card — full width */
-    .blog-card:first-child {
-      grid-column: 1 / -1;
-    }
-
-    /* ---- Card ---- */
-    .blog-card {
-      background: #fff;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      padding: 36px 36px 28px;
+    .mn-blog-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 22px 22px 20px;
+      background: #ffffff;
+      border: 1px solid #e8e8e4;
+      border-radius: 14px;
       cursor: pointer;
-      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 20px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
     }
 
-    .blog-card:hover {
+    .mn-blog-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-      border-color: rgba(0, 0, 0, 0.14);
+      border-color: #d9d9d3;
+      box-shadow: 0 14px 34px rgba(22, 22, 26, 0.08);
     }
 
-    .blog-card-top {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    /* Row: number + category + date */
-    .blog-card-meta {
+    .mn-blog-card-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
     }
 
-    .blog-number {
-      font-family: 'Fira Code', monospace;
-      font-size: 1.0rem;
-      font-weight: 700;
-      color: rgba(0, 0, 0, 0.12);
-      letter-spacing: 2px;
+    .mn-blog-num {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: #74747e;
     }
 
-    .blog-meta-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .blog-category {
-      display: inline-block;
-      padding: 4px 12px;
-      background: #111;
-      color: #fff;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 1.5px;
+    .mn-blog-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      border-radius: 100px;
-    }
-
-    /* Different category colors */
-    .blog-category.cat-git {
-      background: #f05033;
-    }
-
-    .blog-category.cat-collab {
-      background: #3c8e5e;
-    }
-
-    .blog-category.cat-laravel {
-      background: #ff2d20;
-    }
-
-    .blog-category.cat-commands {
-      background: #e67e22;
-    }
-
-    .blog-category.cat-actions {
-      background: #2088ff;
-    }
-
-    .blog-date {
-      font-family: 'Fira Code', monospace;
-      font-size: 1.0rem;
-      color: rgba(0, 0, 0, 0.3);
+      color: #3d3d45;
+      background: #fbfbfa;
+      border: 1px solid #e8e8e4;
+      border-radius: 999px;
+      padding: 4px 10px;
       white-space: nowrap;
     }
 
-    .blog-title {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #111;
-      line-height: 1.25;
-      letter-spacing: -0.4px;
+    .mn-blog-card-title {
+      font-size: 1.22rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      color: #16161a;
+      margin: 0;
     }
 
-    .blog-card:first-child .blog-title {
-      font-size: 2.6rem;
+    .mn-blog-excerpt {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #74747e;
+      margin: 0;
     }
 
-    .blog-excerpt {
-      font-size: 1.35rem;
-      color: rgba(0, 0, 0, 0.45);
-      line-height: 1.65;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      line-clamp: 2;
-      -webkit-box-orient: vertical;
+    .mn-blog-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 8px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #16161a;
+    }
+
+    .mn-blog-link span {
+      transition: transform 0.3s ease;
+    }
+
+    .mn-blog-card:hover .mn-blog-link span {
+      transform: translateX(4px);
+    }
+
+    /* ---------- Article modal ---------- */
+
+    .mn-blog-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(12px, 3vw, 28px);
+      background: rgba(22, 22, 26, 0.44);
+      backdrop-filter: blur(4px);
+    }
+
+    .mn-blog-modal.active {
+      display: flex;
+    }
+
+    .mn-blog-modal-panel {
+      display: flex;
+      flex-direction: column;
+      width: min(780px, 100%);
+      max-height: min(86vh, 900px);
+      background: #fbfbfa;
+      border: 1px solid #e8e8e4;
+      border-radius: 16px;
       overflow: hidden;
+      box-shadow: 0 30px 80px rgba(22, 22, 26, 0.25);
     }
 
-    .blog-card-footer {
+    .mn-blog-modal-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 20px;
-      border-top: 1px solid rgba(0, 0, 0, 0.07);
+      gap: 12px;
+      padding: 14px 18px;
+      border-bottom: 1px solid #e8e8e4;
+      background: #ffffff;
     }
 
-    .read-time {
-      font-family: 'Fira Code', monospace;
-      font-size: 1.0rem;
-      color: rgba(0, 0, 0, 0.28);
-      letter-spacing: 1px;
+    .mn-blog-modal-kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #74747e;
     }
 
-    .blog-arrow {
-      width: 34px;
-      height: 34px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 50%;
-      display: flex;
+    .mn-blog-modal-close {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
-      color: rgba(0, 0, 0, 0.3);
-      transition: all .25s ease;
-    }
-
-    .blog-card:hover .blog-arrow {
-      border-color: #4a7ba7;
-      color: #4a7ba7;
-      transform: translateX(3px);
-    }
-
-    /* =====================================================
-       MODAL — Slide-in reader panel
-       ===================================================== */
-    .blog-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 99999;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .35s ease;
-    }
-
-    .blog-modal.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .blog-modal-content {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      max-width: 720px;
-      height: 100vh;
-      background: #fff;
-      overflow-y: auto;
-      transform: translateX(100%);
-      transition: transform .4s cubic-bezier(.4, 0, .2, 1);
-    }
-
-    .blog-modal.active .blog-modal-content {
-      transform: translateX(0);
-    }
-
-    .blog-modal-content::-webkit-scrollbar {
-      width: 3px;
-    }
-
-    .blog-modal-content::-webkit-scrollbar-thumb {
-      background: rgba(0, 0, 0, 0.15);
-    }
-
-    /* Close bar */
-    .blog-modal-close {
-      position: sticky;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 56px;
-      background: rgba(255, 255, 255, 0.95);
-      border: none;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 0 32px;
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+      line-height: 1;
+      color: #16161a;
+      background: transparent;
+      border: 1px solid #d9d9d3;
+      border-radius: 50%;
       cursor: pointer;
-      z-index: 10;
-      color: rgba(0, 0, 0, 0.4);
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .mn-blog-modal-close:hover {
+      background: #16161a;
+      border-color: #16161a;
+      color: #fbfbfa;
+    }
+
+    .mn-blog-modal-body {
+      padding: 26px clamp(20px, 4vw, 32px) 36px;
+      overflow-y: auto;
+    }
+
+    /* ---------- Article typography ---------- */
+
+    .mn-blog-modal-body h1 {
+      font-size: clamp(1.45rem, 3vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      color: #16161a;
+      margin: 0 0 14px;
+    }
+
+    .mn-blog-modal-body h2 {
       font-size: 1.2rem;
       font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      font-family: 'Space Grotesk', sans-serif;
-      transition: color .2s ease;
-      backdrop-filter: blur(8px);
+      letter-spacing: -0.01em;
+      color: #16161a;
+      margin: 26px 0 10px;
     }
 
-    .blog-modal-close:hover {
-      color: #111;
-    }
-
-    .blog-modal-close::before {
-      content: '←';
-      font-size: 1.3rem;
-      color: rgba(0, 0, 0, 0.3);
-      transition: transform .3s ease;
-    }
-
-    .blog-modal-close:hover::before {
-      transform: translateX(-4px);
-    }
-
-    .blog-modal-body {
-      padding: 48px 52px 80px;
-    }
-
-    /* Modal typography */
-    .blog-modal-body h1 {
-      font-size: 2.8rem;
-      font-weight: 800;
-      color: #111;
-      line-height: 1.15;
-      letter-spacing: -1px;
-      margin: 0 0 28px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-      font-family: 'Space Grotesk', sans-serif;
-    }
-
-    .blog-modal-body h2 {
-      font-size: 1.85rem;
-      font-weight: 700;
-      color: #111;
-      margin: 36px 0 14px;
-    }
-
-    .blog-modal-body h3 {
-      font-size: 1.35rem;
+    .mn-blog-modal-body h3 {
+      font-size: 1.02rem;
       font-weight: 600;
-      color: rgba(0, 0, 0, 0.55);
-      margin: 24px 0 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      color: #16161a;
+      margin: 18px 0 8px;
     }
 
-    .blog-modal-body p {
-      font-size: 1.5rem;
-      line-height: 1.75;
-      color: rgba(0, 0, 0, 0.6);
-      margin-bottom: 18px;
-    }
-
-    .blog-modal-body ul,
-    .blog-modal-body ol {
-      padding-left: 22px;
-      margin-bottom: 18px;
-    }
-
-    .blog-modal-body li {
-      font-size: 1.4rem;
+    .mn-blog-modal-body p {
+      font-size: 0.96rem;
       line-height: 1.7;
-      color: rgba(0, 0, 0, 0.55);
-      margin-bottom: 6px;
+      color: #3d3d45;
+      margin: 0 0 12px;
     }
 
-    .blog-modal-body strong {
-      color: #111;
-      font-weight: 600;
+    .mn-blog-modal-body ul,
+    .mn-blog-modal-body ol {
+      padding-left: 20px;
+      margin: 0 0 14px;
+      color: #3d3d45;
+      font-size: 0.96rem;
+      line-height: 1.7;
     }
 
-    .blog-modal-body code {
-      font-family: 'Fira Code', monospace;
-      font-size: 1.15rem;
-      background: #f2f2f2;
-      color: #d63031;
-      padding: 2px 7px;
-      border-radius: 4px;
+    .mn-blog-modal-body li {
+      margin: 4px 0;
     }
 
-    .blog-modal-body pre {
-      background: #1a1a2e;
-      border-radius: 8px;
-      padding: 24px 28px;
+    .mn-blog-modal-body code {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.84em;
+      background: #f0f0ec;
+      border: 1px solid #e8e8e4;
+      border-radius: 6px;
+      padding: 2px 6px;
+    }
+
+    .mn-blog-modal-body pre {
+      background: #16161a;
+      border-radius: 12px;
+      padding: 16px 18px;
       overflow-x: auto;
-      margin: 20px 0;
+      margin: 0 0 16px;
     }
 
-    .blog-modal-body pre code {
-      background: none;
-      color: #a8d8f0;
-      font-size: 1.15rem;
+    .mn-blog-modal-body pre code {
+      display: block;
+      background: transparent;
+      border: 0;
       padding: 0;
-      border-radius: 0;
-      line-height: 1.7;
+      color: #e8e8e4;
+      font-size: 0.82rem;
+      line-height: 1.65;
     }
 
-    /* Code block wrapper + copy btn */
     .code-block-wrapper {
       position: relative;
-      margin: 20px 0;
-    }
-
-    .code-block-wrapper pre {
-      margin: 0;
     }
 
     .copy-code-btn {
       position: absolute;
       top: 10px;
       right: 10px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 1.1rem;
-      font-family: 'Fira Code', monospace;
-      padding: 5px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 5px;
-      transition: all .2s ease;
+      gap: 6px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fbfbfa;
+      background: rgba(251, 251, 250, 0.14);
+      border: 1px solid rgba(251, 251, 250, 0.28);
+      border-radius: 8px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease;
     }
 
     .copy-code-btn:hover {
-      background: rgba(255, 255, 255, 0.14);
-      color: #fff;
+      background: rgba(251, 251, 250, 0.24);
     }
 
     .copy-code-btn.copied {
-      color: #4a7ba7;
-      border-color: #4a7ba7;
+      background: #fbfbfa;
+      color: #16161a;
     }
 
     .copy-code-btn svg {
@@ -593,41 +369,38 @@
       fill: currentColor;
     }
 
-    /* Share buttons */
+    /* ---------- Share buttons ---------- */
+
     .share-buttons {
       display: flex;
-      gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 36px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+      gap: 8px;
+      margin: 0 0 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #e8e8e4;
     }
 
     .share-btn {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      padding: 8px 16px;
-      font-size: 1.1rem;
-      font-weight: 600;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #3d3d45;
+      background: #ffffff;
+      border: 1px solid #e8e8e4;
+      border-radius: 999px;
+      padding: 7px 12px;
       text-decoration: none;
       cursor: pointer;
-      border-radius: 100px;
-      border: 1px solid rgba(0, 0, 0, 0.12);
-      background: transparent;
-      color: rgba(0, 0, 0, 0.55);
-      font-family: 'Space Grotesk', sans-serif;
-      transition: all .2s ease;
+      transition: color 0.25s ease, border-color 0.25s ease;
     }
 
     .share-btn:hover {
-      background: rgba(0, 0, 0, 0.05);
-      color: #111;
-    }
-
-    .share-btn.copied {
-      color: #4a7ba7;
-      border-color: #4a7ba7;
+      color: #16161a;
+      border-color: #16161a;
     }
 
     .share-btn svg {
@@ -636,871 +409,218 @@
       fill: currentColor;
     }
 
-    /* =====================================================
-       BLOG FOOTER
-       ===================================================== */
-    .blog-footer {
-      padding: 48px 7%;
-      border-top: 1px solid rgba(0, 0, 0, 0.08);
-      background: #f8f8f6;
-    }
+    /* ---------- Responsive ---------- */
 
-    .blog-footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .blog-footer-copy {
-      font-family: 'Fira Code', monospace;
-      font-size: 1.1rem;
-      color: rgba(0, 0, 0, 0.28);
-      letter-spacing: 1px;
-    }
-
-    .blog-footer-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: rgba(0, 0, 0, 0.4);
-      text-decoration: none;
-      transition: color .25s ease;
-    }
-
-    .blog-footer-back:hover {
-      color: #111;
-    }
-
-    .blog-footer-back svg {
-      width: 15px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      transition: transform .25s ease;
-    }
-
-    .blog-footer-back:hover svg {
-      transform: translateX(-4px);
-    }
-
-    /* =====================================================
-       WHATSAPP FLOAT
-       ===================================================== */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      width: 52px;
-      height: 52px;
-      background: #25D366;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      text-decoration: none;
-      box-shadow: 0 4px 16px rgba(37, 211, 102, .35);
-      z-index: 9990;
-      transition: transform .2s ease;
-    }
-
-    .whatsapp-float:hover {
-      transform: scale(1.08);
-    }
-
-    .whatsapp-float span {
-      display: none;
-    }
-
-    /* =====================================================
-       PAGE TRANSITION
-       ===================================================== */
-    .page-transition {
-      position: fixed;
-      inset: 0;
-      background: #111;
-      z-index: 999999;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .4s ease;
-    }
-
-    .page-transition.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .page-transition-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #fff;
-      font-size: 1.4rem;
-      font-family: 'Fira Code', monospace;
-      letter-spacing: 3px;
-    }
-
-    /* =====================================================
-       RESPONSIVE
-       ===================================================== */
-    @media (max-width: 900px) {
-      .blog-nav {
-        width: calc(100% - 32px);
-        padding: 0 16px;
-      }
-
-      .blog-nav-links {
-        display: none;
-      }
-
-      .blog-hamburger {
-        display: flex;
-      }
-
-      .blog-hero {
-        padding: 100px 5% 60px;
-      }
-
-      .blog-hero-title {
-        font-size: clamp(5rem, 18vw, 10rem);
-        letter-spacing: -2px;
-      }
-
-      .blog-hero-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .blog-hero-desc {
-        text-align: left;
-      }
-
-      .blog-grid {
+    @media (max-width: 760px) {
+      .mn-blog-grid {
         grid-template-columns: 1fr;
-        gap: 16px;
       }
 
-      .blog-card:first-child {
-        grid-column: auto;
-      }
-
-      .blog-card:first-child .blog-title {
-        font-size: 2rem;
-      }
-
-      .blog-modal-content {
-        max-width: 100%;
-      }
-
-      .blog-modal-body {
-        padding: 32px 24px 60px;
-      }
-
-      .blog-section {
-        padding: 60px 5%;
-      }
-
-      .blog-footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
+      .mn-blog-modal-panel {
+        max-height: 92vh;
       }
     }
 
-    /* =====================================================
-       MINIMALIST UI OVERRIDES
-       ===================================================== */
-    body {
-      font-family: 'Manrope', sans-serif;
-      background-color: #17191d;
-      background-image:
-        radial-gradient(circle at 15% 20%, rgba(236, 230, 220, 0.05), transparent 30%),
-        radial-gradient(circle at 85% 10%, rgba(142, 153, 165, 0.12), transparent 24%),
-        linear-gradient(rgba(236, 230, 220, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(236, 230, 220, 0.03) 1px, transparent 1px);
-      background-size: auto, auto, 24px 24px, 24px 24px;
-      color: #ece6dc;
-    }
-
-    .cursor-inner {
-      background: #ece6dc;
-    }
-
-    .cursor-outer {
-      border-color: rgba(236, 230, 220, 0.45);
-    }
-
-    .cursor-inner.hover {
-      background: #ece6dc;
-    }
-
-    .cursor-outer.hover {
-      border-color: #ece6dc;
-    }
-
-    .scroll-progress-bar {
-      background: linear-gradient(90deg, #ece6dc, #8e99a5);
-    }
-
-    .blog-hero {
-      border-bottom: 1px solid rgba(236, 230, 220, 0.08);
-    }
-
-    .blog-hero::before {
-      background:
-        radial-gradient(ellipse 55% 45% at 75% 15%, rgba(236, 230, 220, 0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 35% 35% at 15% 85%, rgba(142, 153, 165, 0.08) 0%, transparent 70%);
-    }
-
-    .blog-hero-eyebrow-line,
-    .blog-section-header {
-      border-color: rgba(236, 230, 220, 0.08);
-    }
-
-    .blog-hero-eyebrow-line {
-      background: rgba(236, 230, 220, 0.18);
-    }
-
-    .blog-hero-eyebrow-label,
-    .blog-section-label,
-    .blog-section-count,
-    .blog-hero-count {
-      color: rgba(236, 230, 220, 0.42);
-    }
-
-    .blog-hero-count strong {
-      color: #ece6dc;
-    }
-
-    .blog-hero-title,
-    .blog-title,
-    .blog-modal-body h1,
-    .blog-modal-body h2,
-    .blog-modal-body h3 {
-      font-family: 'Cormorant Garamond', serif;
-    }
-
-    .blog-hero-title {
-      color: #ece6dc;
-      font-size: clamp(6rem, 13vw, 14rem);
-      font-weight: 600;
-      letter-spacing: -3px;
-      text-transform: none;
-    }
-
-    .blog-hero-title .outline {
-      -webkit-text-stroke: 1px rgba(236, 230, 220, 0.28);
-    }
-
-    .blog-hero-desc {
-      color: rgba(236, 230, 220, 0.68);
-    }
-
-    .blog-card {
-      background: rgba(31, 34, 39, 0.92);
-      border: 1px solid rgba(236, 230, 220, 0.08);
-      border-radius: 30px;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
-    }
-
-    .blog-card:hover {
-      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.28);
-      border-color: rgba(236, 230, 220, 0.14);
-    }
-
-    .blog-title,
-    .blog-modal-body h1,
-    .blog-modal-body h2,
-    .blog-modal-body h3 {
-      color: #ece6dc;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-
-    .blog-card-meta,
-    .blog-card-excerpt,
-    .blog-card-footer,
-    .blog-modal-body p,
-    .blog-modal-body li {
-      color: rgba(236, 230, 220, 0.68);
-    }
-
-    .blog-tag,
-    .blog-read-time,
-    .blog-arrow {
-      color: rgba(236, 230, 220, 0.5);
-    }
-
-    .blog-modal {
-      background: rgba(12, 13, 16, 0.82);
-      backdrop-filter: blur(18px);
-    }
-
-    .blog-modal-content {
-      background: #1f2227;
-      border: 1px solid rgba(236, 230, 220, 0.08);
-      color: #ece6dc;
-      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.35);
-    }
-
-    .blog-modal-close,
-    .blog-footer-back {
-      background: #ece6dc;
-      color: #17191d;
-      border-radius: 999px;
-      border: none;
-      font-family: 'Manrope', sans-serif;
-    }
-
-    .blog-modal-close:hover,
-    .blog-footer-back:hover {
-      background: #d9d2c6;
-    }
-
-    .blog-footer {
-      border-top: 1px solid rgba(236, 230, 220, 0.08);
-      background: linear-gradient(180deg, rgba(23, 25, 29, 0) 0%, rgba(23, 25, 29, 0.72) 100%);
-    }
-
-    .blog-footer-copy {
-      color: rgba(236, 230, 220, 0.52);
-    }
-
-    /* Neobrutalism blog refresh */
-    body,
-    body * {
-      cursor: url('/cursorr.png') 3 2, auto !important;
-    }
-
-    a,
-    button,
-    [onclick],
-    a *,
-    button * {
-      cursor: url('/click.png') 5 2, pointer !important;
-    }
-
-    body {
-      background-color: #fff8e7;
-      background-image:
-        linear-gradient(rgba(17, 17, 17, .075) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(17, 17, 17, .075) 1px, transparent 1px);
-      background-size: 32px 32px;
-      color: #111;
-      font-family: 'Space Grotesk', sans-serif;
-    }
-
-    .cursor-inner,
-    .cursor-outer,
-    .page-transition {
-      display: none !important;
-    }
-
-    .scroll-progress-bar {
-      height: 8px;
-      background: #FE6622;
-      border-bottom: 3px solid #111;
-      box-shadow: none;
-    }
-
-    .blog-hero {
-      min-height: 720px;
-      padding-top: 170px;
-      background: #FEBE0F;
-      border-bottom: 4px solid #111;
-    }
-
-    .blog-hero::before {
-      opacity: 1;
-      background:
-        linear-gradient(35deg, transparent 72%, #FF94BF 72% 82%, transparent 82%),
-        radial-gradient(circle at 82% 32%, #4580B2 0 10%, #111 10.3% 11%, transparent 11.3%);
-    }
-
-    .blog-hero-eyebrow {
-      position: relative;
-      z-index: 2;
-      display: inline-flex;
-      padding: 10px 14px;
-      background: #fff;
-      border: 3px solid #111;
-      box-shadow: 5px 5px 0 #111;
-      transform: rotate(-1deg);
-    }
-
-    .blog-hero-eyebrow-line { display: none; }
-    .blog-hero-eyebrow-label,
-    .blog-hero-count,
-    .blog-hero-count strong { color: #111; font-weight: 800; }
-
-    .blog-hero-title {
-      position: relative;
-      z-index: 2;
-      color: #111;
-      font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(7rem, 16vw, 17rem);
-      font-weight: 400;
-      line-height: .78;
-      letter-spacing: -.08em;
-      text-transform: uppercase;
-      text-shadow: 7px 7px 0 #fff;
-    }
-
-    .blog-hero-title .outline { color: #111; -webkit-text-stroke: 0; }
-    .blog-hero-bottom { position: relative; z-index: 2; padding-top: 24px; border-top: 4px solid #111; }
-
-    .blog-hero-desc {
-      max-width: 48ch;
-      padding: 14px 18px;
-      background: #FF94BF;
-      color: #111;
-      border: 3px solid #111;
-      box-shadow: 5px 5px 0 #111;
-      font-weight: 700;
-    }
-
-    .blog-section { padding-block: 100px; background: transparent; }
-    .blog-section-header { border-bottom: 4px solid #111; }
-    .blog-section-label,
-    .blog-section-count { color: #111; font-weight: 800; }
-    .blog-grid { gap: 28px; }
-
-    .blog-card,
-    .blog-card:first-child {
-      position: relative;
-      overflow: visible;
-      padding: 36px;
-      background: #FF94BF;
-      color: #111;
-      border: 4px solid #111;
-      border-radius: 0;
-      box-shadow: 9px 9px 0 #111;
-      transition: transform .16s ease, box-shadow .16s ease;
-    }
-
-    .blog-card:nth-child(2) { background: #FE6622; }
-    .blog-card:nth-child(3) { background: #4580B2; }
-    .blog-card:nth-child(4) { background: #00A56B; }
-    .blog-card:nth-child(5) { background: #FEBE0F; }
-
-    .blog-card:hover {
-      border-color: #111;
-      box-shadow: 3px 3px 0 #111;
-      transform: translate(6px, 6px) rotate(-.5deg);
-    }
-
-    .blog-number,
-    .blog-date,
-    .blog-title,
-    .blog-excerpt,
-    .read-time { color: #111; }
-    .blog-number { font-size: 1.2rem; font-weight: 800; opacity: .6; }
-
-    .blog-title,
-    .blog-card:first-child .blog-title {
-      color: #111;
-      font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(2.3rem, 4vw, 4.4rem);
-      font-weight: 400;
-      line-height: 1;
-      letter-spacing: -.05em;
-    }
-
-    .blog-excerpt { font-weight: 600; opacity: .78; }
-    .blog-category { background: #fff !important; color: #111; border: 2px solid #111; border-radius: 0; }
-    .blog-card-footer { border-top: 3px solid #111; }
-
-    .blog-arrow {
-      width: 40px;
-      height: 40px;
-      background: #fff;
-      color: #111;
-      border: 2px solid #111;
-      border-radius: 0;
-      box-shadow: 3px 3px 0 #111;
-    }
-
-    .blog-card:hover .blog-arrow { color: #111; border-color: #111; transform: rotate(-8deg); }
-    .blog-modal { background: rgba(17, 17, 17, .74); backdrop-filter: blur(3px); }
-
-    .blog-modal-content {
-      max-width: 780px;
-      background: #fff8e7;
-      color: #111;
-      border-left: 5px solid #111;
-      box-shadow: -12px 0 0 #FF94BF;
-    }
-
-    .blog-modal-close {
-      height: 64px;
-      background: #FE6622;
-      color: #111;
-      border: 0;
-      border-bottom: 4px solid #111;
-      border-radius: 0;
-      font-family: 'Fira Code', monospace;
-      font-weight: 800;
-    }
-
-    .blog-modal-close:hover { background: #FF94BF; }
-    .blog-modal-body h1,
-    .blog-modal-body h2,
-    .blog-modal-body h3,
-    .blog-modal-body strong { color: #111; font-family: 'Archivo Black', sans-serif; }
-    .blog-modal-body p,
-    .blog-modal-body li { color: rgba(17, 17, 17, .78); }
-
-    .blog-modal-body code { background: #FEBE0F; color: #111; border: 2px solid #111; border-radius: 0; }
-    .blog-modal-body pre { background: #111; border: 4px solid #4580B2; border-radius: 0; box-shadow: 7px 7px 0 #111; }
-    .share-btn,
-    .copy-code-btn { border-radius: 0; }
-    .blog-footer { padding-block: 58px; background: #00A56B; border-top: 4px solid #111; }
-    .blog-footer-copy { color: #111; font-weight: 800; }
-
-    .blog-footer-back {
-      padding: 12px 16px;
-      background: #FEBE0F;
-      color: #111;
-      border: 3px solid #111;
-      border-radius: 0;
-      box-shadow: 5px 5px 0 #111;
-      font-weight: 800;
-    }
-
-    .blog-footer-back:hover { background: #FF94BF; color: #111; transform: translate(4px, 4px); box-shadow: 1px 1px 0 #111; }
-    .whatsapp-float { background: #00A56B; color: #fff; border: 3px solid #111; border-radius: 0; box-shadow: 5px 5px 0 #111; }
-
-    @media (max-width: 900px) {
-      .blog-hero { min-height: 630px; padding-top: 130px; }
-      .blog-hero-title { font-size: clamp(6rem, 23vw, 10rem); text-shadow: 4px 4px 0 #fff; }
-      .blog-card,
-      .blog-card:first-child { padding: 26px; }
+    @media (prefers-reduced-motion: reduce) {
+      .mn-blog-card,
+      .mn-blog-link span {
+        transition: none;
+      }
     }
   </style>
 </head>
 
-<body>
+<body class="body">
   <!-- Page Transition -->
   <div class="page-transition" id="pageTransition">
-    <div class="page-transition-text">Loading...</div>
+    <div class="page-transition-text">Loading</div>
   </div>
 
-  <!-- Cursor -->
+  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
   <div class="cursor-inner" id="cursor-inner"></div>
   <div class="cursor-outer" id="cursor-outer"></div>
-
-  <!-- Scroll Progress -->
-  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
 
   <!-- ======================================================
        NAVBAR (same as homepage)
        ====================================================== -->
-  <header>
-    <div class="navbar" id="navbar">
-      <div class="hey">Hey!</div>
-      <div class="logo" tabindex="0" aria-label="david saputra logo">
-        <div class="logo-top"
-          style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;cursor:pointer;"
-          onclick="window.location.href='index.html'">
-          <span
-            style="font-size:2rem;font-weight:900;font-family:'Space Grotesk',sans-serif;letter-spacing:-1px;color:#111;text-decoration:none;">DAVID.</span>
-        </div>
-      </div>
+  <header class="mn-header">
+    <nav class="navbar" id="navbar" aria-label="Primary">
+      <a class="logo mn-wordmark" href="index.html" aria-label="David Saputra — home">David<span
+          class="mn-wordmark-dot">.</span></a>
       <div class="navbar-tabs" id="navbar-tabs">
-        <ul class="navbar-tabs-ul">
-          <li class="home navbar-tabs-li" data-aos="fade-down" data-aos-delay="100">
-            <a href="index.html#home" tabindex="0" aria-label="Home menu button">
-              <span>Home</span><span>Home</span>
-            </a>
-          </li>
-          <li class="about navbar-tabs-li" data-aos="fade-down" data-aos-delay="300">
-            <a href="index.html#about" aria-label="about menu button">
-              <span>About Me</span><span>About Me</span>
-            </a>
-          </li>
-          <li class="skills navbar-tabs-li" data-aos="fade-down" data-aos-delay="500">
-            <a href="index.html#skills" aria-label="skills menu button">
-              <span>Skills</span><span>Skills</span>
-            </a>
-          </li>
-          <li class="projects navbar-tabs-li" data-aos="fade-down" data-aos-delay="700">
-            <a href="index.html#projects" aria-label="projects menu button">
-              <span>Projects</span><span>Projects</span>
-            </a>
-          </li>
-          <li class="blog activeThistab navbar-tabs-li" data-aos="fade-down" data-aos-delay="900">
-            <a href="blog.html" aria-label="blog menu button">
-              <span>Blog</span><span>Blog</span>
-            </a>
-          </li>
-          <li class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="1100">
-            <a href="index.html#footer" aria-label="Contact menu button">
-              <span>Contact</span><span>Contact</span>
-            </a>
-          </li>
+        <ul class="navbar-tabs-ul mn-nav-list">
+          <li class="navbar-tabs-li home"><a href="index.html#home">Home</a></li>
+          <li class="navbar-tabs-li about"><a href="index.html#about">About</a></li>
+          <li class="navbar-tabs-li experience"><a href="index.html#experience">Experience</a></li>
+          <li class="navbar-tabs-li skills"><a href="index.html#skills">Skills</a></li>
+          <li class="navbar-tabs-li projects"><a href="index.html#projects">Projects</a></li>
+          <li class="navbar-tabs-li blog activeThistab"><a href="blog.html">Blog</a></li>
+          <li class="navbar-tabs-li contact"><a href="index.html#footer">Contact</a></li>
         </ul>
       </div>
-    </div>
+    </nav>
   </header>
 
-  <!-- hamburger -->
-  <div class="hamburger" id="hamburger" data-aos="fade">
+  <div class="hamburger" id="hamburger">
     <div class="hamburgerbase">
-      <button id="hamburger-button" onclick="hamburgerMenu()" tabindex="0" aria-label="Menu Button">
+      <button id="hamburger-button" onclick="hamburgerMenu()" aria-label="Open menu" aria-expanded="false">
         <span class="burger-bar" id="burger-bar1"></span>
         <span class="burger-bar" id="burger-bar2"></span>
         <span class="burger-bar" id="burger-bar3"></span>
       </button>
     </div>
   </div>
-  <div class="mobiletogglemenu" id="mobiletogglemenu">
+
+  <div class="mobiletogglemenu" id="mobiletogglemenu" aria-hidden="true">
     <ul class="mobile-navbar-tabs-ul" id="mobile-ul">
-      <li class="mobile-navbar-tabs-li home" onclick="hidemenubyli()">
-        <a href="index.html#home">&#60;/Home&#62;</a>
-      </li>
-      <li class="mobile-navbar-tabs-li about" onclick="hidemenubyli()">
-        <a href="index.html#about">&#60;/AboutMe&#62;</a>
-      </li>
-      <li class="mobile-navbar-tabs-li skills" onclick="hidemenubyli()">
-        <a href="index.html#skills">&#60;/Skills&#62;</a>
-      </li>
-      <li class="mobile-navbar-tabs-li projects" onclick="hidemenubyli()">
-        <a href="index.html#projects">&#60;/Projects&#62;</a>
-      </li>
-      <li class="mobile-navbar-tabs-li blog activeThismobiletab" onclick="hidemenubyli()">
-        <a href="blog.html">&#60;/Blog&#62;</a>
-      </li>
+      <li id="home-mobile-tab" class="mobile-navbar-tabs-li home" onclick="hidemenubyli()"><a
+          href="index.html#home">Home</a></li>
+      <li id="aboutme-mobile-tab" class="mobile-navbar-tabs-li about" onclick="hidemenubyli()"><a
+          href="index.html#about">About</a></li>
+      <li id="experience-mobile-tab" class="mobile-navbar-tabs-li experience" onclick="hidemenubyli()"><a
+          href="index.html#experience">Experience</a></li>
+      <li id="skills-mobile-tab" class="mobile-navbar-tabs-li skills" onclick="hidemenubyli()"><a
+          href="index.html#skills">Skills</a></li>
+      <li id="projects-mobile-tab" class="mobile-navbar-tabs-li projects" onclick="hidemenubyli()"><a
+          href="index.html#projects">Projects</a></li>
+      <li id="blog-mobile-tab" class="mobile-navbar-tabs-li blog activeThismobiletab" onclick="hidemenubyli()"><a
+          href="blog.html">Blog</a></li>
+      <li id="contact-mobile-tab" class="mobile-navbar-tabs-li contact" onclick="hidemenubyli()"><a
+          href="index.html#footer">Contact</a></li>
     </ul>
   </div>
 
-  <!-- ======================================================
-       HERO
-       ====================================================== -->
-  <section class="blog-hero">
-    <div class="blog-hero-eyebrow" data-aos="fade-up" data-aos-delay="100">
-      <div class="blog-hero-eyebrow-line"></div>
-      <span class="blog-hero-eyebrow-label">David Saputra / Blog</span>
-    </div>
-    <h1 class="blog-hero-title" data-aos="fade-up" data-aos-delay="200">
-      MY<br><span class="outline">BLOG</span>
-    </h1>
-    <div class="blog-hero-bottom" data-aos="fade-up" data-aos-delay="300">
-      <div class="blog-hero-count"><strong>5</strong> articles published</div>
-      <p class="blog-hero-desc">Tutorials, guides &amp; notes on web development, Git, and modern tooling.</p>
-    </div>
-  </section>
-
-  <!-- ======================================================
-       BLOG GRID
-       ====================================================== -->
-  <section class="blog-section" id="blog">
-    <div class="blog-container">
-
-      <div class="blog-section-header" data-aos="fade-up">
-        <span class="blog-section-label">All Posts</span>
-        <span class="blog-section-count">01 — 05</span>
+  <main class="mn-main">
+    <!-- ============ HERO ============ -->
+    <section class="mn-blog-hero">
+      <div class="mn-blog-wrap">
+        <p class="mn-blog-kicker" data-aos="fade-up">
+          <span>David Saputra / Blog</span>
+          <span class="mn-blog-kicker-sep" aria-hidden="true">/</span>
+          <span>Notes &amp; tutorials</span>
+        </p>
+        <h1 class="mn-blog-title" data-aos="fade-up" data-aos-delay="80">Writing that keeps<br>the craft clear.</h1>
+        <p class="mn-blog-lede" data-aos="fade-up" data-aos-delay="160">
+          Tutorials, guides and field notes on web development — Git workflows, Laravel setup, and the
+          modern tooling I use every day.
+        </p>
+        <span class="mn-blog-count" data-aos="fade-up" data-aos-delay="220">5 articles published</span>
       </div>
+    </section>
 
-      <div class="blog-grid">
+    <!-- ============ ARTICLES ============ -->
+    <section id="blog">
+      <div class="mn-blog-wrap">
+        <div class="mn-blog-grid">
 
-        <!-- Card 1 — featured -->
-        <article class="blog-card" data-aos="fade-up" data-aos-delay="0" onclick="openBlogModal('blog1')">
-          <div class="blog-card-top">
-            <div class="blog-card-meta">
-              <span class="blog-number">001</span>
-              <div class="blog-meta-right">
-                <span class="blog-category cat-git">Git &amp; GitHub</span>
-                <span class="blog-date">Dec 2026</span>
-              </div>
+          <article class="mn-blog-card" data-aos="fade-up" onclick="openBlogModal('blog1')">
+            <div class="mn-blog-card-top">
+              <span class="mn-blog-num">01</span>
+              <span class="mn-blog-tag">Git &amp; GitHub</span>
             </div>
-            <h3 class="blog-title">Cara Membuat Repository di GitHub</h3>
-            <p class="blog-excerpt">Panduan lengkap untuk membuat dan mengelola repository di GitHub dari awal hingga
-              push pertama kamu.</p>
-          </div>
-          <div class="blog-card-footer">
-            <span class="read-time">5 min read</span>
-            <span class="blog-arrow">→</span>
-          </div>
-        </article>
+            <h3 class="mn-blog-card-title">Cara Membuat Repository di GitHub</h3>
+            <p class="mn-blog-excerpt">Panduan langkah demi langkah membuat repository pertama kamu — dari
+              setup awal, clone, sampai push commit pertama.</p>
+            <span class="mn-blog-link">Read article <span aria-hidden="true">→</span></span>
+          </article>
 
-        <!-- Card 2 -->
-        <article class="blog-card" data-aos="fade-up" data-aos-delay="60" onclick="openBlogModal('blog2')">
-          <div class="blog-card-top">
-            <div class="blog-card-meta">
-              <span class="blog-number">002</span>
-              <div class="blog-meta-right">
-                <span class="blog-category cat-collab">Git Collaboration</span>
-                <span class="blog-date">Dec 2026</span>
-              </div>
+          <article class="mn-blog-card" data-aos="fade-up" data-aos-delay="60" onclick="openBlogModal('blog2')">
+            <div class="mn-blog-card-top">
+              <span class="mn-blog-num">02</span>
+              <span class="mn-blog-tag">Git · Teamwork</span>
             </div>
-            <h3 class="blog-title">Git Collaboration: Kerja Bareng dengan Tim</h3>
-            <p class="blog-excerpt">Pelajari cara berkolaborasi dengan tim menggunakan Git: branching, merging, dan pull
-              requests.</p>
-          </div>
-          <div class="blog-card-footer">
-            <span class="read-time">8 min read</span>
-            <span class="blog-arrow">→</span>
-          </div>
-        </article>
+            <h3 class="mn-blog-card-title">Git Collaboration: Kerja Bareng dengan Tim</h3>
+            <p class="mn-blog-excerpt">Branching strategy, pull request, dan penyelesaian merge conflict —
+              workflow kolaborasi yang proper untuk kerja tim.</p>
+            <span class="mn-blog-link">Read article <span aria-hidden="true">→</span></span>
+          </article>
 
-        <!-- Card 3 -->
-        <article class="blog-card" data-aos="fade-up" data-aos-delay="100" onclick="openBlogModal('blog3')">
-          <div class="blog-card-top">
-            <div class="blog-card-meta">
-              <span class="blog-number">003</span>
-              <div class="blog-meta-right">
-                <span class="blog-category cat-laravel">Laravel</span>
-                <span class="blog-date">Dec 2026</span>
-              </div>
+          <article class="mn-blog-card" data-aos="fade-up" data-aos-delay="120" onclick="openBlogModal('blog3')">
+            <div class="mn-blog-card-top">
+              <span class="mn-blog-num">03</span>
+              <span class="mn-blog-tag">Laravel</span>
             </div>
-            <h3 class="blog-title">Install Laravel: Setup Development Environment</h3>
-            <p class="blog-excerpt">Tutorial step-by-step install Laravel dengan Composer dan setup development
-              environment yang optimal.</p>
-          </div>
-          <div class="blog-card-footer">
-            <span class="read-time">10 min read</span>
-            <span class="blog-arrow">→</span>
-          </div>
-        </article>
+            <h3 class="mn-blog-card-title">Install Laravel: Setup Development Environment</h3>
+            <p class="mn-blog-excerpt">Setup environment development Laravel dari nol — Composer, struktur
+              project, sampai aplikasi pertama berjalan.</p>
+            <span class="mn-blog-link">Read article <span aria-hidden="true">→</span></span>
+          </article>
 
-        <!-- Card 4 -->
-        <article class="blog-card" data-aos="fade-up" data-aos-delay="140" onclick="openBlogModal('blog4')">
-          <div class="blog-card-top">
-            <div class="blog-card-meta">
-              <span class="blog-number">004</span>
-              <div class="blog-meta-right">
-                <span class="blog-category cat-commands">Git Commands</span>
-                <span class="blog-date">Dec 2026</span>
-              </div>
+          <article class="mn-blog-card" data-aos="fade-up" data-aos-delay="180" onclick="openBlogModal('blog4')">
+            <div class="mn-blog-card-top">
+              <span class="mn-blog-num">04</span>
+              <span class="mn-blog-tag">Git · Cheatsheet</span>
             </div>
-            <h3 class="blog-title">Git Commands yang Wajib Kamu Tahu</h3>
-            <p class="blog-excerpt">Daftar lengkap Git commands essential untuk workflow development sehari-hari dengan
-              contoh praktis.</p>
-          </div>
-          <div class="blog-card-footer">
-            <span class="read-time">6 min read</span>
-            <span class="blog-arrow">→</span>
-          </div>
-        </article>
+            <h3 class="mn-blog-card-title">Git Commands yang Wajib Kamu Tahu</h3>
+            <p class="mn-blog-excerpt">Kumpulan perintah Git esensial untuk kerja sehari-hari, lengkap dengan
+              contoh penggunaan dan kapan memakainya.</p>
+            <span class="mn-blog-link">Read article <span aria-hidden="true">→</span></span>
+          </article>
 
-        <!-- Card 5 -->
-        <article class="blog-card" data-aos="fade-up" data-aos-delay="180" onclick="openBlogModal('blog5')">
-          <div class="blog-card-top">
-            <div class="blog-card-meta">
-              <span class="blog-number">005</span>
-              <div class="blog-meta-right">
-                <span class="blog-category cat-actions">GitHub Actions</span>
-                <span class="blog-date">Dec 2026</span>
-              </div>
+          <article class="mn-blog-card" data-aos="fade-up" data-aos-delay="240" onclick="openBlogModal('blog5')">
+            <div class="mn-blog-card-top">
+              <span class="mn-blog-num">05</span>
+              <span class="mn-blog-tag">CI/CD</span>
             </div>
-            <h3 class="blog-title">GitHub Actions: Automate Your Workflow</h3>
-            <p class="blog-excerpt">Belajar membuat CI/CD pipeline dengan GitHub Actions untuk automate testing dan
-              deployment.</p>
-          </div>
-          <div class="blog-card-footer">
-            <span class="read-time">12 min read</span>
-            <span class="blog-arrow">→</span>
-          </div>
-        </article>
+            <h3 class="mn-blog-card-title">GitHub Actions: Automate Your Workflow</h3>
+            <p class="mn-blog-excerpt">Otomasi build, test, dan deploy dengan GitHub Actions — workflow,
+              matrix strategy, caching, dan conditional execution.</p>
+            <span class="mn-blog-link">Read article <span aria-hidden="true">→</span></span>
+          </article>
 
-      </div><!-- /blog-grid -->
-    </div>
-  </section>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <!-- ======================================================
-       MODAL — Slide-in reader
-       ====================================================== -->
-  <div class="blog-modal" id="blogModal">
-    <div class="blog-modal-content">
-      <button class="blog-modal-close" onclick="closeBlogModal()">Close Article</button>
-      <div class="blog-modal-body" id="blogModalBody"></div>
+  <!-- ============ ARTICLE MODAL ============ -->
+  <div class="mn-blog-modal" id="blogModal" aria-hidden="true">
+    <div class="mn-blog-modal-panel" role="dialog" aria-modal="true" aria-label="Blog article">
+      <header class="mn-blog-modal-head">
+        <span class="mn-blog-modal-kicker">Article</span>
+        <button class="mn-blog-modal-close blog-modal-close" onclick="closeBlogModal()"
+          aria-label="Tutup artikel">✕</button>
+      </header>
+      <div class="mn-blog-modal-body blog-modal-body" id="blogModalBody"></div>
     </div>
   </div>
 
-  <!-- ======================================================
-       FOOTER
-       ====================================================== -->
-  <footer class="blog-footer" id="footer">
-    <div class="blog-footer-inner">
-      <span class="blog-footer-copy">© 2026 David Saputra. All rights reserved.</span>
-      <a href="index.html" class="blog-footer-back">
-        <svg viewBox="0 0 24 24">
-          <polyline points="19 12 5 12" />
-          <polyline points="12 19 5 12 12 5" />
-        </svg>
-        Back to Portfolio
-      </a>
+  <!-- ============ FOOTER ============ -->
+  <footer id="footer" class="mn-footer">
+    <div class="mn-blog-wrap">
+      <p class="mn-footer-kicker" data-aos="fade-up">Get in touch</p>
+      <h2 class="mn-footer-title" data-aos="fade-up" data-aos-delay="60">Let's build something clean &amp;
+        useful.</h2>
+      <div class="mn-footer-actions" data-aos="fade-up" data-aos-delay="120">
+        <a class="mn-btn mn-btn-primary" href="mailto:davidsaputra2704@gmail.com">davidsaputra2704@gmail.com</a>
+        <a class="mn-btn mn-btn-ghost" href="https://github.com/DavidDSaputra" target="_blank"
+          rel="noreferrer">GitHub</a>
+        <a class="mn-btn mn-btn-ghost" href="https://www.linkedin.com/in/david-saputra-98b4b823b/" target="_blank"
+          rel="noreferrer">LinkedIn</a>
+        <a class="mn-btn mn-btn-ghost" href="https://www.instagram.com/david2470_/" target="_blank"
+          rel="noreferrer">Instagram</a>
+      </div>
+      <div class="mn-footer-meta">
+        <span>+62 895-0463-1048</span>
+        <span>Tangerang, Indonesia</span>
+        <a href="https://davidsaputra.my.id/" target="_blank" rel="noreferrer">davidsaputra.my.id</a>
+      </div>
+      <div class="mn-footer-bottom">
+        <span>© 2026 David Saputra</span>
+        <span>Designed &amp; built with care</span>
+      </div>
     </div>
   </footer>
 
-  <!-- WhatsApp -->
-  <a href="https://wa.me/6289504631048" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
-    <svg viewBox="0 0 32 32" width="26" height="26">
-      <path fill="currentColor"
-        d="M16 0C7.164 0 0 7.163 0 16c0 2.826.739 5.488 2.03 7.788L.047 31.406l7.853-2.058A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.455A13.455 13.455 0 1 1 29.455 16 13.47 13.47 0 0 1 16 29.455z" />
-      <path fill="currentColor"
-        d="M22.916 18.802c-.324-.162-1.917-.946-2.214-1.054-.297-.108-.513-.162-.73.162-.216.324-.838 1.054-1.027 1.27-.189.217-.378.244-.702.081-.324-.162-1.367-.504-2.604-1.607-.963-.859-1.613-1.92-1.802-2.244-.189-.324-.02-.5.142-.662.146-.146.324-.378.486-.567.162-.189.216-.324.324-.54.108-.217.054-.405-.027-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.081-.135-.297-.216-.621-.378z" />
-    </svg>
-    <span>Chat</span>
-  </a>
-
-  <!-- Scripts -->
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>AOS.init({ duration: 650, easing: 'ease-out-cubic', once: true, offset: 40 });</script>
-
-  <!-- Scroll Progress -->
-  <script>
-    const scrollBar = document.getElementById('scrollProgressBar');
-    window.addEventListener('scroll', () => {
-      const total = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      scrollBar.style.width = (window.scrollY / total * 100) + '%';
-    });
-  </script>
-
-  <!-- Cursor -->
-  <script>
-    const ci = document.getElementById('cursor-inner');
-    const co = document.getElementById('cursor-outer');
-    document.addEventListener('mousemove', e => {
-      ci.style.left = e.clientX + 'px'; ci.style.top = e.clientY + 'px';
-      co.animate({ left: e.clientX + 'px', top: e.clientY + 'px' }, { duration: 500, fill: 'forwards' });
-    });
-    document.querySelectorAll('a,button,article').forEach(el => {
-      el.addEventListener('mouseenter', () => { ci.classList.add('hover'); co.classList.add('hover'); });
-      el.addEventListener('mouseleave', () => { ci.classList.remove('hover'); co.classList.remove('hover'); });
-    });
-  </script>
-
-  <!-- Main JS (hamburger, cursor, scroll) -->
   <script src="main.js"></script>
-  <script src="../public/js/mobile-menu.js"></script>
-  <!-- Blog Modal Scripts -->
+  <script src="public/js/mobile-menu.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script src="blog-content.js"></script>
-
-  <!-- Page Transition -->
+  <script src="public/js/blog-page.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const pt = document.getElementById('pageTransition');
-      setTimeout(() => pt.classList.remove('active'), 500);
-      document.querySelectorAll('a[href^="index.html"], a[href^="blog.html"]').forEach(link => {
-        link.addEventListener('click', e => {
-          const href = link.getAttribute('href');
-          if (href.includes('#') && href.startsWith('index.html')) return;
-          e.preventDefault();
-          pt.classList.add('active');
-          setTimeout(() => window.location.href = href, 500);
-        });
-      });
-    });
+    if (window.AOS) {
+      AOS.init({ duration: 700, easing: "ease-out-cubic", once: true, offset: 60 });
+    }
   </script>
 </body>
 

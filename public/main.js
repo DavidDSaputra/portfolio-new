@@ -64,10 +64,33 @@ if (slides.length > 0) {
 
 // Navbar scroll effect
 const navbarEl = document.getElementById('navbar');
+const scrollUpBtn = document.getElementById('scrollUpBtn');
+
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
         navbarEl.classList.add('scrolled');
     } else {
         navbarEl.classList.remove('scrolled');
     }
+
+    // Scroll up button visibility
+    if (scrollUpBtn) {
+        if (window.scrollY > 300) {
+            scrollUpBtn.classList.add('show');
+        } else {
+            scrollUpBtn.classList.remove('show');
+        }
+    }
 });
+
+if (scrollUpBtn) {
+    scrollUpBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+
+

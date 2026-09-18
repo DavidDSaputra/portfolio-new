@@ -531,4 +531,94 @@
       }, 500);
     }
   });
+
+  // Project filter dock: AssistiveTouch-style — the frosted toggle springs in
+  // when the section enters view; pressing it reveals the filter tabs.
+  const filterDock = document.querySelector(".mn-filter-dock");
+  const filterBar = document.querySelector(".mn-filter");
+  const filterEmpty = document.getElementById("filterEmpty");
+  const projectsSection = document.getElementById("projects");
+  if (filterDock && filterBar) {
+    const filterToggle = filterDock.querySelector(".mn-filter-toggle");
+
+    const dockObserver = new IntersectionObserver(
+      (entries, observerRef) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            filterDock.classList.add("in-view");
+            observerRef.unobserve(filterDock);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    dockObserver.observe(filterDock);
+
+    const setDockOpen = (open) => {
+      filterDock.classList.toggle("open", open);
+      filterToggle.setAttribute("aria-expanded", String(open));
+      filterToggle.setAttribute(
+        "aria-label",
+        open ? "Tutup filter project" : "Buka filter project"
+      );
+    };
+
+    filterToggle.addEventListener("click", () => {
+      setDockOpen(!filterDock.classList.contains("open"));
+    });
+
+    document.addEventListener("click", (event) => {
+      if (filterDock.classList.contains("open") && !filterDock.contains(event.target)) {
+        setDockOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && filterDock.classList.contains("open")) {
+        setDockOpen(false);
+      }
+    });
+
+    const filterButtons = filterBar.querySelectorAll(".mn-filter-btn");
+    const projectCards = document.querySelectorAll(".mn-project[data-category]");
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.getAttribute("data-filter");
+
+        // AssistiveTouch-style spring pop on the pressed tab.
+        button.classList.remove("pop");
+        void button.offsetWidth;
+        button.classList.add("pop");
+
+        filterButtons.forEach((other) => {
+          const isActive = other === button;
+          other.classList.toggle("active", isActive);
+          other.setAttribute("aria-pressed", String(isActive));
+        });
+
+        filterToggle.classList.toggle("has-filter", filter !== "all");
+
+        // First tab pick reveals the grid; the empty-state dialog steps aside.
+        if (projectsSection) {
+          projectsSection.classList.add("is-revealed");
+        }
+        if (filterEmpty) {
+          filterEmpty.hidden = true;
+        }
+
+        projectCards.forEach((card) => {
+          const matches =
+            filter === "all" || card.getAttribute("data-category") === filter;
+          card.classList.toggle("is-hidden", !matches);
+          card.classList.remove("is-shown");
+
+          if (matches) {
+            void card.offsetWidth;
+            card.classList.add("is-shown");
+          }
+        });
+      });
+    });
+  }
 })();

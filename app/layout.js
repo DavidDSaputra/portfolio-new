@@ -7,7 +7,7 @@ export const metadata = {
     template: "%s | David Saputra",
   },
   description:
-    "Portfolio David Saputra berisi project, eksperimen desain, dan blog seputar development.",
+    "Portfolio David Saputra — frontend developer, vibe coder & prompt engineer. Project, pengalaman, dan blog seputar development dengan desain yang bersih dan minimalis.",
   icons: {
     icon: "/src/png/nav-avatar.png",
   },
@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fira+Code:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
         />
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
       </head>

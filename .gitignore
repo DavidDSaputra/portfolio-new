@@ -5,3 +5,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# Local verification & temp artifacts (not for VCS)
+.qoder/
+verify-*.png
+bsa-raw.png
+**/webp/jarwinn-hero.png

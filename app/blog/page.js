@@ -18,7 +18,6 @@ export default function BlogPage() {
         "/js/mobile-menu.js",
         "https://unpkg.com/aos@next/dist/aos.js",
         "/blog-content.js",
-        "https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js",
         "/js/blog-page.js",
       ]}
     />
