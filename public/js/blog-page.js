@@ -26,6 +26,7 @@
 
   const cursorInner = document.getElementById("cursor-inner");
   const cursorOuter = document.getElementById("cursor-outer");
+  const cursorAnya = document.getElementById("cursor-anya");
   if (cursorInner && cursorOuter) {
     const lightTargets = document.querySelectorAll(".blog-footer-back, .blog-modal-close");
 
@@ -36,16 +37,24 @@
         { left: `${e.clientX}px`, top: `${e.clientY}px` },
         { duration: 500, fill: "forwards" }
       );
+      if (cursorAnya) {
+        cursorAnya.animate(
+          { left: `${e.clientX + 14}px`, top: `${e.clientY + 10}px` },
+          { duration: 720, fill: "forwards", easing: "cubic-bezier(0.22, 1, 0.36, 1)" }
+        );
+      }
     });
 
     document.querySelectorAll("a,button,article").forEach((el) => {
       el.addEventListener("mouseenter", () => {
         cursorInner.classList.add("hover");
         cursorOuter.classList.add("hover");
+        cursorAnya?.classList.add("hover");
       });
       el.addEventListener("mouseleave", () => {
         cursorInner.classList.remove("hover");
         cursorOuter.classList.remove("hover");
+        cursorAnya?.classList.remove("hover");
       });
     });
 

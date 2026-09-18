@@ -21,6 +21,7 @@
 
   const cursorInner = document.getElementById("cursor-inner");
   const cursorOuter = document.getElementById("cursor-outer");
+  const cursorAnya = document.getElementById("cursor-anya");
   const spotlight = document.getElementById("spotlight");
   const scrollProgressBar = document.getElementById("scrollProgressBar");
   const canvas = document.getElementById("particleCanvas");
@@ -47,16 +48,28 @@
         },
         { duration: 500, fill: "forwards" }
       );
+
+      if (cursorAnya) {
+        cursorAnya.animate(
+          {
+            left: `${posX + 14}px`,
+            top: `${posY + 10}px`,
+          },
+          { duration: 720, fill: "forwards", easing: "cubic-bezier(0.22, 1, 0.36, 1)" }
+        );
+      }
     });
 
     links.forEach((link) => {
       link.addEventListener("mouseenter", () => {
         cursorInner.classList.add("hover");
         cursorOuter.classList.add("hover");
+        cursorAnya?.classList.add("hover");
       });
       link.addEventListener("mouseleave", () => {
         cursorInner.classList.remove("hover");
         cursorOuter.classList.remove("hover");
+        cursorAnya?.classList.remove("hover");
       });
     });
 

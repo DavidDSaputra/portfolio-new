@@ -10,4 +10,5 @@ pnpm-debug.log*
 .qoder/
 verify-*.png
 bsa-raw.png
+scripts/anya-*.png
 **/webp/jarwinn-hero.png
