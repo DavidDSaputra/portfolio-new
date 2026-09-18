@@ -1728,6 +1728,13 @@ body.stopscrolling {
   background: var(--surface) !important;
 }
 
+.login-overlay {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: var(--surface) !important;
+}
+
 .chat-form {
   display: flex;
   align-items: center;
