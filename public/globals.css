@@ -786,6 +786,62 @@ body.stopscrolling {
   margin-bottom: clamp(20px, 3vw, 30px);
 }
 
+.mn-hero-title .mn-word {
+  display: inline-block;
+}
+
+.mn-hero-title .mn-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.55em) rotate(4deg);
+  filter: blur(10px);
+  animation: mn-char-in 0.85s var(--ease) forwards;
+  animation-delay: calc(0.15s + var(--i) * 0.045s);
+}
+
+@keyframes mn-char-in {
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+    filter: blur(0);
+  }
+}
+
+.mn-hero .mn-kicker,
+.mn-hero .mn-hero-lede,
+.mn-hero .mn-hero-meta,
+.mn-hero .mn-hero-actions {
+  opacity: 0;
+  animation: mn-rise-in 0.7s var(--ease) forwards;
+}
+
+.mn-hero .mn-kicker {
+  animation-delay: 0.05s;
+}
+
+.mn-hero .mn-hero-lede {
+  animation-delay: 0.8s;
+}
+
+.mn-hero .mn-hero-meta {
+  animation-delay: 0.95s;
+}
+
+.mn-hero .mn-hero-actions {
+  animation-delay: 1.1s;
+}
+
+@keyframes mn-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .mn-hero-lede {
   max-width: 56ch;
   font-size: clamp(1.02rem, 1.6vw, 1.2rem);
