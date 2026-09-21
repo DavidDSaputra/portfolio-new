@@ -121,6 +121,7 @@
         <h1 class="mn-hero-title" aria-label="David Saputra">
           <span class="mn-word" aria-hidden="true"><span class="mn-char" style="--i:0">D</span><span class="mn-char" style="--i:1">a</span><span class="mn-char" style="--i:2">v</span><span class="mn-char" style="--i:3">i</span><span class="mn-char" style="--i:4">d</span></span>
           <span class="mn-word" aria-hidden="true"><span class="mn-char" style="--i:5">S</span><span class="mn-char" style="--i:6">a</span><span class="mn-char" style="--i:7">p</span><span class="mn-char" style="--i:8">u</span><span class="mn-char" style="--i:9">t</span><span class="mn-char" style="--i:10">r</span><span class="mn-char" style="--i:11">a</span></span>
+          <span class="mn-title-aura" aria-hidden="true">David Saputra</span>
         </h1>
         <p class="mn-hero-lede">
           Software-engineering graduate and IT professional designing and building clean, purposeful web
@@ -159,6 +160,8 @@
           <h2 class="mn-section-title">About</h2>
         </header>
 
+        <div class="mn-about-fill-zone" id="aboutFillZone">
+          <div class="mn-about-fill-sticky">
         <div class="mn-about-grid">
           <div class="mn-about-copy" data-aos="fade-up">
             <p class="mn-lead">
@@ -185,6 +188,8 @@
             <img src="src/webp/about.png" alt="Portrait of David Saputra" />
             <figcaption>David Saputra — Web Developer &amp; Visual Designer</figcaption>
           </figure>
+        </div>
+          </div>
         </div>
 
         <dl class="mn-facts" data-aos="fade-up">
@@ -413,186 +418,186 @@
           <h2 class="mn-section-title">Selected Work</h2>
         </header>
 
-        <div class="mn-filter-dock" role="group" aria-label="Filter projects by category">
-          <button class="mn-filter-toggle" type="button" aria-expanded="false" aria-label="Buka pilihan kategori">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M4 6h16M7 12h10M10 18h4" />
+        <div class="mn-folder-stage">
+        <div class="mn-folder-gate" id="folderGate">
+          <button class="mn-folder-btn" id="folderBtn" type="button" aria-expanded="false"
+            aria-controls="workWindow" aria-label="Buka folder Selected Work">
+            <svg class="mn-folder-btn-icon" viewBox="0 0 96 68" aria-hidden="true">
+              <path class="fb" d="M4 14a8 8 0 0 1 8-8h18l8 8h46a8 8 0 0 1 8 8v4H4z" />
+              <path class="fc" d="M4 20h88v36a8 8 0 0 1-8 8H12a8 8 0 0 1-8-8z" />
             </svg>
           </button>
+          <p class="mn-folder-hint">Silakan dibuka</p>
+          <p class="mn-folder-sub">Klik foldernya — project-projectnya ada di dalam.</p>
         </div>
 
-        <div class="mn-filter-empty" id="filterEmpty">
-          <button class="mn-filter-big" type="button" aria-expanded="false" aria-label="Buka pilihan kategori project">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M4 6h16M7 12h10M10 18h4" />
-            </svg>
-          </button>
-          <p class="mn-filter-empty-title">Project-nya masih tersembunyi.</p>
-          <p class="mn-filter-empty-text">Pencet tombolnya, pilih kategori, dan project-nya langsung muncul.</p>
-        </div>
-
-        <div class="mn-filter-overlay" id="filterOverlay" aria-hidden="true">
-          <button class="mn-filter-overlay-close" type="button" aria-label="Tutup pilihan kategori">✕</button>
-          <div class="mn-filter-overlay-panel" role="dialog" aria-modal="true" aria-label="Pilih kategori project">
-            <span class="mn-filter-overlay-kicker">Pilih kategori</span>
-            <div class="mn-filter">
-              <button class="mn-filter-btn active" type="button" data-filter="all" aria-pressed="true"><span
-                  class="mn-filter-opt-num">01</span>All</button>
-              <button class="mn-filter-btn" type="button" data-filter="website" aria-pressed="false"><span
-                  class="mn-filter-opt-num">02</span>Website</button>
-              <button class="mn-filter-btn" type="button" data-filter="mobile" aria-pressed="false"><span
-                  class="mn-filter-opt-num">03</span>Mobile</button>
-              <button class="mn-filter-btn" type="button" data-filter="system" aria-pressed="false"><span
-                  class="mn-filter-opt-num">04</span>System</button>
-              <button class="mn-filter-btn" type="button" data-filter="design" aria-pressed="false"><span
-                  class="mn-filter-opt-num">05</span>Design</button>
+        <div class="mn-work-window" id="workWindow" hidden>
+          <div class="mn-work-bar">
+            <span class="mn-work-dots" aria-hidden="true"><i class="r"></i><i class="y"></i><i class="g"></i></span>
+            <span class="mn-work-title">selected-work — 18 items</span>
+            <button class="mn-work-close" id="workClose" type="button" aria-label="Tutup folder">✕</button>
+          </div>
+          <div class="mn-work-body">
+            <aside class="mn-work-side" role="group" aria-label="Filter projects by category">
+              <span class="mn-work-side-kicker">Favorites</span>
+              <button class="mn-side-btn active" type="button" data-filter="all" aria-pressed="true">All<span
+                  class="mn-side-count">18</span></button>
+              <button class="mn-side-btn" type="button" data-filter="website" aria-pressed="false">Website<span
+                  class="mn-side-count">8</span></button>
+              <button class="mn-side-btn" type="button" data-filter="mobile" aria-pressed="false">Mobile<span
+                  class="mn-side-count">1</span></button>
+              <button class="mn-side-btn" type="button" data-filter="system" aria-pressed="false">System<span
+                  class="mn-side-count">1</span></button>
+              <button class="mn-side-btn" type="button" data-filter="design" aria-pressed="false">Design<span
+                  class="mn-side-count">8</span></button>
+            </aside>
+            <div class="mn-work-main">
+              <div class="mn-work-files" id="workFiles">
+                <button class="mn-file" type="button" style="--i:0" data-category="website"
+                  data-title="Jarwinn Official Website" data-tag="Featured · Company" data-href="https://jarwinn.co.id/"
+                  data-img="src/webp/jarwinn-hero.jpg"
+                  data-desc="Professional company website presenting services and portfolio with a modern, seamless experience.">
+                  <span class="mn-file-thumb"><img src="src/webp/jarwinn-hero.jpg" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">jarwinn-official.website</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:1" data-category="website"
+                  data-title="Jarwinn.com — PLTS &amp; Energy Storage" data-tag="Web · Content" data-href="https://jarwinn.com/"
+                  data-img="src/webp/jarwinn-com.jpg"
+                  data-desc="Content and consultation site for Jarwinn's solar (PLTS) and battery storage solutions — educational articles, system guides and a consultation funnel.">
+                  <span class="mn-file-thumb"><img src="src/webp/jarwinn-com.jpg" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">jarwinn-plts.website</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:2" data-category="mobile"
+                  data-title="Joulwinn Agent App" data-tag="Mobile App" data-href="https://mlm.joulwinn.com/"
+                  data-img="src/webp/joulwinn-app.jpg"
+                  data-desc="Android partner app for Joulwinn's solar (PLTS) business — fingerprint or Google sign-in, customer &amp; SPK project management, commission wallet and referral program.">
+                  <span class="mn-file-thumb"><img src="src/webp/joulwinn-app.jpg" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">joulwinn-agent.mobile</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:3" data-category="website"
+                  data-title="BSA Interior" data-tag="Web · Catalog" data-href="https://bsainterior.id/"
+                  data-img="src/webp/bsa-interior.jpg"
+                  data-desc="Catalog website for an interior material &amp; accessories supplier — browsable HPL collections by category, project inspiration and WhatsApp consultation.">
+                  <span class="mn-file-thumb"><img src="src/webp/bsa-interior.jpg" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">bsa-interior.website</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:4" data-category="website"
+                  data-title="Solis Inverters Indonesia" data-tag="Energy" data-href="https://www.solisinverters.co.id/"
+                  data-img="src/webp/solis.png"
+                  data-desc="Official site for solar energy solutions with a clean interface and clear product information.">
+                  <span class="mn-file-thumb"><img src="src/webp/solis.png" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">solis-inverters.website</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:5" data-category="system"
+                  data-title="Jarwinn HR System" data-tag="Web App" data-href="https://career.jarwinn.co.id/portal-hrd"
+                  data-img="src/webp/hris.png"
+                  data-desc="Centralised HR platform for team workflow, employee data and administration, with a secure admin panel.">
+                  <span class="mn-file-thumb"><img src="src/webp/hris.png" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">jarwinn-hr.system</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:6" data-category="website"
+                  data-title="ANTBOX Storage Website" data-tag="Product" data-href="https://antboxindonesia.com/"
+                  data-img="src/webp/antbox.png"
+                  data-desc="Energy-storage product presentation with a premium, corporate tone and detailed showcase.">
+                  <span class="mn-file-thumb"><img src="src/webp/antbox.png" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">antbox-storage.website</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:7" data-category="design"
+                  data-title="WebKarbit UI Design" data-tag="UI Design" data-href="https://dav-uiweb.netlify.app/"
+                  data-img="src/webp/webkarbit.png"
+                  data-desc="UI/UX showcase focused on visual composition, detail and usability.">
+                  <span class="mn-file-thumb"><img src="src/webp/webkarbit.png" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">webkarbit-ui.design</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:8" data-category="website"
+                  data-title="SEFashion" data-tag="Commerce" data-href="http://sefashion.my.id/"
+                  data-img="src/webp/sefashion.png"
+                  data-desc="Commerce and payment-flow UI experiment with a bold, considered visual language.">
+                  <span class="mn-file-thumb"><img src="src/webp/sefashion.png" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">sefashion.website</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:9" data-category="website"
+                  data-title="Personal Social Media" data-tag="Experiment" data-href="https://socialmedia7.netlify.app/"
+                  data-img="src/webp/cardname.png"
+                  data-desc="Social media concept built from scratch with HTML, CSS and JavaScript.">
+                  <span class="mn-file-thumb"><img src="src/webp/cardname.png" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">social-media.website</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:10" data-category="website"
+                  data-title="Yudha Bhaskara Portfolio" data-tag="Web · Portfolio" data-href="https://yudhabhas.web.id/"
+                  data-img="src/webp/yudha-portfolio.jpg"
+                  data-desc="Creative producer portfolio with oversized typography and an editorial layout.">
+                  <span class="mn-file-thumb"><img src="src/webp/yudha-portfolio.jpg" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">yudha-portfolio.website</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:11" data-category="design" data-fit="contain"
+                  data-likes="70" data-title="Spy x Family — Poster GFX" data-tag="GFX · Poster" data-href="https://www.instagram.com/david2470_/"
+                  data-img="src/webp/gfx-spyxfamily.jpg"
+                  data-desc="Fan poster edit of Anya, Loid and Yor Forger — sticker info-cards, barcode strips, Japanese type accents and a bold display title.">
+                  <span class="mn-file-thumb"><img src="src/webp/gfx-spyxfamily.jpg" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">spyxfamily.poster</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:12" data-category="design" data-fit="contain"
+                  data-likes="66" data-title="Jujutsu Kaisen — Nobara Kugisaki" data-tag="GFX · Poster" data-href="https://www.instagram.com/david2470_/"
+                  data-img="src/webp/gfx-jujutsu-nobara.jpg"
+                  data-desc="Character poster edit for Nobara Kugisaki — speech-bubble notes, cut-out detail stickers and outlined display lettering on a swirl backdrop.">
+                  <span class="mn-file-thumb"><img src="src/webp/gfx-jujutsu-nobara.jpg" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">nobara.poster</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:13" data-category="design" data-fit="contain"
+                  data-title="Genshin Impact — Raiden Shogun" data-tag="GFX · Poster" data-href="https://www.instagram.com/david2470_/"
+                  data-img="src/webp/gfx-raiden-shogun.jpg"
+                  data-desc="Character poster edit for Raiden Shogun — seigaiha pattern frame, Electro element badge and sticker callouts.">
+                  <span class="mn-file-thumb"><img src="src/webp/gfx-raiden-shogun.jpg" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">raiden.poster</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:14" data-category="design" data-fit="contain"
+                  data-likes="47" data-title="Kaguya-sama — Kaguya Shinomiya" data-tag="GFX · Poster" data-href="https://www.instagram.com/david2470_/"
+                  data-img="src/webp/gfx-kaguya.jpg"
+                  data-desc="Character poster edit for Kaguya Shinomiya — repeated outline typography, focus-frame sticker and wave-pattern background.">
+                  <span class="mn-file-thumb"><img src="src/webp/gfx-kaguya.jpg" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">kaguya.poster</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:15" data-category="design" data-fit="contain"
+                  data-likes="55" data-title="My Dress-Up Darling — Kitagawa Marin" data-tag="GFX · Poster" data-href="https://www.instagram.com/david2470_/"
+                  data-img="src/webp/gfx-kitagawa-marin.jpg"
+                  data-desc="Character poster edit for Kitagawa Marin — sunburst background, cloud speech bubble and a clean info card.">
+                  <span class="mn-file-thumb"><img src="src/webp/gfx-kitagawa-marin.jpg" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">marin.poster</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:16" data-category="design" data-fit="contain"
+                  data-likes="39" data-title="hololive ID — Kobo Kanaeru" data-tag="GFX · Poster" data-href="https://www.instagram.com/david2470_/"
+                  data-img="src/webp/gfx-kobo-kanaeru.jpg"
+                  data-desc="Character poster edit for Kobo Kanaeru — UI sticker cards (search bar, follower stats, subscribe bubble) layered over a wave illustration.">
+                  <span class="mn-file-thumb"><img src="src/webp/gfx-kobo-kanaeru.jpg" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">kobo.poster</span>
+                </button>
+                <button class="mn-file" type="button" style="--i:17" data-category="design" data-fit="contain"
+                  data-likes="308" data-title="hololive EN — Watson Amelia" data-tag="GFX · Poster" data-href="https://www.instagram.com/david2470_/"
+                  data-img="src/webp/gfx-amelia-watson.jpg"
+                  data-desc="Character poster edit for Watson Amelia — scattered UI stickers, profile cards and a grid-paper background in a warm palette.">
+                  <span class="mn-file-thumb"><img src="src/webp/gfx-amelia-watson.jpg" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">amelia.poster</span>
+                </button>
+              </div>
+              <div class="mn-work-preview" id="workPreview" hidden>
+                <button class="mn-preview-back" id="previewBack" type="button">← All files</button>
+                <div class="mn-preview-media"><img id="previewImg" src="" alt="" /></div>
+                <div class="mn-preview-info">
+                  <div class="mn-preview-meta">
+                    <span class="mn-preview-tag" id="previewTag"></span>
+                    <span class="mn-preview-like" id="previewLike" hidden><span aria-hidden="true">♥</span> <span
+                        id="previewLikeCount"></span> likes</span>
+                  </div>
+                  <h3 id="previewTitle"></h3>
+                  <p id="previewDesc"></p>
+                  <a class="mn-btn mn-btn-primary" id="previewLink" href="#" target="_blank" rel="noreferrer">View
+                    project <span aria-hidden="true">→</span></a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="mn-projects-grid">
-          <a class="mn-project" href="https://jarwinn.co.id/" target="_blank" rel="noreferrer" data-aos="fade-up"
-                      data-category="website">
-            <div class="mn-project-media"><img src="src/webp/jarwinn-hero.jpg" alt="Jarwinn official website — renewable energy homepage"
-                loading="lazy" /></div>
-            <div class="mn-project-body">
-              <span class="mn-project-tag">Featured · Company</span>
-              <h3>Jarwinn Official Website</h3>
-              <p>Professional company website presenting services and portfolio with a modern, seamless
-                experience.</p>
-              <span class="mn-project-link">View project <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="mn-project" href="https://jarwinn.com/" target="_blank" rel="noreferrer" data-aos="fade-up"
-                      data-category="website">
-            <div class="mn-project-media"><img src="src/webp/jarwinn-com.jpg"
-                alt="Jarwinn.com homepage — PLTS and solar panel hero with consultation call-to-action"
-                loading="lazy" /></div>
-            <div class="mn-project-body">
-              <span class="mn-project-tag">Web · Content</span>
-              <h3>Jarwinn.com — PLTS &amp; Energy Storage</h3>
-              <p>Content and consultation site for Jarwinn's solar (PLTS) and battery storage solutions —
-                educational articles, system guides and a consultation funnel.</p>
-              <span class="mn-project-link">View project <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="mn-project" href="https://mlm.joulwinn.com/" target="_blank" rel="noreferrer"
-            data-aos="fade-up" data-category="mobile">
-            <div class="mn-project-media"><img src="src/webp/joulwinn-app.jpg"
-                alt="Joulwinn agent mobile app — login, commission wallet and PLTS customer screens"
-                loading="lazy" /></div>
-            <div class="mn-project-body">
-              <span class="mn-project-tag">Mobile App</span>
-              <h3>Joulwinn Agent App</h3>
-              <p>Android partner app for Joulwinn's solar (PLTS) business — fingerprint or Google sign-in,
-                customer &amp; SPK project management, commission wallet and referral program.</p>
-              <span class="mn-project-link">View project <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="mn-project" href="https://bsainterior.id/" target="_blank" rel="noreferrer" data-aos="fade-up"
-                      data-category="website">
-            <div class="mn-project-media"><img src="src/webp/bsa-interior.jpg"
-                alt="BSA Interior homepage — interior material supplier catalog hero"
-                loading="lazy" /></div>
-            <div class="mn-project-body">
-              <span class="mn-project-tag">Web · Catalog</span>
-              <h3>BSA Interior</h3>
-              <p>Catalog website for an interior material &amp; accessories supplier — browsable HPL
-                collections by category, project inspiration and WhatsApp consultation.</p>
-              <span class="mn-project-link">View project <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="mn-project" href="https://www.solisinverters.co.id/" target="_blank" rel="noreferrer"
-            data-aos="fade-up" data-category="website">
-            <div class="mn-project-media"><img src="src/webp/solis.png" alt="Solis Inverters Indonesia website"
-                loading="lazy" /></div>
-            <div class="mn-project-body">
-              <span class="mn-project-tag">Energy</span>
-              <h3>Solis Inverters Indonesia</h3>
-              <p>Official site for solar energy solutions with a clean interface and clear product
-                information.</p>
-              <span class="mn-project-link">View project <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="mn-project" href="https://career.jarwinn.co.id/portal-hrd" target="_blank" rel="noreferrer"
-            data-aos="fade-up" data-category="system">
-            <div class="mn-project-media"><img src="src/webp/hris.png" alt="Jarwinn HR system dashboard"
-                loading="lazy" /></div>
-            <div class="mn-project-body">
-              <span class="mn-project-tag">Web App</span>
-              <h3>Jarwinn HR System</h3>
-              <p>Centralised HR platform for team workflow, employee data and administration, with a secure
-                admin panel.</p>
-              <span class="mn-project-link">View project <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="mn-project" href="https://antboxindonesia.com/" target="_blank" rel="noreferrer"
-            data-aos="fade-up" data-category="website">
-            <div class="mn-project-media"><img src="src/webp/antbox.png" alt="ANTBOX storage website"
-                loading="lazy" /></div>
-            <div class="mn-project-body">
-              <span class="mn-project-tag">Product</span>
-              <h3>ANTBOX Storage Website</h3>
-              <p>Energy-storage product presentation with a premium, corporate tone and detailed showcase.</p>
-              <span class="mn-project-link">View project <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="mn-project" href="https://dav-uiweb.netlify.app/" target="_blank" rel="noreferrer"
-            data-aos="fade-up" data-category="design">
-            <div class="mn-project-media"><img src="src/webp/webkarbit.png" alt="WebKarbit UI design showcase"
-                loading="lazy" /></div>
-            <div class="mn-project-body">
-              <span class="mn-project-tag">UI Design</span>
-              <h3>WebKarbit UI Design</h3>
-              <p>UI/UX showcase focused on visual composition, detail and usability.</p>
-              <span class="mn-project-link">View project <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="mn-project" href="http://sefashion.my.id/" target="_blank" rel="noreferrer" data-aos="fade-up"
-                      data-category="website">
-            <div class="mn-project-media"><img src="src/webp/sefashion.png" alt="SEFashion commerce experiment"
-                loading="lazy" /></div>
-            <div class="mn-project-body">
-              <span class="mn-project-tag">Commerce</span>
-              <h3>SEFashion</h3>
-              <p>Commerce and payment-flow UI experiment with a bold, considered visual language.</p>
-              <span class="mn-project-link">View project <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="mn-project" href="https://socialmedia7.netlify.app/" target="_blank" rel="noreferrer"
-            data-aos="fade-up" data-category="website">
-            <div class="mn-project-media"><img src="src/webp/cardname.png" alt="Personal social media concept"
-                loading="lazy" /></div>
-            <div class="mn-project-body">
-              <span class="mn-project-tag">Experiment</span>
-              <h3>Personal Social Media</h3>
-              <p>Social media concept built from scratch with HTML, CSS and JavaScript.</p>
-              <span class="mn-project-link">View project <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="mn-project" href="https://yudhabhas.web.id/" target="_blank" rel="noreferrer"
-            data-aos="fade-up" data-category="website">
-            <div class="mn-project-media"><img src="src/webp/yudha-portfolio.jpg"
-                alt="Yudha Bhaskara creative producer portfolio homepage" loading="lazy" /></div>
-            <div class="mn-project-body">
-              <span class="mn-project-tag">Web · Portfolio</span>
-              <h3>Yudha Bhaskara Portfolio</h3>
-              <p>Creative producer portfolio with oversized typography and an editorial layout.</p>
-              <span class="mn-project-link">View project <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
         </div>
       </div>
     </section>

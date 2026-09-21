@@ -85,6 +85,42 @@
     });
   }
 
+  const titleAura = document.querySelector(".mn-title-aura");
+  if (titleAura && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const trackers = [
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+    ];
+    const speeds = [0.16, 0.1, 0.065];
+    const target = { x: 0, y: 0 };
+    let primed = false;
+
+    const syncAura = () => {
+      trackers.forEach((t, i) => {
+        t.x += (target.x - t.x) * speeds[i];
+        t.y += (target.y - t.y) * speeds[i];
+        titleAura.style.setProperty(`--x${i + 1}`, `${t.x}px`);
+        titleAura.style.setProperty(`--y${i + 1}`, `${t.y}px`);
+      });
+      requestAnimationFrame(syncAura);
+    };
+
+    document.addEventListener("mousemove", (e) => {
+      const rect = titleAura.getBoundingClientRect();
+      target.x = e.clientX - rect.left;
+      target.y = e.clientY - rect.top;
+      if (!primed) {
+        primed = true;
+        trackers.forEach((t) => {
+          t.x = rect.width / 2;
+          t.y = rect.height / 2;
+        });
+        requestAnimationFrame(syncAura);
+      }
+    });
+  }
+
   if (scrollProgressBar) {
     window.addEventListener("scroll", () => {
       const windowHeight =
@@ -545,103 +581,214 @@
     }
   });
 
-  // Project filter: a big centered button (before the first pick) and the
-  // sticky dock toggle both open a full-screen blurred category overlay;
-  // picking a category closes it and reveals the matching cards.
-  const filterDock = document.querySelector(".mn-filter-dock");
-  const filterOverlay = document.getElementById("filterOverlay");
-  const filterBar = document.querySelector(".mn-filter");
-  const filterEmpty = document.getElementById("filterEmpty");
+  // Selected Work hides behind a folder: the section shows a single folder
+  // button with an invitation line. Clicking it pops open a file-manager
+  // window; the sidebar filters the file grid and clicking a file swaps the
+  // window body to a quick-look style preview of that project.
+  const folderGate = document.getElementById("folderGate");
+  const folderBtn = document.getElementById("folderBtn");
+  const workWindow = document.getElementById("workWindow");
+  const workClose = document.getElementById("workClose");
+  const workFiles = document.getElementById("workFiles");
+  const workPreview = document.getElementById("workPreview");
+  const previewBack = document.getElementById("previewBack");
   const projectsSection = document.getElementById("projects");
-  if (filterOverlay && filterBar) {
-    const filterToggle = filterDock?.querySelector(".mn-filter-toggle");
-    const bigButton = filterEmpty?.querySelector(".mn-filter-big");
-    const closeButton = filterOverlay.querySelector(".mn-filter-overlay-close");
+  const sideButtons = workWindow?.querySelectorAll(".mn-side-btn");
+  const fileItems = workWindow?.querySelectorAll(".mn-file");
+  if (folderBtn && workWindow && workFiles && sideButtons?.length && fileItems?.length) {
+    const previewImg = document.getElementById("previewImg");
+        const previewMedia = previewImg?.closest(".mn-preview-media");
+    const previewTag = document.getElementById("previewTag");
+    const previewTitle = document.getElementById("previewTitle");
+    const previewDesc = document.getElementById("previewDesc");
+    const previewLink = document.getElementById("previewLink");
+    const previewLike = document.getElementById("previewLike");
+    const previewLikeCount = document.getElementById("previewLikeCount");
+    let firstOpen = true;
 
-    if (filterDock && filterToggle) {
-      const dockObserver = new IntersectionObserver(
-        (entries, observerRef) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              filterDock.classList.add("in-view");
-              observerRef.unobserve(filterDock);
-            }
-          });
-        },
-        { threshold: 0.4 }
-      );
-      dockObserver.observe(filterDock);
-    }
-
-    const setOverlayOpen = (open) => {
-      if (!open && filterOverlay.contains(document.activeElement)) {
-        // Keep focus out of the aria-hidden overlay once it closes.
-        const fallback =
-          filterToggle && projectsSection?.classList.contains("is-revealed")
-            ? filterToggle
-            : bigButton;
-        fallback?.focus({ preventScroll: true });
+    // Like badges: one heart pill per design file, built from data-likes.
+    // Desktop reveals it on hover/focus; touch reveals it while pressed and
+    // again inside the quick-look preview after the tap opens it.
+    fileItems.forEach((file) => {
+      const likes = file.getAttribute("data-likes");
+      const thumb = file.querySelector(".mn-file-thumb");
+      if (!likes || !thumb || thumb.querySelector(".mn-file-like")) {
+        return;
       }
-      filterOverlay.classList.toggle("open", open);
-      filterOverlay.setAttribute("aria-hidden", String(!open));
-      document.body.style.overflow = open ? "hidden" : "";
-      filterDock?.classList.toggle("open", open);
-      filterToggle?.setAttribute("aria-expanded", String(open));
-      bigButton?.setAttribute("aria-expanded", String(open));
+      const badge = document.createElement("span");
+      badge.className = "mn-file-like";
+      badge.setAttribute("aria-hidden", "true");
+      const heart = document.createElement("i");
+      heart.textContent = "\u2665";
+      const count = document.createElement("strong");
+      count.textContent = likes;
+      badge.append(heart, count);
+      thumb.appendChild(badge);
+    });
+
+    const applyFilter = (filter) => {
+      sideButtons.forEach((button) => {
+        const isActive = button.getAttribute("data-filter") === filter;
+        button.classList.toggle("active", isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+      });
+      fileItems.forEach((file) => {
+        const matches =
+          filter === "all" || file.getAttribute("data-category") === filter;
+        file.classList.toggle("is-hidden", !matches);
+      });
     };
 
-    [filterToggle, bigButton].forEach((trigger) => {
-      trigger?.addEventListener("click", () => setOverlayOpen(true));
-    });
-    closeButton?.addEventListener("click", () => setOverlayOpen(false));
-    filterOverlay.addEventListener("click", (event) => {
-      if (event.target === filterOverlay) {
-        setOverlayOpen(false);
-      }
-    });
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && filterOverlay.classList.contains("open")) {
-        setOverlayOpen(false);
-      }
-    });
+    const hidePreview = () => {
+      workPreview.classList.remove("open");
+      window.setTimeout(() => {
+        workPreview.hidden = true;
+        workFiles.hidden = false;
+      }, 260);
+    };
 
-    const filterButtons = filterBar.querySelectorAll(".mn-filter-btn");
-    const projectCards = document.querySelectorAll(".mn-project[data-category]");
+    const showPreview = (file) => {
+      previewImg.src = file.getAttribute("data-img") || "";
+      previewImg.alt = file.getAttribute("data-title") || "";
+      previewTag.textContent = file.getAttribute("data-tag") || "";
+      previewTitle.textContent = file.getAttribute("data-title") || "";
+      previewDesc.textContent = file.getAttribute("data-desc") || "";
+      previewLink.href = file.getAttribute("data-href") || "#";
+      // Portrait GFX posters read better uncropped; website shots stay cover-cropped
+      previewMedia?.classList.toggle("contain", file.getAttribute("data-fit") === "contain");
+      const likes = file.getAttribute("data-likes");
+      if (previewLike && previewLikeCount) {
+        previewLike.hidden = !likes;
+        previewLikeCount.textContent = likes || "";
+      }
+      workFiles.hidden = true;
+      workPreview.hidden = false;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => workPreview.classList.add("open"));
+      });
+      previewBack?.focus({ preventScroll: true });
+    };
 
-    filterButtons.forEach((button) => {
+    const setFolderOpen = (open) => {
+      folderBtn.setAttribute("aria-expanded", String(open));
+      if (open) {
+        workWindow.hidden = false;
+        folderGate?.classList.add("is-open");
+        projectsSection?.classList.add("is-revealed");
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => workWindow.classList.add("open"));
+        });
+        workClose?.focus({ preventScroll: true });
+        if (firstOpen) {
+          firstOpen = false;
+          applyFilter("all");
+        }
+      } else {
+        workWindow.classList.remove("open");
+        workPreview.classList.remove("open");
+        folderGate?.classList.remove("is-open");
+        window.setTimeout(() => {
+          workWindow.hidden = true;
+          workPreview.hidden = true;
+          workFiles.hidden = false;
+          folderBtn.focus({ preventScroll: true });
+        }, 420);
+      }
+    };
+
+    folderBtn.addEventListener("click", () => setFolderOpen(true));
+    workClose?.addEventListener("click", () => setFolderOpen(false));
+    previewBack?.addEventListener("click", hidePreview);
+    fileItems.forEach((file) => {
+      file.addEventListener("click", () => showPreview(file));
+    });
+    sideButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        const filter = button.getAttribute("data-filter");
-
-        filterButtons.forEach((other) => {
-          const isActive = other === button;
-          other.classList.toggle("active", isActive);
-          other.setAttribute("aria-pressed", String(isActive));
-        });
-
-        filterToggle?.classList.toggle("has-filter", filter !== "all");
-
-        // First pick reveals the grid; the empty-state dialog steps aside and
-        // the dock toggle takes over as the overlay trigger.
-        if (projectsSection) {
-          projectsSection.classList.add("is-revealed");
+        if (!workPreview.hidden) {
+          hidePreview();
         }
-        if (filterEmpty) {
-          filterEmpty.hidden = true;
-        }
-        setOverlayOpen(false);
-
-        projectCards.forEach((card) => {
-          const matches =
-            filter === "all" || card.getAttribute("data-category") === filter;
-          card.classList.toggle("is-hidden", !matches);
-          card.classList.remove("is-shown");
-
-          if (matches) {
-            void card.offsetWidth;
-            card.classList.add("is-shown");
-          }
-        });
+        applyFilter(button.getAttribute("data-filter"));
       });
     });
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || workWindow.hidden) {
+        return;
+      }
+      if (workPreview.hidden) {
+        setFolderOpen(false);
+      } else {
+        hidePreview();
+      }
+    });
+  }
+
+  // About: ObsidianUI-style text fill — the page pins while scrolling scrubs a
+  // character-by-character color sweep across the whole About copy; once the
+  // last character lands the pin releases and normal scrolling resumes.
+  const aboutCopy = document.querySelector(".mn-about-copy");
+  const fillZone = document.getElementById("aboutFillZone");
+  const pinMedia = window.matchMedia("(min-width: 761px)");
+  if (
+    aboutCopy &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    const chars = [];
+    aboutCopy.querySelectorAll("p").forEach((paragraph) => {
+      const statement = paragraph.textContent.replace(/\s+/g, " ").trim();
+      const hiddenWrap = document.createElement("span");
+      hiddenWrap.setAttribute("aria-hidden", "true");
+      statement.split(" ").forEach((word, wordIndex) => {
+        if (wordIndex > 0) {
+          hiddenWrap.append(" ");
+        }
+        const wordSpan = document.createElement("span");
+        wordSpan.className = "wd";
+        word.split("").forEach((character) => {
+          const charSpan = document.createElement("span");
+          charSpan.className = "ch";
+          charSpan.textContent = character;
+          wordSpan.appendChild(charSpan);
+          chars.push(charSpan);
+        });
+        hiddenWrap.appendChild(wordSpan);
+      });
+      const srOnly = document.createElement("span");
+      srOnly.className = "mn-sr-only";
+      srOnly.textContent = statement;
+      paragraph.textContent = "";
+      paragraph.append(hiddenWrap, srOnly);
+    });
+
+    let fillTicking = false;
+    const updateFill = () => {
+      fillTicking = false;
+      let progress;
+      if (pinMedia.matches && fillZone) {
+        // Pinned scrub: progress tracks the tall zone scrolling past
+        const rect = fillZone.getBoundingClientRect();
+        const total = rect.height - window.innerHeight;
+        const passed = Math.min(Math.max(-rect.top, 0), Math.max(total, 0));
+        progress = total > 0 ? passed / total : 1;
+      } else {
+        // Unpinned (mobile): fill as the copy enters the reading position
+        const rect = aboutCopy.getBoundingClientRect();
+        const start = window.innerHeight * 0.95;
+        const end = window.innerHeight * 0.35;
+        progress = Math.min(Math.max((start - rect.top) / (start - end), 0), 1);
+      }
+      const active = Math.round(progress * chars.length);
+      chars.forEach((charSpan, index) => {
+        charSpan.classList.toggle("show", index < active);
+      });
+    };
+    const queueFill = () => {
+      if (!fillTicking) {
+        fillTicking = true;
+        window.requestAnimationFrame(updateFill);
+      }
+    };
+    window.addEventListener("scroll", queueFill, { passive: true });
+    window.addEventListener("resize", queueFill);
+    updateFill();
   }
 })();
