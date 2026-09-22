@@ -2213,6 +2213,11 @@ body.stopscrolling {
   display: none;
 }
 
+/* Desktop: the sheet wrapper is transparent so the grid layout stays intact */
+.mn-preview-sheet {
+  display: contents;
+}
+
 .mn-preview-back {
   grid-column: 1 / -1;
   justify-self: start;
@@ -2333,7 +2338,42 @@ body.stopscrolling {
   }
 
   .mn-work-preview {
-    grid-template-columns: minmax(0, 1fr);
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    background: rgba(22, 22, 26, 0.5);
+    backdrop-filter: blur(6px);
+    transform: none;
+    transition: opacity 0.25s var(--ease);
+  }
+
+  /* Mobile: the quick-look becomes a centered pop-up modal sheet */
+  .mn-preview-sheet {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: min(560px, 100%);
+    max-height: min(84vh, 720px);
+    overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 28px 64px rgba(22, 22, 26, 0.28);
+    transform: translateY(18px) scale(0.96);
+    transition: transform 0.35s var(--ease);
+  }
+
+  .mn-work-preview.open .mn-preview-sheet {
+    transform: none;
+  }
+
+  .mn-preview-media.contain img {
+    height: 380px;
   }
 }
 

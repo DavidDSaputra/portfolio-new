@@ -633,8 +633,10 @@
         button.setAttribute("aria-pressed", String(isActive));
       });
       fileItems.forEach((file) => {
-        const matches =
-          filter === "all" || file.getAttribute("data-category") === filter;
+        // data-category may hold several space-separated categories so one
+        // item (e.g. the POS APK) can live under System and Mobile at once
+        const categories = (file.getAttribute("data-category") || "").split(/\s+/);
+        const matches = filter === "all" || categories.includes(filter);
         file.classList.toggle("is-hidden", !matches);
       });
     };
@@ -653,7 +655,22 @@
       previewTag.textContent = file.getAttribute("data-tag") || "";
       previewTitle.textContent = file.getAttribute("data-title") || "";
       previewDesc.textContent = file.getAttribute("data-desc") || "";
-      previewLink.href = file.getAttribute("data-href") || "#";
+      // Items that ship a binary (e.g. the POS APK) turn the primary CTA into
+      // a real download; everything else keeps the external "View project" link
+      const download = file.getAttribute("data-download");
+      if (download) {
+        previewLink.href = download;
+        previewLink.setAttribute("download", "");
+        previewLink.removeAttribute("target");
+        previewLink.removeAttribute("rel");
+        previewLink.innerHTML = 'Download APK <span aria-hidden="true">\u2B73</span>';
+      } else {
+        previewLink.href = file.getAttribute("data-href") || "#";
+        previewLink.removeAttribute("download");
+        previewLink.setAttribute("target", "_blank");
+        previewLink.setAttribute("rel", "noreferrer");
+        previewLink.innerHTML = 'View project <span aria-hidden="true">\u2192</span>';
+      }
       // Portrait GFX posters read better uncropped; website shots stay cover-cropped
       previewMedia?.classList.toggle("contain", file.getAttribute("data-fit") === "contain");
       const likes = file.getAttribute("data-likes");
@@ -699,6 +716,13 @@
     folderBtn.addEventListener("click", () => setFolderOpen(true));
     workClose?.addEventListener("click", () => setFolderOpen(false));
     previewBack?.addEventListener("click", hidePreview);
+    // On phones the preview is a modal: tapping the scrim dismisses it
+    const mobileMq = window.matchMedia("(max-width: 760px)");
+    workPreview.addEventListener("click", (event) => {
+      if (mobileMq.matches && event.target === workPreview) {
+        hidePreview();
+      }
+    });
     fileItems.forEach((file) => {
       file.addEventListener("click", () => showPreview(file));
     });
