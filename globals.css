@@ -2279,6 +2279,10 @@ body.mn-modal-open {
   display: none;
 }
 
+#previewLink[hidden] {
+  display: none;
+}
+
 .mn-preview-info h3 {
   font-size: 1.5rem;
   font-weight: 600;

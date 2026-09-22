@@ -651,13 +651,17 @@
       // a real download; everything else keeps the external "View project" link
       const download = file.getAttribute("data-download");
       if (download) {
+        previewLink.hidden = false;
         previewLink.href = download;
         previewLink.setAttribute("download", "");
         previewLink.removeAttribute("target");
         previewLink.removeAttribute("rel");
         previewLink.innerHTML = 'Download APK <span aria-hidden="true">\u2B73</span>';
       } else {
-        previewLink.href = file.getAttribute("data-href") || "#";
+        const href = file.getAttribute("data-href");
+        // Showcase-only items (no binary, no live URL) hide the CTA entirely
+        previewLink.hidden = !href;
+        previewLink.href = href || "#";
         previewLink.removeAttribute("download");
         previewLink.setAttribute("target", "_blank");
         previewLink.setAttribute("rel", "noreferrer");
