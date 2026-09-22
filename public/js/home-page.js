@@ -21,7 +21,6 @@
 
   const cursorInner = document.getElementById("cursor-inner");
   const cursorOuter = document.getElementById("cursor-outer");
-  const cursorAnya = document.getElementById("cursor-anya");
   const spotlight = document.getElementById("spotlight");
   const scrollProgressBar = document.getElementById("scrollProgressBar");
   const canvas = document.getElementById("particleCanvas");
@@ -48,28 +47,16 @@
         },
         { duration: 500, fill: "forwards" }
       );
-
-      if (cursorAnya) {
-        cursorAnya.animate(
-          {
-            left: `${posX + 14}px`,
-            top: `${posY + 10}px`,
-          },
-          { duration: 720, fill: "forwards", easing: "cubic-bezier(0.22, 1, 0.36, 1)" }
-        );
-      }
     });
 
     links.forEach((link) => {
       link.addEventListener("mouseenter", () => {
         cursorInner.classList.add("hover");
         cursorOuter.classList.add("hover");
-        cursorAnya?.classList.add("hover");
       });
       link.addEventListener("mouseleave", () => {
         cursorInner.classList.remove("hover");
         cursorOuter.classList.remove("hover");
-        cursorAnya?.classList.remove("hover");
       });
     });
 
@@ -643,9 +630,14 @@
 
     const hidePreview = () => {
       workPreview.classList.remove("open");
+      document.body.classList.remove("mn-modal-open");
       window.setTimeout(() => {
         workPreview.hidden = true;
         workFiles.hidden = false;
+        // Modal closed: park the preview back inside the window body
+        if (workPreview.parentElement === document.body) {
+          previewHome.appendChild(workPreview);
+        }
       }, 260);
     };
 
@@ -677,6 +669,14 @@
       if (previewLike && previewLikeCount) {
         previewLike.hidden = !likes;
         previewLikeCount.textContent = likes || "";
+      }
+      // On phones lift the preview onto <body> so no transformed ancestor
+      // (the window bounce) can trap the fixed-position modal overlay
+      if (mobileMq.matches) {
+        if (workPreview.parentElement !== document.body) {
+          document.body.appendChild(workPreview);
+        }
+        document.body.classList.add("mn-modal-open");
       }
       workFiles.hidden = true;
       workPreview.hidden = false;
@@ -718,9 +718,17 @@
     previewBack?.addEventListener("click", hidePreview);
     // On phones the preview is a modal: tapping the scrim dismisses it
     const mobileMq = window.matchMedia("(max-width: 760px)");
+    const previewHome = workPreview.parentElement;
     workPreview.addEventListener("click", (event) => {
       if (mobileMq.matches && event.target === workPreview) {
         hidePreview();
+      }
+    });
+    mobileMq.addEventListener("change", (event) => {
+      document.body.classList.remove("mn-modal-open");
+      if (!event.matches && workPreview.hidden &&
+        workPreview.parentElement === document.body) {
+        previewHome.appendChild(workPreview);
       }
     });
     fileItems.forEach((file) => {

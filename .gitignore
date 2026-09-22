@@ -9,6 +9,7 @@ pnpm-debug.log*
 # Local verification & temp artifacts (not for VCS)
 .qoder/
 verify-*.png
+tmp-*.png
 bsa-raw.png
 scripts/anya-*.png
 **/webp/jarwinn-hero.png

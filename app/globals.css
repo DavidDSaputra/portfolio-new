@@ -200,44 +200,9 @@ section {
   border-color: var(--ink) !important;
 }
 
-.cursor-anya {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  width: 42px !important;
-  height: 42px !important;
-  pointer-events: none !important;
-  z-index: 999997 !important;
-}
-
-.cursor-anya img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  transform-origin: 50% 85%;
-  filter: drop-shadow(0 3px 8px rgba(22, 22, 26, 0.16));
-  animation: mn-anya-bob 2.6s ease-in-out infinite;
-  transition: transform 0.25s var(--ease);
-}
-
-.cursor-anya.hover img {
-  transform: scale(1.14) rotate(-9deg);
-}
-
-@keyframes mn-anya-bob {
-  0%,
-  100% {
-    translate: 0 0;
-  }
-  50% {
-    translate: 0 -3px;
-  }
-}
-
 @media (pointer: coarse) {
   .cursor-inner,
-  .cursor-outer,
-  .cursor-anya {
+  .cursor-outer {
     display: none !important;
   }
 }
@@ -1891,7 +1856,9 @@ body.stopscrolling {
 
 /* macOS-style springy bounce as the folder window opens */
 .mn-work-window.open {
-  animation: mn-window-pop 0.62s cubic-bezier(0.34, 1.4, 0.44, 1) both;
+  opacity: 1;
+  transform: none;
+  animation: mn-window-pop 0.62s cubic-bezier(0.34, 1.4, 0.44, 1);
 }
 
 @keyframes mn-window-pop {
@@ -2218,6 +2185,11 @@ body.stopscrolling {
   display: contents;
 }
 
+/* While the mobile modal is up the page behind it must not scroll */
+body.mn-modal-open {
+  overflow: hidden;
+}
+
 .mn-preview-back {
   grid-column: 1 / -1;
   justify-self: start;
@@ -2340,13 +2312,14 @@ body.stopscrolling {
   .mn-work-preview {
     position: fixed;
     inset: 0;
-    z-index: 90;
+    z-index: 1001;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 14px;
-    background: rgba(22, 22, 26, 0.5);
-    backdrop-filter: blur(6px);
+    padding: 16px;
+    background: rgba(22, 22, 26, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     transform: none;
     transition: opacity 0.25s var(--ease);
   }
@@ -2355,25 +2328,39 @@ body.stopscrolling {
   .mn-preview-sheet {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    width: min(560px, 100%);
-    max-height: min(84vh, 720px);
+    gap: 16px;
+    width: min(480px, 100%);
+    max-height: min(86vh, 680px);
     overflow-y: auto;
+    overscroll-behavior: contain;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 28px 64px rgba(22, 22, 26, 0.28);
-    transform: translateY(18px) scale(0.96);
-    transition: transform 0.35s var(--ease);
+    border-radius: 20px;
+    padding: 18px 18px calc(18px + env(safe-area-inset-bottom));
+    box-shadow: 0 32px 80px rgba(22, 22, 26, 0.35);
+    transform: translateY(24px) scale(0.97);
+    transition: transform 0.38s cubic-bezier(0.34, 1.4, 0.44, 1);
   }
 
   .mn-work-preview.open .mn-preview-sheet {
     transform: none;
   }
 
+  .mn-preview-back {
+    align-self: flex-start;
+  }
+
+  .mn-preview-media {
+    border-radius: 14px;
+  }
+
   .mn-preview-media.contain img {
-    height: 380px;
+    height: 340px;
+  }
+
+  .mn-preview-sheet .mn-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -2982,5 +2969,204 @@ body.stopscrolling {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============ Circle Menu — mobile nav (ObsidianUI-style) ============ */
+.mn-circle-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 1002;
+  background: rgba(22, 22, 26, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease);
+}
+
+.mn-circle-scrim.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mn-circle-menu {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 1003;
+  width: 250px;
+  height: 250px;
+  margin: -125px 0 0 -125px;
+  transform: translate(var(--cm-x, 0px), var(--cm-y, 0px));
+  transition: transform 0.45s var(--ease);
+  pointer-events: none;
+}
+
+.mn-circle-menu.open {
+  transform: translate(0, 0);
+}
+
+.mn-circle-ring {
+  position: absolute;
+  inset: 0;
+}
+
+.mn-circle-menu.closing .mn-circle-ring {
+  animation: mn-ring-spin 0.55s linear;
+}
+
+@keyframes mn-ring-spin {
+  0% {
+    transform: rotate(0deg);
+    filter: blur(0);
+  }
+
+  50% {
+    filter: blur(1px);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+    filter: blur(0);
+  }
+}
+
+.mn-circle-item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 46px;
+  height: 46px;
+  margin: -23px 0 0 -23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: #f4f4f5;
+  color: var(--ink);
+  box-shadow: 0 8px 20px rgba(22, 22, 26, 0.16);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(0, 0) scale(0.5);
+  transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  transition-delay: calc(var(--i) * 0.07s);
+}
+
+.mn-circle-menu.open .mn-circle-item {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(var(--x), var(--y)) scale(1);
+  transition-delay: calc(var(--i) * 0.03s);
+}
+
+.mn-circle-item:hover {
+  background: #ffffff;
+}
+
+.mn-circle-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mn-circle-item:hover .mn-circle-label {
+    opacity: 1;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .mn-circle-item:active .mn-circle-label {
+    opacity: 1;
+  }
+}
+
+.mn-circle-trigger {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  width: 48px;
+  height: 48px;
+  margin: -24px 0 0 -24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  background: #27272a;
+  color: #ffffff;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 10px 26px rgba(22, 22, 26, 0.28);
+  transition: filter 0.1s ease;
+}
+
+.mn-circle-trigger:hover {
+  filter: brightness(1.25);
+}
+
+.mn-circle-menu.closing .mn-circle-trigger {
+  animation: mn-trigger-pulse 0.4s ease;
+}
+
+@keyframes mn-trigger-pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.18);
+    background: #3f3f46;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.mn-circle-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.mn-icon-close {
+  opacity: 0;
+  filter: blur(8px);
+}
+
+.mn-circle-menu.open .mn-icon-open {
+  opacity: 0;
+  filter: blur(8px);
+}
+
+.mn-circle-menu.open .mn-icon-close {
+  opacity: 1;
+  filter: blur(0);
+}
+
+body.mn-menu-open {
+  overflow: hidden;
+}
+
+@media (min-width: 999px) {
+  .mn-circle-menu,
+  .mn-circle-scrim {
+    display: none;
   }
 }
