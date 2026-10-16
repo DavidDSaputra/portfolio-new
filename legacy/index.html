@@ -182,7 +182,7 @@
       <div class="mn-container">
         <header class="mn-section-head" data-aos="fade-up">
           <span class="mn-section-index">01</span>
-          <h2 class="mn-section-title">About</h2>
+          <h2 class="mn-section-title" data-mask>About</h2>
         </header>
 
         <div class="mn-about-fill-zone" id="aboutFillZone">
@@ -210,7 +210,14 @@
           </div>
 
           <figure class="mn-about-figure" data-aos="fade-up" data-aos-delay="100">
-            <img src="src/webp/about.png" alt="Portrait of David Saputra" />
+            <div class="mn-grid-reveal" data-src="src/webp/about.png" data-aspect="0.8" data-duration="4200">
+              <canvas role="img" aria-label="Portrait of David Saputra"></canvas>
+              <span class="mn-gr-caption" aria-hidden="true"><span>sedang menggenerate potret…</span></span>
+              <button class="mn-gr-generate" type="button"><span class="mn-gr-spark" aria-hidden="true">✦</span>Generate
+                portrait</button>
+              <button class="mn-gr-regen" type="button" aria-label="Generate ulang potret">↻ Regenerate</button>
+            </div>
+            <noscript><img src="src/webp/about.png" alt="Portrait of David Saputra" /></noscript>
             <figcaption>David Saputra — Web Developer &amp; Visual Designer</figcaption>
           </figure>
         </div>
@@ -239,45 +246,72 @@
       <div class="mn-container">
         <header class="mn-section-head" data-aos="fade-up">
           <span class="mn-section-index">02</span>
-          <h2 class="mn-section-title">What I Do</h2>
+          <h2 class="mn-section-title" data-mask>What I Do</h2>
         </header>
 
         <div class="mn-services">
-          <article class="mn-service" data-aos="fade-up">
-            <span class="mn-service-num">01</span>
-            <div class="mn-service-body">
-              <h3>Frontend Development</h3>
-              <p>Responsive, fast-loading interfaces with HTML, CSS, JavaScript and React/Next.js — from landing
-                pages to internal web systems.</p>
-            </div>
-            <span class="mn-service-arrow" aria-hidden="true">→</span>
+          <article class="mn-svc-card">
+            <span class="mn-svc-num">001</span>
+            <span class="mn-svc-icon" aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1">
+                <circle cx="60" cy="60" r="30" />
+                <circle cx="60" cy="60" r="24" />
+                <circle cx="60" cy="60" r="18" />
+              </svg>
+            </span>
+            <h3>Web Development</h3>
+            <p class="mn-svc-tag">End-to-end, from domain to deploy.</p>
+            <p class="mn-svc-desc">Responsive, fast-loading interfaces with HTML, CSS, JavaScript and React/Next.js
+              — from landing pages to internal web systems.</p>
           </article>
-          <article class="mn-service" data-aos="fade-up">
-            <span class="mn-service-num">02</span>
-            <div class="mn-service-body">
-              <h3>UI/UX Design</h3>
-              <p>Wireframes, prototypes and design systems in Figma — simple content structure and clear visual
-                hierarchy before a single line of code.</p>
-            </div>
-            <span class="mn-service-arrow" aria-hidden="true">→</span>
+          <article class="mn-svc-card">
+            <span class="mn-svc-num">002</span>
+            <span class="mn-svc-icon" aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1">
+                <polygon points="60,16 94,36 94,76 60,96 26,76 26,36" />
+                <path d="M48 52 L62 45 L76 52 L62 59 Z" />
+                <path d="M48 52 L48 70 L62 77 L62 59" />
+                <path d="M76 52 L76 70 L62 77" />
+                <circle cx="86" cy="24" r="9" fill="currentColor" stroke="none" />
+              </svg>
+            </span>
+            <h3>UI/UX Design</h3>
+            <p class="mn-svc-tag">Clarity, hierarchy, and detail.</p>
+            <p class="mn-svc-desc">Wireframes, prototypes and design systems in Figma — simple content structure
+              and clear visual hierarchy before a single line of code.</p>
           </article>
-          <article class="mn-service" data-aos="fade-up">
-            <span class="mn-service-num">03</span>
-            <div class="mn-service-body">
-              <h3>Web &amp; Graphic Design</h3>
-              <p>Company profiles, product sites and supporting visual assets crafted in Photoshop and Canva with
-                a consistent brand tone.</p>
-            </div>
-            <span class="mn-service-arrow" aria-hidden="true">→</span>
+          <article class="mn-svc-card">
+            <span class="mn-svc-num">003</span>
+            <span class="mn-svc-icon" aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1">
+                <rect x="20" y="32" width="32" height="20" />
+                <rect x="56" y="32" width="32" height="20" />
+                <rect x="20" y="56" width="24" height="28" />
+                <rect x="48" y="56" width="28" height="20" />
+                <rect x="40" y="70" width="28" height="20" />
+                <circle cx="86" cy="60" r="11" fill="#c3c6cc" stroke="none" />
+              </svg>
+            </span>
+            <h3>Graphic Design</h3>
+            <p class="mn-svc-tag">Visuals that speak for your brand.</p>
+            <p class="mn-svc-desc">Company profiles, posters and feed assets crafted in Photoshop and Canva with
+              a consistent brand tone.</p>
           </article>
-          <article class="mn-service" data-aos="fade-up">
-            <span class="mn-service-num">04</span>
-            <div class="mn-service-body">
-              <h3>Deployment &amp; Care</h3>
-              <p>Hosting, domains, SSL and routine maintenance — keeping shipped products online, secure and
-                healthy.</p>
-            </div>
-            <span class="mn-service-arrow" aria-hidden="true">→</span>
+          <article class="mn-svc-card">
+            <span class="mn-svc-num">004</span>
+            <span class="mn-svc-icon" aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M36 40 L60 52 L84 40" />
+                <path d="M36 40 L36 76 L60 88 L60 52" />
+                <path d="M84 40 L84 76 L60 88" />
+                <path d="M36 58 L60 70 L84 58" />
+                <path d="M60 70 L60 88" />
+              </svg>
+            </span>
+            <h3>Deployment &amp; Care</h3>
+            <p class="mn-svc-tag">Keep everything running.</p>
+            <p class="mn-svc-desc">Hosting, domains, SSL and routine maintenance — keeping shipped products
+              online, secure and healthy.</p>
           </article>
         </div>
       </div>
@@ -288,7 +322,7 @@
       <div class="mn-container">
         <header class="mn-section-head" data-aos="fade-up">
           <span class="mn-section-index">03</span>
-          <h2 class="mn-section-title">Experience</h2>
+          <h2 class="mn-section-title" data-mask>Experience</h2>
         </header>
 
         <ol class="mn-timeline">
@@ -344,7 +378,7 @@
       <div class="mn-container">
         <header class="mn-section-head" data-aos="fade-up">
           <span class="mn-section-index">04</span>
-          <h2 class="mn-section-title">Skills &amp; Tools</h2>
+          <h2 class="mn-section-title" data-mask>Skills &amp; Tools</h2>
         </header>
 
         <div class="mn-skills-grid">
@@ -410,7 +444,7 @@
       <div class="mn-container">
         <header class="mn-section-head" data-aos="fade-up">
           <span class="mn-section-index">05</span>
-          <h2 class="mn-section-title">Education &amp; Certification</h2>
+          <h2 class="mn-section-title" data-mask>Education &amp; Certification</h2>
         </header>
 
         <div class="mn-edu-list">
@@ -438,19 +472,40 @@
     <!-- ============ PROJECTS ============ -->
     <section class="mn-section" id="projects">
       <div class="mn-container">
-        <header class="mn-section-head" data-aos="fade-up">
-          <span class="mn-section-index">06</span>
-          <h2 class="mn-section-title">Selected Work</h2>
+        <header class="mn-workbanner">
+          <span class="mn-section-index mn-wb-index">06</span>
+          <h2 class="mn-workbanner-title">
+            <span class="mn-wb-word" data-mask>Work</span>
+            <span class="mn-wb-years" data-mask>23—26</span>
+          </h2>
+          <div class="mn-floatfield" id="floatField" aria-hidden="true">
+            <div class="mn-floatfield-stage"></div>
+          </div>
         </header>
 
         <div class="mn-folder-stage">
         <div class="mn-folder-gate" id="folderGate">
           <button class="mn-folder-btn" id="folderBtn" type="button" aria-expanded="false"
             aria-controls="workWindow" aria-label="Buka folder Selected Work">
-            <svg class="mn-folder-btn-icon" viewBox="0 0 96 68" aria-hidden="true">
-              <path class="fb" d="M4 14a8 8 0 0 1 8-8h18l8 8h46a8 8 0 0 1 8 8v4H4z" />
-              <path class="fc" d="M4 20h88v36a8 8 0 0 1-8 8H12a8 8 0 0 1-8-8z" />
-            </svg>
+            <span class="mn-folder3d" aria-hidden="true">
+              <span class="f3d-stage">
+                <span class="f3d-back"></span>
+                <span class="f3d-card f3d-card-1"></span>
+                <span class="f3d-card f3d-card-2"></span>
+                <span class="f3d-card f3d-card-3"></span>
+                <span class="f3d-flap">
+                  <span class="f3d-glass"></span>
+                  <svg class="f3d-flap-svg" width="321" height="241" viewBox="0 0 321 241" fill="none">
+                    <path
+                      d="M0 25C0 11.1929 11.1929 0 25 0H136.084C143.044 0 149.689 2.90139 154.42 8.00608L178.08 33.5343C182.811 38.639 189.456 41.5404 196.416 41.5404H296C309.807 41.5404 321 52.7333 321 66.5404V216C321 229.807 309.807 241 296 241H25C11.1929 241 0 229.807 0 216V25Z"
+                      fill="#292929" fill-opacity="0.25" />
+                    <path
+                      d="M25 0.5H136.084C142.905 0.5 149.417 3.3431 154.054 8.3457L177.713 33.874C182.539 39.0808 189.317 42.04 196.416 42.04H296C309.531 42.04 320.5 53.0092 320.5 66.54V216C320.5 229.531 309.531 240.5 296 240.5H25C11.469 240.5 0.5 229.531 0.5 216V25C0.5 11.469 11.469 0.5 25 0.5Z"
+                      stroke="#979797" />
+                  </svg>
+                </span>
+              </span>
+            </span>
           </button>
           <p class="mn-folder-hint">Silakan dibuka</p>
           <p class="mn-folder-sub">Klik foldernya — project-projectnya ada di dalam.</p>
@@ -649,7 +704,7 @@
       <div class="mn-container">
         <header class="mn-section-head" data-aos="fade-up">
           <span class="mn-section-index">07</span>
-          <h2 class="mn-section-title">Playground</h2>
+          <h2 class="mn-section-title" data-mask>Playground</h2>
         </header>
         <p class="mn-section-lede" data-aos="fade-up">Experiments and writing — where ideas get tested before
           they reach production.</p>
@@ -677,7 +732,7 @@
       <div class="mn-container mn-container-narrow">
         <header class="mn-section-head" data-aos="fade-up">
           <span class="mn-section-index">08</span>
-          <h2 class="mn-section-title">Guestbook</h2>
+          <h2 class="mn-section-title" data-mask>Guestbook</h2>
         </header>
 
         <div class="chat-container mn-chat" data-aos="fade-up">
