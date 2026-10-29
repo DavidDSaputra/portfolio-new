@@ -36,9 +36,13 @@ export default function HomePage() {
       html={page.bodyHtml}
       bodyClassName={page.bodyClassName}
       scripts={[
+        "/js/preloader.js",
         "/main.js",
         "/js/mobile-menu.js",
+        "/js/glass-nav.js",
         "https://unpkg.com/aos@next/dist/aos.js",
+        "/js/lenis.min.js",
+        "/js/smooth-scroll.js",
         "/js/home-page.js",
       ]}
       moduleScripts={["/chat.js"]}

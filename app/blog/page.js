@@ -14,9 +14,13 @@ export default function BlogPage() {
       html={page.bodyHtml}
       inlineStyle={page.inlineStyle}
       scripts={[
+        "/js/preloader.js",
         "/main.js",
         "/js/mobile-menu.js",
+        "/js/glass-nav.js",
         "https://unpkg.com/aos@next/dist/aos.js",
+        "/js/lenis.min.js",
+        "/js/smooth-scroll.js",
         "/blog-content.js",
         "/js/blog-page.js",
       ]}

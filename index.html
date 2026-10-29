@@ -37,9 +37,30 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <script>
+    try { if (localStorage.getItem("mn-theme") === "dark") { document.documentElement.classList.add("dark"); } } catch (e) { /* private mode */ }
+  </script>
+  <noscript><style>.preloader{display:none!important}</style></noscript>
 </head>
 
 <body class="body">
+  <div class="mn-sheet">
+  <a class="mn-brand" href="#home" aria-label="David Saputra — back to top">
+    <img src="/src/png/logo-david.png" alt="">
+  </a>
+  <div class="preloader" id="mnPre" aria-hidden="true">
+    <div class="pre-center">
+      <div class="pre-words" id="preWords"></div>
+      <div class="pre-grid" id="preGrid"></div>
+      <p class="pre-note"><span><b id="preDone">0</b> / <b id="preTotal">0</b> assets loaded</span></p>
+    </div>
+    <div class="pre-foot">
+      <span class="pre-foot-label"><i>David Saputra / Portfolio</i></span>
+      <span class="pre-count" id="preCount"></span>
+    </div>
+  </div>
+  <script src="public/js/preloader.js"></script>
+
   <div class="page-transition" id="pageTransition">
     <div class="page-transition-text">Loading</div>
   </div>
@@ -49,7 +70,6 @@
   </audio>
   <noscript>Allow Javascript</noscript>
 
-  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
   <div class="cursor-inner" id="cursor-inner"></div>
   <div class="cursor-outer" id="cursor-outer"></div>
 
@@ -61,20 +81,49 @@
   </button>
 
   <header class="mn-header">
-    <nav class="navbar" id="navbar" aria-label="Primary">
-      <a class="logo mn-wordmark" href="#home" aria-label="David Saputra — home">David<span
-          class="mn-wordmark-dot">.</span></a>
-      <div class="navbar-tabs" id="navbar-tabs">
-        <ul class="navbar-tabs-ul mn-nav-list">
-          <li class="navbar-tabs-li home activeThistab"><a href="#home">Home</a></li>
-          <li class="navbar-tabs-li about"><a href="#about">About</a></li>
-          <li class="navbar-tabs-li experience"><a href="#experience">Experience</a></li>
-          <li class="navbar-tabs-li skills"><a href="#skills">Skills</a></li>
-          <li class="navbar-tabs-li projects"><a href="#projects">Projects</a></li>
-          <li class="navbar-tabs-li blog"><a href="blog.html">Blog</a></li>
-          <li class="navbar-tabs-li contact"><a href="#footer">Contact</a></li>
-        </ul>
+    <nav class="gn nav--segmented" id="navbar" aria-label="Primary">
+      <button class="gn-ctrl gn-menu" id="gnMenu" type="button" aria-label="Open menu" aria-expanded="false"
+        aria-controls="circleMenu">
+        <svg class="gn-icon-open" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+        <svg class="gn-icon-close" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+      <div class="gn-seg-group">
+        <span class="gn-thumb" aria-hidden="true"></span>
+        <a class="gn-link is-active" href="#home"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </svg>Home</a>
+        <a class="gn-link" href="#about"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+          </svg>About</a>
+        <a class="gn-link" href="#experience"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z" />
+          </svg>Experience</a>
+        <a class="gn-link" href="#skills"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z" />
+          </svg>Skills</a>
+        <a class="gn-link" href="#projects"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z" />
+          </svg>Projects</a>
+        <a class="gn-link" href="blog.html"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+          </svg>Blog</a>
+        <a class="gn-link" href="#footer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+          </svg>Contact</a>
       </div>
+      <span class="gn-badge" id="gnBadge" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+        aria-label="Page scroll">0%</span>
     </nav>
   </header>
 
@@ -137,32 +186,77 @@
     <!-- ============ HERO ============ -->
     <section class="mn-hero" id="home">
       <div class="mn-container">
-        <p class="mn-kicker">
+        <div class="mn-hero-top">
+          <p class="mn-kicker">
+            <span>Frontend Developer · Vibe Coder · Prompt Engineer</span>
+          </p>
           <span class="mn-status"><span class="mn-status-dot" aria-hidden="true"></span>Available for
             opportunities</span>
-          <span class="mn-kicker-sep" aria-hidden="true">/</span>
-          <span>Frontend Developer · Vibe Coder · Prompt Engineer</span>
-        </p>
-        <h1 class="mn-hero-title" aria-label="David Saputra">
-          <span class="mn-word" aria-hidden="true"><span class="mn-char" style="--i:0">D</span><span class="mn-char" style="--i:1">a</span><span class="mn-char" style="--i:2">v</span><span class="mn-char" style="--i:3">i</span><span class="mn-char" style="--i:4">d</span></span>
-          <span class="mn-word" aria-hidden="true"><span class="mn-char" style="--i:5">S</span><span class="mn-char" style="--i:6">a</span><span class="mn-char" style="--i:7">p</span><span class="mn-char" style="--i:8">u</span><span class="mn-char" style="--i:9">t</span><span class="mn-char" style="--i:10">r</span><span class="mn-char" style="--i:11">a</span></span>
-          <span class="mn-title-aura" aria-hidden="true">David Saputra</span>
-        </h1>
-        <p class="mn-hero-lede">
-          Software-engineering graduate and IT professional designing and building clean, purposeful web
-          experiences — from company profiles and product sites to internal HR systems.
-        </p>
-        <div class="mn-hero-meta">
-          <span>Tangerang, Indonesia</span>
-          <a href="mailto:davidsaputra2704@gmail.com">davidsaputra2704@gmail.com</a>
-          <a href="https://github.com/DavidDSaputra" target="_blank" rel="noreferrer">github.com/DavidDSaputra</a>
         </div>
-        <div class="mn-hero-actions">
-          <a class="mn-btn mn-btn-primary" href="#projects">View selected work</a>
-          <a class="mn-btn mn-btn-ghost" href="src/cv/CV_DAVID_SAPUTRA.pdf" target="_blank"
-            rel="noopener">Download CV</a>
-          <a class="mn-link-arrow" href="mailto:davidsaputra2704@gmail.com">Get in touch <span
-              aria-hidden="true">→</span></a>
+        <div class="mn-hero-grid">
+          <div class="mn-hero-left">
+            <div class="mn-hero-name">
+              <span class="mn-hero-avatar" aria-hidden="true"><img src="/src/png/nav-avatar.png" alt=""></span>
+              <h1 class="mn-hero-title" aria-label="David Saputra">
+                <span class="mn-word" aria-hidden="true"><span class="mn-char" style="--i:0">D</span><span class="mn-char" style="--i:1">a</span><span class="mn-char" style="--i:2">v</span><span class="mn-char" style="--i:3">i</span><span class="mn-char" style="--i:4">d</span></span>
+                <span class="mn-word" aria-hidden="true"><span class="mn-char" style="--i:5">S</span><span class="mn-char" style="--i:6">a</span><span class="mn-char" style="--i:7">p</span><span class="mn-char" style="--i:8">u</span><span class="mn-char" style="--i:9">t</span><span class="mn-char" style="--i:10">r</span><span class="mn-char" style="--i:11">a</span></span>
+                <span class="mn-title-aura" aria-hidden="true">David Saputra</span>
+              </h1>
+            </div>
+            <p class="mn-hero-lede">
+              Software-engineering graduate and IT professional designing and building clean, purposeful web
+              experiences — from company profiles and product sites to internal HR systems.
+            </p>
+            <div class="mn-hero-actions">
+              <a class="mn-btn mn-btn-primary" href="#projects">View selected work</a>
+              <a class="mn-btn mn-btn-ghost" href="src/cv/CV_DAVID_SAPUTRA.pdf" target="_blank"
+                rel="noopener">Download CV</a>
+              <a class="mn-link-arrow" href="mailto:davidsaputra2704@gmail.com">Get in touch <span
+                  aria-hidden="true">→</span></a>
+            </div>
+            <div class="mn-hero-foot">
+              <div class="mn-hero-socials">
+                <a class="mn-social mn-social-gh" href="https://github.com/DavidDSaputra" target="_blank" rel="noreferrer"
+                  aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.06.78 2.14 0 1.54-.01 2.78-.01 3.16 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" /></svg></a>
+                <a class="mn-social mn-social-mail" href="mailto:davidsaputra2704@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg></a>
+                <a class="mn-social mn-social-blog" href="/blog" aria-label="Blog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4.5l5 5L8 21H3v-5Z" /><path d="m12 7 5 5" /></svg></a>
+              </div>
+              <div class="mn-hero-loc">
+                <span>Based in Tangerang, ID</span>
+                <span class="mn-hero-clock"><b id="mnClock">--:--:--</b><i>GMT+7</i></span>
+              </div>
+            </div>
+          </div>
+          <div class="mn-hero-right" aria-hidden="true">
+            <div class="mn-dev mn-dev-laptop">
+              <span class="mn-dev-viewport"><span class="mn-dev-reel">
+                <img src="/src/webp/hris.png" alt="">
+                <img src="/src/webp/jarwinn.png" alt="">
+                <img src="/src/webp/webkarbit.png" alt="">
+                <img src="/src/webp/solis.png" alt="">
+                <img src="/src/webp/hris.png" alt="">
+                <img src="/src/webp/jarwinn.png" alt="">
+                <img src="/src/webp/webkarbit.png" alt="">
+                <img src="/src/webp/solis.png" alt="">
+              </span></span>
+              <img class="mn-dev-frame" src="/src/png/mockup-laptop.png" alt="">
+              <div class="mn-dev mn-dev-code">
+                <span class="mn-dev-code-head"><i>david.ts</i><em>✓ deployed</em></span>
+                <code>const david = {<br>&nbsp;&nbsp;design: <b>true</b>,<br>&nbsp;&nbsp;build: <b>true</b>,<br>&nbsp;&nbsp;ship: <u>"anywhere"</u>,<br>};<br>deploy(david); <s>// live</s></code>
+              </div>
+            </div>
+            <div class="mn-dev mn-dev-phone">
+              <span class="mn-dev-viewport"><span class="mn-dev-reel">
+                <img src="/src/webp/sefashion.png" alt="">
+                <img src="/src/webp/cardname.png" alt="">
+                <img src="/src/webp/antbox.png" alt="">
+                <img src="/src/webp/sefashion.png" alt="">
+                <img src="/src/webp/cardname.png" alt="">
+                <img src="/src/webp/antbox.png" alt="">
+              </span></span>
+              <img class="mn-dev-frame" src="/src/png/mockup-mobile.png" alt="">
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -249,70 +343,43 @@
           <h2 class="mn-section-title" data-mask>What I Do</h2>
         </header>
 
-        <div class="mn-services">
-          <article class="mn-svc-card">
-            <span class="mn-svc-num">001</span>
-            <span class="mn-svc-icon" aria-hidden="true">
-              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1">
-                <circle cx="60" cy="60" r="30" />
-                <circle cx="60" cy="60" r="24" />
-                <circle cx="60" cy="60" r="18" />
-              </svg>
-            </span>
-            <h3>Web Development</h3>
-            <p class="mn-svc-tag">End-to-end, from domain to deploy.</p>
-            <p class="mn-svc-desc">Responsive, fast-loading interfaces with HTML, CSS, JavaScript and React/Next.js
-              — from landing pages to internal web systems.</p>
-          </article>
-          <article class="mn-svc-card">
-            <span class="mn-svc-num">002</span>
-            <span class="mn-svc-icon" aria-hidden="true">
-              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1">
-                <polygon points="60,16 94,36 94,76 60,96 26,76 26,36" />
-                <path d="M48 52 L62 45 L76 52 L62 59 Z" />
-                <path d="M48 52 L48 70 L62 77 L62 59" />
-                <path d="M76 52 L76 70 L62 77" />
-                <circle cx="86" cy="24" r="9" fill="currentColor" stroke="none" />
-              </svg>
-            </span>
-            <h3>UI/UX Design</h3>
-            <p class="mn-svc-tag">Clarity, hierarchy, and detail.</p>
-            <p class="mn-svc-desc">Wireframes, prototypes and design systems in Figma — simple content structure
-              and clear visual hierarchy before a single line of code.</p>
-          </article>
-          <article class="mn-svc-card">
-            <span class="mn-svc-num">003</span>
-            <span class="mn-svc-icon" aria-hidden="true">
-              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1">
-                <rect x="20" y="32" width="32" height="20" />
-                <rect x="56" y="32" width="32" height="20" />
-                <rect x="20" y="56" width="24" height="28" />
-                <rect x="48" y="56" width="28" height="20" />
-                <rect x="40" y="70" width="28" height="20" />
-                <circle cx="86" cy="60" r="11" fill="#c3c6cc" stroke="none" />
-              </svg>
-            </span>
-            <h3>Graphic Design</h3>
-            <p class="mn-svc-tag">Visuals that speak for your brand.</p>
-            <p class="mn-svc-desc">Company profiles, posters and feed assets crafted in Photoshop and Canva with
-              a consistent brand tone.</p>
-          </article>
-          <article class="mn-svc-card">
-            <span class="mn-svc-num">004</span>
-            <span class="mn-svc-icon" aria-hidden="true">
-              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M36 40 L60 52 L84 40" />
-                <path d="M36 40 L36 76 L60 88 L60 52" />
-                <path d="M84 40 L84 76 L60 88" />
-                <path d="M36 58 L60 70 L84 58" />
-                <path d="M60 70 L60 88" />
-              </svg>
-            </span>
-            <h3>Deployment &amp; Care</h3>
-            <p class="mn-svc-tag">Keep everything running.</p>
-            <p class="mn-svc-desc">Hosting, domains, SSL and routine maintenance — keeping shipped products
-              online, secure and healthy.</p>
-          </article>
+        <div class="mn-svc-type">
+          <p class="mn-svc-statement">
+            <span class="wd">Give</span> <span class="wd">me</span> <span class="wd">a</span> <span class="wd">problem,</span>
+            <span class="wd">not</span> <span class="wd">a</span> <span class="wd">stack.</span>
+            <span class="wd">I</span>
+            <i class="wd mn-svc-tile" style="--tile:#ef5a31;--tilt:-5deg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M3 14c3-7 5 7 8 0s5 7 10-2" /></svg></i>
+            <span class="wd">design</span> <span class="wd">it,</span>
+            <i class="wd mn-svc-tile" style="--tile:#7c58ff;--tilt:4deg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6 3 12l5 6" /><path d="m16 6 5 6-5 6" /></svg></i>
+            <span class="wd">build</span> <span class="wd">it,</span>
+            <i class="wd mn-svc-tile" style="--tile:#22a55e;--tilt:-3deg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5 14.4 9.6 21.5 12 14.4 14.4 12 21.5 9.6 14.4 2.5 12 9.6 9.6Z" /></svg></i>
+            <span class="wd">polish</span> <span class="wd">it</span> <span class="wd">and</span>
+            <i class="wd mn-svc-tile" style="--tile:#2196f3;--tilt:5deg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7" /><path d="M9 7h8v8" /></svg></i>
+            <span class="wd">ship</span> <span class="wd">it</span> <span class="wd">to</span> <span class="wd">any</span> <span class="wd">screen.</span>
+            <span class="wd">No</span> <span class="wd">handoffs.</span>
+            <span class="wd">No</span> <span class="wd">excuses.</span>
+            <span class="mn-svc-mark"><span class="wd">Just</span> <span class="wd">products</span></span>
+            <span class="wd">that</span> <span class="wd">work.</span>
+          </p>
+
+          <div class="mn-svc-row" role="list">
+            <div class="mn-svc-cell" role="listitem" tabindex="0">
+              <span class="mn-svc-cell-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M8 20h8M12 16v4" /><path class="blink b1" d="M12 7.5h5" stroke-width="1.2" /><path class="blink b2" d="M12 10.5h5" stroke-width="1.2" /><path class="blink b3" d="M12 13.5h5" stroke-width="1.2" /><rect class="hop" x="7" y="6.9" width="4" height="1.7" rx="0.4" fill="#22a55e" stroke="none" /></svg></span>
+              <span class="mn-svc-cell-label">Web Development</span>
+            </div>
+            <div class="mn-svc-cell" role="listitem" tabindex="0">
+              <span class="mn-svc-cell-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="16" width="4" height="4" /><rect x="17" y="4" width="4" height="4" /><path d="M5 16c0-6 14-4 14-10" /><circle class="travel" r="1.7" fill="#22a55e" stroke="none" /></svg></span>
+              <span class="mn-svc-cell-label">UI/UX Design</span>
+            </div>
+            <div class="mn-svc-cell" role="listitem" tabindex="0">
+              <span class="mn-svc-cell-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4.5l5 5L8 21H3v-5Z" /><path d="m12 7 5 5" /><path class="draw" pathLength="1" d="M9.5 21H21" stroke="#22a55e" stroke-width="1.8" /></svg></span>
+              <span class="mn-svc-cell-label">Graphic Design</span>
+            </div>
+            <div class="mn-svc-cell" role="listitem" tabindex="0">
+              <span class="mn-svc-cell-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z" /><path class="draw" pathLength="1" d="m9 12 2 2 4-4" stroke="#22a55e" stroke-width="1.8" /></svg></span>
+              <span class="mn-svc-cell-label">Deployment &amp; Care</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -449,6 +516,17 @@
 
         <div class="mn-edu-list">
           <article class="mn-edu-item" data-aos="fade-up">
+            <h3>Global Institute of Technology and Business</h3>
+            <p class="mn-edu-meta">Bachelor of Information Technology — 2023 – Present · Semester 7, GPA 3.89 / 4.00</p>
+            <ul>
+              <li>Web application development with Laravel and mobile application development with Flutter.</li>
+              <li>Designed and implemented an attendance system and a Point of Sale (POS) system.</li>
+              <li>Hands-on experience with Cisco networking, database design and systems analysis.</li>
+              <li>Project-based learning focused on solving real-world business problems; daily tooling across
+                Visual Studio Code, Sublime Text, MySQL DBMS, C++, Kotlin and Java.</li>
+            </ul>
+          </article>
+          <article class="mn-edu-item" data-aos="fade-up" data-aos-delay="60">
             <h3>SMKN 5 Kabupaten Tangerang</h3>
             <p class="mn-edu-meta">Rekayasa Perangkat Lunak (Software Engineering)</p>
             <ul>
@@ -458,7 +536,7 @@
               <li>Awarded the BNSP competency certificate for Software Engineering.</li>
             </ul>
           </article>
-          <article class="mn-edu-item" data-aos="fade-up" data-aos-delay="60">
+          <article class="mn-edu-item" data-aos="fade-up" data-aos-delay="120">
             <h3>BNSP Competency Certificate</h3>
             <p class="mn-edu-meta">Web Programming — Rekayasa Perangkat Lunak</p>
             <ul>
@@ -469,18 +547,46 @@
       </div>
     </section>
 
+    <!-- ============ OPEN SOURCE ============ -->
+    <section class="mn-section" id="opensource">
+      <div class="mn-container">
+        <header class="mn-section-head mn-gh-head" data-aos="fade-up">
+          <span class="mn-section-index">06</span>
+          <h2 class="mn-section-title" data-mask>Open Source</h2>
+          <a class="mn-btn mn-btn-ghost mn-gh-cta" href="https://github.com/DavidDSaputra" target="_blank"
+            rel="noreferrer">View GitHub <span aria-hidden="true">↗</span></a>
+        </header>
+        <p class="mn-gh-sub" data-aos="fade-up">What I've been building lately — one commit at a time.</p>
+        <div class="mn-gh-card" id="mnGhCard">
+          <div class="mn-gh-top">
+            <div class="mn-gh-total">
+              <b id="mnGhTotal">0</b>
+              <span>contributions in the last year</span>
+            </div>
+            <div class="mn-gh-stats">
+              <div><i>Best day</i><span><b id="mnGhBest">0</b><em id="mnGhBestDate"></em></span></div>
+              <div><i>Longest streak</i><span><b id="mnGhStreak">0</b><em>days</em></span></div>
+              <div><i>Active days</i><span><b id="mnGhActive">0</b><em id="mnGhSpan">of 365</em></span></div>
+            </div>
+          </div>
+          <div class="mn-gh-graph" id="mnGhGraph" role="img" aria-label="Contribution calendar for the last year"></div>
+          <div class="mn-gh-foot">
+            <span class="mn-gh-legend">Less <i class="lv0"></i><i class="lv1"></i><i class="lv2"></i><i class="lv3"></i><i class="lv4"></i> More</span>
+            <span class="mn-gh-user" id="mnGhUser">@DavidDSaputra</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ PROJECTS ============ -->
     <section class="mn-section" id="projects">
       <div class="mn-container">
         <header class="mn-workbanner">
-          <span class="mn-section-index mn-wb-index">06</span>
+          <span class="mn-section-index mn-wb-index">07</span>
           <h2 class="mn-workbanner-title">
             <span class="mn-wb-word" data-mask>Work</span>
             <span class="mn-wb-years" data-mask>23—26</span>
           </h2>
-          <div class="mn-floatfield" id="floatField" aria-hidden="true">
-            <div class="mn-floatfield-stage"></div>
-          </div>
         </header>
 
         <div class="mn-folder-stage">
@@ -674,6 +780,13 @@
                   <span class="mn-file-thumb"><img src="src/webp/solar-monitoring.jpg" alt="" loading="lazy" /></span>
                   <span class="mn-file-name">solar-monitoring.expo</span>
                 </button>
+                <button class="mn-file" type="button" style="--i:20" data-category="website"
+                  data-title="Tiara Kiani Portfolio" data-tag="Web · Portfolio" data-href="https://tiarakiani.vercel.app/"
+                  data-img="src/webp/tiara-kiani.jpg"
+                  data-desc="Desktop-OS-style portfolio for a live-stream host and e-commerce presenter — playful pink workspace with widget cards, a live-selling player and folder shortcuts.">
+                  <span class="mn-file-thumb"><img src="src/webp/tiara-kiani.jpg" alt="" loading="lazy" /></span>
+                  <span class="mn-file-name">tiara-kiani.website</span>
+                </button>
               </div>
               <div class="mn-work-preview" id="workPreview" hidden>
                 <div class="mn-preview-sheet">
@@ -738,8 +851,18 @@
         <div class="chat-container mn-chat" data-aos="fade-up">
           <div class="chat-header">
             <div class="chat-header-info">
-              <span class="chat-icon" aria-hidden="true">✳</span>
-              <h3>Community chat</h3>
+              <span class="chat-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  <path d="M8 9h8" />
+                  <path d="M8 13h5" />
+                </svg>
+              </span>
+              <div class="chat-heading">
+                <h3>Community chat</h3>
+                <span class="chat-subtitle">Public guestbook — leave a kind note</span>
+              </div>
             </div>
             <div id="user-info" class="user-info hidden">
               <img id="user-avatar" src="" alt="User avatar" class="user-avatar" />
@@ -756,7 +879,17 @@
 
           <div class="chat-input-area">
             <div id="login-overlay" class="login-overlay">
-              <button id="google-login-btn" class="google-login-btn">
+              <div class="login-empty">
+                <span class="login-empty-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M12 20h9" />
+                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                  </svg>
+                </span>
+                <p class="login-empty-title">Join the conversation</p>
+                <p class="login-empty-sub">Messages are public. Sign in with Google to write yours.</p>
+                <button id="google-login-btn" class="google-login-btn">
                 <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true">
                   <path
@@ -773,7 +906,8 @@
                     fill="#EA4335" />
                 </svg>
                 Sign in with Google
-              </button>
+                </button>
+              </div>
             </div>
             <form id="chat-form" class="chat-form hidden">
               <input type="text" id="message-input" placeholder="Leave a note…" autocomplete="off" />
@@ -819,7 +953,10 @@
 
   <script src="main.js"></script>
   <script src="public/js/mobile-menu.js"></script>
+  <script src="public/js/glass-nav.js"></script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="public/js/lenis.min.js"></script>
+  <script src="public/js/smooth-scroll.js"></script>
   <script src="public/js/home-page.js"></script>
   <script>
     if (window.AOS) {
@@ -828,6 +965,7 @@
   </script>
   <!-- Guestbook module; only used when this file is served standalone (static hosting) -->
   <script type="module" src="chat.js"></script>
+  </div>
 </body>
 
 </html>

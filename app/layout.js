@@ -24,6 +24,15 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
         />
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'try{if(localStorage.getItem("mn-theme")==="dark"){document.documentElement.classList.add("dark");}}catch(e){}',
+          }}
+        />
+        <noscript>
+          <style>{".preloader{display:none!important}"}</style>
+        </noscript>
       </head>
       <body>
         <div className="site-shell">{children}</div>

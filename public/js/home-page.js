@@ -22,7 +22,6 @@
   const cursorInner = document.getElementById("cursor-inner");
   const cursorOuter = document.getElementById("cursor-outer");
   const spotlight = document.getElementById("spotlight");
-  const scrollProgressBar = document.getElementById("scrollProgressBar");
   const canvas = document.getElementById("particleCanvas");
   const progressCircle = document.querySelector(".progress-ring-circle");
   const logo = document.querySelector(".logo");
@@ -105,15 +104,6 @@
         });
         requestAnimationFrame(syncAura);
       }
-    });
-  }
-
-  if (scrollProgressBar) {
-    window.addEventListener("scroll", () => {
-      const windowHeight =
-        document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (window.scrollY / windowHeight) * 100;
-      scrollProgressBar.style.width = `${scrolled}%`;
     });
   }
 
@@ -806,11 +796,13 @@
         const passed = Math.min(Math.max(-rect.top, 0), Math.max(total, 0));
         progress = total > 0 ? passed / total : 1;
       } else {
-        // Unpinned (mobile): fill as the copy enters the reading position
+        // Unpinned (mobile): the sweep tracks the copy crossing a reading
+        // line, so characters light up exactly as they are scrolled into
+        // reading position instead of finishing before the text is read
         const rect = aboutCopy.getBoundingClientRect();
-        const start = window.innerHeight * 0.95;
-        const end = window.innerHeight * 0.35;
-        progress = Math.min(Math.max((start - rect.top) / (start - end), 0), 1);
+        const readLine = window.innerHeight * 0.62;
+        const passed = readLine - rect.top;
+        progress = rect.height > 0 ? Math.min(Math.max(passed / rect.height, 0), 1) : 1;
       }
       const active = Math.round(progress * chars.length);
       chars.forEach((charSpan, index) => {
@@ -829,147 +821,109 @@
   }
 })();
 
-// Services cards: staggered scroll reveal + line-art stroke draw-in and
-// accent-dot pop (arturospatino.com-style motion). CSS owns the transitions;
-// this only stamps per-shape dash lengths/delays and flips .is-in once.
+// Services: statement typography (albertirgi.com-style) — scrolling scrubs a
+// word-by-word fill across the sentence; colored tiles pop and the marker
+// sweeps once the scrub reaches them. Reduced motion lights all at once.
 (function () {
   "use strict";
 
-  function initServiceCards() {
-    const cards = document.querySelectorAll(".mn-svc-card");
-    if (!cards.length) { return; }
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function initServiceType() {
+    const statement = document.querySelector(".mn-svc-statement");
+    if (!statement) { return; }
+    const tokens = Array.from(statement.querySelectorAll(".wd"));
+    if (!tokens.length) { return; }
+    const mark = statement.querySelector(".mn-svc-mark");
+    const markAt = mark ? tokens.indexOf(mark.querySelector(".wd")) : -1;
 
-    cards.forEach((card) => {
-      const svg = card.querySelector(".mn-svc-icon svg");
-      if (!svg) { return; }
-      let step = 0;
-      svg.querySelectorAll("circle, rect, polygon, path, line, polyline").forEach((shape) => {
-        if (shape.getAttribute("stroke") === "none") {
-          shape.classList.add("pop");
-        } else if (typeof shape.getTotalLength === "function") {
-          try {
-            shape.classList.add("dr");
-            shape.style.setProperty("--len", Math.ceil(shape.getTotalLength()) + "px");
-          } catch (err) {
-            /* not a geometry element: skip drawing */
-          }
-        }
-        shape.style.setProperty("--dd", (0.25 + step * 0.14).toFixed(2) + "s");
-        step += 1;
+    const light = (progress) => {
+      const active = Math.round(progress * tokens.length);
+      tokens.forEach((token, index) => {
+        token.classList.toggle("on", index < active);
       });
-    });
+      if (mark) {
+        mark.classList.toggle("on", markAt >= 0 && active > markAt);
+      }
+    };
 
-    if (reduced.matches || !("IntersectionObserver" in window)) {
-      cards.forEach((card) => card.classList.add("is-in"));
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      light(1);
       return;
     }
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-in");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-    cards.forEach((card) => io.observe(card));
+
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const rect = statement.getBoundingClientRect();
+      const readLine = window.innerHeight * 0.72;
+      const span = rect.height + window.innerHeight * 0.25;
+      const progress = Math.min(Math.max((readLine - rect.top) / span, 0), 1);
+      light(progress);
+    };
+    const queue = () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    };
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", queue);
+    update();
+
+    // Category row: an auto-cycling "live" cell (tinted bg, revealed icon and
+    // a sweep progress bar) so the row keeps moving like the reference; the
+    // cycle pauses while the pointer is over the row so hover stays in charge.
+    const row = document.querySelector(".mn-svc-row");
+    if (row && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const cells = Array.from(row.children);
+      let live = -1;
+      let timer = null;
+      const step = () => {
+        cells.forEach((cell) => cell.classList.remove("is-live"));
+        live = (live + 1) % cells.length;
+        cells[live].classList.add("is-live");
+      };
+      const start = () => {
+        if (!timer && cells.length) {
+          step();
+          timer = window.setInterval(step, 2200);
+        }
+      };
+      const stop = () => {
+        window.clearInterval(timer);
+        timer = null;
+      };
+      row.addEventListener("mouseenter", stop);
+      row.addEventListener("mouseleave", start);
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                start();
+              } else {
+                stop();
+              }
+            });
+          },
+          { threshold: 0.4 }
+        );
+        io.observe(row);
+      } else {
+        start();
+      }
+    }
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initServiceCards, { once: true });
+    document.addEventListener("DOMContentLoaded", initServiceType, { once: true });
   } else {
-    initServiceCards();
+    initServiceType();
   }
 })();
 
-// Work banner: bleibtgleich.dev-style floating 3D card field built from the
-// real project thumbnails, plus mask-reveal text for section titles.
+// Work banner: mask-reveal text for section titles.
 (function () {
   "use strict";
-
-  // Hand-tuned slots: x/y in %, w in px, z depth in px, tilt in deg
-  const FLOAT_SLOTS = [
-    { x: 42, y: 2, w: 150, z: 60, rx: 8, ry: -10, rz: -6, front: true, dur: 7.5, amp: -12 },
-    { x: 62, y: 34, w: 168, z: 40, rx: -6, ry: 12, rz: 5, front: true, dur: 9, amp: -10 },
-    { x: 22, y: 40, w: 122, z: 20, rx: 10, ry: -14, rz: -10, front: true, dur: 8, amp: -14 },
-    { x: 7, y: 14, w: 92, z: -60, rx: 6, ry: 18, rz: 12, front: false, dur: 10, amp: -8 },
-    { x: 79, y: 8, w: 82, z: -80, rx: -8, ry: -16, rz: -14, front: false, dur: 11, amp: -9 },
-    { x: 35, y: 66, w: 100, z: -40, rx: 12, ry: 8, rz: 8, front: false, dur: 9.5, amp: -10 },
-    { x: 55, y: 60, w: 88, z: -70, rx: -10, ry: -8, rz: -4, front: false, dur: 10.5, amp: -8 },
-    { x: 86, y: 52, w: 70, z: -110, rx: 6, ry: 20, rz: 16, front: false, dur: 12, amp: -7 },
-    { x: 14, y: 72, w: 78, z: -90, rx: -6, ry: -18, rz: -8, front: false, dur: 11.5, amp: -8 }
-  ];
-
-  function buildFloatField() {
-    const field = document.getElementById("floatField");
-    if (!field) { return; }
-    const stage = field.querySelector(".mn-floatfield-stage");
-    const imgs = Array.from(document.querySelectorAll("#workFiles .mn-file"))
-      .map((file) => file.getAttribute("data-img"))
-      .filter(Boolean);
-    if (!stage || imgs.length < 3) { return; }
-
-    FLOAT_SLOTS.forEach((slot, i) => {
-      const card = document.createElement("div");
-      card.className = "mn-float-card " + (slot.front ? "is-front" : "is-back");
-      card.style.setProperty("--x", slot.x + "%");
-      card.style.setProperty("--y", slot.y + "%");
-      card.style.setProperty("--w", slot.w + "px");
-      card.style.setProperty("--z", slot.z + "px");
-      card.style.setProperty("--rx", slot.rx + "deg");
-      card.style.setProperty("--ry", slot.ry + "deg");
-      card.style.setProperty("--rz", slot.rz + "deg");
-      card.style.setProperty("--dur", slot.dur + "s");
-      card.style.setProperty("--amp", slot.amp + "px");
-      card.style.setProperty("--wig", (i % 2 ? -3 : 4) + "deg");
-      card.style.setProperty("--del", (-i * 0.9).toFixed(1) + "s");
-      const img = document.createElement("img");
-      img.src = imgs[(i * 3) % imgs.length];
-      img.alt = "";
-      img.loading = "lazy";
-      img.draggable = false;
-      card.appendChild(img);
-      stage.appendChild(card);
-    });
-
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reduced.matches) { return; }
-
-    // Mouse tilt across the whole banner
-    const banner = field.closest(".mn-workbanner");
-    if (banner) {
-      banner.addEventListener("mousemove", (event) => {
-        const rect = banner.getBoundingClientRect();
-        if (!rect.width || !rect.height) { return; }
-        const px = (event.clientX - rect.left) / rect.width - 0.5;
-        const py = (event.clientY - rect.top) / rect.height - 0.5;
-        stage.style.setProperty("--mx", (px * 8).toFixed(2) + "deg");
-        stage.style.setProperty("--my", (py * -6).toFixed(2) + "deg");
-      });
-      banner.addEventListener("mouseleave", () => {
-        stage.style.setProperty("--mx", "0deg");
-        stage.style.setProperty("--my", "0deg");
-      });
-    }
-
-    // Gentle scroll parallax on the field
-    let ticking = false;
-    const onScroll = () => {
-      if (ticking) { return; }
-      ticking = true;
-      window.requestAnimationFrame(() => {
-        const rect = field.getBoundingClientRect();
-        const offset = (rect.top + rect.height / 2 - window.innerHeight / 2) * -0.08;
-        stage.style.setProperty("--sy", offset.toFixed(1) + "px");
-        ticking = false;
-      });
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-  }
 
   // Mask reveal: wrap title content, lift it into the clip once in view
   function initMaskReveal() {
@@ -1001,7 +955,6 @@
   }
 
   function initBannerMotion() {
-    buildFloatField();
     initMaskReveal();
   }
 
@@ -1458,5 +1411,156 @@
     document.addEventListener("DOMContentLoaded", bootGridReveals, { once: true });
   } else {
     bootGridReveals();
+  }
+})();
+
+// Hero: live WIB wall clock (GMT+7) for the hero footer location block.
+(function () {
+  "use strict";
+
+  function initHeroClock() {
+    const el = document.getElementById("mnClock");
+    if (!el) { return; }
+    const fmt = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Jakarta",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    });
+    const tick = () => {
+      el.textContent = fmt.format(new Date());
+    };
+    tick();
+    window.setInterval(tick, 1000);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initHeroClock, { once: true });
+  } else {
+    initHeroClock();
+  }
+})();
+
+// Open Source: render the build-time GitHub snapshot (public/github-stats.json)
+// into the dark contribution card — month labels, week columns, count-up stats.
+(function () {
+  "use strict";
+
+  function initGithubCard() {
+    const card = document.getElementById("mnGhCard");
+    const graph = document.getElementById("mnGhGraph");
+    if (!card || !graph) { return; }
+    const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const countUp = (el, target) => {
+      if (!el) { return; }
+      if (reduced || !target) { el.textContent = String(target || 0); return; }
+      const t0 = performance.now();
+      const dur = 900;
+      const step = (t) => {
+        const p = Math.min(1, (t - t0) / dur);
+        el.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3))));
+        if (p < 1) { window.requestAnimationFrame(step); }
+      };
+      window.requestAnimationFrame(step);
+    };
+
+    const reveal = (data) => {
+      card.classList.add("on");
+      countUp(document.getElementById("mnGhTotal"), data.total);
+      countUp(document.getElementById("mnGhBest"), data.best ? data.best.c : 0);
+      countUp(document.getElementById("mnGhStreak"), data.streak);
+      countUp(document.getElementById("mnGhActive"), data.active);
+      const bestDate = document.getElementById("mnGhBestDate");
+      if (bestDate && data.best && data.best.c) {
+        bestDate.textContent = new Date(data.best.d + "T00:00:00").toLocaleString("en-US", { month: "short", day: "numeric" });
+      }
+      const span = document.getElementById("mnGhSpan");
+      if (span && data.span) { span.textContent = "of " + data.span; }
+    };
+
+    const render = (data) => {
+      const days = data.days || [];
+      if (!days.length) { throw new Error("empty snapshot"); }
+      const weeks = [];
+      for (let i = 0; i < days.length; i += 7) { weeks.push(days.slice(i, i + 7)); }
+
+      const months = document.createElement("div");
+      months.className = "mn-gh-months";
+      months.style.gridTemplateColumns = "repeat(" + weeks.length + ", var(--cell))";
+      let lastMonth = -1;
+      weeks.forEach((week, wi) => {
+        const month = new Date(week[0].d + "T00:00:00").getMonth();
+        if (month !== lastMonth) {
+          lastMonth = month;
+          const label = document.createElement("span");
+          label.style.gridColumn = String(wi + 1);
+          label.textContent = new Date(week[0].d + "T00:00:00").toLocaleString("en-US", { month: "short" });
+          months.appendChild(label);
+        }
+      });
+      const inner = document.createElement("div");
+      inner.className = "mn-gh-inner";
+      inner.appendChild(months);
+      const row = document.createElement("div");
+      row.className = "mn-gh-weeks";
+
+      weeks.forEach((week, wi) => {
+        const col = document.createElement("div");
+        col.className = "mn-gh-week";
+        week.forEach((day) => {
+          const cell = document.createElement("i");
+          cell.className = "mn-gh-cell lv" + (day.l || 0);
+          cell.style.setProperty("--d", (wi * 14) + "ms");
+          const when = new Date(day.d + "T00:00:00").toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric" });
+          cell.title = (day.c ? day.c + " contribution" + (day.c === 1 ? "" : "s") : "No contributions") + " on " + when;
+          col.appendChild(cell);
+        });
+        row.appendChild(col);
+      });
+      inner.appendChild(row);
+      const scroll = document.createElement("div");
+      scroll.className = "mn-gh-scroll";
+      scroll.appendChild(inner);
+      graph.appendChild(scroll);
+
+      const user = document.getElementById("mnGhUser");
+      if (user && data.user) { user.textContent = "@" + data.user; }
+
+      if (reduced || !("IntersectionObserver" in window)) {
+        reveal(data);
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            reveal(data);
+            io.disconnect();
+          }
+        });
+      }, { threshold: 0.25 });
+      io.observe(card);
+    };
+
+    fetch("/github-stats.json", { cache: "no-cache" })
+      .then((r) => {
+        if (!r.ok) { throw new Error("http " + r.status); }
+        return r.json();
+      })
+      .then(render)
+      .catch(() => {
+        graph.textContent = "";
+        const note = document.createElement("p");
+        note.className = "mn-gh-empty";
+        note.textContent = "Contribution snapshot unavailable right now — see the full graph on GitHub.";
+        graph.appendChild(note);
+      });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initGithubCard, { once: true });
+  } else {
+    initGithubCard();
   }
 })();

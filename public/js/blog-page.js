@@ -15,15 +15,6 @@
 
   initAOS();
 
-  const scrollBar = document.getElementById("scrollProgressBar");
-  if (scrollBar) {
-    window.addEventListener("scroll", () => {
-      const total =
-        document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      scrollBar.style.width = `${(window.scrollY / total) * 100}%`;
-    });
-  }
-
   const cursorInner = document.getElementById("cursor-inner");
   const cursorOuter = document.getElementById("cursor-outer");
   if (cursorInner && cursorOuter) {

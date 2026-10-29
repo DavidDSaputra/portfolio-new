@@ -202,7 +202,7 @@ function appendMessage(msg) {
     div.innerHTML = `
         ${!isOwn && msg.uid !== 'system' ? `<span class="message-author">${msg.displayName}</span>` : ''}
         <p>${escapeHtml(msg.text)}</p>
-        <span style="font-size: 0.8rem; opacity: 0.7; float: right; margin-top: 5px;">${time}</span>
+        <span class="message-time">${time}</span>
     `;
 
     chatMessages.appendChild(div);

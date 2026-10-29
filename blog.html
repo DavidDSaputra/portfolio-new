@@ -430,15 +430,35 @@
       }
     }
   </style>
+  <script>
+    try { if (localStorage.getItem("mn-theme") === "dark") { document.documentElement.classList.add("dark"); } } catch (e) { /* private mode */ }
+  </script>
+  <noscript><style>.preloader{display:none!important}</style></noscript>
 </head>
 
 <body class="body">
+  <div class="mn-sheet">
+  <a class="mn-brand" href="/" aria-label="David Saputra — home">
+    <img src="/src/png/logo-david.png" alt="">
+  </a>
+  <div class="preloader" id="mnPre" aria-hidden="true">
+    <div class="pre-center">
+      <div class="pre-words" id="preWords"></div>
+      <div class="pre-grid" id="preGrid"></div>
+      <p class="pre-note"><span><b id="preDone">0</b> / <b id="preTotal">0</b> assets loaded</span></p>
+    </div>
+    <div class="pre-foot">
+      <span class="pre-foot-label"><i>David Saputra / Portfolio</i></span>
+      <span class="pre-count" id="preCount"></span>
+    </div>
+  </div>
+  <script src="public/js/preloader.js"></script>
+
   <!-- Page Transition -->
   <div class="page-transition" id="pageTransition">
     <div class="page-transition-text">Loading</div>
   </div>
 
-  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
   <div class="cursor-inner" id="cursor-inner"></div>
   <div class="cursor-outer" id="cursor-outer"></div>
 
@@ -446,20 +466,49 @@
        NAVBAR (same as homepage)
        ====================================================== -->
   <header class="mn-header">
-    <nav class="navbar" id="navbar" aria-label="Primary">
-      <a class="logo mn-wordmark" href="index.html" aria-label="David Saputra — home">David<span
-          class="mn-wordmark-dot">.</span></a>
-      <div class="navbar-tabs" id="navbar-tabs">
-        <ul class="navbar-tabs-ul mn-nav-list">
-          <li class="navbar-tabs-li home"><a href="index.html#home">Home</a></li>
-          <li class="navbar-tabs-li about"><a href="index.html#about">About</a></li>
-          <li class="navbar-tabs-li experience"><a href="index.html#experience">Experience</a></li>
-          <li class="navbar-tabs-li skills"><a href="index.html#skills">Skills</a></li>
-          <li class="navbar-tabs-li projects"><a href="index.html#projects">Projects</a></li>
-          <li class="navbar-tabs-li blog activeThistab"><a href="blog.html">Blog</a></li>
-          <li class="navbar-tabs-li contact"><a href="index.html#footer">Contact</a></li>
-        </ul>
+    <nav class="gn nav--segmented" id="navbar" aria-label="Primary">
+      <button class="gn-ctrl gn-menu" id="gnMenu" type="button" aria-label="Open menu" aria-expanded="false"
+        aria-controls="circleMenu">
+        <svg class="gn-icon-open" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+        <svg class="gn-icon-close" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+      <div class="gn-seg-group">
+        <span class="gn-thumb" aria-hidden="true"></span>
+        <a class="gn-link" href="index.html#home"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </svg>Home</a>
+        <a class="gn-link" href="index.html#about"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+          </svg>About</a>
+        <a class="gn-link" href="index.html#experience"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z" />
+          </svg>Experience</a>
+        <a class="gn-link" href="index.html#skills"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z" />
+          </svg>Skills</a>
+        <a class="gn-link" href="index.html#projects"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z" />
+          </svg>Projects</a>
+        <a class="gn-link is-active" href="blog.html"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+          </svg>Blog</a>
+        <a class="gn-link" href="index.html#footer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+          </svg>Contact</a>
       </div>
+      <span class="gn-badge" id="gnBadge" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+        aria-label="Page scroll">0%</span>
     </nav>
   </header>
 
@@ -642,7 +691,10 @@
 
   <script src="main.js"></script>
   <script src="public/js/mobile-menu.js"></script>
+  <script src="public/js/glass-nav.js"></script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="public/js/lenis.min.js"></script>
+  <script src="public/js/smooth-scroll.js"></script>
   <script src="blog-content.js"></script>
   <script src="public/js/blog-page.js"></script>
   <script>
@@ -650,6 +702,7 @@
       AOS.init({ duration: 700, easing: "ease-out-cubic", once: true, offset: 60 });
     }
   </script>
+  </div>
 </body>
 
 </html>
