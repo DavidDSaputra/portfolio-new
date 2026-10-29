@@ -59,6 +59,22 @@
       <span class="pre-count" id="preCount"></span>
     </div>
   </div>
+  <script>
+    /* Take the splash lock before first paint so the hero's hidden entrance
+       state is the initial one (no visible-then-hide flash). Mirrors the
+       reduced-motion bail in preloader.js; the failsafe lifts the lock again
+       should the splash script never flag completion. */
+    (function () {
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce || !document.getElementById("mnPre")) return;
+      document.documentElement.classList.add("pre-lock");
+      setTimeout(function () {
+        if (!document.documentElement.classList.contains("pre-done")) {
+          document.documentElement.classList.remove("pre-lock");
+        }
+      }, 9000);
+    })();
+  </script>
   <script src="public/js/preloader.js"></script>
 
   <div class="page-transition" id="pageTransition">
@@ -186,64 +202,53 @@
     <!-- ============ HERO ============ -->
     <section class="mn-hero" id="home">
       <div class="mn-container">
-        <div class="mn-hero-top">
-          <p class="mn-kicker">
-            <span>Frontend Developer · Vibe Coder · Prompt Engineer</span>
-          </p>
-          <span class="mn-status"><span class="mn-status-dot" aria-hidden="true"></span>Available for
-            opportunities</span>
+        <div class="mn-hero-name" data-reveal style="--d:0">
+          <span class="mn-hero-avatar" aria-hidden="true"><img src="/src/png/nav-avatar.png" alt=""></span>
+          <h1 class="mn-hero-title" aria-label="David Saputra">
+            <span class="mn-word" aria-hidden="true"><span class="mn-char" style="--i:0">D</span><span class="mn-char" style="--i:1">a</span><span class="mn-char" style="--i:2">v</span><span class="mn-char" style="--i:3">i</span><span class="mn-char" style="--i:4">d</span></span>
+            <span class="mn-word" aria-hidden="true"><span class="mn-char" style="--i:5">S</span><span class="mn-char" style="--i:6">a</span><span class="mn-char" style="--i:7">p</span><span class="mn-char" style="--i:8">u</span><span class="mn-char" style="--i:9">t</span><span class="mn-char" style="--i:10">r</span><span class="mn-char" style="--i:11">a</span></span>
+            <span class="mn-title-aura" aria-hidden="true">David Saputra</span>
+          </h1>
         </div>
-        <div class="mn-hero-grid">
-          <div class="mn-hero-left">
-            <div class="mn-hero-name">
-              <span class="mn-hero-avatar" aria-hidden="true"><img src="/src/png/nav-avatar.png" alt=""></span>
-              <h1 class="mn-hero-title" aria-label="David Saputra">
-                <span class="mn-word" aria-hidden="true"><span class="mn-char" style="--i:0">D</span><span class="mn-char" style="--i:1">a</span><span class="mn-char" style="--i:2">v</span><span class="mn-char" style="--i:3">i</span><span class="mn-char" style="--i:4">d</span></span>
-                <span class="mn-word" aria-hidden="true"><span class="mn-char" style="--i:5">S</span><span class="mn-char" style="--i:6">a</span><span class="mn-char" style="--i:7">p</span><span class="mn-char" style="--i:8">u</span><span class="mn-char" style="--i:9">t</span><span class="mn-char" style="--i:10">r</span><span class="mn-char" style="--i:11">a</span></span>
-                <span class="mn-title-aura" aria-hidden="true">David Saputra</span>
-              </h1>
-            </div>
-            <p class="mn-hero-lede">
-              Software-engineering graduate and IT professional designing and building clean, purposeful web
-              experiences — from company profiles and product sites to internal HR systems.
-            </p>
-            <div class="mn-hero-actions">
-              <a class="mn-btn mn-btn-primary" href="#projects">View selected work</a>
-              <a class="mn-btn mn-btn-ghost" href="src/cv/CV_DAVID_SAPUTRA.pdf" target="_blank"
-                rel="noopener">Download CV</a>
-              <a class="mn-link-arrow" href="mailto:davidsaputra2704@gmail.com">Get in touch <span
-                  aria-hidden="true">→</span></a>
-            </div>
-            <div class="mn-hero-foot">
-              <div class="mn-hero-socials">
-                <a class="mn-social mn-social-gh" href="https://github.com/DavidDSaputra" target="_blank" rel="noreferrer"
-                  aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.06.78 2.14 0 1.54-.01 2.78-.01 3.16 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" /></svg></a>
-                <a class="mn-social mn-social-mail" href="mailto:davidsaputra2704@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg></a>
-                <a class="mn-social mn-social-blog" href="/blog" aria-label="Blog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4.5l5 5L8 21H3v-5Z" /><path d="m12 7 5 5" /></svg></a>
-              </div>
-              <div class="mn-hero-loc">
-                <span>Based in Tangerang, ID</span>
-                <span class="mn-hero-clock"><b id="mnClock">--:--:--</b><i>GMT+7</i></span>
-              </div>
-            </div>
+        <p class="mn-hero-lede" data-reveal style="--d:1">
+          Software-engineering graduate and IT professional designing and building clean, purposeful web
+          experiences — from company profiles and product sites to internal HR systems.
+        </p>
+        <div class="mn-hero-actions" data-reveal style="--d:2">
+          <a class="mn-btn mn-btn-primary" href="#projects">View selected work</a>
+          <a class="mn-btn mn-btn-ghost" href="src/cv/CV_DAVID_SAPUTRA.pdf" target="_blank"
+            rel="noopener">Download CV</a>
+        </div>
+        <div class="mn-hero-foot" data-reveal style="--d:3">
+          <div class="mn-hero-socials">
+            <a class="mn-social mn-social-gh" href="https://github.com/DavidDSaputra" target="_blank" rel="noreferrer"
+              aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.06.78 2.14 0 1.54-.01 2.78-.01 3.16 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" /></svg></a>
+            <a class="mn-social mn-social-mail" href="mailto:davidsaputra2704@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg></a>
+            <a class="mn-social mn-social-blog" href="/blog" aria-label="Blog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4.5l5 5L8 21H3v-5Z" /><path d="m12 7 5 5" /></svg></a>
           </div>
-          <div class="mn-hero-right" aria-hidden="true">
-            <div class="mn-dev mn-dev-laptop">
-              <span class="mn-dev-viewport"><span class="mn-dev-reel">
-                <img src="/src/webp/hris.png" alt="">
-                <img src="/src/webp/jarwinn.png" alt="">
-                <img src="/src/webp/webkarbit.png" alt="">
-                <img src="/src/webp/solis.png" alt="">
-                <img src="/src/webp/hris.png" alt="">
-                <img src="/src/webp/jarwinn.png" alt="">
-                <img src="/src/webp/webkarbit.png" alt="">
-                <img src="/src/webp/solis.png" alt="">
-              </span></span>
-              <img class="mn-dev-frame" src="/src/png/mockup-laptop.png" alt="">
-              <div class="mn-dev mn-dev-code">
-                <span class="mn-dev-code-head"><i>david.ts</i><em>✓ deployed</em></span>
-                <code>const david = {<br>&nbsp;&nbsp;design: <b>true</b>,<br>&nbsp;&nbsp;build: <b>true</b>,<br>&nbsp;&nbsp;ship: <u>"anywhere"</u>,<br>};<br>deploy(david); <s>// live</s></code>
-              </div>
+          <div class="mn-hero-loc">
+            <span>Based in Tangerang, ID</span>
+            <span class="mn-hero-clock"><b id="mnClock">--:--:--</b><i>GMT+7</i></span>
+          </div>
+        </div>
+        <div class="mn-hero-devices" data-reveal style="--d:4">
+          <div class="mn-dev mn-dev-laptop">
+            <span class="mn-dev-viewport"><span class="mn-dev-reel">
+              <img src="/src/webp/hris.png" alt="">
+              <img src="/src/webp/jarwinn.png" alt="">
+              <img src="/src/webp/webkarbit.png" alt="">
+              <img src="/src/webp/solis.png" alt="">
+              <img src="/src/webp/hris.png" alt="">
+              <img src="/src/webp/jarwinn.png" alt="">
+              <img src="/src/webp/webkarbit.png" alt="">
+              <img src="/src/webp/solis.png" alt="">
+            </span></span>
+            <img class="mn-dev-frame" src="/src/png/mockup-laptop.png" alt="">
+          </div>
+          <div class="mn-hero-dev-row">
+            <div class="mn-dev mn-dev-code">
+              <span class="mn-dev-code-head"><i>david.ts</i><em>✓ deployed</em></span>
+              <code>const david = {<br>&nbsp;&nbsp;design: <b>true</b>,<br>&nbsp;&nbsp;build: <b>true</b>,<br>&nbsp;&nbsp;ship: <u>"anywhere"</u>,<br>};<br>deploy(david); <s>// live</s></code>
             </div>
             <div class="mn-dev mn-dev-phone">
               <span class="mn-dev-viewport"><span class="mn-dev-reel">

@@ -114,19 +114,89 @@ html.lenis body {
    fixed overlays (splash, nav pill, cursor) escape it as intended. */
 .mn-sheet {
   position: relative;
-  max-width: 1600px;
-  min-height: calc(100vh - clamp(20px, 3.2vw, 48px));
-  min-height: calc(100svh - clamp(20px, 3.2vw, 48px));
-  margin: clamp(10px, 1.6vw, 24px) auto;
+  z-index: 1;
+  /* Albert-exact proportions: 81.25% wide card, 40px vertical inset */
+  width: 81.25%;
+  min-height: calc(100vh - 80px);
+  min-height: calc(100svh - 80px);
+  margin: 40px auto;
   background: var(--bg);
   border: 1px solid var(--line);
-  border-radius: clamp(16px, 2.2vw, 28px);
+  border-radius: 24px;
   box-shadow: 0 24px 70px rgb(0 0 0 / 0.07);
   overflow: clip;
 }
 
+@media (max-width: 960px) {
+  .mn-sheet {
+    width: calc(100% - 28px);
+    min-height: calc(100svh - 28px);
+    margin: 14px auto;
+  }
+}
+
 html.dark .mn-sheet {
   box-shadow: 0 24px 70px rgb(0 0 0 / 0.45);
+}
+
+/* ---------- Ambient shader canvas: the thin rim around the sheet ---------- */
+.site-lightpillar-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.site-lightpillar-base {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(90rem 60rem at 12% -10%, rgb(234 114 215 / 0.1), transparent 60%),
+    radial-gradient(80rem 55rem at 88% 110%, rgb(218 100 144 / 0.1), transparent 60%),
+    var(--out);
+}
+
+html.dark .site-lightpillar-base {
+  background:
+    radial-gradient(90rem 60rem at 12% -10%, rgb(234 114 215 / 0.14), transparent 60%),
+    radial-gradient(80rem 55rem at 88% 110%, rgb(218 100 144 / 0.12), transparent 60%),
+    var(--out);
+}
+
+.site-lightpillar-effect {
+  opacity: 0.5;
+}
+
+html.dark .site-lightpillar-effect {
+  opacity: 0.65;
+}
+
+.site-lightpillar-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 95% at 50% 42%, transparent 58%, rgb(12 10 14 / 0.1) 100%);
+}
+
+html.dark .site-lightpillar-vignette {
+  background: radial-gradient(120% 95% at 50% 42%, transparent 55%, rgb(0 0 0 / 0.34) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-lightpillar-effect {
+    display: none;
+  }
+}
+
+/* ---------- Sitewide background: ripple grid (aceternity) ---------- */
+/* Replaces the three.js cubes grid with the DOM-only ripple boxes. The layer
+   keeps pointer events (unlike the cubes one) so hovering/clicking the
+   margins around the rounded .mn-sheet lifts cells and fires the ripple. */
+.site-ripple-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
 }
 
 /* Hand-drawn wordmark pinned to the sheet's top-left corner */
@@ -910,15 +980,6 @@ body.stopscrolling {
   z-index: 1;
 }
 
-.mn-hero-top {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px 24px;
-  margin-bottom: clamp(44px, 8vh, 84px);
-}
-
 .mn-kicker {
   display: flex;
   flex-wrap: wrap;
@@ -932,50 +993,8 @@ body.stopscrolling {
   margin-bottom: 0;
 }
 
-.mn-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-  background: var(--surface-2);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-
-.mn-status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--ok);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 16%, transparent);
-  animation: mn-dot-pulse 2.4s var(--ease) infinite;
-}
-
-@keyframes mn-dot-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 16%, transparent);
-  }
-
-  50% {
-    box-shadow: 0 0 0 5px color-mix(in srgb, var(--ok) 8%, transparent);
-  }
-}
-
 .mn-kicker-sep {
   color: var(--line-strong);
-}
-
-.mn-hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: clamp(40px, 5vw, 72px);
-  align-items: center;
 }
 
 .mn-hero-name {
@@ -1041,7 +1060,13 @@ body.stopscrolling {
     radial-gradient(circle 190px at var(--x2, 50%) var(--y2, 50%), #f79694 0 99%, transparent 100%),
     radial-gradient(circle 280px at var(--x1, 50%) var(--y1, 50%), #7f7de4 0 99%, transparent 100%);
   opacity: 0;
-  animation: mn-aura-in 0.8s var(--ease) 1.45s forwards;
+}
+
+/* The aura waits for the splash: it fades in once the preloader flags
+   pre-done (or immediately when no splash runs at all). */
+html.pre-done .mn-title-aura,
+html:not(.pre-lock) .mn-title-aura {
+  animation: mn-aura-in 0.8s var(--ease) 1.1s forwards;
 }
 
 @keyframes mn-aura-in {
@@ -1061,6 +1086,10 @@ body.stopscrolling {
   opacity: 0;
   transform: translateY(0.55em) rotate(4deg);
   filter: blur(10px);
+}
+
+html.pre-done .mn-hero-title .mn-char,
+html:not(.pre-lock) .mn-hero-title .mn-char {
   animation: mn-char-in 0.85s var(--ease) forwards;
   animation-delay: calc(0.15s + var(--i) * 0.045s);
 }
@@ -1073,38 +1102,57 @@ body.stopscrolling {
   }
 }
 
-.mn-hero .mn-kicker,
-.mn-hero .mn-status,
-.mn-hero .mn-hero-lede,
-.mn-hero .mn-hero-actions,
-.mn-hero .mn-hero-foot,
-.mn-hero .mn-hero-right {
+.mn-hero-title.mn-tech-mounted .mn-word,
+.mn-hero-title.mn-tech-mounted .mn-char,
+.mn-hero-title.mn-tech-mounted .mn-title-aura {
+  display: none;
+}
+
+/* The h1 is a flex item sized by its content, so once the legacy letters are
+   hidden it would collapse to zero width. Let the row hand it the leftover
+   space instead, which is the width it already had. */
+.mn-hero-title.mn-tech-mounted {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* TechText canvas wordmark. Each line box is taller than the glyphs so the
+   letters have room to be dragged and kicked, and TechText's own fit rule
+   (0.66 of the box height) still renders them at the h1 font-size. The
+   negative margins put the two baselines back on the original 0.98em leading
+   (measured against Instrument Serif metrics) and the wrapper keeps the h1
+   footprint identical to the two legacy lines it replaces. */
+.mn-tech-title {
+  position: relative;
+  display: flow-root;
+  height: 1.96em;
+}
+
+.mn-tech-line {
+  height: 1.55em;
+  margin-left: -5%;
+}
+
+.mn-tech-line:first-child {
+  margin-top: -0.306em;
+}
+
+.mn-tech-line + .mn-tech-line {
+  margin-top: -0.4725em;
+}
+
+/* Entrance choreography: the hero blocks hold hidden while the splash owns
+   the screen (html.pre-lock) and rise in sequence — stagger index per block
+   via --d — the moment the preloader flags html.pre-done. No-JS visitors
+   never get pre-lock, so the hero simply reads visible. */
+.mn-hero [data-reveal] {
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition-delay: calc(var(--d, 0) * 110ms);
+}
+
+html.pre-lock:not(.pre-done) .mn-hero [data-reveal] {
   opacity: 0;
-  animation: mn-rise-in 0.7s var(--ease) forwards;
-}
-
-.mn-hero .mn-kicker {
-  animation-delay: 0.05s;
-}
-
-.mn-hero .mn-status {
-  animation-delay: 0.15s;
-}
-
-.mn-hero .mn-hero-lede {
-  animation-delay: 0.8s;
-}
-
-.mn-hero .mn-hero-actions {
-  animation-delay: 0.95s;
-}
-
-.mn-hero .mn-hero-right {
-  animation-delay: 1.05s;
-}
-
-.mn-hero .mn-hero-foot {
-  animation-delay: 1.2s;
+  transform: translateY(22px);
 }
 
 @keyframes mn-rise-in {
@@ -1242,23 +1290,32 @@ html.dark .mn-social-gh {
   gap: 14px 22px;
 }
 
-/* Device collage: monochrome mockups that colourise on hover */
-.mn-hero-right {
-  position: relative;
-  min-height: clamp(420px, 44vw, 560px);
+/* Device stack: laptop centred on top, code card + handset in a row below —
+   one calm column instead of the old overlapping collage */
+.mn-hero-devices {
+  display: grid;
+  justify-items: center;
+  gap: clamp(14px, 2.6vw, 26px);
+  margin-top: clamp(44px, 7vw, 84px);
 }
 
-.mn-hero-right img {
+.mn-hero-devices img {
   display: block;
+  width: 100%;
+}
+
+.mn-hero-dev-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 5vw, 64px);
   width: 100%;
 }
 
 /* Fixed dark bezel so the devices read as hardware in both themes */
 .mn-dev-laptop {
-  position: absolute;
-  top: 2%;
-  left: 0;
-  width: 82%;
+  position: relative;
+  width: min(100%, 780px);
   aspect-ratio: 508 / 311;
 }
 
@@ -1310,7 +1367,7 @@ html.dark .mn-social-gh {
   object-position: top center;
 }
 
-.mn-hero-right:hover .mn-dev-reel {
+.mn-hero-devices:hover .mn-dev-reel {
   animation-play-state: paused;
 }
 
@@ -1321,10 +1378,9 @@ html.dark .mn-social-gh {
 }
 
 .mn-dev-phone {
-  position: absolute;
-  top: 26%;
-  right: 2%;
-  width: 27%;
+  position: relative;
+  flex: none;
+  width: clamp(140px, 22vw, 200px);
   aspect-ratio: 168 / 326;
   border-radius: 10% / 5%;
   box-shadow: 0 24px 48px -24px rgb(22 22 26 / 0.5);
@@ -1352,12 +1408,27 @@ html.dark .mn-social-gh {
   aspect-ratio: 142 / 305;
 }
 
-.mn-dev-code {
+/* Hero phone: screen-recording video replaces the scrolling reel inside the
+   frame's transparent window. cover + center keeps the recording undistorted
+   (neither stretched wide nor squeezed thin) whatever its native ratio. */
+.mn-dev-viewport-video .mn-dev-reel {
+  display: none;
+}
+
+.mn-hero-phone-video {
   position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  background: #0b0b0e;
+}
+
+.mn-dev-code {
+  position: relative;
   z-index: 3;
-  top: calc(100% - 56px);
-  left: -3%;
-  width: 58%;
+  width: min(430px, 58%);
   padding: 12px 14px 14px;
   background: #141416;
   color: #e8e8ea;
@@ -1403,6 +1474,36 @@ html.dark .mn-social-gh {
   color: #6b6b74;
 }
 
+/* ---------- Hero laptop code card: Aceternity Terminal ---------- */
+
+/* The floating card keeps its legacy position/rotate/float animation; the
+   Terminal portal replaces the head + <code> content. The Terminal renders
+   at its exact source size (576px wide, 320px scroll area) and is zoomed
+   down to fit the card, so the component itself stays verbatim. */
+.mn-dev-code-terminal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+}
+
+.mn-dev-code-terminal .mn-dev-code-head,
+.mn-dev-code-terminal code {
+  display: none;
+}
+
+.mn-hero-terminal {
+  zoom: 0.52;
+}
+
+@media (max-width: 720px) {
+  .mn-dev-code-terminal .mn-hero-terminal {
+    zoom: 0.42;
+  }
+}
+
 @keyframes mn-dev-float {
   0%,
   100% {
@@ -1414,40 +1515,32 @@ html.dark .mn-social-gh {
   }
 }
 
-@media (max-width: 960px) {
-  .mn-hero-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .mn-hero-right {
-    min-height: clamp(360px, 70vw, 520px);
-    margin-top: clamp(8px, 2vw, 20px);
-  }
-}
-
 @media (max-width: 560px) {
-  .mn-hero-top {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-  }
-
-  .mn-hero-foot {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .mn-hero-loc {
-    justify-items: start;
-    text-align: left;
+  .mn-hero-dev-row {
+    gap: 16px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mn-status-dot,
   .mn-dev-phone,
   .mn-dev-code {
     animation: none;
+  }
+
+  .mn-hero-title .mn-char {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .mn-title-aura {
+    animation: none;
+    opacity: 1;
+  }
+
+  .mn-hero [data-reveal] {
+    transition: none;
   }
 
   .mn-brand {
@@ -1684,6 +1777,34 @@ html.dark .mn-social-gh {
   border-radius: var(--radius-pill);
   padding: 7px 14px;
   background: var(--surface);
+}
+
+/* ---------- About soft skills: RotatingText pill (reactbits) ---------- */
+/* The three static pills collapse into one rotating pill; the legacy list
+   stays for no-JS but hides once the React pill mounts. */
+.mn-softskills-hidden {
+  display: none;
+}
+
+.mn-softskills-rotate {
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+  margin: 26px 0 0;
+}
+
+.mn-softskills-rotate .mn-softskills-text {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mn-softskills-rotate .mn-rt-word-mask {
+  overflow: hidden;
+  padding-bottom: 2px;
 }
 
 .mn-about-figure {
@@ -2708,6 +2829,326 @@ html.dark .mn-social-gh {
 .mn-folder-sub {
   color: var(--muted);
   font-size: 0.92rem;
+}
+
+/* ---------- Projects: React Bits <Folder /> replacement ---------- */
+
+/* Once the React folder mounts, the legacy gate + work window step aside
+   (they remain in the DOM for the no-JS / legacy-page fallback). */
+.mn-folder-react .mn-folder-gate,
+.mn-folder-react .mn-work-window {
+  display: none;
+}
+
+.mn-folder-react-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(28px, 5vh, 44px);
+  width: 100%;
+  text-align: center;
+}
+
+.mn-folder-react-wrap .folder-root {
+  /* Extra room: spread-layout pages swing out past the folder body */
+  margin: 40px 0 56px;
+}
+
+/* Project card rendered inside each folder page (mirrors .folder-doc) */
+.mn-pf-card {
+  display: flex;
+  height: 100%;
+  box-sizing: border-box;
+  flex-direction: column;
+  gap: calc(6px * var(--folder-scale, 1));
+  padding: calc(12px * var(--folder-scale, 1)) calc(12px * var(--folder-scale, 1));
+  text-align: left;
+}
+
+.mn-pf-thumb {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: calc(4px * var(--folder-scale, 1));
+  background: rgb(0 0 0 / 0.06);
+}
+
+.mn-pf-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mn-pf-title {
+  overflow: hidden;
+  color: var(--folder-paper-text, #18181b);
+  font-size: calc(10.5px * var(--folder-scale, 1));
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mn-pf-tag {
+  color: rgb(24 24 27 / 0.55);
+  font-size: calc(8.5px * var(--folder-scale, 1));
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Quick-look dialog (replaces the legacy in-window preview sheet) */
+.mn-pf-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 48px);
+  background: rgb(10 10 12 / 0.55);
+  backdrop-filter: blur(6px);
+  animation: mn-pf-fade 0.25s var(--ease);
+}
+
+@keyframes mn-pf-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.mn-pf-sheet {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 32px);
+  align-items: start;
+  width: min(920px, 100%);
+  max-height: 86vh;
+  overflow: auto;
+  padding: clamp(18px, 3vw, 30px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 28px 80px rgb(0 0 0 / 0.3);
+  animation: mn-pf-pop 0.3s var(--ease);
+}
+
+@keyframes mn-pf-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+.mn-pf-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.mn-pf-media {
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+}
+
+.mn-pf-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.mn-pf-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.mn-pf-modal-tag {
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mn-pf-info h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.mn-pf-info p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 760px) {
+  .mn-pf-sheet {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Quick-look extras: poster matte + like badge */
+.mn-pf-modal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.mn-pf-modal-likes {
+  color: var(--muted);
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+}
+
+.mn-pf-media[data-fit="contain"] {
+  background: #101014;
+}
+
+.mn-pf-media[data-fit="contain"] img {
+  object-fit: contain;
+  max-height: 62vh;
+}
+
+/* ---------- Full project archive under the folder ---------- */
+/* The folder keeps its six featured pages; everything else (and those six)
+   lives in this filterable grid so every project is visible at a glance. */
+.mn-pf-archive {
+  width: 100%;
+  margin-top: clamp(10px, 2vh, 24px);
+  text-align: left;
+}
+
+.mn-pf-archive-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mn-pf-archive-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.mn-pf-archive-count {
+  color: var(--muted);
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.mn-pf-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 18px;
+}
+
+.mn-pf-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+
+.mn-pf-chip:hover {
+  border-color: var(--ink);
+}
+
+.mn-pf-chip[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+
+.mn-pf-chip-count {
+  opacity: 0.55;
+}
+
+/* ---------- All projects: FlexCarousel lens row (reactbits) ---------- */
+/* The archive grid becomes a WebGL carousel: every project flows in one
+   row that bends through the invisible lens. Height is reserved here and
+   the captions are themed to the sheet in both modes. */
+.mn-pf-carousel {
+  width: 100%;
+  height: clamp(300px, 40vw, 460px);
+  margin-top: 18px;
+}
+
+.mn-pf-carousel .flex-carousel__title {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.mn-pf-carousel .flex-carousel__subtitle {
+  color: var(--muted);
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mn-pf-carousel .flex-carousel__count {
+  color: var(--muted);
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@media (max-width: 640px) {
+  .mn-pf-carousel {
+    height: clamp(260px, 74vw, 340px);
+  }
+
+  .mn-pf-carousel .flex-carousel__title {
+    font-size: 0.95rem;
+  }
+
+  .mn-pf-carousel .flex-carousel__subtitle {
+    font-size: 0.6rem;
+  }
 }
 
 /* Opened folder window: filter bar and project grid live inside */
@@ -3942,6 +4383,37 @@ html.pre-lock body {
   }
 }
 
+/* ---------- Roles marquee: TextLoop wave ribbon (reactbits) ---------- */
+/* The hairline strip grows into a tall stage for the ribbon wave; the svg
+   keeps its 1200x520 ratio and --mn-loop-crop (set from JS) trims the empty
+   bands above/below the wave so the ribbon fills the strip edge to edge. */
+.mn-marquee-loop {
+  position: relative;
+  padding: 0;
+  /* No hairline borders / surface block: the ribbon floats free on the
+     sheet instead of looking clipped inside a boxed strip. Height is a
+     fallback; JS sizes it to the wave's real extent so nothing crops. */
+  border-top: 0;
+  border-bottom: 0;
+  background: transparent;
+  height: clamp(140px, 18vw, 240px);
+}
+
+.mn-marquee-loop .mn-marquee-track {
+  display: none;
+}
+
+.mn-marquee-loop .mn-roles-loop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.mn-marquee-loop .mn-roles-loop .text-loop-svg {
+  margin: calc(-1 * var(--mn-loop-crop, 0px)) 0;
+}
+
 /* ---------- Services ---------- */
 
 /* Services: statement typography (albertirgi.com-style) — scroll-scrub word
@@ -4968,37 +5440,23 @@ body.mn-menu-open {
   }
 }
 
-/* Mobile: the laptop steps out entirely — the handset carries the collage */
+/* Mobile: the stack tightens — code card and handset share one row under
+   the laptop, like the reference layout */
 @media (max-width: 640px) {
-  .mn-hero-right {
-    min-height: clamp(520px, 130vw, 640px);
-  }
-
-  /* Wrapper stays (static) so the code card keeps an anchor, but the
-     laptop hardware itself is gone */
-  .mn-dev-laptop {
-    position: static;
-    width: auto;
-    aspect-ratio: auto;
-  }
-
-  .mn-dev-laptop .mn-dev-viewport,
-  .mn-dev-laptop .mn-dev-frame {
-    display: none;
-  }
-
-  .mn-dev-phone {
-    top: 0;
-    left: 12%;
-    right: auto;
-    width: 60%;
+  .mn-hero-dev-row {
+    gap: 18px;
   }
 
   .mn-dev-code {
-    top: auto;
-    bottom: 10%;
-    left: 4%;
-    width: 76%;
+    width: 58%;
+  }
+
+  .mn-dev-phone {
+    width: 34%;
+  }
+
+  .mn-dev-code-terminal .mn-hero-terminal {
+    zoom: 0.32;
   }
 }
 

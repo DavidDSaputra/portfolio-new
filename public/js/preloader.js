@@ -118,6 +118,8 @@
     setTimeout(function () {
       spans[wi].style.transform = "translateY(-110%)";
       root.classList.add("is-out");
+      /* hero entrance cue: blocks gated on pre-lock rise once this lands */
+      document.documentElement.classList.add("pre-done");
       setTimeout(function () {
         root.classList.add("is-lift");
         document.documentElement.classList.remove("pre-lock");

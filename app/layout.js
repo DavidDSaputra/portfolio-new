@@ -1,5 +1,6 @@
 import "../style.css";
 import "./globals.css";
+import SiteRippleBackground from "../components/site-ripple-background";
 
 export const metadata = {
   title: {
@@ -30,11 +31,22 @@ export default function RootLayout({ children }) {
               'try{if(localStorage.getItem("mn-theme")==="dark"){document.documentElement.classList.add("dark");}}catch(e){}',
           }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            // Take the splash lock before first paint so the hero's hidden
+            // entrance state is the initial one (no visible-then-hide flash).
+            // Mirrors the reduced-motion bail in preloader.js; the failsafe
+            // lifts the lock again should the splash never flag completion.
+            __html:
+              '(function(){var r=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(r)return;var e=document.documentElement;e.classList.add("pre-lock");setTimeout(function(){if(!e.classList.contains("pre-done"))e.classList.remove("pre-lock");},9000);})();',
+          }}
+        />
         <noscript>
           <style>{".preloader{display:none!important}"}</style>
         </noscript>
       </head>
       <body>
+        <SiteRippleBackground />
         <div className="site-shell">{children}</div>
       </body>
     </html>
