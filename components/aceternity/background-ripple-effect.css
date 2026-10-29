@@ -1,0 +1,156 @@
+/* Aceternity Background Ripple Effect — hand-converted Tailwind v4 utilities
+   (this project ships no Tailwind). Values mirror the source exactly:
+   neutral palette hexes for the --cell-* theme, 0.5px borders, 40%/80% cell
+   opacity, 150ms opacity transition and the dark inset glow. */
+
+.mn-ripple-root {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  /* [--cell-border-color:var(--color-neutral-300)] */
+  --cell-border-color: #d4d4d4;
+  /* [--cell-fill-color:var(--color-neutral-100)] */
+  --cell-fill-color: #f5f5f5;
+  /* [--cell-shadow-color:var(--color-neutral-500)] */
+  --cell-shadow-color: #737373;
+}
+
+html.dark .mn-ripple-root {
+  /* dark:[--cell-border-color:var(--color-neutral-700)] */
+  --cell-border-color: #404040;
+  /* dark:[--cell-fill-color:var(--color-neutral-900)] */
+  --cell-fill-color: #171717;
+  /* dark:[--cell-shadow-color:var(--color-neutral-800)] */
+  --cell-shadow-color: #262626;
+}
+
+/* mask-radial-at-top + mask-radial-from-20%: radial gradient pinned at the
+   top edge, solid until 20% then fading to transparent.
+   The source's `opacity-600` compiles to opacity:600% which CSS clamps to 1,
+   so the wrapper intentionally carries no opacity rule of its own. */
+.mn-ripple-grid {
+  position: relative;
+  z-index: 3;
+  -webkit-mask-image: radial-gradient(at top, #000 20%, transparent 100%);
+  mask-image: radial-gradient(at top, #000 20%, transparent 100%);
+}
+
+/* border-[0.5px] opacity-40 transition-opacity duration-150 will-change-transform */
+.mn-ripple-cell {
+  position: relative;
+  border: 0.5px solid;
+  opacity: 0.4;
+  transition: opacity 150ms;
+  will-change: transform;
+}
+
+/* hover:opacity-80 */
+.mn-ripple-cell:hover {
+  opacity: 0.8;
+}
+
+/* dark:shadow-[0px_0px_40px_1px_var(--cell-shadow-color)_inset] */
+html.dark .mn-ripple-cell {
+  box-shadow: 0 0 40px 1px var(--cell-shadow-color) inset;
+}
+
+/* animate-cell-ripple [animation-fill-mode:none] — delay/duration arrive per
+   cell through --delay/--duration set from the distance to the clicked cell */
+.mn-ripple-anim {
+  animation: mn-cell-ripple var(--duration, 400ms) ease-out var(--delay, 0ms);
+  animation-fill-mode: none;
+}
+
+/* pointer-events-none for non-interactive grids */
+.mn-ripple-static {
+  pointer-events: none;
+}
+
+/* The ripple keyframes ship inside Aceternity's Tailwind theme and were not
+   part of the pasted source; recreated here to honour the --delay/--duration
+   contract: the wavefront dips and brightens each cell as it passes. */
+@keyframes mn-cell-ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  35% {
+    transform: scale(0.86);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mn-ripple-anim {
+    animation: none;
+  }
+}
+
+/* ---------- Demo shell (components/background-ripple-effect-demo.jsx) ---------- */
+/* relative flex min-h-screen w-full flex-col items-start justify-start overflow-hidden */
+.mn-ripple-demo {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+/* mt-60 w-full */
+.mn-ripple-demo-copy {
+  margin-top: 15rem;
+  width: 100%;
+}
+
+/* relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-neutral-800 md:text-4xl lg:text-7xl dark:text-neutral-100 */
+.mn-ripple-demo-title {
+  position: relative;
+  z-index: 10;
+  margin: 0 auto;
+  max-width: 56rem;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: #262626;
+}
+
+html.dark .mn-ripple-demo-title {
+  color: #f5f5f5;
+}
+
+/* relative z-10 mx-auto mt-4 max-w-xl text-center text-neutral-800 dark:text-neutral-500 */
+.mn-ripple-demo-lede {
+  position: relative;
+  z-index: 10;
+  margin: 1rem auto 0;
+  max-width: 36rem;
+  text-align: center;
+  color: #262626;
+}
+
+html.dark .mn-ripple-demo-lede {
+  color: #737373;
+}
+
+@media (min-width: 768px) {
+  .mn-ripple-demo-title {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mn-ripple-demo-title {
+    font-size: 4.5rem;
+    line-height: 1;
+  }
+}

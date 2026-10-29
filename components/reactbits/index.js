@@ -6,3 +6,8 @@ export { default as ClickSpark } from "./ClickSpark";
 export { default as CountUp } from "./CountUp";
 export { default as LightPillar } from "./LightPillar";
 export { default as SoftAurora } from "./SoftAurora";
+export { default as TechText } from "./TechText";
+export { default as TextLoop } from "./TextLoop";
+export { default as RotatingText } from "./RotatingText";
+export { default as FlexCarousel } from "./FlexCarousel";
+export { default as Folder } from "./Folder";
