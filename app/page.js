@@ -1,5 +1,11 @@
 import { getLegacyPage } from "../lib/legacy-page";
 import LegacyPageShell from "../components/legacy-page-shell";
+import HeroTechTitle from "../components/hero-tech-title";
+import RolesMarqueeLoop from "../components/roles-marquee-loop";
+import HeroTerminalCard from "../components/hero-terminal-card";
+import HeroPhoneVideo from "../components/hero-phone-video";
+import AboutRotatingTraits from "../components/about-rotating-traits";
+import ProjectsFolder from "../components/projects-folder";
 
 export const metadata = {
   title: "David Saputra | Frontend Developer, Vibe Coder & Prompt Engineer",
@@ -32,20 +38,28 @@ export default function HomePage() {
   const page = getLegacyPage("index.html");
 
   return (
-    <LegacyPageShell
-      html={page.bodyHtml}
-      bodyClassName={page.bodyClassName}
-      scripts={[
-        "/js/preloader.js",
-        "/main.js",
-        "/js/mobile-menu.js",
-        "/js/glass-nav.js",
-        "https://unpkg.com/aos@next/dist/aos.js",
-        "/js/lenis.min.js",
-        "/js/smooth-scroll.js",
-        "/js/home-page.js",
-      ]}
-      moduleScripts={["/chat.js"]}
-    />
+    <>
+      <LegacyPageShell
+        html={page.bodyHtml}
+        bodyClassName={page.bodyClassName}
+        scripts={[
+          "/js/preloader.js",
+          "/main.js",
+          "/js/mobile-menu.js",
+          "/js/glass-nav.js",
+          "https://unpkg.com/aos@next/dist/aos.js",
+          "/js/lenis.min.js",
+          "/js/smooth-scroll.js",
+          "/js/home-page.js",
+        ]}
+        moduleScripts={["/chat.js"]}
+      />
+      <HeroTechTitle />
+      <RolesMarqueeLoop />
+      <HeroTerminalCard />
+      <HeroPhoneVideo />
+      <AboutRotatingTraits />
+      <ProjectsFolder />
+    </>
   );
 }
