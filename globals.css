@@ -1521,6 +1521,60 @@ html.dark .mn-social-gh {
   }
 }
 
+/* Desktop keeps its own composition: copy column on the left, device
+   collage on the right — the single tidy stack stays mobile-only */
+@media (min-width: 960px) {
+  .mn-hero > .mn-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+    grid-template-areas:
+      "name devices"
+      "lede devices"
+      "actions devices"
+      "foot devices";
+    column-gap: clamp(44px, 5vw, 80px);
+    align-content: center;
+  }
+
+  .mn-hero-name {
+    grid-area: name;
+  }
+
+  .mn-hero-lede {
+    grid-area: lede;
+  }
+
+  .mn-hero-actions {
+    grid-area: actions;
+  }
+
+  .mn-hero-foot {
+    grid-area: foot;
+  }
+
+  .mn-hero-devices {
+    grid-area: devices;
+    align-self: center;
+    margin-top: 0;
+  }
+
+  .mn-dev-laptop {
+    width: 100%;
+  }
+
+  .mn-hero-dev-row {
+    gap: clamp(16px, 2vw, 28px);
+  }
+
+  .mn-dev-code {
+    width: 62%;
+  }
+
+  .mn-dev-phone {
+    width: 33%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mn-dev-phone,
   .mn-dev-code {
