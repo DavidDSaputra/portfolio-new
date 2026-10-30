@@ -1,0 +1,6 @@
+:HL["/_next/static/chunks/2cpuo5wh6zfem.css","style"]
+:HL["/_next/static/chunks/02t6544-0rih0.css","style"]
+:HL["/_next/static/chunks/3_f7t3f2ugk14.css","style"]
+:HL["https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap","style"]
+:HL["https://unpkg.com/aos@next/dist/aos.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"reactbits-demo","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"uVC4rumfjZV7bFXktf5f1"}

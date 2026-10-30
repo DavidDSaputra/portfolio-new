@@ -1,0 +1,678 @@
+1:"$Sreact.fragment"
+2:I[36453,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/311y9mskulzvt.js"],"default"]
+11:I[79520,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/311y9mskulzvt.js"],""]
+12:I[97367,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js"],"OutletBoundary"]
+13:"$Sreact.suspense"
+3:T246a,
+    /* =====================================================
+       BLOG PAGE — minimalist theme (matches homepage system)
+       ===================================================== */
+
+    .mn-blog-wrap {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 48px);
+    }
+
+    /* ---------- Hero ---------- */
+
+    .mn-blog-hero {
+      padding: calc(96px + clamp(36px, 6vw, 72px)) 0 clamp(28px, 4vw, 48px);
+    }
+
+    .mn-blog-kicker {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #74747e;
+      margin: 0 0 clamp(16px, 2.4vw, 24px);
+    }
+
+    .mn-blog-kicker-sep {
+      color: #d9d9d3;
+    }
+
+    .mn-blog-title {
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-size: clamp(2.8rem, 8vw, 5.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.015em;
+      color: #16161a;
+      margin: 0 0 clamp(14px, 2vw, 20px);
+    }
+
+    .mn-blog-lede {
+      max-width: 56ch;
+      font-size: clamp(1rem, 1.5vw, 1.12rem);
+      line-height: 1.65;
+      color: #3d3d45;
+      margin: 0 0 clamp(10px, 1.6vw, 14px);
+    }
+
+    .mn-blog-count {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #74747e;
+    }
+
+    /* ---------- Grid & cards ---------- */
+
+    .mn-blog-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(16px, 2.4vw, 22px);
+      padding-bottom: clamp(48px, 7vw, 88px);
+    }
+
+    .mn-blog-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 22px 22px 20px;
+      background: #ffffff;
+      border: 1px solid #e8e8e4;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .mn-blog-card:hover {
+      transform: translateY(-4px);
+      border-color: #d9d9d3;
+      box-shadow: 0 14px 34px rgba(22, 22, 26, 0.08);
+    }
+
+    .mn-blog-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .mn-blog-num {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: #74747e;
+    }
+
+    .mn-blog-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #3d3d45;
+      background: #fbfbfa;
+      border: 1px solid #e8e8e4;
+      border-radius: 999px;
+      padding: 4px 10px;
+      white-space: nowrap;
+    }
+
+    .mn-blog-card-title {
+      font-size: 1.22rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      color: #16161a;
+      margin: 0;
+    }
+
+    .mn-blog-excerpt {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #74747e;
+      margin: 0;
+    }
+
+    .mn-blog-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 8px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #16161a;
+    }
+
+    .mn-blog-link span {
+      transition: transform 0.3s ease;
+    }
+
+    .mn-blog-card:hover .mn-blog-link span {
+      transform: translateX(4px);
+    }
+
+    /* ---------- Article modal ---------- */
+
+    .mn-blog-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(12px, 3vw, 28px);
+      background: rgba(22, 22, 26, 0.44);
+      backdrop-filter: blur(4px);
+    }
+
+    .mn-blog-modal.active {
+      display: flex;
+    }
+
+    .mn-blog-modal-panel {
+      display: flex;
+      flex-direction: column;
+      width: min(780px, 100%);
+      max-height: min(86vh, 900px);
+      background: #fbfbfa;
+      border: 1px solid #e8e8e4;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(22, 22, 26, 0.25);
+    }
+
+    .mn-blog-modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px;
+      border-bottom: 1px solid #e8e8e4;
+      background: #ffffff;
+    }
+
+    .mn-blog-modal-kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #74747e;
+    }
+
+    .mn-blog-modal-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+      line-height: 1;
+      color: #16161a;
+      background: transparent;
+      border: 1px solid #d9d9d3;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .mn-blog-modal-close:hover {
+      background: #16161a;
+      border-color: #16161a;
+      color: #fbfbfa;
+    }
+
+    .mn-blog-modal-body {
+      padding: 26px clamp(20px, 4vw, 32px) 36px;
+      overflow-y: auto;
+    }
+
+    /* ---------- Article typography ---------- */
+
+    .mn-blog-modal-body h1 {
+      font-size: clamp(1.45rem, 3vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      color: #16161a;
+      margin: 0 0 14px;
+    }
+
+    .mn-blog-modal-body h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #16161a;
+      margin: 26px 0 10px;
+    }
+
+    .mn-blog-modal-body h3 {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: #16161a;
+      margin: 18px 0 8px;
+    }
+
+    .mn-blog-modal-body p {
+      font-size: 0.96rem;
+      line-height: 1.7;
+      color: #3d3d45;
+      margin: 0 0 12px;
+    }
+
+    .mn-blog-modal-body ul,
+    .mn-blog-modal-body ol {
+      padding-left: 20px;
+      margin: 0 0 14px;
+      color: #3d3d45;
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    .mn-blog-modal-body li {
+      margin: 4px 0;
+    }
+
+    .mn-blog-modal-body code {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.84em;
+      background: #f0f0ec;
+      border: 1px solid #e8e8e4;
+      border-radius: 6px;
+      padding: 2px 6px;
+    }
+
+    .mn-blog-modal-body pre {
+      background: #16161a;
+      border-radius: 12px;
+      padding: 16px 18px;
+      overflow-x: auto;
+      margin: 0 0 16px;
+    }
+
+    .mn-blog-modal-body pre code {
+      display: block;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      color: #e8e8e4;
+      font-size: 0.82rem;
+      line-height: 1.65;
+    }
+
+    .code-block-wrapper {
+      position: relative;
+    }
+
+    .copy-code-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fbfbfa;
+      background: rgba(251, 251, 250, 0.14);
+      border: 1px solid rgba(251, 251, 250, 0.28);
+      border-radius: 8px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .copy-code-btn:hover {
+      background: rgba(251, 251, 250, 0.24);
+    }
+
+    .copy-code-btn.copied {
+      background: #fbfbfa;
+      color: #16161a;
+    }
+
+    .copy-code-btn svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+    }
+
+    /* ---------- Share buttons ---------- */
+
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #e8e8e4;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #3d3d45;
+      background: #ffffff;
+      border: 1px solid #e8e8e4;
+      border-radius: 999px;
+      padding: 7px 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .share-btn:hover {
+      color: #16161a;
+      border-color: #16161a;
+    }
+
+    .share-btn svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
+    }
+
+    /* ---------- Responsive ---------- */
+
+    @media (max-width: 760px) {
+      .mn-blog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mn-blog-modal-panel {
+        max-height: 92vh;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mn-blog-card,
+      .mn-blog-link span {
+        transition: none;
+      }
+    }
+  0:{"rsc":["$","$1","c",{"children":[[["$","$L2",null,{}],["$","style",null,{"dangerouslySetInnerHTML":{"__html":"$3"}}],"$L4",["$L5","$L6","$L7","$L8","$L9","$La","$Lb","$Lc","$Ld"],[]],["$Le"],"$Lf"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"uVC4rumfjZV7bFXktf5f1"}
+10:T39ac,
+  <div class="mn-sheet">
+  <a class="mn-brand" href="/" aria-label="David Saputra — home">
+    <img src="/src/png/logo-david.png" alt="">
+  </a>
+  <div class="preloader" id="mnPre" aria-hidden="true">
+    <div class="pre-center">
+      <div class="pre-words" id="preWords"></div>
+      <div class="pre-grid" id="preGrid"></div>
+      <p class="pre-note"><span><b id="preDone">0</b> / <b id="preTotal">0</b> assets loaded</span></p>
+    </div>
+    <div class="pre-foot">
+      <span class="pre-foot-label"><i>David Saputra / Portfolio</i></span>
+      <span class="pre-count" id="preCount"></span>
+    </div>
+  </div>
+  
+
+  <!-- Page Transition -->
+  <div class="page-transition" id="pageTransition">
+    <div class="page-transition-text">Loading</div>
+  </div>
+
+  <div class="cursor-inner" id="cursor-inner"></div>
+  <div class="cursor-outer" id="cursor-outer"></div>
+
+  <!-- ======================================================
+       NAVBAR (same as homepage)
+       ====================================================== -->
+  <header class="mn-header">
+    <nav class="gn nav--segmented" id="navbar" aria-label="Primary">
+      <button class="gn-ctrl gn-menu" id="gnMenu" type="button" aria-label="Open menu" aria-expanded="false"
+        aria-controls="circleMenu">
+        <svg class="gn-icon-open" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+        <svg class="gn-icon-close" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+      <div class="gn-seg-group">
+        <span class="gn-thumb" aria-hidden="true"></span>
+        <a class="gn-link" href="/#home"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </svg>Home</a>
+        <a class="gn-link" href="/#about"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+          </svg>About</a>
+        <a class="gn-link" href="/#experience"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z" />
+          </svg>Experience</a>
+        <a class="gn-link" href="/#skills"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z" />
+          </svg>Skills</a>
+        <a class="gn-link" href="/#projects"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z" />
+          </svg>Projects</a>
+        <a class="gn-link is-active" href="/blog"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+          </svg>Blog</a>
+        <a class="gn-link" href="/#footer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+          </svg>Contact</a>
+      </div>
+      <span class="gn-badge" id="gnBadge" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+        aria-label="Page scroll">0%</span>
+    </nav>
+  </header>
+
+  <div class="mn-circle-scrim" id="circleScrim" aria-hidden="true"></div>
+  <div class="mn-circle-menu" id="circleMenu">
+    <div class="mn-circle-ring">
+      <a class="mn-circle-item" style="--i:0;--x:0px;--y:-125px" href="/#home" aria-label="Home"><svg
+          viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <path d="M9 22V12h6v10" />
+        </svg><span class="mn-circle-label">Home</span></a>
+      <a class="mn-circle-item" style="--i:1;--x:98px;--y:-78px" href="/#about" aria-label="About"><svg
+          viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="8" r="4" />
+          <path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
+        </svg><span class="mn-circle-label">About</span></a>
+      <a class="mn-circle-item" style="--i:2;--x:122px;--y:28px" href="/#experience"
+          aria-label="Experience"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="7" width="18" height="13" rx="2" />
+          <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+        </svg><span class="mn-circle-label">Experience</span></a>
+      <a class="mn-circle-item" style="--i:3;--x:54px;--y:113px" href="/#skills" aria-label="Skills"><svg
+          viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path
+            d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+        </svg><span class="mn-circle-label">Skills</span></a>
+      <a class="mn-circle-item" style="--i:4;--x:-54px;--y:113px" href="/#projects" aria-label="Projects"><svg
+          viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 4h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+        </svg><span class="mn-circle-label">Projects</span></a>
+      <a class="mn-circle-item" style="--i:5;--x:-122px;--y:28px" href="/blog" aria-label="Blog"><svg
+          viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 20h9" />
+          <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+        </svg><span class="mn-circle-label">Blog</span></a>
+      <a class="mn-circle-item" style="--i:6;--x:-98px;--y:-78px" href="/#footer" aria-label="Contact"><svg
+          viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="m3 7 9 6 9-6" />
+        </svg><span class="mn-circle-label">Contact</span></a>
+    </div>
+    <button class="mn-circle-trigger" id="circleTrigger" type="button" aria-label="Open menu" aria-expanded="false">
+      <span class="mn-circle-icon mn-icon-open"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" /></svg></span>
+      <span class="mn-circle-icon mn-icon-close"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12" /></svg></span>
+    </button>
+  </div>
+
+  <main class="mn-main">
+    <!-- ============ HERO ============ -->
+    <section class="mn-blog-hero">
+      <div class="mn-blog-wrap">
+        <p class="mn-blog-kicker" data-aos="fade-up">
+          <span>David Saputra / Blog</span>
+          <span class="mn-blog-kicker-sep" aria-hidden="true">/</span>
+          <span>Notes &amp; tutorials</span>
+        </p>
+        <h1 class="mn-blog-title" data-aos="fade-up" data-aos-delay="80">Writing that keeps<br>the craft clear.</h1>
+        <p class="mn-blog-lede" data-aos="fade-up" data-aos-delay="160">
+          Tutorials, guides and field notes on web development — Git workflows, Laravel setup, and the
+          modern tooling I use every day.
+        </p>
+        <span class="mn-blog-count" data-aos="fade-up" data-aos-delay="220">5 articles published</span>
+      </div>
+    </section>
+
+    <!-- ============ ARTICLES ============ -->
+    <section id="blog">
+      <div class="mn-blog-wrap">
+        <div class="mn-blog-grid">
+
+          <article class="mn-blog-card" data-aos="fade-up" onclick="openBlogModal('blog1')">
+            <div class="mn-blog-card-top">
+              <span class="mn-blog-num">01</span>
+              <span class="mn-blog-tag">Git &amp; GitHub</span>
+            </div>
+            <h3 class="mn-blog-card-title">Cara Membuat Repository di GitHub</h3>
+            <p class="mn-blog-excerpt">Panduan langkah demi langkah membuat repository pertama kamu — dari
+              setup awal, clone, sampai push commit pertama.</p>
+            <span class="mn-blog-link">Read article <span aria-hidden="true">→</span></span>
+          </article>
+
+          <article class="mn-blog-card" data-aos="fade-up" data-aos-delay="60" onclick="openBlogModal('blog2')">
+            <div class="mn-blog-card-top">
+              <span class="mn-blog-num">02</span>
+              <span class="mn-blog-tag">Git · Teamwork</span>
+            </div>
+            <h3 class="mn-blog-card-title">Git Collaboration: Kerja Bareng dengan Tim</h3>
+            <p class="mn-blog-excerpt">Branching strategy, pull request, dan penyelesaian merge conflict —
+              workflow kolaborasi yang proper untuk kerja tim.</p>
+            <span class="mn-blog-link">Read article <span aria-hidden="true">→</span></span>
+          </article>
+
+          <article class="mn-blog-card" data-aos="fade-up" data-aos-delay="120" onclick="openBlogModal('blog3')">
+            <div class="mn-blog-card-top">
+              <span class="mn-blog-num">03</span>
+              <span class="mn-blog-tag">Laravel</span>
+            </div>
+            <h3 class="mn-blog-card-title">Install Laravel: Setup Development Environment</h3>
+            <p class="mn-blog-excerpt">Setup environment development Laravel dari nol — Composer, struktur
+              project, sampai aplikasi pertama berjalan.</p>
+            <span class="mn-blog-link">Read article <span aria-hidden="true">→</span></span>
+          </article>
+
+          <article class="mn-blog-card" data-aos="fade-up" data-aos-delay="180" onclick="openBlogModal('blog4')">
+            <div class="mn-blog-card-top">
+              <span class="mn-blog-num">04</span>
+              <span class="mn-blog-tag">Git · Cheatsheet</span>
+            </div>
+            <h3 class="mn-blog-card-title">Git Commands yang Wajib Kamu Tahu</h3>
+            <p class="mn-blog-excerpt">Kumpulan perintah Git esensial untuk kerja sehari-hari, lengkap dengan
+              contoh penggunaan dan kapan memakainya.</p>
+            <span class="mn-blog-link">Read article <span aria-hidden="true">→</span></span>
+          </article>
+
+          <article class="mn-blog-card" data-aos="fade-up" data-aos-delay="240" onclick="openBlogModal('blog5')">
+            <div class="mn-blog-card-top">
+              <span class="mn-blog-num">05</span>
+              <span class="mn-blog-tag">CI/CD</span>
+            </div>
+            <h3 class="mn-blog-card-title">GitHub Actions: Automate Your Workflow</h3>
+            <p class="mn-blog-excerpt">Otomasi build, test, dan deploy dengan GitHub Actions — workflow,
+              matrix strategy, caching, dan conditional execution.</p>
+            <span class="mn-blog-link">Read article <span aria-hidden="true">→</span></span>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ ARTICLE MODAL ============ -->
+  <div class="mn-blog-modal" id="blogModal" aria-hidden="true">
+    <div class="mn-blog-modal-panel" role="dialog" aria-modal="true" aria-label="Blog article">
+      <header class="mn-blog-modal-head">
+        <span class="mn-blog-modal-kicker">Article</span>
+        <button class="mn-blog-modal-close blog-modal-close" onclick="closeBlogModal()"
+          aria-label="Tutup artikel">✕</button>
+      </header>
+      <div class="mn-blog-modal-body blog-modal-body" id="blogModalBody"></div>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer id="footer" class="mn-footer">
+    <div class="mn-blog-wrap">
+      <p class="mn-footer-kicker" data-aos="fade-up">Get in touch</p>
+      <h2 class="mn-footer-title" data-aos="fade-up" data-aos-delay="60">Let's build something clean &amp;
+        useful.</h2>
+      <div class="mn-footer-actions" data-aos="fade-up" data-aos-delay="120">
+        <a class="mn-btn mn-btn-primary" href="mailto:davidsaputra2704@gmail.com">davidsaputra2704@gmail.com</a>
+        <a class="mn-btn mn-btn-ghost" href="https://github.com/DavidDSaputra" target="_blank"
+          rel="noreferrer">GitHub</a>
+        <a class="mn-btn mn-btn-ghost" href="https://www.linkedin.com/in/david-saputra-98b4b823b/" target="_blank"
+          rel="noreferrer">LinkedIn</a>
+        <a class="mn-btn mn-btn-ghost" href="https://www.instagram.com/david2470_/" target="_blank"
+          rel="noreferrer">Instagram</a>
+      </div>
+      <div class="mn-footer-meta">
+        <span>+62 895-0463-1048</span>
+        <span>Tangerang, Indonesia</span>
+        <a href="https://davidsaputra.my.id/" target="_blank" rel="noreferrer">davidsaputra.my.id</a>
+      </div>
+      <div class="mn-footer-bottom">
+        <span>© 2026 David Saputra</span>
+        <span>Designed &amp; built with care</span>
+      </div>
+    </div>
+  </footer>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+4:["$","div",null,{"suppressHydrationWarning":true,"dangerouslySetInnerHTML":{"__html":"$10"}}]
+5:["$","$L11","/js/preloader.js",{"src":"/js/preloader.js","strategy":"afterInteractive"}]
+6:["$","$L11","/main.js",{"src":"/main.js","strategy":"afterInteractive"}]
+7:["$","$L11","/js/mobile-menu.js",{"src":"/js/mobile-menu.js","strategy":"afterInteractive"}]
+8:["$","$L11","/js/glass-nav.js",{"src":"/js/glass-nav.js","strategy":"afterInteractive"}]
+9:["$","$L11","https://unpkg.com/aos@next/dist/aos.js",{"src":"https://unpkg.com/aos@next/dist/aos.js","strategy":"afterInteractive"}]
+a:["$","$L11","/js/lenis.min.js",{"src":"/js/lenis.min.js","strategy":"afterInteractive"}]
+b:["$","$L11","/js/smooth-scroll.js",{"src":"/js/smooth-scroll.js","strategy":"afterInteractive"}]
+c:["$","$L11","/blog-content.js",{"src":"/blog-content.js","strategy":"afterInteractive"}]
+d:["$","$L11","/js/blog-page.js",{"src":"/js/blog-page.js","strategy":"afterInteractive"}]
+e:["$","script","script-0",{"src":"/_next/static/chunks/311y9mskulzvt.js","async":true}]
+f:["$","$L12",null,{"children":["$","$13",null,{"name":"Next.MetadataOutlet","children":"$@14"}]}]
+14:null

@@ -4,7 +4,8 @@
   "scripts": {
     "sync:legacy": "node scripts/generate-legacy-pages.mjs",
     "dev": "next dev",
-    "build": "node scripts/fetch-github-stats.mjs && next build && node scripts/ensure-blog-route.mjs",
+    "build": "node scripts/fetch-github-stats.mjs && next build && node scripts/ensure-blog-route.mjs && npm run publish:root",
+    "publish:root": "node scripts/publish-root.mjs",
     "start": "next start"
   },
   "dependencies": {
