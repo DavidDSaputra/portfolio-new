@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import Folder from "./reactbits/Folder";
-import FlexCarousel from "./reactbits/FlexCarousel";
+import DriftWall from "./reactbits/DriftWall";
 
 /* Replaces the legacy 3D folder gate + file-manager work window in #projects.
    The React Bits <Folder /> stays as the interactive centrepiece with six
@@ -322,21 +322,16 @@ export default function ProjectsFolder() {
     [filter],
   );
 
-  /* Carousel cards mirror the visible catalogue; visibleIdx maps a carousel
-     index back to the global PROJECTS index for the quick-look dialog. */
-  const carouselItems = useMemo(
+  /* Drift wall tiles carry the visible catalogue; tiles link straight out
+     (or to the APK for the download-only entry) instead of opening the
+     quick-look dialog — the folder above keeps that role. */
+  const driftItems = useMemo(
     () =>
       visible.map((entry) => ({
-        src: entry.image,
-        alt: entry.title,
+        image: entry.image,
         title: entry.title,
-        subtitle: entry.tag,
+        href: entry.href || entry.download || undefined,
       })),
-    [visible],
-  );
-
-  const visibleIdx = useMemo(
-    () => visible.map((entry) => PROJECTS.indexOf(entry)),
     [visible],
   );
 
@@ -384,7 +379,7 @@ export default function ProjectsFolder() {
           />
           <p className="mn-folder-sub">
             Klik foldernya untuk project unggulan — arsip lengkapnya
-            mengalir di carousel bawah (drag atau scroll horizontal).
+            mengalir di dinding drift bawah (hover untuk mengangkat tile).
           </p>
 
           <div className="mn-pf-archive">
@@ -413,21 +408,26 @@ export default function ProjectsFolder() {
               ))}
             </div>
             <div className="mn-pf-carousel">
-              <FlexCarousel
-                items={carouselItems}
-                preset="liquid"
-                intro="rise"
-                cardHeight={0.62}
-                gap={14}
+              <DriftWall
+                items={driftItems}
+                columns={narrow ? 3 : vw <= 960 ? 4 : 5}
+                tileWidth={narrow ? 148 : vw <= 960 ? 176 : 208}
+                tileHeight={Math.round((narrow ? 148 : vw <= 960 ? 176 : 208) * 0.66)}
+                gap={16}
                 radius={12}
-                fit="natural"
-                squeeze={0.2}
-                focusOnClick={false}
-                autoplay
-                interval={4}
-                captions
-                captureWheel={false}
-                onSelect={(index) => setActive(visibleIdx[index])}
+                tilt={14}
+                turn={-12}
+                perspective={1200}
+                depth={110}
+                speed={40}
+                direction="up"
+                variance={0.45}
+                parallax={0.6}
+                pauseOnHover
+                lift={56}
+                fade={0.65}
+                dim={0.5}
+                overlayColor={dark ? "#101014" : "#f4f4f2"}
               />
             </div>
           </div>

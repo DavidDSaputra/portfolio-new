@@ -3167,7 +3167,9 @@ html.dark .mn-social-gh {
    the captions are themed to the sheet in both modes. */
 .mn-pf-carousel {
   width: 100%;
-  height: clamp(300px, 40vw, 460px);
+  /* Drift wall needs a tall stage so the columns keep flowing behind the
+     perspective mask */
+  height: clamp(420px, 52vw, 620px);
   margin-top: 18px;
 }
 
@@ -3193,7 +3195,7 @@ html.dark .mn-social-gh {
 
 @media (max-width: 640px) {
   .mn-pf-carousel {
-    height: clamp(260px, 74vw, 340px);
+    height: clamp(340px, 96vw, 420px);
   }
 
   .mn-pf-carousel .flex-carousel__title {

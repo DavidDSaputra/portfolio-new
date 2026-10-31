@@ -399,7 +399,7 @@
         transition: none;
       }
     }
-  0:{"rsc":["$","$1","c",{"children":[[["$","$L2",null,{}],["$","style",null,{"dangerouslySetInnerHTML":{"__html":"$3"}}],"$L4",["$L5","$L6","$L7","$L8","$L9","$La","$Lb","$Lc","$Ld"],[]],["$Le"],"$Lf"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"uVC4rumfjZV7bFXktf5f1"}
+  0:{"rsc":["$","$1","c",{"children":[[["$","$L2",null,{}],["$","style",null,{"dangerouslySetInnerHTML":{"__html":"$3"}}],"$L4",["$L5","$L6","$L7","$L8","$L9","$La","$Lb","$Lc","$Ld"],[]],["$Le"],"$Lf"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"W_gcVXAz0R9z40GoXFzNZ"}
 10:T39ac,
   <div class="mn-sheet">
   <a class="mn-brand" href="/" aria-label="David Saputra — home">
