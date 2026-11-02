@@ -1141,18 +1141,45 @@ html:not(.pre-lock) .mn-hero-title .mn-char {
   margin-top: -0.4725em;
 }
 
-/* Entrance choreography: the hero blocks hold hidden while the splash owns
-   the screen (html.pre-lock) and rise in sequence — stagger index per block
-   via --d — the moment the preloader flags html.pre-done. No-JS visitors
-   never get pre-lock, so the hero simply reads visible. */
-.mn-hero [data-reveal] {
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+/* Entrance choreography: revealed blocks hold hidden while the splash owns
+   the screen (html.pre-lock) and fly in sequence — stagger index per block
+   via --d — the moment the preloader flags html.pre-done. Each data-reveal
+   flavour starts from its own transform so the entrance reads playful
+   instead of uniform: rise (default), spin, pop, blur, left, right.
+   No-JS visitors never get pre-lock, so everything simply reads visible. */
+[data-reveal] {
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.9s cubic-bezier(0.22, 1.24, 0.54, 1),
+    filter 0.7s var(--ease);
   transition-delay: calc(var(--d, 0) * 110ms);
+  will-change: opacity, transform;
 }
 
-html.pre-lock:not(.pre-done) .mn-hero [data-reveal] {
+html.pre-lock:not(.pre-done) [data-reveal] {
   opacity: 0;
-  transform: translateY(22px);
+  transform: translateY(26px);
+}
+
+html.pre-lock:not(.pre-done) [data-reveal="spin"] {
+  transform: scale(0.4) rotate(-16deg);
+}
+
+html.pre-lock:not(.pre-done) [data-reveal="pop"] {
+  transform: scale(0.82) rotate(-2.5deg) translateY(20px);
+}
+
+html.pre-lock:not(.pre-done) [data-reveal="blur"] {
+  transform: translateY(18px);
+  filter: blur(10px);
+}
+
+html.pre-lock:not(.pre-done) [data-reveal="left"] {
+  transform: translateX(-42px);
+}
+
+html.pre-lock:not(.pre-done) [data-reveal="right"] {
+  transform: translateX(56px) rotate(2deg);
 }
 
 @keyframes mn-rise-in {
@@ -1593,7 +1620,7 @@ html.dark .mn-social-gh {
     opacity: 1;
   }
 
-  .mn-hero [data-reveal] {
+  [data-reveal] {
     transition: none;
   }
 
