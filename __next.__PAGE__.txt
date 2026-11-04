@@ -1,20 +1,20 @@
 1:"$Sreact.fragment"
-2:I[36453,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
-18:I[79520,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],""]
-19:I[15128,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
-1a:I[85415,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
-1b:I[37943,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
-1c:I[49663,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
-1d:I[26455,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
-1e:I[97062,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
+2:I[36453,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
+18:I[79520,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],""]
+19:I[15128,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
+1a:I[85415,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
+1b:I[37943,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
+1c:I[49663,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
+1d:I[26455,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
+1e:I[97062,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
 1f:I[97367,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js"],"OutletBoundary"]
 20:"$Sreact.suspense"
 :HL["/_next/static/chunks/27cke12kltu1i.css","style"]
 :HL["/_next/static/chunks/2cfqfb94cyk7_.css","style"]
-3:Te2d0,
+3:Te4c3,
   <div class="mn-sheet">
   <a class="mn-brand" href="#home" aria-label="David Saputra — back to top">
-    <img src="/src/png/logo-david.png" alt="">
+    <img src="/src/opt/logo-david-s.webp" alt="">
   </a>
   <div class="preloader" id="mnPre" aria-hidden="true">
     <div class="pre-center">
@@ -34,7 +34,7 @@
     <div class="page-transition-text">Loading</div>
   </div>
 
-  <audio loop="" id="audioPlayer" style="display: none">
+  <audio loop="" id="audioPlayer" preload="none" style="display: none">
     <source src="/src/mp3/preloader.mp3" type="audio/mp3" />
   </audio>
   <noscript>Allow Javascript</noscript>
@@ -156,7 +156,7 @@
     <section class="mn-hero" id="home">
       <div class="mn-container">
         <div class="mn-hero-name" data-reveal style="--d:0">
-          <span class="mn-hero-avatar" data-reveal="spin" style="--d:1" aria-hidden="true"><img src="/src/png/nav-avatar.png" alt=""></span>
+          <span class="mn-hero-avatar" data-reveal="spin" style="--d:1" aria-hidden="true"><img src="/src/opt/nav-avatar-s.webp" alt=""></span>
           <h1 class="mn-hero-title" aria-label="David Saputra">
             <span class="mn-word" aria-hidden="true"><span class="mn-char" style="--i:0">D</span><span class="mn-char" style="--i:1">a</span><span class="mn-char" style="--i:2">v</span><span class="mn-char" style="--i:3">i</span><span class="mn-char" style="--i:4">d</span></span>
             <span class="mn-word" aria-hidden="true"><span class="mn-char" style="--i:5">S</span><span class="mn-char" style="--i:6">a</span><span class="mn-char" style="--i:7">p</span><span class="mn-char" style="--i:8">u</span><span class="mn-char" style="--i:9">t</span><span class="mn-char" style="--i:10">r</span><span class="mn-char" style="--i:11">a</span></span>
@@ -187,16 +187,16 @@
         <div class="mn-hero-devices" data-reveal="right" style="--d:4">
           <div class="mn-dev mn-dev-laptop" data-reveal="pop" style="--d:5">
             <span class="mn-dev-viewport"><span class="mn-dev-reel">
-              <img src="/src/webp/hris.png" alt="">
-              <img src="/src/webp/jarwinn.png" alt="">
-              <img src="/src/webp/webkarbit.png" alt="">
-              <img src="/src/webp/solis.png" alt="">
-              <img src="/src/webp/hris.png" alt="">
-              <img src="/src/webp/jarwinn.png" alt="">
-              <img src="/src/webp/webkarbit.png" alt="">
-              <img src="/src/webp/solis.png" alt="">
+              <img src="/src/opt/hris-s.webp" alt="" loading="lazy" decoding="async">
+              <img src="/src/opt/jarwinn-s.webp" alt="" loading="lazy" decoding="async">
+              <img src="/src/opt/webkarbit-s.webp" alt="" loading="lazy" decoding="async">
+              <img src="/src/opt/solis-s.webp" alt="" loading="lazy" decoding="async">
+              <img src="/src/opt/hris-s.webp" alt="" loading="lazy" decoding="async">
+              <img src="/src/opt/jarwinn-s.webp" alt="" loading="lazy" decoding="async">
+              <img src="/src/opt/webkarbit-s.webp" alt="" loading="lazy" decoding="async">
+              <img src="/src/opt/solis-s.webp" alt="" loading="lazy" decoding="async">
             </span></span>
-            <img class="mn-dev-frame" src="/src/png/mockup-laptop.png" alt="">
+            <img class="mn-dev-frame" src="/src/opt/mockup-laptop.webp" alt="">
           </div>
           <div class="mn-hero-dev-row">
             <div class="mn-dev mn-dev-code" data-reveal="pop" style="--d:6">
@@ -205,14 +205,14 @@
             </div>
             <div class="mn-dev mn-dev-phone" data-reveal="pop" style="--d:7">
               <span class="mn-dev-viewport"><span class="mn-dev-reel">
-                <img src="/src/webp/sefashion.png" alt="">
-                <img src="/src/webp/cardname.png" alt="">
-                <img src="/src/webp/antbox.png" alt="">
-                <img src="/src/webp/sefashion.png" alt="">
-                <img src="/src/webp/cardname.png" alt="">
-                <img src="/src/webp/antbox.png" alt="">
+                <img src="/src/opt/sefashion-s.webp" alt="" loading="lazy" decoding="async">
+                <img src="/src/opt/cardname-s.webp" alt="" loading="lazy" decoding="async">
+                <img src="/src/opt/antbox-s.webp" alt="" loading="lazy" decoding="async">
+                <img src="/src/opt/sefashion-s.webp" alt="" loading="lazy" decoding="async">
+                <img src="/src/opt/cardname-s.webp" alt="" loading="lazy" decoding="async">
+                <img src="/src/opt/antbox-s.webp" alt="" loading="lazy" decoding="async">
               </span></span>
-              <img class="mn-dev-frame" src="/src/png/mockup-mobile.png" alt="">
+              <img class="mn-dev-frame" src="/src/opt/mockup-mobile.webp" alt="">
             </div>
           </div>
         </div>
@@ -262,14 +262,14 @@
           </div>
 
           <figure class="mn-about-figure" data-aos="fade-up" data-aos-delay="100">
-            <div class="mn-grid-reveal" data-src="/src/webp/about.png" data-aspect="0.8" data-duration="4200">
+            <div class="mn-grid-reveal" data-src="/src/opt/about.webp" data-aspect="0.8" data-duration="4200">
               <canvas role="img" aria-label="Portrait of David Saputra"></canvas>
               <span class="mn-gr-caption" aria-hidden="true"><span>sedang menggenerate potret…</span></span>
               <button class="mn-gr-generate" type="button"><span class="mn-gr-spark" aria-hidden="true">✦</span>Generate
                 portrait</button>
               <button class="mn-gr-regen" type="button" aria-label="Generate ulang potret">↻ Regenerate</button>
             </div>
-            <noscript><img src="/src/webp/about.png" alt="Portrait of David Saputra" /></noscript>
+            <noscript><img src="/src/opt/about.webp" alt="Portrait of David Saputra" /></noscript>
             <figcaption>David Saputra — Web Developer &amp; Visual Designer</figcaption>
           </figure>
         </div>
@@ -920,7 +920,7 @@
   <!-- Guestbook module; only used when this file is served standalone (static hosting) -->
   
   </div>
-0:{"rsc":["$","$1","c",{"children":[[[["$","$L2",null,{"className":"body"}],null,["$","div",null,{"suppressHydrationWarning":true,"dangerouslySetInnerHTML":{"__html":"$3"}}],["$L4","$L5","$L6","$L7","$L8","$L9","$La","$Lb"],["$Lc"]],"$Ld","$Le","$Lf","$L10","$L11","$L12"],["$L13","$L14","$L15","$L16"],"$L17"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"yVzmMR1oEPgkmLV3DFMbS"}
+0:{"rsc":["$","$1","c",{"children":[[[["$","$L2",null,{"className":"body"}],null,["$","div",null,{"suppressHydrationWarning":true,"dangerouslySetInnerHTML":{"__html":"$3"}}],["$L4","$L5","$L6","$L7","$L8","$L9","$La","$Lb"],["$Lc"]],"$Ld","$Le","$Lf","$L10","$L11","$L12"],["$L13","$L14","$L15","$L16"],"$L17"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"pKIsJwmSrPibkxsSzafCD"}
 4:["$","$L18","/js/preloader.js",{"src":"/js/preloader.js","strategy":"afterInteractive"}]
 5:["$","$L18","/main.js",{"src":"/main.js","strategy":"afterInteractive"}]
 6:["$","$L18","/js/mobile-menu.js",{"src":"/js/mobile-menu.js","strategy":"afterInteractive"}]
@@ -929,7 +929,7 @@
 9:["$","$L18","/js/lenis.min.js",{"src":"/js/lenis.min.js","strategy":"afterInteractive"}]
 a:["$","$L18","/js/smooth-scroll.js",{"src":"/js/smooth-scroll.js","strategy":"afterInteractive"}]
 b:["$","$L18","/js/home-page.js",{"src":"/js/home-page.js","strategy":"afterInteractive"}]
-c:["$","$L18","/chat.js",{"src":"/chat.js","type":"module","strategy":"afterInteractive"}]
+c:["$","$L18","/chat.js",{"src":"/chat.js","type":"module","strategy":"lazyOnload"}]
 d:["$","$L19",null,{}]
 e:["$","$L1a",null,{}]
 f:["$","$L1b",null,{}]
@@ -938,7 +938,7 @@ f:["$","$L1b",null,{}]
 12:["$","$L1e",null,{}]
 13:["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/27cke12kltu1i.css","precedence":"next"}]
 14:["$","link","1",{"rel":"stylesheet","href":"/_next/static/chunks/2cfqfb94cyk7_.css","precedence":"next"}]
-15:["$","script","script-0",{"src":"/_next/static/chunks/3shvrczc3b0up.js","async":true}]
+15:["$","script","script-0",{"src":"/_next/static/chunks/1cn_d38veroje.js","async":true}]
 16:["$","script","script-1",{"src":"/_next/static/chunks/3ga35y46_qjdj.js","async":true}]
 17:["$","$L1f",null,{"children":["$","$20",null,{"name":"Next.MetadataOutlet","children":"$@21"}]}]
 21:null

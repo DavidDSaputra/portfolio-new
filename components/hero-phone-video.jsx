@@ -14,6 +14,26 @@ const VIEWPORT_SELECTOR = ".mn-dev-phone .mn-dev-viewport";
 
 export default function HeroPhoneVideo() {
   const [target, setTarget] = useState(null);
+  const [src, setSrc] = useState(undefined);
+
+  /* The MP4 clip weighs several megabytes, so it never competes with the
+     first paint: the <video> mounts empty and only fetches once the window
+     load event plus an idle callback have passed. */
+  useEffect(() => {
+    let cancelled = false;
+    const start = () => {
+      const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1500));
+      idle(() => {
+        if (!cancelled) setSrc("src/mp4/hero-phone-mockup.mp4");
+      }, { timeout: 4000 });
+    };
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", start);
+    };
+  }, []);
 
   useEffect(() => {
     const viewport = document.querySelector(VIEWPORT_SELECTOR);
@@ -35,14 +55,15 @@ export default function HeroPhoneVideo() {
     sync();
     query.addEventListener("change", sync);
     return () => query.removeEventListener("change", sync);
-  }, [target]);
+  }, [target, src]);
 
   if (!target) return null;
 
   return createPortal(
     <video
       className="mn-hero-phone-video"
-      src="src/mp4/hero-phone-mockup.mp4"
+      src={src}
+      preload="none"
       autoPlay
       muted
       loop

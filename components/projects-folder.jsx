@@ -16,6 +16,14 @@ import DriftWall from "./reactbits/DriftWall";
 
 const STAGE_SELECTOR = ".mn-folder-stage";
 
+/* Optimized WebP derivatives (scripts/optimize-images.mjs): tiles and folder
+   thumbs ride the 480px tier, the quick-look sheet the 900px one — the raw
+   PNGs stay on disk only as sources. */
+const optThumb = (src) =>
+  src.replace(/^src\/webp\//, "src/opt/").replace(/\.(png|jpe?g)$/i, "-s.webp");
+const optFull = (src) =>
+  src.replace(/^src\/webp\//, "src/opt/").replace(/\.(png|jpe?g)$/i, ".webp");
+
 /* Full catalogue, mirroring the legacy .mn-file entries (name = file-style
    label, categories = legacy sidebar filters, fit/likes = poster previews). */
 const PROJECTS = [
@@ -290,7 +298,7 @@ export default function ProjectsFolder() {
         return (
           <div className="mn-pf-card" key={project.name}>
             <span className="mn-pf-thumb">
-              <img src={project.image} alt="" draggable="false" loading="lazy" />
+              <img src={optThumb(project.image)} alt="" draggable="false" loading="lazy" />
             </span>
             <span className="mn-pf-title">{project.title}</span>
             <span className="mn-pf-tag">{project.tag}</span>
@@ -328,7 +336,7 @@ export default function ProjectsFolder() {
   const driftItems = useMemo(
     () =>
       visible.map((entry) => ({
-        image: entry.image,
+        image: optThumb(entry.image),
         title: entry.title,
         href: entry.href || entry.download || undefined,
       })),
@@ -455,7 +463,7 @@ export default function ProjectsFolder() {
                   ✕
                 </button>
                 <div className="mn-pf-media" data-fit={project.fit || "cover"}>
-                  <img src={project.image} alt={project.title} />
+                  <img src={optFull(project.image)} alt={project.title} />
                 </div>
                 <div className="mn-pf-info">
                   <div className="mn-pf-modal-meta">

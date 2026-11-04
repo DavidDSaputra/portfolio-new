@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "sync:legacy": "node scripts/generate-legacy-pages.mjs",
+    "optimize:images": "node scripts/optimize-images.mjs",
     "dev": "next dev",
     "build": "node scripts/fetch-github-stats.mjs && next build && node scripts/ensure-blog-route.mjs && npm run publish:root",
     "publish:root": "node scripts/publish-root.mjs",
@@ -19,5 +20,8 @@
     "react-dom": "^19.2.7",
     "tailwind-merge": "^3.7.0",
     "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
   }
 }

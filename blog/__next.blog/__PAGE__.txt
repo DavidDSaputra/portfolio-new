@@ -399,11 +399,11 @@
         transition: none;
       }
     }
-  0:{"rsc":["$","$1","c",{"children":[[["$","$L2",null,{}],["$","style",null,{"dangerouslySetInnerHTML":{"__html":"$3"}}],"$L4",["$L5","$L6","$L7","$L8","$L9","$La","$Lb","$Lc","$Ld"],[]],["$Le"],"$Lf"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"yVzmMR1oEPgkmLV3DFMbS"}
-10:T39ac,
+  0:{"rsc":["$","$1","c",{"children":[[["$","$L2",null,{}],["$","style",null,{"dangerouslySetInnerHTML":{"__html":"$3"}}],"$L4",["$L5","$L6","$L7","$L8","$L9","$La","$Lb","$Lc","$Ld"],[]],["$Le"],"$Lf"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"pKIsJwmSrPibkxsSzafCD"}
+10:T39af,
   <div class="mn-sheet">
   <a class="mn-brand" href="/" aria-label="David Saputra — home">
-    <img src="/src/png/logo-david.png" alt="">
+    <img src="/src/opt/logo-david-s.webp" alt="">
   </a>
   <div class="preloader" id="mnPre" aria-hidden="true">
     <div class="pre-center">

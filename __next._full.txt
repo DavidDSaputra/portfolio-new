@@ -2,7 +2,7 @@
 3:I[43035,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js"],"default"]
 4:I[39756,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js"],"default"]
 5:I[37457,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js"],"default"]
-6:I[36453,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
+6:I[36453,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
 1d:I[68027,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js"],"default",1]
 :HL["/_next/static/chunks/2cpuo5wh6zfem.css","style"]
 :HL["/_next/static/chunks/2j2_zf31yx-8b.css","style"]
@@ -11,10 +11,10 @@
 :HL["https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap","style"]
 :HL["https://unpkg.com/aos@next/dist/aos.css","style"]
 2:["$","style",null,{"children":".preloader{display:none!important}"}]
-7:Te2d0,
+7:Te4c3,
   <div class="mn-sheet">
   <a class="mn-brand" href="#home" aria-label="David Saputra — back to top">
-    <img src="/src/png/logo-david.png" alt="">
+    <img src="/src/opt/logo-david-s.webp" alt="">
   </a>
   <div class="preloader" id="mnPre" aria-hidden="true">
     <div class="pre-center">
@@ -34,7 +34,7 @@
     <div class="page-transition-text">Loading</div>
   </div>
 
-  <audio loop="" id="audioPlayer" style="display: none">
+  <audio loop="" id="audioPlayer" preload="none" style="display: none">
     <source src="/src/mp3/preloader.mp3" type="audio/mp3" />
   </audio>
   <noscript>Allow Javascript</noscript>
@@ -156,7 +156,7 @@
     <section class="mn-hero" id="home">
       <div class="mn-container">
         <div class="mn-hero-name" data-reveal style="--d:0">
-          <span class="mn-hero-avatar" data-reveal="spin" style="--d:1" aria-hidden="true"><img src="/src/png/nav-avatar.png" alt=""></span>
+          <span class="mn-hero-avatar" data-reveal="spin" style="--d:1" aria-hidden="true"><img src="/src/opt/nav-avatar-s.webp" alt=""></span>
           <h1 class="mn-hero-title" aria-label="David Saputra">
             <span class="mn-word" aria-hidden="true"><span class="mn-char" style="--i:0">D</span><span class="mn-char" style="--i:1">a</span><span class="mn-char" style="--i:2">v</span><span class="mn-char" style="--i:3">i</span><span class="mn-char" style="--i:4">d</span></span>
             <span class="mn-word" aria-hidden="true"><span class="mn-char" style="--i:5">S</span><span class="mn-char" style="--i:6">a</span><span class="mn-char" style="--i:7">p</span><span class="mn-char" style="--i:8">u</span><span class="mn-char" style="--i:9">t</span><span class="mn-char" style="--i:10">r</span><span class="mn-char" style="--i:11">a</span></span>
@@ -187,16 +187,16 @@
         <div class="mn-hero-devices" data-reveal="right" style="--d:4">
           <div class="mn-dev mn-dev-laptop" data-reveal="pop" style="--d:5">
             <span class="mn-dev-viewport"><span class="mn-dev-reel">
-              <img src="/src/webp/hris.png" alt="">
-              <img src="/src/webp/jarwinn.png" alt="">
-              <img src="/src/webp/webkarbit.png" alt="">
-              <img src="/src/webp/solis.png" alt="">
-              <img src="/src/webp/hris.png" alt="">
-              <img src="/src/webp/jarwinn.png" alt="">
-              <img src="/src/webp/webkarbit.png" alt="">
-              <img src="/src/webp/solis.png" alt="">
+              <img src="/src/opt/hris-s.webp" alt="" loading="lazy" decoding="async">
+              <img src="/src/opt/jarwinn-s.webp" alt="" loading="lazy" decoding="async">
+              <img src="/src/opt/webkarbit-s.webp" alt="" loading="lazy" decoding="async">
+              <img src="/src/opt/solis-s.webp" alt="" loading="lazy" decoding="async">
+              <img src="/src/opt/hris-s.webp" alt="" loading="lazy" decoding="async">
+              <img src="/src/opt/jarwinn-s.webp" alt="" loading="lazy" decoding="async">
+              <img src="/src/opt/webkarbit-s.webp" alt="" loading="lazy" decoding="async">
+              <img src="/src/opt/solis-s.webp" alt="" loading="lazy" decoding="async">
             </span></span>
-            <img class="mn-dev-frame" src="/src/png/mockup-laptop.png" alt="">
+            <img class="mn-dev-frame" src="/src/opt/mockup-laptop.webp" alt="">
           </div>
           <div class="mn-hero-dev-row">
             <div class="mn-dev mn-dev-code" data-reveal="pop" style="--d:6">
@@ -205,14 +205,14 @@
             </div>
             <div class="mn-dev mn-dev-phone" data-reveal="pop" style="--d:7">
               <span class="mn-dev-viewport"><span class="mn-dev-reel">
-                <img src="/src/webp/sefashion.png" alt="">
-                <img src="/src/webp/cardname.png" alt="">
-                <img src="/src/webp/antbox.png" alt="">
-                <img src="/src/webp/sefashion.png" alt="">
-                <img src="/src/webp/cardname.png" alt="">
-                <img src="/src/webp/antbox.png" alt="">
+                <img src="/src/opt/sefashion-s.webp" alt="" loading="lazy" decoding="async">
+                <img src="/src/opt/cardname-s.webp" alt="" loading="lazy" decoding="async">
+                <img src="/src/opt/antbox-s.webp" alt="" loading="lazy" decoding="async">
+                <img src="/src/opt/sefashion-s.webp" alt="" loading="lazy" decoding="async">
+                <img src="/src/opt/cardname-s.webp" alt="" loading="lazy" decoding="async">
+                <img src="/src/opt/antbox-s.webp" alt="" loading="lazy" decoding="async">
               </span></span>
-              <img class="mn-dev-frame" src="/src/png/mockup-mobile.png" alt="">
+              <img class="mn-dev-frame" src="/src/opt/mockup-mobile.webp" alt="">
             </div>
           </div>
         </div>
@@ -262,14 +262,14 @@
           </div>
 
           <figure class="mn-about-figure" data-aos="fade-up" data-aos-delay="100">
-            <div class="mn-grid-reveal" data-src="/src/webp/about.png" data-aspect="0.8" data-duration="4200">
+            <div class="mn-grid-reveal" data-src="/src/opt/about.webp" data-aspect="0.8" data-duration="4200">
               <canvas role="img" aria-label="Portrait of David Saputra"></canvas>
               <span class="mn-gr-caption" aria-hidden="true"><span>sedang menggenerate potret…</span></span>
               <button class="mn-gr-generate" type="button"><span class="mn-gr-spark" aria-hidden="true">✦</span>Generate
                 portrait</button>
               <button class="mn-gr-regen" type="button" aria-label="Generate ulang potret">↻ Regenerate</button>
             </div>
-            <noscript><img src="/src/webp/about.png" alt="Portrait of David Saputra" /></noscript>
+            <noscript><img src="/src/opt/about.webp" alt="Portrait of David Saputra" /></noscript>
             <figcaption>David Saputra — Web Developer &amp; Visual Designer</figcaption>
           </figure>
         </div>
@@ -920,14 +920,14 @@
   <!-- Guestbook module; only used when this file is served standalone (static hosting) -->
   
   </div>
-0:{"P":null,"c":["",""],"q":"","i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/2cpuo5wh6zfem.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/chunks/2j2_zf31yx-8b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/2r1r3_5i2zyl5.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/158myu8e_yme3.js","async":true,"nonce":"$undefined"}],["$","script","script-2",{"src":"/_next/static/chunks/08jiwqcg2qaie.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":[["$","head",null,{"children":[["$","link",null,{"rel":"preconnect","href":"https://fonts.googleapis.com"}],["$","link",null,{"rel":"preconnect","href":"https://fonts.gstatic.com","crossOrigin":"anonymous"}],["$","link",null,{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"}],["$","link",null,{"rel":"stylesheet","href":"https://unpkg.com/aos@next/dist/aos.css"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"try{if(localStorage.getItem(\"mn-theme\")===\"dark\"){document.documentElement.classList.add(\"dark\");}}catch(e){}"}}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"(function(){var r=window.matchMedia&&window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches;if(r)return;var e=document.documentElement;e.classList.add(\"pre-lock\");setTimeout(function(){if(!e.classList.contains(\"pre-done\"))e.classList.remove(\"pre-lock\");},9000);})();"}}],["$","noscript",null,{"children":"$2"}]]}],["$","body",null,{"children":[["$","$L3",null,{}],["$","div",null,{"className":"site-shell","children":["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]]}]]}]]}],{"children":[["$","$1","c",{"children":[[[["$","$L6",null,{"className":"body"}],null,["$","div",null,{"suppressHydrationWarning":true,"dangerouslySetInnerHTML":{"__html":"$7"}}],["$L8","$L9","$La","$Lb","$Lc","$Ld","$Le","$Lf"],["$L10"]],"$L11","$L12","$L13","$L14","$L15","$L16"],["$L17","$L18","$L19","$L1a"],"$L1b"]}],{},null,false,null]},null,false,null],"$L1c",false]],"m":"$undefined","G":["$1d",["$L1e","$L1f"]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"yVzmMR1oEPgkmLV3DFMbS"}
-20:I[79520,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],""]
-21:I[15128,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
-22:I[85415,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
-23:I[37943,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
-24:I[49663,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
-25:I[26455,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
-26:I[97062,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/3shvrczc3b0up.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
+0:{"P":null,"c":["",""],"q":"","i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/2cpuo5wh6zfem.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/chunks/2j2_zf31yx-8b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/2r1r3_5i2zyl5.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/158myu8e_yme3.js","async":true,"nonce":"$undefined"}],["$","script","script-2",{"src":"/_next/static/chunks/08jiwqcg2qaie.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":[["$","head",null,{"children":[["$","link",null,{"rel":"preconnect","href":"https://fonts.googleapis.com"}],["$","link",null,{"rel":"preconnect","href":"https://fonts.gstatic.com","crossOrigin":"anonymous"}],["$","link",null,{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"}],["$","link",null,{"rel":"stylesheet","href":"https://unpkg.com/aos@next/dist/aos.css"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"try{if(localStorage.getItem(\"mn-theme\")===\"dark\"){document.documentElement.classList.add(\"dark\");}}catch(e){}"}}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"(function(){var r=window.matchMedia&&window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches;if(r)return;var e=document.documentElement;e.classList.add(\"pre-lock\");setTimeout(function(){if(!e.classList.contains(\"pre-done\"))e.classList.remove(\"pre-lock\");},9000);})();"}}],["$","noscript",null,{"children":"$2"}]]}],["$","body",null,{"children":[["$","$L3",null,{}],["$","div",null,{"className":"site-shell","children":["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]]}]]}]]}],{"children":[["$","$1","c",{"children":[[[["$","$L6",null,{"className":"body"}],null,["$","div",null,{"suppressHydrationWarning":true,"dangerouslySetInnerHTML":{"__html":"$7"}}],["$L8","$L9","$La","$Lb","$Lc","$Ld","$Le","$Lf"],["$L10"]],"$L11","$L12","$L13","$L14","$L15","$L16"],["$L17","$L18","$L19","$L1a"],"$L1b"]}],{},null,false,null]},null,false,null],"$L1c",false]],"m":"$undefined","G":["$1d",["$L1e","$L1f"]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"pKIsJwmSrPibkxsSzafCD"}
+20:I[79520,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],""]
+21:I[15128,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
+22:I[85415,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
+23:I[37943,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
+24:I[49663,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
+25:I[26455,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
+26:I[97062,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js","/_next/static/chunks/1cn_d38veroje.js","/_next/static/chunks/3ga35y46_qjdj.js"],"default"]
 27:I[97367,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js"],"OutletBoundary"]
 28:"$Sreact.suspense"
 2a:I[97367,["/_next/static/chunks/2r1r3_5i2zyl5.js","/_next/static/chunks/158myu8e_yme3.js","/_next/static/chunks/08jiwqcg2qaie.js"],"ViewportBoundary"]
@@ -940,7 +940,7 @@ c:["$","$L20","https://unpkg.com/aos@next/dist/aos.js",{"src":"https://unpkg.com
 d:["$","$L20","/js/lenis.min.js",{"src":"/js/lenis.min.js","strategy":"afterInteractive"}]
 e:["$","$L20","/js/smooth-scroll.js",{"src":"/js/smooth-scroll.js","strategy":"afterInteractive"}]
 f:["$","$L20","/js/home-page.js",{"src":"/js/home-page.js","strategy":"afterInteractive"}]
-10:["$","$L20","/chat.js",{"src":"/chat.js","type":"module","strategy":"afterInteractive"}]
+10:["$","$L20","/chat.js",{"src":"/chat.js","type":"module","strategy":"lazyOnload"}]
 11:["$","$L21",null,{}]
 12:["$","$L22",null,{}]
 13:["$","$L23",null,{}]
@@ -949,7 +949,7 @@ f:["$","$L20","/js/home-page.js",{"src":"/js/home-page.js","strategy":"afterInte
 16:["$","$L26",null,{}]
 17:["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/27cke12kltu1i.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]
 18:["$","link","1",{"rel":"stylesheet","href":"/_next/static/chunks/2cfqfb94cyk7_.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]
-19:["$","script","script-0",{"src":"/_next/static/chunks/3shvrczc3b0up.js","async":true,"nonce":"$undefined"}]
+19:["$","script","script-0",{"src":"/_next/static/chunks/1cn_d38veroje.js","async":true,"nonce":"$undefined"}]
 1a:["$","script","script-1",{"src":"/_next/static/chunks/3ga35y46_qjdj.js","async":true,"nonce":"$undefined"}]
 1b:["$","$L27",null,{"children":["$","$28",null,{"name":"Next.MetadataOutlet","children":"$@29"}]}]
 1c:["$","$1","h",{"children":[null,["$","$L2a",null,{"children":"$L2b"}],["$","div",null,{"hidden":true,"children":["$","$L2c",null,{"children":["$","$28",null,{"name":"Next.Metadata","children":"$L2d"}]}]}],null]}]

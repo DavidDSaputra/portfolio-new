@@ -12,7 +12,7 @@
   document.documentElement.classList.add("pre-lock");
 
   /* pacing — brief, but greetings stay readable */
-  var MIN_SHOW = 2400;   /* minimum splash duration */
+  var MIN_SHOW = 1700;   /* minimum splash duration */
   var HARD_CAP = 6000;   /* force exit */
   var WORD_CYCLE = 800;  /* per-greeting reading time */
 
