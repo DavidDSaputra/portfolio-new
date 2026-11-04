@@ -1,6 +1,7 @@
 import "../style.css";
 import "./globals.css";
 import SiteRippleBackground from "../components/site-ripple-background";
+import ScrollSling from "../components/scroll-sling";
 
 export const metadata = {
   title: {
@@ -48,6 +49,7 @@ export default function RootLayout({ children }) {
       <body>
         <SiteRippleBackground />
         <div className="site-shell">{children}</div>
+        <ScrollSling />
       </body>
     </html>
   );

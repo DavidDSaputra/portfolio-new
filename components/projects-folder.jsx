@@ -3,14 +3,15 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import Folder from "./reactbits/Folder";
-import DriftWall from "./reactbits/DriftWall";
+import ParallaxSlider from "./reactbits/ParallaxSlider";
 
 /* Replaces the legacy 3D folder gate + file-manager work window in #projects.
    The React Bits <Folder /> stays as the interactive centrepiece with six
-   featured pages (its MAX_ITEMS), and directly below it a filterable
-   FlexCarousel lens-row flows EVERY project so nothing stays hidden inside
-   the folder. Both the folder pages and the carousel cards open the same
-   quick-look dialog that carries the data the legacy preview sheet showed.
+   featured pages (its MAX_ITEMS), and directly below it the full archive
+   flows as an ObsidianUI ParallaxSlider strip — drag it and every project
+   frame glides past with its image drifting inside the mat. Slides link
+   straight out; the folder pages keep opening the quick-look dialog that
+   carries the data the legacy preview sheet showed.
    The legacy markup stays in the DOM (hidden once this mounts) so the
    standalone legacy pages and the no-JS fallback keep working. */
 
@@ -330,14 +331,16 @@ export default function ProjectsFolder() {
     [filter],
   );
 
-  /* Drift wall tiles carry the visible catalogue; tiles link straight out
-     (or to the APK for the download-only entry) instead of opening the
-     quick-look dialog — the folder above keeps that role. */
-  const driftItems = useMemo(
+  /* Parallax strip slides carry the visible catalogue; frames link straight
+     out (or to the APK for the download-only entry) instead of opening the
+     quick-look dialog — the folder above keeps that role. A drag never
+     fires the link, so visitors can sweep the strip freely. */
+  const slides = useMemo(
     () =>
       visible.map((entry) => ({
-        image: optThumb(entry.image),
         title: entry.title,
+        image: optFull(entry.image),
+        alt: entry.title,
         href: entry.href || entry.download || undefined,
       })),
     [visible],
@@ -386,8 +389,9 @@ export default function ProjectsFolder() {
             }}
           />
           <p className="mn-folder-sub">
-            Klik foldernya untuk project unggulan — arsip lengkapnya
-            mengalir di dinding drift bawah (hover untuk mengangkat tile).
+            Klik foldernya untuk project unggulan — arsip lengkapnya mengalir
+            di strip parallax bawah (tarik untuk menggeser, hover untuk
+            judulnya).
           </p>
 
           <div className="mn-pf-archive">
@@ -416,26 +420,12 @@ export default function ProjectsFolder() {
               ))}
             </div>
             <div className="mn-pf-carousel">
-              <DriftWall
-                items={driftItems}
-                columns={narrow ? 3 : vw <= 960 ? 4 : 5}
-                tileWidth={narrow ? 148 : vw <= 960 ? 176 : 208}
-                tileHeight={Math.round((narrow ? 148 : vw <= 960 ? 176 : 208) * 0.66)}
-                gap={16}
-                radius={12}
-                tilt={14}
-                turn={-12}
-                perspective={1200}
-                depth={110}
-                speed={40}
-                direction="up"
-                variance={0.45}
-                parallax={0.6}
-                pauseOnHover
-                lift={56}
-                fade={0.65}
-                dim={0.5}
-                overlayColor={dark ? "#101014" : "#f4f4f2"}
+              <ParallaxSlider
+                slides={slides}
+                orientation="landscape"
+                scrollOnWheel={false}
+                label="All projects"
+                zoom={1.15}
               />
             </div>
           </div>

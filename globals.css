@@ -3188,16 +3188,28 @@ html.dark .mn-social-gh {
   opacity: 0.55;
 }
 
-/* ---------- All projects: FlexCarousel lens row (reactbits) ---------- */
-/* The archive grid becomes a WebGL carousel: every project flows in one
-   row that bends through the invisible lens. Height is reserved here and
-   the captions are themed to the sheet in both modes. */
+/* ---------- All projects: ObsidianUI parallax strip ---------- */
+/* The archive rides an endless parallax slider: every project is a wide
+   16:9 frame whose image drifts inside the mat while the strip glides.
+   The stage sizes itself from the slider now (no fixed height), and the
+   strip inherits the sheet's ink so captions match both themes. */
 .mn-pf-carousel {
   width: 100%;
-  /* Drift wall needs a tall stage so the columns keep flowing behind the
-     perspective mask */
-  height: clamp(420px, 52vw, 620px);
   margin-top: 18px;
+}
+
+.mn-pf-carousel .obsidian-parallax-slider {
+  --obsidian-parallax-foreground: var(--ink);
+  --obsidian-parallax-radius: 12px;
+  --obsidian-parallax-gap: 18px;
+  color: var(--ink);
+}
+
+/* The sheet already heads the archive, so the strip keeps its own padding
+   tight instead of reserving the full header space. */
+.mn-pf-carousel .obsidian-parallax-slider__inner {
+  --obsidian-parallax-space: 1.5rem;
+  padding-block: 0.5rem calc(0.5rem + 1.75rem);
 }
 
 .mn-pf-carousel .flex-carousel__title {
@@ -3221,10 +3233,6 @@ html.dark .mn-social-gh {
 }
 
 @media (max-width: 640px) {
-  .mn-pf-carousel {
-    height: clamp(340px, 96vw, 420px);
-  }
-
   .mn-pf-carousel .flex-carousel__title {
     font-size: 0.95rem;
   }

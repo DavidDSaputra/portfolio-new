@@ -8,6 +8,9 @@
     if (!window.Lenis) { return; }
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
     const lenis = new window.Lenis({ lerp: 0.12, smoothWheel: true });
+    // Exposed so React widgets (e.g. the SlingButton scroll-up) can glide
+    // through the same instance instead of fighting it with native scroll.
+    window.__lenis = lenis;
     const raf = (time) => {
       lenis.raf(time);
       window.requestAnimationFrame(raf);
