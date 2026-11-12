@@ -173,7 +173,7 @@
 .mn-scroll-sling {
   position: fixed;
   right: clamp(16px, 2.4vw, 30px);
-  bottom: clamp(18px, 3vh, 34px);
+  bottom: max(96px, env(safe-area-inset-bottom));
   z-index: 110;
   display: grid;
   place-items: center;
@@ -187,6 +187,13 @@
   opacity: 1;
   transform: translateY(0) scale(1);
   pointer-events: auto;
+}
+
+@media (max-width: 640px) {
+  .mn-scroll-sling {
+    right: max(22px, env(safe-area-inset-right));
+    bottom: calc(112px + env(safe-area-inset-bottom));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,10 +1,7 @@
 "use client";
 
-/* React Bits — SlingButton (JavaScript + CSS variant), ported verbatim from
-   the official source except for the icon: @hugeicons/* is not installed in
-   this project, so the default pad content is an inline up-arrow SVG sized
-   from the same `size` prop. Everything else (pull/arm/launch physics,
-   particle burst, reduced-motion path) matches the published component. */
+/* React Bits SlingButton, adapted with an inline arrow, animated tap launch
+   and an optional downward-only pull for the responsive scroll-up control. */
 
 import { useEffect, useId, useRef, useState } from "react";
 import {
@@ -69,6 +66,7 @@ export default function SlingButton({
   particles = 14,
   spread = 60,
   axis = "any",
+  pullDownOnly = false,
   tapSends = true,
   disabled = false,
   ariaLabel = "Send",
@@ -104,6 +102,8 @@ export default function SlingButton({
   const dotTimer = useRef(undefined);
   const paintQueued = useRef(false);
   const skipClick = useRef(false);
+  const tapping = useRef(false);
+  const tapTimer = useRef(null);
   const hintId = useId();
 
   const px = useMotionValue(0);
@@ -209,6 +209,14 @@ export default function SlingButton({
   useEffect(() => {
     animX.current?.stop();
     animY.current?.stop();
+    clearTimeout(tapTimer.current);
+    clearTimeout(dotTimer.current);
+    tapping.current = false;
+    dotPending.current = false;
+    grip.current = null;
+    armedRef.current = false;
+    setHeld(false);
+    setArmed(false);
     px.jump(0);
     py.jump(0);
     paint();
@@ -233,8 +241,30 @@ export default function SlingButton({
     animY.current = animate(py, 0, { type: "spring", duration: 0.4, bounce: recoil, velocity: v0.y });
   };
 
+  // Touch and keyboard taps get the same pull/release cue as a manual drag.
+  const tapLaunch = () => {
+    if (disabled || tapping.current) return;
+    if (reduce) { onSend?.(); return; }
+    tapping.current = true;
+    dir.current = { ux: 0, uy: 1 };
+    animX.current?.stop();
+    animY.current?.stop();
+    px.jump(0);
+    animY.current = animate(py, ARM * 1.1, { duration: 0.14, ease: "easeOut",
+      onComplete: () => {
+        power.current = 0.4;
+        dotPending.current = true;
+        dotTimer.current = setTimeout(launchDot, 150);
+        settle({ x: 0, y: -launchSpeed });
+        onSend?.();
+        tapTimer.current = setTimeout(() => { tapping.current = false; }, 450);
+      },
+    });
+  };
+
   const onPointerDown = (e) => {
-    if (disabled || grip.current || e.button !== 0) return;
+    if (disabled || tapping.current || grip.current || e.button !== 0) return;
+    skipClick.current = false;
     const el = rootRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -270,9 +300,16 @@ export default function SlingButton({
     let ry = g.rawOrigin.y + dy;
     if (axis === "horizontal") ry = rubberband(ry, size / 4);
     else if (axis === "vertical") rx = rubberband(rx, size / 4);
+    if (pullDownOnly) ry = Math.max(0, ry);
     if (!g.moved && Math.hypot(dx, dy) > g.slop) g.moved = true;
     const raw = Math.hypot(rx, ry);
-    if (raw < 0.01) return;
+    if (raw < 0.01) {
+      px.set(0);
+      py.set(0);
+      armedRef.current = false;
+      setArmed(false);
+      return;
+    }
     const d = (R * raw) / (R + raw);
     const ux = rx / raw;
     const uy = ry / raw;
@@ -317,7 +354,8 @@ export default function SlingButton({
     }
     if (!g.moved) {
       relaxIcon();
-      if (tapSends && !cancelled) onSend?.();
+      if (tapSends && !cancelled) tapLaunch();
+      else settle({ x: 0, y: 0 });
     } else {
       const fire = armedRef.current && !cancelled;
       const launch = fire ? launchSpeed * Math.min(p, POWER_CAP) : CANCEL * launchSpeed * Math.min(p, 1);
@@ -351,6 +389,7 @@ export default function SlingButton({
       animX.current?.stop();
       animY.current?.stop();
       clearTimeout(dotTimer.current);
+      clearTimeout(tapTimer.current);
     },
     [],
   );
@@ -406,6 +445,8 @@ export default function SlingButton({
           aria-label={ariaLabel}
           aria-describedby={hintId}
           aria-disabled={disabled || undefined}
+          disabled={disabled}
+          title="Ketuk atau tarik ke bawah lalu lepas"
           data-held={held ? "" : undefined}
           data-armed={armed ? "" : undefined}
           onPointerDown={onPointerDown}
@@ -416,12 +457,12 @@ export default function SlingButton({
           onKeyDown={(e) => {
             if (e.key === "Escape" && grip.current) release(grip.current.id, true);
           }}
-          onClick={() => {
-            if (skipClick.current) {
+          onClick={(event) => {
+            if (skipClick.current && event.detail !== 0) {
               skipClick.current = false;
               return;
             }
-            if (!disabled) onSend?.();
+            tapLaunch();
           }}
         >
           <span className="sling-button__face">
@@ -432,7 +473,7 @@ export default function SlingButton({
         </button>
       </motion.span>
       <span id={hintId} className="sling-button__sr">
-        Press Enter to send, or drag away and release.
+        Ketuk atau tekan Enter. Bisa juga tarik ke bawah lalu lepas untuk kembali ke atas.
       </span>
     </span>
   );

@@ -2,11 +2,16 @@
    odometer percent and curved curtain exit. Vanilla, no dependencies. */
 (function () {
   var root = document.getElementById("mnPre");
-  if (!root) return;
+  function unlock() {
+    if (window.__releasePreloaderLock) window.__releasePreloaderLock();
+    else document.documentElement.classList.remove("pre-lock");
+  }
+  if (!root) { unlock(); return; }
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce) {
     if (root.parentNode) root.parentNode.removeChild(root);
+    unlock();
     return;
   }
   document.documentElement.classList.add("pre-lock");
@@ -102,7 +107,7 @@
   var start = performance.now();
   var p = 0;
   var finished = false;
-  var loaded = false;
+  var loaded = document.readyState === "complete";
   window.addEventListener("load", function () { loaded = true; });
 
   function finish() {
@@ -122,9 +127,9 @@
       document.documentElement.classList.add("pre-done");
       setTimeout(function () {
         root.classList.add("is-lift");
-        document.documentElement.classList.remove("pre-lock");
         setTimeout(function () {
           if (root.parentNode) root.parentNode.removeChild(root);
+          unlock();
         }, 700);
       }, 350);
     }, 600);

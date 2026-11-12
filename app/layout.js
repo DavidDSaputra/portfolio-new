@@ -39,7 +39,32 @@ export default function RootLayout({ children }) {
             // Mirrors the reduced-motion bail in preloader.js; the failsafe
             // lifts the lock again should the splash never flag completion.
             __html:
-              '(function(){var r=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(r)return;var e=document.documentElement;e.classList.add("pre-lock");setTimeout(function(){if(!e.classList.contains("pre-done"))e.classList.remove("pre-lock");},9000);})();',
+              `(function(){
+                if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+                var root=document.documentElement;
+                root.classList.add("pre-lock");
+                var keys=[" ","ArrowUp","ArrowDown","PageUp","PageDown","Home","End"];
+                function block(event){if(root.classList.contains("pre-lock")&&(event.type!=="keydown"||keys.indexOf(event.key)!==-1))event.preventDefault();}
+                window.addEventListener("wheel",block,{passive:false});
+                window.addEventListener("touchmove",block,{passive:false});
+                window.addEventListener("keydown",block);
+                window.__releasePreloaderLock=function(){
+                  clearTimeout(timer);
+                  root.classList.remove("pre-lock");
+                  window.removeEventListener("wheel",block);
+                  window.removeEventListener("touchmove",block);
+                  window.removeEventListener("keydown",block);
+                };
+                var timer=setTimeout(function(){
+                  var splash=document.getElementById("mnPre");
+                  if(splash)splash.remove();
+                  root.classList.add("pre-done");
+                  window.__releasePreloaderLock();
+                },12000);
+                document.addEventListener("DOMContentLoaded",function(){
+                  if(!document.getElementById("mnPre"))window.__releasePreloaderLock();
+                },{once:true});
+              })();`,
           }}
         />
         <noscript>

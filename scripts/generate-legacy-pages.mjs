@@ -9,6 +9,8 @@ const files = ["index.html", "blog.html"];
 
 function rewriteLegacyMarkup(html) {
   return html
+    // React's root layout owns the sling; retain this only in standalone legacy HTML.
+    .replace(/[ \t]*<button\b[^>]*\bid="scrollUpBtn"[^>]*>[\s\S]*?<\/button>/gi, "")
     .replace(/href="blog\.html"/g, 'href="/blog"')
     .replace(/href="index\.html"/g, 'href="/"')
     .replace(/href="index\.html#/g, 'href="/#')

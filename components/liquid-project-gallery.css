@@ -1,0 +1,54 @@
+.liquid-gallery { width: 100%; min-width: 0; color: var(--ink); }
+.liquid-gallery__stage {
+  position: relative; aspect-ratio: 5 / 3; overflow: hidden; isolation: isolate;
+  border: 1px solid var(--line); border-radius: 16px;
+  background: var(--surface); touch-action: pan-y; cursor: grab;
+  user-select: none; -webkit-user-select: none;
+}
+.liquid-gallery__stage:active { cursor: grabbing; }
+.liquid-gallery__image, .liquid-gallery__wipe {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none;
+}
+.liquid-gallery__image { object-fit: cover; }
+.liquid-gallery__fallback { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; }
+.liquid-gallery__glow { fill: none; stroke: #fe6622; stroke-width: 18; filter: blur(9px); opacity: .8; }
+.liquid-gallery__edge { fill: none; stroke: #fff0d7; stroke-width: 2.5; filter: drop-shadow(0 0 4px #fe6622); }
+.liquid-gallery__badge {
+  position: absolute; right: 14px; top: 14px; border-radius: 100px;
+  padding: 7px 11px; background: #17171bc9; color: #fff;
+  font: 10px / 1.4 "JetBrains Mono", monospace; letter-spacing: .1em; pointer-events: none;
+}
+.liquid-gallery__details { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; padding: 22px 0; }
+.liquid-gallery__copy { min-width: 0; max-width: 660px; }
+.liquid-gallery__tag { font: 10px / 1.5 "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.liquid-gallery__copy h4 { margin: 7px 0 8px; font-size: clamp(1.2rem, 2.3vw, 1.7rem); line-height: 1.25; font-weight: 500; overflow-wrap: anywhere; }
+.liquid-gallery__copy p { margin: 0; font-size: .83rem; line-height: 1.7; color: var(--muted); }
+.liquid-gallery__actions { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 12px; }
+.liquid-gallery__actions :is(button, a) { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; border: 0; padding: 0; background: none; color: var(--ink); font: inherit; font-size: .75rem; cursor: pointer; text-decoration: underline; text-underline-offset: 5px; }
+.liquid-gallery__nav { display: flex; flex-shrink: 0; gap: 8px; }
+.liquid-gallery__nav button { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); font-size: 22px; cursor: pointer; }
+.liquid-gallery__nav button:hover { background: var(--ink); color: var(--bg); }
+.liquid-gallery__nav button:disabled { opacity: .4; cursor: default; }
+.liquid-gallery__thumbs { position: relative; display: flex; gap: 10px; overflow-x: auto; overscroll-behavior-x: contain; padding: 4px 2px 12px; scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent; }
+.liquid-gallery__thumbs button { flex: 0 0 88px; position: relative; height: 58px; border: 2px solid transparent; border-radius: 8px; padding: 0; overflow: hidden; background: var(--surface); cursor: pointer; opacity: .55; transition: opacity .2s, border-color .2s; }
+.liquid-gallery__thumbs button[aria-pressed="true"] { opacity: 1; border-color: #fe6622; }
+.liquid-gallery__thumbs button:hover { opacity: 1; }
+.liquid-gallery__thumbs img { width: 100%; height: 100%; object-fit: cover; }
+.liquid-gallery__thumbs span { position: absolute; right: 3px; bottom: 3px; border-radius: 3px; padding: 1px 4px; background: #17171bce; color: white; font: 9px / 1.5 monospace; }
+.liquid-gallery__hint { margin: 8px 0 0; color: var(--muted); font-size: .68rem; line-height: 1.6; }
+.liquid-gallery :is(button, a, [tabindex]):focus-visible { outline: 2px solid #fe6622; outline-offset: 3px; }
+@media (max-width: 640px) {
+  .mn-pf-archive-head { flex-wrap: wrap; gap: 5px; }
+  .mn-pf-filters { gap: 6px; }
+  .mn-pf-chip { min-height: 44px; padding: 8px 10px; letter-spacing: .03em; }
+  .liquid-gallery__stage { border-radius: 12px; }
+  .liquid-gallery__details { flex-wrap: wrap; gap: 14px; padding: 16px 0; }
+  .liquid-gallery__copy { flex-basis: 100%; }
+  .liquid-gallery__copy p { font-size: .78rem; }
+  .liquid-gallery__nav { margin-left: auto; }
+  .liquid-gallery__thumbs button { flex-basis: 72px; height: 50px; }
+  .liquid-gallery__badge { top: 9px; right: 9px; padding: 5px 8px; font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .liquid-gallery__thumbs button { transition: none; }
+}

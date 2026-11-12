@@ -3,15 +3,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import Folder from "./reactbits/Folder";
-import ParallaxSlider from "./reactbits/ParallaxSlider";
+import LiquidProjectGallery from "./liquid-project-gallery";
 
 /* Replaces the legacy 3D folder gate + file-manager work window in #projects.
    The React Bits <Folder /> stays as the interactive centrepiece with six
    featured pages (its MAX_ITEMS), and directly below it the full archive
-   flows as an ObsidianUI ParallaxSlider strip — drag it and every project
-   frame glides past with its image drifting inside the mat. Slides link
-   straight out; the folder pages keep opening the quick-look dialog that
-   carries the data the legacy preview sheet showed.
+   uses a liquid-wipe gallery with swipe, thumbnails and category filters.
+   Both the folder and gallery can open the project quick-look dialog.
    The legacy markup stays in the DOM (hidden once this mounts) so the
    standalone legacy pages and the no-JS fallback keep working. */
 
@@ -331,15 +329,18 @@ export default function ProjectsFolder() {
     [filter],
   );
 
-  /* Parallax strip slides carry the visible catalogue; frames link straight
-     out (or to the APK for the download-only entry) instead of opening the
-     quick-look dialog — the folder above keeps that role. A drag never
-     fires the link, so visitors can sweep the strip freely. */
+  /* Stable project IDs keep previews and filters in sync across wipes. */
   const slides = useMemo(
     () =>
       visible.map((entry) => ({
+        id: entry.name,
         title: entry.title,
         image: optFull(entry.image),
+        thumbnail: optThumb(entry.image),
+        tag: entry.tag,
+        desc: entry.desc,
+        fit: entry.fit,
+        download: entry.download,
         alt: entry.title,
         href: entry.href || entry.download || undefined,
       })),
@@ -389,9 +390,8 @@ export default function ProjectsFolder() {
             }}
           />
           <p className="mn-folder-sub">
-            Klik foldernya untuk project unggulan — arsip lengkapnya mengalir
-            di strip parallax bawah (tarik untuk menggeser, hover untuk
-            judulnya).
+            Klik foldernya untuk project unggulan — jelajahi semua project
+            di bawah dengan menggeser preview atau memilih thumbnail.
           </p>
 
           <div className="mn-pf-archive">
@@ -420,12 +420,9 @@ export default function ProjectsFolder() {
               ))}
             </div>
             <div className="mn-pf-carousel">
-              <ParallaxSlider
+              <LiquidProjectGallery
                 slides={slides}
-                orientation="landscape"
-                scrollOnWheel={false}
-                label="All projects"
-                zoom={1.15}
+                onPreview={(id) => setActive(PROJECTS.findIndex((entry) => entry.name === id))}
               />
             </div>
           </div>

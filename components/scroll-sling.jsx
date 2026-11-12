@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SlingButton from "./reactbits/SlingButton";
 
 /* Scroll-up indicator built on the React Bits SlingButton slingshot: tap it
@@ -31,23 +31,35 @@ const THEME = {
 };
 
 function scrollToTop() {
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   /* smooth-scroll.js parks its Lenis instance on window.__lenis so the
      glide stays consistent with the rest of the page; native smooth scroll
      is the fallback (and reduced-motion users get an instant jump). */
   const lenis = typeof window !== "undefined" ? window.__lenis : null;
   if (lenis && typeof lenis.scrollTo === "function") {
-    lenis.scrollTo(0, { duration: 1.2 });
+    lenis.scrollTo(0, { duration: 1.2, immediate: reduce });
     return;
   }
-  const reduce =
-    window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
 }
 
 export default function ScrollSling() {
   const [visible, setVisible] = useState(false);
   const [dark, setDark] = useState(false);
+  const [mobile, setMobile] = useState(false);
+  const [launching, setLaunching] = useState(false);
+  const launchTimer = useRef(null);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 640px)");
+    const sync = () => setMobile(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => {
+      media.removeEventListener("change", sync);
+      clearTimeout(launchTimer.current);
+    };
+  }, []);
 
   useEffect(() => {
     let ticking = false;
@@ -79,18 +91,25 @@ export default function ScrollSling() {
   const colors = dark ? THEME.dark : THEME.light;
 
   return (
-    <div className="mn-scroll-sling" data-visible={visible ? "true" : "false"}>
+    <div className="mn-scroll-sling" data-visible={visible || launching ? "true" : "false"}
+      inert={!(visible || launching)} aria-hidden={!(visible || launching)}>
       <SlingButton
-        onSend={scrollToTop}
-        size={52}
+        onSend={() => {
+          setLaunching(true);
+          clearTimeout(launchTimer.current);
+          launchTimer.current = setTimeout(() => setLaunching(false), 900);
+          scrollToTop();
+        }}
+        size={mobile ? 44 : 52}
         strokeWidth={3}
-        armAt={44}
-        maxPull={150}
+        armAt={mobile ? 24 : 40}
+        maxPull={mobile ? 64 : 110}
         launchSpeed={2400}
         flight={110}
         particles={12}
         spread={64}
         axis="vertical"
+        pullDownOnly
         tapSends
         ariaLabel="Kembali ke atas"
         {...colors}

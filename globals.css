@@ -4218,6 +4218,20 @@ body.mn-modal-open {
 html.pre-lock,
 html.pre-lock body {
   overflow: hidden !important;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+html.pre-lock body {
+  position: fixed !important;
+  inset: 0;
+  width: 100%;
+}
+
+html.pre-lock .mn-scroll-sling,
+html.pre-lock .scroll-up-btn {
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 .preloader {
