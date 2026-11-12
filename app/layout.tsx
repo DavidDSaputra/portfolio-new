@@ -56,7 +56,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           }}
         />
         <noscript>
-          <style>{".preloader{display:none!important}html{overflow:auto!important}"}</style>
+          <style>
+            {".preloader{display:none!important}html{overflow:auto!important}.hero-pop{opacity:1!important;transform:none!important}"}
+          </style>
         </noscript>
       </head>
       <body>

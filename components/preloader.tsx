@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { preloader } from "@/lib/content";
+import { CURTAIN, openIntro } from "@/lib/intro";
 
 type Phase = "loading" | "ready" | "opening" | "done";
 
@@ -12,8 +13,6 @@ const COUNT_MS = 2200;
 const HOLD_AT = 90;
 /** Never hold the visitor longer than this, whatever the network does. */
 const MAX_WAIT_MS = 7000;
-const CURTAIN_EASE = [0.76, 0, 0.24, 1] as const;
-const CURTAIN_S = 1.25;
 
 /* Soft vertical folds so the two panels read as fabric, not flat blocks. */
 const FOLDS =
@@ -34,6 +33,8 @@ export default function Preloader() {
   useEffect(() => {
     if (document.documentElement.dataset.intro === "skip") {
       setPhase("done");
+      // No curtain this time: let the hero start right away.
+      openIntro("instant");
       return;
     }
 
@@ -92,6 +93,11 @@ export default function Preloader() {
     setPhase((current) => (current === "ready" ? "opening" : current));
   }, []);
 
+  // The hero times its pop-in entrance to the curtain (see lib/intro.ts).
+  useEffect(() => {
+    if (phase === "opening") openIntro("curtain");
+  }, [phase]);
+
   // Once ready: focus the button, and keep keyboard focus on the screen.
   useEffect(() => {
     if (phase !== "ready") return;
@@ -134,13 +140,15 @@ export default function Preloader() {
         <motion.div
           key={side}
           aria-hidden="true"
-          className={`absolute inset-y-0 w-[50.5%] bg-ink will-change-transform ${
+          className={`absolute inset-y-0 bg-ink will-change-transform ${
             side === "left" ? "left-0" : "right-0"
           }`}
-          style={{ backgroundImage: FOLDS }}
+          style={{ backgroundImage: FOLDS, width: `${CURTAIN.panel * 100}%` }}
           initial={false}
-          animate={{ x: opening && !reduced ? (side === "left" ? "-101%" : "101%") : "0%" }}
-          transition={{ duration: CURTAIN_S, ease: CURTAIN_EASE, delay: 0.12 }}
+          animate={{
+            x: opening && !reduced ? `${(side === "left" ? -1 : 1) * CURTAIN.travel * 100}%` : "0%",
+          }}
+          transition={{ duration: CURTAIN.duration, ease: CURTAIN.ease, delay: CURTAIN.delay }}
           onAnimationComplete={() => {
             if (opening && side === "right") finish();
           }}
