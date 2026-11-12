@@ -13,7 +13,6 @@ const bricolage = Bricolage_Grotesque({
 });
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
   variable: "--font-jetbrains",
   display: "swap",
 });

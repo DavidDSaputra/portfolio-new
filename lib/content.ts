@@ -126,8 +126,8 @@ export const about = {
     caption: "David Saputra — Web Developer & Visual Designer",
   },
   mascots: [
-    { src: "/src/png/mascot-noodle.png", alt: "" },
-    { src: "/src/png/mascot-runner.png", alt: "" },
+    { src: "/src/opt/mascot-noodle.webp", alt: "" },
+    { src: "/src/opt/mascot-runner.webp", alt: "" },
   ],
   meta: [
     { label: "Based in", value: "Tangerang, Indonesia" },

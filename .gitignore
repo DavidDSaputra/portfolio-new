@@ -18,3 +18,7 @@ ref-calvin-*.png
 v2-*.png
 verify-*.png
 verify_*.png
+
+# TypeScript / Vercel
+*.tsbuildinfo
+.vercel

@@ -1,7 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { useRef } from "react";
+import { motion, useInView, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/cn";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -60,9 +61,14 @@ export function RevealTitle({
   immediate = false,
 }: RevealTitleProps) {
   const reduced = useReducedMotion();
+  /* Observe the heading itself: the moving spans start fully clipped by their
+     overflow-hidden line, so they would never report as intersecting. */
+  const ref = useRef<HTMLHeadingElement & HTMLParagraphElement>(null);
+  const inView = useInView(ref, { once: true, margin: "0px 0px -12% 0px" });
+  const shown = immediate || inView;
 
   return (
-    <Tag className={className}>
+    <Tag ref={ref} className={className}>
       {lines.map((line, index) => (
         <span
           key={index}
@@ -74,9 +80,7 @@ export function RevealTitle({
             <motion.span
               className="block will-change-transform"
               initial={{ y: "110%" }}
-              {...(immediate
-                ? { animate: { y: 0 } }
-                : { whileInView: { y: 0 }, viewport: { once: true, margin: "0px 0px -12% 0px" } })}
+              animate={{ y: shown ? 0 : "110%" }}
               transition={{ duration: 1, delay: delay + index * 0.09, ease: EASE }}
             >
               {line}
