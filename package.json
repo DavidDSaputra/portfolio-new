@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/publish-root.mjs",
     "start": "npx serve out",
     "typecheck": "tsc --noEmit",
     "optimize:images": "node scripts/optimize-images.mjs"
