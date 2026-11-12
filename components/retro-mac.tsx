@@ -56,7 +56,7 @@ function readPalette(): Palette {
     inkSoft: token("--color-ink-soft", "#6b665c"),
     card: token("--color-card", "#ffffff"),
     line: token("--color-line", "#eadfd2"),
-    accent: token("--color-accent", "#ff9e8f"),
+    accent: token("--color-accent", "#315b8c"),
     butter: token("--color-butter", "#fff4c9"),
     mint: token("--color-mint", "#d9efe2"),
     sageInk: token("--color-sage-ink", "#4f6b58"),

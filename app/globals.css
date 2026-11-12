@@ -13,9 +13,9 @@
   --color-lilac: #e5dff7;
   --color-butter: #fff4c9;
   --color-sky: #d8e9f6;
-  --color-accent: #ff9e8f;
-  /* Darker coral for small text on cream/white (AA contrast). */
-  --color-accent-ink: #b0483a;
+  --color-accent: #315b8c;
+  /* Slightly deeper accent for small text on cream/white (AA contrast). */
+  --color-accent-ink: #284b75;
   --color-sage: #9db8a5;
   --color-sage-ink: #4f6b58;
   --color-card: #ffffff;
@@ -84,7 +84,7 @@
   }
   ::selection {
     background: var(--color-accent);
-    color: var(--color-ink);
+    color: var(--color-bg);
   }
   :focus-visible {
     outline: 2px solid var(--color-ink);

@@ -472,7 +472,7 @@ function EndSticker({
       {/* Untransformed anchor box: the path ends at its centre. */}
       <div ref={stickerRef} className="relative inline-block max-w-full">
         <motion.p
-          className="jalur-reveal display relative inline-flex max-w-full items-center gap-[0.5em] rounded-full border-[3px] border-white bg-accent px-[1.1em] py-[0.62em] text-[clamp(1.35rem,3.6vw,3rem)] text-ink shadow-lift"
+          className="jalur-reveal display relative inline-flex max-w-full items-center gap-[0.5em] rounded-full border-[3px] border-white bg-accent px-[1.1em] py-[0.62em] text-[clamp(1.35rem,3.6vw,3rem)] text-bg shadow-lift"
           style={reduced ? { rotate: -4 } : { scale, rotate, opacity }}
         >
           <StopIcon icon="sparkles" className="size-[0.9em] shrink-0" />

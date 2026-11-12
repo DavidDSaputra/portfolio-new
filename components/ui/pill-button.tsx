@@ -13,9 +13,9 @@ interface PillButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 const variants: Record<Variant, { pill: string; circle: string }> = {
-  ink: { pill: "bg-ink text-bg", circle: "bg-accent text-ink" },
+  ink: { pill: "bg-ink text-bg", circle: "bg-accent text-bg" },
   white: { pill: "bg-card text-ink border border-line", circle: "bg-ink text-bg" },
-  accent: { pill: "bg-accent text-ink", circle: "bg-ink text-bg" },
+  accent: { pill: "bg-accent text-bg", circle: "bg-ink text-bg" },
 };
 
 const sizes = {
