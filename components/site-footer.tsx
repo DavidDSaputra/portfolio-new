@@ -36,7 +36,7 @@ function BackToTop() {
 function Wordmark() {
   const reduced = useReducedMotion();
   const className =
-    "display block bg-linear-to-r from-pink via-peach to-lilac bg-clip-text text-[18.6vw] leading-[0.8] whitespace-nowrap text-transparent";
+    "display block bg-linear-to-r from-pink via-peach to-lilac bg-clip-text text-[17.4vw] leading-[0.8] whitespace-nowrap text-transparent";
 
   return (
     <div
@@ -136,7 +136,7 @@ export default function SiteFooter() {
               </p>
               <LocalTime
                 withSeconds
-                className="mt-4 block font-mono text-[clamp(1.5rem,2.4vw,2rem)] leading-none font-medium tracking-tight text-ink tabular-nums"
+                className="mt-4 block font-mono text-[clamp(1.375rem,2.1vw,2rem)] leading-none whitespace-nowrap font-medium tracking-tight text-ink tabular-nums"
               />
               <p className="mt-3 text-sm text-ink-soft">{footer.location}</p>
               <a

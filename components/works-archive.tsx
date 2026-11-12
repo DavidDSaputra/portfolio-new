@@ -84,6 +84,9 @@ function ArchiveCard({ project, index }: { project: Project; index: number }) {
         <h3 className="mt-1.5 line-clamp-2 text-[0.92rem] leading-snug font-semibold text-balance sm:text-lg">
           {project.title}
         </h3>
+        <p className="mt-1.5 line-clamp-3 text-[0.78rem] leading-relaxed text-ink-soft sm:line-clamp-4 sm:text-sm">
+          {project.desc}
+        </p>
 
         {(project.likes !== undefined || !project.href) && (
           <div className="mt-auto flex flex-wrap items-center gap-2 pt-3">

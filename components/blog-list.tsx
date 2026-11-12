@@ -3,7 +3,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from "motion/react";
+import {
+  AnimatePresence,
+  motion,
+  useIsPresent,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+} from "motion/react";
 import FigLabel from "@/components/ui/fig-label";
 import Marquee from "@/components/ui/marquee";
 import PillButton, { ArrowIcon } from "@/components/ui/pill-button";
@@ -236,6 +243,9 @@ const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1
 
 function ArticleDialog({ post, onClose }: { post: BlogPost; onClose: () => void }) {
   const reduced = useReducedMotion();
+  // False as soon as the exit animation starts: the dialog is still mounted
+  // but must stop locking scroll, trapping focus and swallowing clicks.
+  const isPresent = useIsPresent();
   const panelRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -251,20 +261,26 @@ function ArticleDialog({ post, onClose }: { post: BlogPost; onClose: () => void 
 
   // Scroll lock (the overlay carries data-lenis-prevent, so Lenis ignores
   // wheel/touch inside it; this stops native + keyboard page scrolling).
+  // Released when the exit starts, and cleared rather than restored from a
+  // snapshot so overlapping locks can never leave the page stuck. --sbw keeps
+  // the fixed header from shifting (same contract as the header menu lock).
   useEffect(() => {
+    if (!isPresent) return;
     const root = document.documentElement;
-    const { overflow, paddingRight } = root.style;
-    const scrollbar = window.innerWidth - root.clientWidth;
+    const scrollbar = Math.max(0, window.innerWidth - root.clientWidth);
     root.style.overflow = "hidden";
     if (scrollbar > 0) root.style.paddingRight = `${scrollbar}px`;
+    root.style.setProperty("--sbw", `${scrollbar}px`);
     return () => {
-      root.style.overflow = overflow;
-      root.style.paddingRight = paddingRight;
+      root.style.overflow = "";
+      root.style.paddingRight = "";
+      root.style.removeProperty("--sbw");
     };
-  }, []);
+  }, [isPresent]);
 
-  // Escape + focus trap.
+  // Escape + focus trap (only while open, not during the exit animation).
   useEffect(() => {
+    if (!isPresent) return;
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
@@ -292,14 +308,17 @@ function ArticleDialog({ post, onClose }: { post: BlogPost; onClose: () => void 
     };
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [onClose]);
+  }, [onClose, isPresent]);
 
   const instant = { duration: 0 };
 
   return (
     <div
       data-lenis-prevent
-      className="fixed inset-0 z-[90] flex items-end justify-center sm:items-center sm:p-6 lg:p-10"
+      className={cn(
+        "fixed inset-0 z-[90] flex items-end justify-center sm:items-center sm:p-6 lg:p-10",
+        !isPresent && "pointer-events-none",
+      )}
     >
       <motion.div
         aria-hidden="true"

@@ -79,7 +79,8 @@ function StackCounter({
       aria-hidden="true"
       className={cn(
         "sticky top-[var(--header-h)] z-30 flex items-center gap-4 bg-bg/90 py-3 backdrop-blur-sm",
-        "[@media(max-height:520px)]:static",
+        /* Same thresholds as the StackCard li: below them a stuck card cannot fit. */
+        "[@media(max-height:620px)]:static sm:max-lg:[@media(max-height:720px)]:static lg:[@media(max-height:650px)]:static",
         "lg:top-[calc(var(--header-h)+2rem)] lg:z-auto lg:flex-col lg:items-start lg:gap-5 lg:self-start",
         "lg:bg-transparent lg:py-0 lg:backdrop-blur-none",
       )}
@@ -123,7 +124,7 @@ function ProjectAction({ project }: { project: Project }) {
     );
   }
   return (
-    <span className="inline-flex h-12 items-center rounded-full border border-dashed border-ink/30 px-5 text-[0.95rem] font-semibold text-ink/70">
+    <span className="inline-flex h-12 items-center rounded-full border border-dashed border-ink/30 px-5 text-[0.95rem] font-semibold text-ink/80">
       {works.privateLabel}
     </span>
   );
@@ -160,7 +161,7 @@ function StackCard({
 
   return (
     <li
-      className="sticky mb-6 last:mb-0 lg:mb-10 [@media(max-height:520px)]:static"
+      className="sticky mb-6 last:mb-0 lg:mb-10 [@media(max-height:620px)]:static sm:max-lg:[@media(max-height:720px)]:static lg:[@media(max-height:650px)]:static"
       style={{ top: `calc(var(--header-h) + var(--stack-top) + ${index} * var(--stack-step))` }}
     >
       <motion.article
@@ -202,7 +203,7 @@ function StackCard({
               <dl className="mt-4 grid grid-cols-3 gap-3 border-t border-ink/10 pt-4 lg:mt-auto lg:pt-6">
                 {meta.map((item) => (
                   <div key={item.label} className="min-w-0">
-                    <dt className="label-mono text-ink/70">{item.label}</dt>
+                    <dt className="label-mono text-ink/80">{item.label}</dt>
                     <dd className="mt-1 flex items-start gap-1.5 text-[0.8rem] leading-snug font-medium sm:text-sm">
                       {item.live && (
                         <span

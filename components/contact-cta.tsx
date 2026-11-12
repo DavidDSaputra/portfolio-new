@@ -216,7 +216,7 @@ function ChannelRow({ channel, index }: { channel: Channel; index: number }) {
           <span
             className={cn(
               "link-sweep max-w-full align-bottom font-medium tracking-tight [overflow-wrap:anywhere]",
-              "text-[clamp(1.05rem,4.4vw,2.75rem)] leading-[1.15]",
+              "text-[clamp(1.05rem,4.4vw,2.75rem)] md:text-[clamp(1.25rem,3vw,2.75rem)] leading-[1.15]",
               "group-hover:after:[transform-origin:left] group-hover:after:[transform:scaleX(1)]",
               "group-focus-visible:after:[transform-origin:left] group-focus-visible:after:[transform:scaleX(1)]",
             )}

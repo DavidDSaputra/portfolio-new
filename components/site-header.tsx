@@ -25,6 +25,9 @@ const DELTA = 6;
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
+/* Page content made inert while the menu is open (the header is outside both). */
+const INERT_TARGETS = "main, footer";
+
 const glassPill =
   "pointer-events-auto inline-flex h-10 shrink-0 items-center rounded-full border border-line bg-card/80 text-sm font-semibold text-ink shadow-soft backdrop-blur-md transition-[transform,box-shadow,background-color] duration-500 ease-out-expo";
 
@@ -84,6 +87,9 @@ export default function SiteHeader() {
     root.style.overflow = "";
     root.style.paddingRight = "";
     root.style.removeProperty("--sbw");
+    document
+      .querySelectorAll<HTMLElement>(INERT_TARGETS)
+      .forEach((el) => el.removeAttribute("inert"));
   }, []);
 
   const closeMenu = useCallback(
@@ -105,6 +111,11 @@ export default function SiteHeader() {
     root.style.overflow = "hidden";
     root.style.paddingRight = `${scrollbar}px`;
     root.style.setProperty("--sbw", `${scrollbar}px`);
+    /* Take the page behind the menu out of the tab order and the
+       accessibility tree while it is open. */
+    document
+      .querySelectorAll<HTMLElement>(INERT_TARGETS)
+      .forEach((el) => el.setAttribute("inert", ""));
     return unlockScroll;
   }, [open, unlockScroll]);
 
@@ -255,7 +266,7 @@ export default function SiteHeader() {
             <p
               className={cn(
                 glassPill,
-                "label-mono hidden gap-2.5 px-4 font-normal text-ink-soft lg:inline-flex",
+                "label-mono hidden gap-2.5 px-4 font-normal text-ink-soft xl:inline-flex",
               )}
             >
               <AvailabilityDot animated={!reduce} />
@@ -281,9 +292,6 @@ export default function SiteHeader() {
           <motion.div
             key="menu"
             id={MENU_ID}
-            role="dialog"
-            aria-modal="true"
-            aria-label={nav.menuLabel}
             data-lenis-prevent=""
             className="fixed inset-0 z-40 overflow-hidden"
             style={{ paddingRight: "var(--sbw, 0px)" }}
@@ -314,11 +322,11 @@ export default function SiteHeader() {
                       {pad(nav.links.length)} / {site.years}
                     </span>
                   </div>
-                  <ul className="grid sm:grid-cols-2 sm:gap-x-2">
+                  <ul className="grid xl:grid-cols-2 xl:gap-x-2">
                     {nav.links.map((link, index) => {
                       const style: TintStyle = { "--tint": tintVar(TINTS[index % TINTS.length]) };
                       return (
-                        <li key={link.href} className="border-t border-line">
+                        <li key={link.href} className="@container border-t border-line">
                           <a
                             href={link.href}
                             onClick={() => closeMenu(false)}
@@ -335,7 +343,7 @@ export default function SiteHeader() {
                               <motion.span
                                 variants={lineVariants}
                                 style={{ transformOrigin: "left bottom" }}
-                                className="display block text-[clamp(2.1rem,min(10vw,6.6vh),4.25rem)] text-ink transition-transform duration-500 ease-out-expo group-hover/link:translate-x-1.5"
+                                className="display block text-[clamp(1.75rem,min(10vw,6.6vh,calc((100cqi_-_7.75rem)_/_4.3)),4.25rem)] text-ink transition-transform duration-500 ease-out-expo group-hover/link:translate-x-1.5"
                               >
                                 {link.label}
                               </motion.span>

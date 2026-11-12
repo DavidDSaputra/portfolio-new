@@ -27,7 +27,7 @@ import { jalur, tintVar, type JalurIcon, type JalurStop } from "@/lib/content";
    the line and the stops stay aligned at every width, and re-align on resize.
    ────────────────────────────────────────────────────────────────────────── */
 
-const DESKTOP_QUERY = "(min-width: 768px)";
+const DESKTOP_QUERY = "(min-width: 48rem)";
 /** Viewport line (from the top) the pen tip rides on while scrolling. */
 const TIP_LINE = "65%";
 /** Portion of the path (in length-fraction) over which a stop fades in. */
@@ -337,6 +337,13 @@ function Stop({ stop, index, total, progress, threshold, reduced, badgeRef, node
   const badgeScale = useTransform(pop, (latest) => Math.max(0, latest));
   const badgeRotate = useTransform(pop, [0, 1], [tilt - side * 40, tilt], { clamp: false });
 
+  /* The mobile timeline node fills only once the line actually reaches it. */
+  const nodeTarget = useTransform<number, number>(progress, (latest) =>
+    threshold !== null && latest >= threshold - 0.004 ? 1 : 0,
+  );
+  const nodePop = useSpring(nodeTarget, { stiffness: 420, damping: 15, mass: 0.8 });
+  const nodeFill = useTransform(nodePop, (latest) => Math.max(0, latest));
+
   const bubbleOpacity = useTransform(reveal, [0.45, 1], [0, 1]);
   const bubbleScale = useTransform(pop, [0, 1], [0.9, 1], { clamp: false });
   const bubbleLift = useTransform(reveal, [0.45, 1], [18, 0]);
@@ -346,7 +353,7 @@ function Stop({ stop, index, total, progress, threshold, reduced, badgeRef, node
 
   return (
     <li className="relative py-10 md:flex md:min-h-[90svh] md:flex-col md:justify-center md:py-[6vh]">
-      <TimelineNode anchorRef={nodeRef} fill={reduced ? 1 : badgeScale} className="top-[2.6rem]" />
+      <TimelineNode anchorRef={nodeRef} fill={reduced ? 1 : nodeFill} className="top-[2.6rem]" />
 
       <motion.div
         className={cn(
@@ -717,7 +724,7 @@ export default function Jalur() {
           {geometry && !reduced && (
             <motion.div
               aria-hidden="true"
-              className="pointer-events-none absolute top-0 left-0 z-20"
+              className="pointer-events-none absolute top-0 left-0 z-0"
               style={{ x: penX, y: penY, opacity: penOpacity }}
             >
               <span className="absolute top-0 left-0 block size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-ink bg-card shadow-soft md:size-7 md:border-[3px]">

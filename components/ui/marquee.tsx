@@ -32,7 +32,12 @@ export default function Marquee({
   const renderHalf = (hidden: boolean) => (
     <ul className="flex shrink-0 items-center" aria-hidden={hidden || undefined}>
       {repeated.map((item, index) => (
-        <li key={index} className="flex shrink-0 items-center">
+        <li
+          key={index}
+          className="flex shrink-0 items-center"
+          // Only the first run of the exposed half is announced; repeats are visual filler.
+          aria-hidden={(!hidden && index >= items.length) || undefined}
+        >
           <span className={cn("whitespace-nowrap", itemClassName)}>{item}</span>
           <span aria-hidden="true" className={cn("mx-[1.2em] text-accent", separatorClassName)}>
             {separator}

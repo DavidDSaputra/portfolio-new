@@ -375,6 +375,8 @@ export default function RetroMac({ className, fallback, scrollProgress }: RetroM
 
     let cancelled = false;
     let ready = false;
+    let loaded = false;
+    let contextLost = false;
     let running = false;
     let inView = false;
     let raf = 0;
@@ -496,6 +498,9 @@ export default function RetroMac({ className, fallback, scrollProgress }: RetroM
         radius = sphere.radius || 1;
         pivot.add(model);
 
+        loaded = true;
+        // If the context is currently lost, onContextRestored brings it up.
+        if (contextLost) return;
         ready = true;
         fit();
         renderOnce();
@@ -530,13 +535,26 @@ export default function RetroMac({ className, fallback, scrollProgress }: RetroM
     };
     const onContextLost = (event: Event) => {
       event.preventDefault();
+      contextLost = true;
       ready = false;
       sync();
       setStatus("failed");
     };
+    // preventDefault above asks the browser to restore the context; three
+    // re-initialises its GL state itself, we only need to resume drawing.
+    const onContextRestored = () => {
+      contextLost = false;
+      if (cancelled || !loaded) return;
+      ready = true;
+      screenTexture.needsUpdate = true;
+      fit();
+      setStatus("ready");
+      sync();
+    };
 
     document.addEventListener("visibilitychange", sync);
     canvas.addEventListener("webglcontextlost", onContextLost);
+    canvas.addEventListener("webglcontextrestored", onContextRestored);
     if (!reduced) {
       window.addEventListener("pointermove", onPointerMove, { passive: true });
       document.documentElement.addEventListener("pointerleave", onPointerReset);
@@ -552,6 +570,7 @@ export default function RetroMac({ className, fallback, scrollProgress }: RetroM
       intersectionObserver.disconnect();
       document.removeEventListener("visibilitychange", sync);
       canvas.removeEventListener("webglcontextlost", onContextLost);
+      canvas.removeEventListener("webglcontextrestored", onContextRestored);
       window.removeEventListener("pointermove", onPointerMove);
       document.documentElement.removeEventListener("pointerleave", onPointerReset);
       window.removeEventListener("blur", onPointerReset);

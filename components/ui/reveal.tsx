@@ -1,11 +1,36 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useRef } from "react";
-import { motion, useInView, useReducedMotion } from "motion/react";
+import { useRef, useSyncExternalStore } from "react";
+import { motion, useInView } from "motion/react";
 import { cn } from "@/lib/cn";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+
+function subscribeReducedMotion(onChange: () => void) {
+  const query = window.matchMedia(REDUCED_MOTION_QUERY);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
+
+function getReducedMotion() {
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
+}
+
+function getReducedMotionServer() {
+  return false;
+}
+
+/* Hydration-safe reduced-motion flag. Motion's own hook reads matchMedia during
+   the hydration render, so reduced-motion visitors got a different tree than the
+   static HTML. This one reports false while hydrating (matching the export) and
+   switches right after; the plain element then remounts without the inline
+   opacity/transform styles the server emitted. */
+function useReducedMotion(): boolean {
+  return useSyncExternalStore(subscribeReducedMotion, getReducedMotion, getReducedMotionServer);
+}
 
 interface RevealProps {
   children: ReactNode;

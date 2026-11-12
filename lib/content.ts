@@ -15,20 +15,19 @@ export const site = {
   initials: "DS",
   url: "https://davidsaputra.my.id/",
   title: "David Saputra | Frontend Developer, Vibe Coder & Prompt Engineer",
+  siteName: "David Saputra Portfolio",
   description:
-    "David Saputra adalah frontend developer, vibe coder, dan prompt engineer dari Tangerang, Indonesia. Membangun pengalaman web yang bersih, jelas, dan purposeful — dari company profile hingga sistem internal.",
+    "David Saputra — Frontend developer, vibe coder & prompt engineer from Tangerang, Indonesia. Clean, purposeful web experiences: company profiles, product sites and internal systems.",
   ogDescription:
     "Clean, purposeful web experiences — company profiles, product sites and internal systems. Based in Tangerang, Indonesia.",
   ogImage: "https://davidsaputra.my.id/src/png/nav-avatar.png",
+  ogImageAlt: "David Saputra portfolio preview",
   twitter: "@David_Saputra07",
   location: "Tangerang, Indonesia",
-  locationShort: "Tangerang, ID",
   timeZone: "Asia/Jakarta",
   timeZoneLabel: "WIB",
   availability: "Available for work",
   years: "23—26",
-  logo: "/src/opt/logo-david-s.webp",
-  avatar: "/src/opt/nav-avatar-s.webp",
   cv: "/src/cv/CV_DAVID_SAPUTRA.pdf",
 } as const;
 
@@ -61,6 +60,7 @@ export const nav = {
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/#contact" },
   ],
+  skipLabel: "Skip to content",
   menuLabel: "Menu",
   closeLabel: "Close",
 } as const;
@@ -122,7 +122,7 @@ export const about = {
   traits: ["Clear communication", "Fast adaptation", "Team collaboration"],
   photo: {
     src: "/src/opt/about.webp",
-    alt: "David Saputra — Web Developer & Visual Designer",
+    alt: "Portrait of David Saputra",
     caption: "David Saputra — Web Developer & Visual Designer",
   },
   mascots: [
@@ -620,6 +620,15 @@ export const education = {
   ],
 };
 
+/** Contact-section channel built from contact.socials, so each URL and handle
+    has a single source of truth. */
+const social = (
+  label: (typeof contact.socials)[number]["label"],
+): { label: string; value: string; href: string } => {
+  const s = contact.socials.find((x) => x.label === label)!;
+  return { label: s.label, value: s.handle, href: s.href };
+};
+
 export const contactCta = {
   fig: "Fig. 08",
   figLabel: "Contact",
@@ -630,13 +639,9 @@ export const contactCta = {
   channels: [
     { label: "Email", value: contact.email, href: contact.emailHref },
     { label: "WhatsApp", value: contact.phone, href: contact.whatsappHref },
-    { label: "Instagram", value: "@david2470_", href: "https://www.instagram.com/david2470_/" },
-    {
-      label: "LinkedIn",
-      value: "David Saputra",
-      href: "https://www.linkedin.com/in/david-saputra-98b4b823b/",
-    },
-    { label: "GitHub", value: "@DavidDSaputra", href: "https://github.com/DavidDSaputra" },
+    social("Instagram"),
+    social("LinkedIn"),
+    social("GitHub"),
   ],
 };
 

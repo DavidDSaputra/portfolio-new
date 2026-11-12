@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Anton, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import SmoothScroll from "@/components/ui/smooth-scroll";
-import { site } from "@/lib/content";
+import { nav, site } from "@/lib/content";
 import "./globals.css";
 
 const anton = Anton({ weight: "400", subsets: ["latin"], variable: "--font-anton", display: "swap" });
@@ -25,9 +25,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: site.url,
+    siteName: site.siteName,
     title: site.title,
     description: site.ogDescription,
-    images: [{ url: site.ogImage, alt: `${site.name} portfolio preview` }],
+    images: [{ url: site.ogImage, alt: site.ogImageAlt }],
   },
   twitter: {
     card: "summary_large_image",
@@ -50,7 +51,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-bg"
         >
-          Skip to content
+          {nav.skipLabel}
         </a>
         <SmoothScroll />
         {children}
