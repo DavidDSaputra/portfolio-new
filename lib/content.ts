@@ -31,6 +31,14 @@ export const site = {
   cv: "/src/cv/CV_DAVID_SAPUTRA.pdf",
 } as const;
 
+export const preloader = {
+  label: "David Saputra / Portfolio",
+  years: site.years,
+  loading: "Loading",
+  ready: "Click to open",
+  hint: "Click anywhere or press Enter",
+} as const;
+
 export const contact = {
   email: "davidsaputra2704@gmail.com",
   emailHref: "mailto:davidsaputra2704@gmail.com",

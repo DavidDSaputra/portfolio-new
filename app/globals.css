@@ -103,6 +103,15 @@
   }
 }
 
+/* Intro loading screen (components/preloader.tsx): the page is scroll-locked
+   until the curtain has opened; repeat visits skip it before first paint. */
+html:not([data-intro="skip"]):not([data-intro="done"]) {
+  overflow: hidden;
+}
+html[data-intro="skip"] .preloader {
+  display: none;
+}
+
 /* Lenis */
 html.lenis,
 html.lenis body {
