@@ -14,7 +14,7 @@ export const CURTAIN = {
   /** Seconds between the click and the panels starting to move. */
   delay: 0.12,
   /** Seconds the panels take to slide away. */
-  duration: 1.25,
+  duration: 1.7,
   /** cubic-bezier easing of the slide. */
   ease: [0.76, 0, 0.24, 1],
   /** Width of one panel, as a fraction of the viewport (they overlap slightly). */

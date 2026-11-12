@@ -120,9 +120,14 @@ const UNCOVER = 0.25;
 const MAX_DISTANCE = 0.47;
 /** Seconds after the edge passes: lets the pop start in full view. */
 const CURTAIN_LEAD = 0.02;
-/** Without a curtain: start almost at once, in the same order but brisker. */
-const INSTANT_START = 0.12;
-const INSTANT_PACE = 0.75;
+/** Without a curtain: start almost at once, in the same order and pace. */
+const INSTANT_START = 0.15;
+const INSTANT_PACE = 1;
+/** Global tempo: below 1 slows every pop down. Stiffness scales by TEMPO²
+    and damping by TEMPO, so each pop keeps its bounce, just takes longer. */
+const TEMPO = 0.62;
+/** Fades are stretched by the same amount. */
+const FADE_MIN = 0.28;
 
 /* Seconds until `el` should pop. Works from its layout box (offset*), so the
    hidden, scaled-down transform it currently wears does not skew the result. */
@@ -216,8 +221,14 @@ export function Pop({
           : {
               type: "spring",
               ...preset.spring,
+              stiffness: preset.spring.stiffness * TEMPO * TEMPO,
+              damping: preset.spring.damping * TEMPO,
               delay: at,
-              opacity: { duration: preset.fade ?? 0.16, delay: at, ease: "linear" },
+              opacity: {
+                duration: Math.max(FADE_MIN, (preset.fade ?? 0.16) / TEMPO),
+                delay: at,
+                ease: "easeOut",
+              },
             }
       }
     >
