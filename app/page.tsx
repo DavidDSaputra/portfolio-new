@@ -1,5 +1,6 @@
 import SiteHeader from "@/components/site-header";
 import Hero from "@/components/hero";
+import Showcase from "@/components/showcase";
 import About from "@/components/about";
 import Jalur from "@/components/jalur";
 import SelectedWorks from "@/components/selected-works";
@@ -15,6 +16,7 @@ export default function HomePage() {
       <SiteHeader />
       <main id="main">
         <Hero />
+        <Showcase />
         <About />
         <Jalur />
         <SelectedWorks />

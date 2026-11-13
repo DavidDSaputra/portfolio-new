@@ -207,3 +207,20 @@ html.lenis body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Hero name: each letter hops and tints on hover (inner box, so it never
+   fights the pop-in transform on its parent). */
+.hero-letter {
+  transition:
+    translate 0.45s var(--ease-out-expo),
+    color 0.3s ease;
+}
+.hero-letter:hover {
+  translate: 0 -0.07em;
+  color: var(--color-accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-letter {
+    transition: none;
+  }
+}

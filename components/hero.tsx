@@ -1,8 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import type { CSSProperties, RefObject } from "react";
-import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import type { MotionValue } from "motion/react";
 import LocalTime from "@/components/ui/local-time";
@@ -10,207 +8,150 @@ import Marquee from "@/components/ui/marquee";
 import PillButton, { ArrowIcon } from "@/components/ui/pill-button";
 import { Pop } from "@/components/ui/pop";
 import { cn } from "@/lib/cn";
-import { TINTS, hero, roles, tintVar } from "@/lib/content";
+import { useIntroState } from "@/lib/intro";
+import { hero, roles, site } from "@/lib/content";
 
-/* Giant name: scales with width, but backs off on short viewports so the
-   whole hero (and a peek of the marquee) stays near the fold. */
-const HEADLINE_SIZE = "text-[length:clamp(4.5rem,min(19vw,25svh),19rem)]";
+/* Typography-only hero: the name set as one giant line that fills the shell,
+   its letters popping in behind the loading curtain, a role line that flips
+   through what David does, and the two words drifting apart on scroll. */
+
+/* The name spans the shell width (container units), backing off on short
+   viewports so the whole hero stays above the fold. Below md it breaks onto
+   two lines and is sized off "SAPUTRA", the longer word. */
+const HEADLINE_SIZE =
+  "text-[length:min(30.5cqw,26svh)] md:text-[length:min(18.2cqw,36svh)]";
 const MARQUEE_SIZE = "text-[length:clamp(2rem,6vw,5rem)]";
 
-/* Where the monitor "sticker" sits from md up: pinned to the right edge of the
-   headline block, overlapping the end of the name. */
-const DESKTOP_SPOT =
-  "md:absolute md:right-0 md:top-1/2 md:w-[clamp(17rem,36vw,31rem)] md:-translate-y-[46%]";
-
-/* Scattered polaroids around the monitor (percentages of the visual square).
-   `burst` is where each one starts its pop: tucked behind the monitor, so
-   they fly out of it. */
-const STICKER_SPOTS = [
-  {
-    position: "-left-[12%] top-[5%] w-[40%]",
-    rotate: -9,
-    spin: -5,
-    drift: -70,
-    burst: { x: "55%", y: "45%" },
-  },
-  {
-    position: "-right-[6%] -top-[3%] w-[33%]",
-    rotate: 7,
-    spin: 6,
-    drift: -130,
-    burst: { x: "-60%", y: "70%" },
-  },
-  {
-    position: "-right-[8%] bottom-[4%] w-[41%]",
-    rotate: 5,
-    spin: -4,
-    drift: -40,
-    burst: { x: "-50%", y: "-55%" },
-  },
-] as const;
-
-const CHIP_TILTS = [-2, 1.5, -1, 2, -1.5] as const;
+/** Milliseconds each role stays up before flipping to the next. */
+const ROLE_MS = 2600;
 
 /* Anton's only kerning pair in the name. Giving each letter its own box drops
    kerning, so it is put back by hand (measured, in em). */
 const KERNING: Record<string, number> = { AV: -0.0215 };
 
-/* The giant name, one popping letter at a time. Each letter times itself to
-   the curtain edge, so the name bursts open from the centre outwards. The
-   visible letters are hidden from assistive tech; the sr-only copy is read. */
-function PopHeadline({ lines, className }: { lines: readonly string[]; className?: string }) {
-  let count = 0;
-
+/* One word of the name, one popping letter at a time. `start` keeps the
+   alternating tilt running across both words. Each letter sits in two boxes:
+   the outer one pops in, the inner one does the hover bounce, so the two
+   transforms never fight. */
+function PopWord({ word, start }: { word: string; start: number }) {
   return (
-    <h1 className={className}>
-      <span className="sr-only">{lines.join(" ")}</span>
-      {lines.map((line, lineIndex) => (
-        <span
-          key={lineIndex}
-          aria-hidden="true"
-          className="-mb-[0.08em] block pt-[0.06em] pb-[0.08em] whitespace-nowrap"
-        >
-          {[...line].map((char, charIndex) => {
-            const index = count++;
-            const kern = KERNING[(char + (line[charIndex + 1] ?? "")).toUpperCase()];
-            return (
-              <Pop
-                key={charIndex}
-                kind="letter"
-                as="span"
-                className="inline-block"
-                from={{ rotate: index % 2 ? 14 : -12 }}
-                style={kern ? { marginRight: `${kern}em` } : undefined}
-              >
-                {char === " " ? "\u00a0" : char}
-              </Pop>
-            );
-          })}
-        </span>
-      ))}
-    </h1>
+    <>
+      {[...word].map((char, charIndex) => {
+        const index = start + charIndex;
+        const kern = KERNING[(char + (word[charIndex + 1] ?? "")).toUpperCase()];
+        return (
+          <Pop
+            key={charIndex}
+            kind="letter"
+            as="span"
+            className="inline-block"
+            from={{ rotate: index % 2 ? 14 : -12 }}
+            style={kern ? { marginRight: `${kern}em` } : undefined}
+          >
+            <span className="hero-letter inline-block">{char}</span>
+          </Pop>
+        );
+      })}
+    </>
   );
 }
 
-/* CSS-drawn monitor silhouette with the code on screen. Same square footprint
-   as the WebGL canvas, so swapping one for the other never shifts layout. */
-function MonitorPlaceholder() {
-  return (
-    <div aria-hidden="true" className="@container grid size-full place-items-center">
-      <div className="flex h-[74%] w-[55%] flex-col items-center">
-        <div className="flex w-full flex-1 flex-col rounded-[12%] border border-ink/10 bg-line p-[9%] shadow-soft">
-          <div className="aspect-[1.3] rounded-[8%] bg-ink p-[6%]">
-            <div className="size-full overflow-hidden rounded-[5%] bg-bg p-[7%] font-mono text-[2.1cqw] leading-[1.6] text-ink">
-              {hero.monitor.code.map((line, index) => (
-                <span key={index} className="block whitespace-pre">
-                  {line}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="mt-auto ml-auto h-[3%] w-[46%] rounded-full bg-ink/60" />
-        </div>
-        <div className="h-[9%] w-[84%] rounded-b-[18%] border border-t-0 border-ink/10 bg-line" />
-      </div>
-    </div>
-  );
-}
-
-const RetroMac = dynamic(() => import("@/components/retro-mac"), {
-  ssr: false,
-  loading: () => (
-    <div role="img" aria-label={hero.monitor.alt} className="size-full">
-      <MonitorPlaceholder />
-    </div>
-  ),
-});
-
-/* Soft pastel blobs behind the monitor. */
-function Halo({
+function Word({
+  word,
+  start,
+  x,
   className,
-  anchor,
 }: {
+  word: string;
+  start: number;
+  x?: MotionValue<string>;
   className?: string;
-  anchor?: RefObject<HTMLElement | null>;
 }) {
   return (
-    <Pop
-      kind="glow"
-      anchor={anchor}
+    <motion.span
       aria-hidden="true"
-      className={cn("pointer-events-none", className)}
+      className={cn("block whitespace-nowrap will-change-transform md:inline-block", className)}
+      style={x ? { x } : undefined}
     >
-      <div className="absolute inset-[7%] rounded-full bg-peach blur-3xl" />
-      <div className="absolute top-0 left-[40%] size-[56%] rounded-full bg-lilac opacity-80 blur-3xl" />
-      <div className="absolute bottom-[2%] -left-[4%] size-[46%] rounded-full bg-mint opacity-70 blur-3xl" />
-    </Pop>
+      <PopWord word={word} start={start} />
+    </motion.span>
   );
 }
 
-function Sticker({
-  src,
-  index,
-  progress,
-  reduced,
-  anchor,
-}: {
-  src: string;
-  index: number;
-  progress: MotionValue<number>;
-  reduced: boolean;
-  anchor: RefObject<HTMLElement | null>;
-}) {
-  const spot = STICKER_SPOTS[index % STICKER_SPOTS.length];
-  const y = useTransform(progress, [0, 1], [0, spot.drift]);
-  const rotate = useTransform(progress, [0, 1], [spot.rotate, spot.rotate + spot.spin]);
+/* "Currently — Frontend Developer", the role flipping letter by letter out of
+   a mask. Waits for the curtain, then cycles. */
+function RoleFlip({ className }: { className?: string }) {
+  const intro = useIntroState();
+  const reduced = useReducedMotion() ?? false;
+  /* `prev` stays mounted (faded out) until the next flip replaces it. */
+  const [{ index, prev }, setFlip] = useState({ index: 0, prev: -1 });
+  const running = intro !== "pending" && !reduced;
+
+  useEffect(() => {
+    if (!running) return;
+    const timer = window.setInterval(
+      () => setFlip((flip) => ({ index: (flip.index + 1) % roles.length, prev: flip.index })),
+      ROLE_MS,
+    );
+    return () => window.clearInterval(timer);
+  }, [running]);
+
+  const role = roles[index];
 
   return (
-    <motion.div
-      className={cn("absolute will-change-transform", spot.position)}
-      style={reduced ? { rotate: spot.rotate } : { y, rotate }}
-    >
-      <Pop
-        kind="sticker"
-        anchor={anchor}
-        extra={0.1 + index * 0.08}
-        from={{ ...spot.burst, rotate: -spot.rotate * 2 }}
-        className="rounded-[0.9rem] border border-line bg-card p-[5%] shadow-lift"
+    <p className={cn("flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-x-4", className)}>
+      <span className="label-mono text-ink-soft">{hero.rolePrefix} —</span>
+      <span className="sr-only">{roles.join(", ")}</span>
+      {/* Both words share one grid cell, so the outgoing one rises out of the
+          same one-line mask the incoming one rises into. */}
+      <span
+        aria-hidden="true"
+        className="relative inline-grid h-[1.2em] overflow-hidden font-sans text-[clamp(1.6rem,1.1rem+2.2vw,3.25rem)] leading-[1.2] font-semibold tracking-[-0.03em] text-ink"
       >
-        <img
-          src={src}
-          alt=""
-          aria-hidden="true"
-          width={480}
-          height={360}
-          decoding="async"
-          draggable={false}
-          className="aspect-[4/3] w-full rounded-[0.55rem] object-cover"
-        />
-      </Pop>
-    </motion.div>
-  );
-}
-
-function Sparkle({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
-      <path
-        fill="currentColor"
-        d="M12 0c1 7 4 10 12 12-8 2-11 5-12 12-1-7-4-10-12-12 8-2 11-5 12-12z"
-      />
-    </svg>
+        {prev !== -1 ? (
+          <motion.span
+            key={`out-${prev}`}
+            className="col-start-1 row-start-1 inline-flex whitespace-pre"
+            initial={{ y: "0%", opacity: 1 }}
+            animate={{ y: "-110%", opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.7, 0, 0.84, 0] }}
+          >
+            {roles[prev]}
+            <span className="text-accent">.</span>
+          </motion.span>
+        ) : null}
+        {/* Letters rise in one after another; the word leaves as one. */}
+        <span key={`in-${index}`} className="col-start-1 row-start-1 inline-flex whitespace-pre">
+          {[...role].map((char, charIndex) => (
+            <motion.span
+              key={charIndex}
+              className="inline-block"
+              initial={reduced || prev === -1 ? false : { y: "110%", rotate: 8 }}
+              animate={{ y: "0%", rotate: 0 }}
+              transition={{ duration: 0.7, delay: 0.15 + charIndex * 0.022, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {char}
+            </motion.span>
+          ))}
+          <span className="text-accent">.</span>
+        </span>
+      </span>
+    </p>
   );
 }
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  /* The monitor cluster pops as one: everything in it times off this box. */
-  const clusterRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion() ?? false;
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
+  /* The two words drift apart as the hero scrolls away. */
+  const firstX = useTransform(scrollYProgress, [0, 1], ["0%", "-14%"]);
+  const lastX = useTransform(scrollYProgress, [0, 1], ["0%", "9%"]);
+
+  const [first, last] = hero.headlineLines;
 
   return (
     <section
@@ -218,95 +159,59 @@ export default function Hero() {
       ref={sectionRef}
       className="relative flex min-h-svh flex-col overflow-hidden pt-[var(--header-h)]"
     >
-      <div className="shell flex flex-1 flex-col justify-center py-[clamp(1.5rem,4svh,3.25rem)]">
-        {/* ── Name + monitor ─────────────────────────────────────────── */}
-        <div className="relative isolate">
-          {/* Halo sits behind the headline from md up so it never tints the type. */}
-          <Halo className={cn("-z-10 hidden aspect-square md:block", DESKTOP_SPOT)} />
-
-          <Pop
-            kind="kicker"
-            as="p"
-            className="label-mono mb-[clamp(0.9rem,2svh,1.5rem)] flex items-start gap-3 text-ink-soft"
-          >
-            <span
-              aria-hidden="true"
-              className="mt-[0.35em] inline-block size-2 shrink-0 rounded-full bg-accent"
-            />
+      <div className="shell flex flex-1 flex-col justify-center gap-[clamp(1.5rem,4.5svh,3.5rem)] py-[clamp(1.5rem,4svh,3rem)]">
+        {/* ── Top rule: kicker + where/when ───────────────────────────── */}
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-line pb-4">
+          <Pop kind="kicker" as="p" className="label-mono flex items-center gap-3 text-ink-soft">
+            <span aria-hidden="true" className="inline-block size-2 shrink-0 rounded-full bg-accent" />
             <span>{hero.kicker}</span>
           </Pop>
-
-          <PopHeadline lines={hero.headlineLines} className={cn("display text-ink", HEADLINE_SIZE)} />
-
-          <div
-            ref={clusterRef}
-            className={cn(
-              "pointer-events-none relative z-10 mx-auto mt-8 aspect-square w-[min(78%,21rem)] md:mt-0",
-              DESKTOP_SPOT,
-            )}
-          >
-            <Halo anchor={clusterRef} className="absolute inset-0 md:hidden" />
-
-            {hero.stickers.map((src, index) => (
-              <Sticker
-                key={src}
-                src={src}
-                index={index}
-                progress={scrollYProgress}
-                reduced={reduced}
-                anchor={clusterRef}
-              />
-            ))}
-
-            <Pop
-              kind="glow"
-              anchor={clusterRef}
-              aria-hidden="true"
-              className="absolute bottom-[8%] left-1/2 h-[5%] w-[44%] -translate-x-1/2 rounded-[50%] bg-ink/25 blur-xl"
-            />
-
-            <Pop kind="monitor" anchor={clusterRef} className="absolute inset-0">
-              <RetroMac fallback={<MonitorPlaceholder />} scrollProgress={scrollYProgress} />
-            </Pop>
-
-            <Pop
-              kind="spark"
-              anchor={clusterRef}
-              extra={0.32}
-              aria-hidden="true"
-              className="absolute top-[1%] left-[9%] size-[9%] text-accent"
-            >
-              <Sparkle className="size-full" />
-            </Pop>
-
-            <Pop
-              kind="chip"
-              as="p"
-              anchor={clusterRef}
-              extra={0.42}
-              from={{ rotate: 12 }}
-              to={{ rotate: -5 }}
-              aria-hidden="true"
-              className="label-mono absolute bottom-[10%] -left-[3%] flex items-center gap-2 rounded-full border border-line bg-card px-3 py-1.5 text-ink shadow-soft"
-            >
-              <span className="size-1.5 rounded-full bg-sage-ink" />
-              {hero.monitor.fileLabel}
-            </Pop>
-          </div>
+          <Pop kind="soft" className="label-mono flex items-center gap-4 text-ink-soft">
+            <span className="flex items-center gap-2.5">
+              <span aria-hidden="true" className="size-1.5 rounded-full bg-sage-ink" />
+              {hero.basedIn}
+            </span>
+            <LocalTime withSeconds className="hidden tabular-nums text-ink sm:inline" />
+          </Pop>
         </div>
 
-        {/* ── Tagline, CTAs, meta ────────────────────────────────────── */}
-        <div className="mt-9 grid gap-10 md:mt-[clamp(1.75rem,4svh,3rem)] lg:grid-cols-12 lg:items-end lg:gap-8">
-          <div className="lg:col-span-6">
+        {/* ── The name ────────────────────────────────────────────────── */}
+        <div className="@container">
+          <h1
+            className={cn(
+              "display flex flex-col text-ink md:flex-row md:justify-between",
+              HEADLINE_SIZE,
+            )}
+          >
+            <span className="sr-only">{site.name}</span>
+            <Word word={first} start={0} x={reduced ? undefined : firstX} className="pt-[0.06em]" />
+            <Word
+              word={last}
+              start={first.length}
+              x={reduced ? undefined : lastX}
+              className="-mt-[0.04em] pt-[0.06em] md:mt-0"
+            />
+          </h1>
+        </div>
+
+        {/* ── Role, tagline, CTAs ─────────────────────────────────────── */}
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-8">
+          <div className="lg:col-span-7">
+            <Pop kind="text">
+              <RoleFlip />
+            </Pop>
             <Pop
               kind="text"
               as="p"
-              className="max-w-[46ch] text-[clamp(1rem,0.92rem+0.35vw,1.2rem)] leading-relaxed text-ink-soft"
+              extra={0.08}
+              className="mt-5 max-w-[52ch] text-[clamp(1rem,0.92rem+0.3vw,1.15rem)] leading-relaxed text-ink-soft"
             >
               {hero.tagline}
             </Pop>
+          </div>
 
-            <div className="mt-7 flex flex-wrap gap-3">
+          <div className="flex flex-col gap-5 lg:col-span-5 lg:items-end">
+            <div className="flex flex-wrap gap-3 lg:justify-end">
               <Pop kind="button" extra={0.05}>
                 <PillButton href={hero.primaryCta.href} variant="ink">
                   {hero.primaryCta.label}
@@ -318,43 +223,15 @@ export default function Hero() {
                 </PillButton>
               </Pop>
             </div>
-          </div>
-
-          <div className="lg:col-span-5 lg:col-start-8">
-            <Pop
-              kind="soft"
-              className="label-mono flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-line pt-4 text-ink-soft"
-            >
-              <span className="flex items-center gap-2.5">
-                <span aria-hidden="true" className="size-1.5 rounded-full bg-sage-ink" />
-                {hero.basedIn}
-              </span>
-              <LocalTime withSeconds className="tabular-nums text-ink" />
-              <span aria-hidden="true" className="ml-auto hidden items-center gap-2 sm:flex">
-                {hero.scrollHint}
+            <Pop kind="soft" extra={0.2}>
+              <a
+                href="/#showcase"
+                className="label-mono link-sweep flex items-center gap-2 text-ink-soft hover:text-ink"
+              >
+                {hero.nextLabel}
                 <ArrowIcon className="size-3 rotate-90" />
-              </span>
+              </a>
             </Pop>
-
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {roles.map((role, index) => (
-                <Pop
-                  key={role}
-                  kind="chip"
-                  as="li"
-                  extra={index * 0.05}
-                  className="label-mono rounded-full border border-ink/10 px-3 py-1.5 text-ink rotate-(--tilt) transition-[rotate,translate] duration-500 ease-out-expo hover:-translate-y-0.5 hover:rotate-0 motion-reduce:transition-none"
-                  style={
-                    {
-                      backgroundColor: tintVar(TINTS[index % TINTS.length]),
-                      "--tilt": `${CHIP_TILTS[index % CHIP_TILTS.length]}deg`,
-                    } as CSSProperties
-                  }
-                >
-                  {role}
-                </Pop>
-              ))}
-            </ul>
           </div>
         </div>
       </div>

@@ -60,6 +60,7 @@ export const nav = {
   aboutPill: { label: "About", href: "/#about" },
   cta: { label: "Let's Talk", href: contact.whatsappHref },
   links: [
+    { label: "Now Showing", href: "/#showcase" },
     { label: "About", href: "/#about" },
     { label: "Services", href: "/#services" },
     { label: "Work", href: "/#work" },
@@ -91,35 +92,15 @@ export const hero = {
   basedIn: "Based in Tangerang, ID",
   scrollHint: "Scroll",
   marquee: roles,
-  /* Retro CRT monitor (3D) — the screen cycles through these project shots. */
-  monitor: {
-    model: "/src/3d/retro-mac.glb",
-    alt: "Retro CRT monitor showing David's projects",
-    fileLabel: "david.ts",
-    statusLabel: "✓ deployed",
-    code: [
-      "const david = {",
-      "  design: true,",
-      "  build: true,",
-      '  ship: "anywhere",',
-      "};",
-      "deploy(david); // live",
-    ],
-    screens: [
-      "/src/opt/hris-s.webp",
-      "/src/opt/jarwinn-s.webp",
-      "/src/opt/webkarbit-s.webp",
-      "/src/opt/solis-s.webp",
-      "/src/opt/sefashion-s.webp",
-      "/src/opt/antbox-s.webp",
-    ],
-  },
-  /* Loose sticker photos scattered around the hero. */
+  /* The role line under the name flips through these. */
+  rolePrefix: "Currently",
+  nextLabel: "Tune in below",
+  /* Loose sticker photos (used by the contact section). */
   stickers: ["/src/opt/jarwinn-hero-s.webp", "/src/opt/bsa-interior-s.webp", "/src/opt/joulwinn-app-s.webp"],
 } as const;
 
 export const about = {
-  fig: "Fig. 01",
+  fig: "Fig. 02",
   figLabel: "About",
   heading: ["Building things", "on the web."],
   paragraphs: [
@@ -156,7 +137,7 @@ export interface JalurStop {
 }
 
 export const jalur = {
-  fig: "Fig. 02",
+  fig: "Fig. 03",
   figLabel: "What I Do",
   statement:
     "Give me a problem, not a stack. I design it, build it, polish it and ship it to any screen. No handoffs. No excuses. Just products that work.",
@@ -470,8 +451,45 @@ export const projects: Project[] = projectSeeds.map(({ file, ...seed }) => ({
 
 export const featuredProjects: Project[] = projects.filter((project) => project.featured);
 
+/* "Now Showing": the retro CRT as a channel guide. Channel 00 boots into code,
+   every other channel plays one featured project on the monitor's screen. */
+export const showcase = {
+  fig: "Fig. 01",
+  figLabel: "Now Showing",
+  heading: ["Tune in", "to the work"],
+  intro:
+    "An old CRT with new channels. Pick one and the monitor plays it — every channel is a project that's shipped and in use.",
+  channelPrefix: "CH",
+  autoLabel: "Auto-tune",
+  pausedLabel: "Tuned",
+  visitLabel: "Visit project",
+  downloadLabel: "Download APK",
+  privateLabel: "Private build",
+  hint: "Move your cursor — the monitor follows",
+  boot: {
+    name: "david.ts",
+    title: "Boot Sequence",
+    tag: "Channel 00 · Code",
+    desc: "Where every project starts: a blank file, a few lines of intent, and a deploy.",
+    status: "✓ deployed",
+  },
+  monitor: {
+    model: "/src/3d/retro-mac.glb",
+    alt: "Retro CRT monitor playing David's projects",
+    code: [
+      "const david = {",
+      "  design: true,",
+      "  build: true,",
+      '  ship: "anywhere",',
+      "};",
+      "deploy(david); // live",
+    ],
+  },
+  channels: featuredProjects,
+};
+
 export const works = {
-  fig: "Fig. 03",
+  fig: "Fig. 04",
   figLabel: "Selected Work",
   heading: ["Selected", "Work"],
   years: site.years,
@@ -481,7 +499,7 @@ export const works = {
   downloadLabel: "Download APK",
   privateLabel: "Private build",
   archive: {
-    fig: "Fig. 04",
+    fig: "Fig. 05",
     figLabel: "Archive",
     heading: ["All", "Projects"],
     intro: "Everything in the folder — websites, apps, systems and poster edits.",
@@ -508,7 +526,7 @@ export interface ExperienceItem {
 }
 
 export const experience = {
-  fig: "Fig. 05",
+  fig: "Fig. 06",
   figLabel: "Experience",
   heading: ["Where I've", "Worked"],
   intro: "Four stops so far — from the production floor to owning the web end-to-end.",
@@ -565,7 +583,7 @@ export const experience = {
 };
 
 export const skills = {
-  fig: "Fig. 06",
+  fig: "Fig. 07",
   figLabel: "Skills & Tools",
   heading: ["Skills", "& Tools"],
   groups: [
@@ -594,7 +612,7 @@ export const skills = {
 };
 
 export const education = {
-  fig: "Fig. 07",
+  fig: "Fig. 08",
   figLabel: "Education & Certification",
   heading: ["Education &", "Certification"],
   items: [
@@ -638,7 +656,7 @@ const social = (
 };
 
 export const contactCta = {
-  fig: "Fig. 08",
+  fig: "Fig. 09",
   figLabel: "Contact",
   kicker: "Get in touch",
   headingLines: ["Let's build", "something clean", "& useful."],

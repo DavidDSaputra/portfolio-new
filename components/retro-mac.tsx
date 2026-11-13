@@ -5,20 +5,33 @@ import { useReducedMotion, type MotionValue } from "motion/react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { cn } from "@/lib/cn";
-import { hero } from "@/lib/content";
+import { showcase } from "@/lib/content";
 
-/* 3D retro CRT monitor (raw three.js). The "screen" mesh is re-skinned with a
-   canvas texture we paint ourselves: typed code first, then a cross-fading
-   slideshow of project screenshots, under a tiny title bar + CRT scanlines.
+/* 3D retro CRT monitor (raw three.js), used as a little TV. The "screen" mesh
+   is re-skinned with a canvas texture we paint ourselves: channel 0 types out
+   code, every other channel shows a project screenshot that slowly scrolls.
+   Switching channels plays a burst of CRT static and a "CH 03" overlay.
 
    The GLB's screen mesh has clean 0–1 planar UVs in glTF orientation (v = 0 at
    the top edge), so the canvas texture is used with flipY = false. */
 
+export interface MonitorChannel {
+  /** Screenshot; leave out for the typed-code channel. */
+  src?: string;
+  /** Title-bar label, e.g. "jarwinn-official.website". */
+  label: string;
+  /** Right side of the title bar, e.g. "Live". */
+  status: string;
+}
+
 interface RetroMacProps {
+  channels: readonly MonitorChannel[];
+  /** Index into `channels` the monitor is tuned to. */
+  active: number;
   className?: string;
   /** Shown (aria-hidden) until the model is ready, and kept if WebGL fails. */
   fallback?: ReactNode;
-  /** 0 → 1 scroll progress of the hero; adds a little extra rotation. */
+  /** 0 → 1 scroll progress of the section; adds a little extra rotation. */
   scrollProgress?: MotionValue<number>;
 }
 
@@ -30,10 +43,15 @@ const SCREEN_W = 768;
 const SCREEN_H = 592; // matches the screen mesh aspect (0.614 × 0.474)
 const BAR_H = 48;
 const CHAR_MS = 28;
-const CODE_HOLD_MS = 4400;
-const SHOT_HOLD_MS = 3000;
-const FADE_MS = 700;
 const BLINK_MS = 520;
+/** Length of the static burst between two channels. */
+const SWITCH_MS = 560;
+/** How long the "CH 03" overlay stays up after a switch. */
+const OSD_MS = 1600;
+/** Seconds for one top → bottom pass of a scrolling screenshot. */
+const PAN_S = 9;
+const NOISE_W = 192;
+const NOISE_H = 148;
 
 interface Palette {
   bg: string;
@@ -56,7 +74,7 @@ function readPalette(): Palette {
     inkSoft: token("--color-ink-soft", "#6b665c"),
     card: token("--color-card", "#ffffff"),
     line: token("--color-line", "#eadfd2"),
-    accent: token("--color-accent", "#315b8c"),
+    accent: token("--color-accent", "#f2a7b8"),
     butter: token("--color-butter", "#fff4c9"),
     mint: token("--color-mint", "#d9efe2"),
     sageInk: token("--color-sage-ink", "#4f6b58"),
@@ -65,7 +83,9 @@ function readPalette(): Palette {
 
 interface ScreenPainter {
   canvas: HTMLCanvasElement;
-  /** Advance the slideshow; returns true when the canvas was repainted. */
+  /** Tune to another channel (applied on the next paint). */
+  setTarget: (index: number) => void;
+  /** Advance the animation; returns true when the canvas was repainted. */
   update: (timeMs: number) => boolean;
   /** Paint one static frame (reduced motion); returns true when repainted. */
   paintStatic: () => boolean;
@@ -74,7 +94,13 @@ interface ScreenPainter {
   dispose: () => void;
 }
 
-function createScreenPainter(fontFamily: string): ScreenPainter | null {
+const smooth = (t: number) => t * t * (3 - 2 * t);
+
+function createScreenPainter(
+  fontFamily: string,
+  channels: readonly MonitorChannel[],
+  initial: number,
+): ScreenPainter | null {
   const canvas = document.createElement("canvas");
   canvas.width = SCREEN_W;
   canvas.height = SCREEN_H;
@@ -82,7 +108,7 @@ function createScreenPainter(fontFamily: string): ScreenPainter | null {
   if (!ctx) return null;
 
   const palette = readPalette();
-  const codeLines: readonly string[] = hero.monitor.code;
+  const codeLines: readonly string[] = showcase.monitor.code;
   const totalChars = codeLines.reduce((sum, line) => sum + line.length, 0);
   const typingMs = totalChars * CHAR_MS;
 
@@ -90,8 +116,8 @@ function createScreenPainter(fontFamily: string): ScreenPainter | null {
   let listener: (() => void) | null = null;
   let dirty = true;
 
-  // Slide 0 is the code screen; 1..n are screenshots (ready once decoded).
-  const shots = hero.monitor.screens.map((src) => {
+  const shots = channels.map((channel) => {
+    if (!channel.src) return null;
     const img = new Image();
     const shot = { img, ready: false };
     img.decoding = "async";
@@ -101,11 +127,9 @@ function createScreenPainter(fontFamily: string): ScreenPainter | null {
       dirty = true;
       listener?.();
     };
-    img.src = src;
+    img.src = channel.src;
     return shot;
   });
-  const slideCount = shots.length + 1;
-  const isReady = (index: number) => index === 0 || shots[index - 1].ready;
 
   if (document.fonts) {
     void document.fonts.ready.then(() => {
@@ -114,6 +138,26 @@ function createScreenPainter(fontFamily: string): ScreenPainter | null {
       listener?.();
     });
   }
+
+  // A few frames of grey snow, drawn scaled up with smoothing off.
+  const noiseFrames = Array.from({ length: 4 }, () => {
+    const frame = document.createElement("canvas");
+    frame.width = NOISE_W;
+    frame.height = NOISE_H;
+    const nctx = frame.getContext("2d");
+    if (nctx) {
+      const data = nctx.createImageData(NOISE_W, NOISE_H);
+      for (let i = 0; i < data.data.length; i += 4) {
+        const v = 40 + Math.random() * 200;
+        data.data[i] = v;
+        data.data[i + 1] = v;
+        data.data[i + 2] = v * 0.96;
+        data.data[i + 3] = 255;
+      }
+      nctx.putImageData(data, 0, 0);
+    }
+    return frame;
+  });
 
   // Static CRT overlay (scanlines + vignette + glass sheen), painted once.
   const overlay = document.createElement("canvas");
@@ -142,9 +186,11 @@ function createScreenPainter(fontFamily: string): ScreenPainter | null {
     octx.fillRect(0, 0, SCREEN_W, SCREEN_H);
   }
 
+  const areaH = SCREEN_H - BAR_H;
+
   const drawCode = (chars: number, cursorOn: boolean) => {
     ctx.fillStyle = palette.bg;
-    ctx.fillRect(0, BAR_H, SCREEN_W, SCREEN_H - BAR_H);
+    ctx.fillRect(0, BAR_H, SCREEN_W, areaH);
     ctx.font = `500 29px ${fontFamily}`;
     ctx.textBaseline = "middle";
     ctx.textAlign = "left";
@@ -184,30 +230,58 @@ function createScreenPainter(fontFamily: string): ScreenPainter | null {
     }
   };
 
-  const drawShot = (img: HTMLImageElement) => {
-    const areaH = SCREEN_H - BAR_H;
+  const drawNoise = (alpha: number, timeMs: number) => {
+    const frame = noiseFrames[Math.floor(timeMs / 40) % noiseFrames.length];
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(frame, 0, BAR_H, SCREEN_W, areaH);
+    ctx.restore();
+  };
+
+  /* `pan` 0 → 1 scrolls a tall screenshot from its top to its bottom. */
+  const drawShot = (img: HTMLImageElement, pan: number) => {
     const scale = Math.max(SCREEN_W / img.naturalWidth, areaH / img.naturalHeight);
     const sw = SCREEN_W / scale;
     const sh = areaH / scale;
-    // Cover-fit, anchored to the top (the interesting part of a page shot).
-    ctx.drawImage(img, (img.naturalWidth - sw) / 2, 0, sw, sh, 0, BAR_H, SCREEN_W, areaH);
+    const sy = Math.max(0, img.naturalHeight - sh) * pan;
+    ctx.drawImage(img, (img.naturalWidth - sw) / 2, sy, sw, sh, 0, BAR_H, SCREEN_W, areaH);
   };
 
-  const drawSlide = (index: number, chars: number, cursorOn: boolean) => {
-    if (index === 0) drawCode(chars, cursorOn);
-    else drawShot(shots[index - 1].img);
+  /* Ping-pong pan with eased ends, so the page lingers at top and bottom. */
+  const panAt = (elapsedMs: number) => {
+    const phase = (elapsedMs / 1000 / PAN_S) % 2;
+    const t = phase < 1 ? phase : 2 - phase;
+    return smooth(Math.min(1, Math.max(0, t * 1.3 - 0.15)));
   };
 
-  const drawChrome = () => {
+  const drawChannel = (index: number, elapsedMs: number, timeMs: number) => {
+    const shot = shots[index];
+    if (!shot) {
+      const chars = Math.min(totalChars, Math.floor(elapsedMs / CHAR_MS));
+      const blink = Math.floor(timeMs / BLINK_MS);
+      drawCode(chars, elapsedMs < typingMs || blink % 2 === 0);
+      return;
+    }
+    if (shot.ready) {
+      drawShot(shot.img, panAt(elapsedMs));
+    } else {
+      // Not decoded yet: keep the snow running until it arrives.
+      drawNoise(1, timeMs);
+    }
+  };
+
+  const drawChrome = (index: number) => {
+    const channel = channels[index];
     ctx.globalAlpha = 1;
     ctx.fillStyle = palette.card;
     ctx.fillRect(0, 0, SCREEN_W, BAR_H);
     ctx.fillStyle = palette.line;
     ctx.fillRect(0, BAR_H - 2, SCREEN_W, 2);
 
-    [palette.accent, palette.butter, palette.mint].forEach((color, index) => {
+    [palette.accent, palette.butter, palette.mint].forEach((color, dot) => {
       ctx.beginPath();
-      ctx.arc(46 + index * 24, BAR_H / 2 - 1, 7, 0, Math.PI * 2);
+      ctx.arc(46 + dot * 24, BAR_H / 2 - 1, 7, 0, Math.PI * 2);
       ctx.fillStyle = color;
       ctx.fill();
       ctx.lineWidth = 1.5;
@@ -219,85 +293,117 @@ function createScreenPainter(fontFamily: string): ScreenPainter | null {
     ctx.textBaseline = "middle";
     ctx.textAlign = "left";
     ctx.fillStyle = palette.ink;
-    ctx.fillText(hero.monitor.fileLabel, 130, BAR_H / 2);
+    ctx.fillText(channel?.label ?? "", 130, BAR_H / 2);
     ctx.textAlign = "right";
     ctx.fillStyle = palette.sageInk;
-    ctx.fillText(hero.monitor.statusLabel, SCREEN_W - 40, BAR_H / 2);
+    ctx.fillText(channel?.status ?? "", SCREEN_W - 40, BAR_H / 2);
     ctx.textAlign = "left";
-
-    ctx.drawImage(overlay, 0, 0);
   };
 
-  let current = 0;
+  /* Old-TV on-screen display: big channel number, bottom left. */
+  const drawOsd = (index: number, alpha: number) => {
+    if (alpha <= 0) return;
+    const text = `${showcase.channelPrefix} ${String(index).padStart(2, "0")}`;
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.font = `700 46px ${fontFamily}`;
+    ctx.textBaseline = "alphabetic";
+    ctx.textAlign = "left";
+    ctx.lineWidth = 8;
+    ctx.strokeStyle = "rgba(20, 18, 14, 0.55)";
+    ctx.strokeText(text, 40, SCREEN_H - 36);
+    ctx.fillStyle = "#b8f5c8";
+    ctx.fillText(text, 40, SCREEN_H - 36);
+    ctx.restore();
+  };
+
+  let current = Math.min(Math.max(0, initial), channels.length - 1);
   let previous = -1;
-  let slideStart = 0;
+  let pending: number | null = null;
+  let switchStart = 0;
   let lastChars = -1;
   let lastBlink = -1;
 
   const update = (timeMs: number) => {
-    let elapsed = timeMs - slideStart;
-    const hold = current === 0 ? CODE_HOLD_MS : SHOT_HOLD_MS;
-
-    if (elapsed > hold) {
-      let next = current;
-      for (let step = 1; step <= slideCount; step++) {
-        const candidate = (current + step) % slideCount;
-        if (isReady(candidate)) {
-          next = candidate;
-          break;
-        }
-      }
-      if (next !== current) {
+    if (pending !== null) {
+      if (pending !== current) {
         previous = current;
-        current = next;
-        slideStart = timeMs;
-        elapsed = 0;
-        dirty = true;
+        current = pending;
+        switchStart = timeMs;
       }
+      pending = null;
     }
 
-    const fading = previous !== -1 && elapsed < FADE_MS;
-    let chars = totalChars;
-    let cursorOn = false;
-    if (current === 0) {
-      chars = Math.min(totalChars, Math.floor(elapsed / CHAR_MS));
+    const elapsed = timeMs - switchStart;
+    const switching = previous !== -1 && elapsed < SWITCH_MS;
+    const osdOn = elapsed < OSD_MS && switchStart > 0;
+    const shot = shots[current];
+    // Screenshots pan (or wait behind snow), so they repaint every frame.
+    const animated = switching || osdOn || Boolean(shot);
+
+    if (!shot) {
+      const chars = Math.min(totalChars, Math.floor(elapsed / CHAR_MS));
       const blink = Math.floor(timeMs / BLINK_MS);
-      cursorOn = elapsed < typingMs || blink % 2 === 0;
       if (chars !== lastChars || blink !== lastBlink) dirty = true;
       lastChars = chars;
       lastBlink = blink;
     }
 
-    if (!dirty && !fading) return false;
+    if (!dirty && !animated) return false;
     dirty = false;
-
     ctx.globalAlpha = 1;
-    if (fading) {
-      drawSlide(previous, totalChars, false);
-      const t = elapsed / FADE_MS;
-      ctx.globalAlpha = t * t * (3 - 2 * t);
-      drawSlide(current, chars, cursorOn);
+
+    if (switching) {
+      const t = elapsed / SWITCH_MS;
+      // First half: the old picture dissolves into snow; second half: the new
+      // one tunes in out of it.
+      if (t < 0.5) drawChannel(previous, SWITCH_MS, timeMs);
+      else drawChannel(current, 0, timeMs);
+      drawNoise(1 - Math.abs(t - 0.5) * 1.6, timeMs);
+      // A bright roll bar sweeping down, like a TV losing vertical hold.
+      const barY = BAR_H + ((t * 1.6) % 1) * areaH;
+      ctx.fillStyle = "rgba(255, 255, 255, 0.18)";
+      ctx.fillRect(0, barY, SCREEN_W, 34);
     } else {
       if (previous !== -1) previous = -1;
-      drawSlide(current, chars, cursorOn);
+      drawChannel(current, Math.max(0, elapsed - SWITCH_MS / 2), timeMs);
     }
-    drawChrome();
+
+    if (osdOn) {
+      const fadeOut = 1 - Math.max(0, (elapsed - (OSD_MS - 400)) / 400);
+      drawOsd(current, Math.min(1, fadeOut));
+    }
+    drawChrome(current);
+    ctx.drawImage(overlay, 0, 0);
     return true;
   };
 
   const paintStatic = () => {
+    if (pending !== null) {
+      if (pending !== current) dirty = true;
+      current = pending;
+      pending = null;
+    }
     if (!dirty) return false;
     dirty = false;
     ctx.globalAlpha = 1;
-    const first = shots.findIndex((shot) => shot.ready);
-    if (first === -1) drawCode(totalChars, false);
-    else drawShot(shots[first].img);
-    drawChrome();
+    const shot = shots[current];
+    if (!shot) drawCode(totalChars, false);
+    else if (shot.ready) drawShot(shot.img, 0);
+    else {
+      ctx.fillStyle = palette.bg;
+      ctx.fillRect(0, BAR_H, SCREEN_W, areaH);
+    }
+    drawChrome(current);
+    ctx.drawImage(overlay, 0, 0);
     return true;
   };
 
   return {
     canvas,
+    setTarget: (index) => {
+      pending = Math.min(Math.max(0, index), channels.length - 1);
+    },
     update,
     paintStatic,
     onContent: (next) => {
@@ -307,6 +413,7 @@ function createScreenPainter(fontFamily: string): ScreenPainter | null {
       disposed = true;
       listener = null;
       shots.forEach((shot) => {
+        if (!shot) return;
         shot.img.onload = null;
         shot.img.src = "";
       });
@@ -342,11 +449,26 @@ function disposeObject(root: THREE.Object3D) {
 
 /* ── Component ───────────────────────────────────────────────────────────── */
 
-export default function RetroMac({ className, fallback, scrollProgress }: RetroMacProps) {
+export default function RetroMac({
+  channels,
+  active,
+  className,
+  fallback,
+  scrollProgress,
+}: RetroMacProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const reduced = useReducedMotion() ?? false;
   const [status, setStatus] = useState<Status>("loading");
+  /* The scene is built once; channel changes reach it through these refs. */
+  const activeRef = useRef(active);
+  const channelsRef = useRef(channels);
+  const tuneRef = useRef<((index: number) => void) | null>(null);
+
+  useEffect(() => {
+    activeRef.current = active;
+    tuneRef.current?.(active);
+  }, [active]);
 
   useEffect(() => {
     const wrap = wrapRef.current;
@@ -366,7 +488,11 @@ export default function RetroMac({ className, fallback, scrollProgress }: RetroM
       return;
     }
 
-    const painter = createScreenPainter(getComputedStyle(wrap).fontFamily || "monospace");
+    const painter = createScreenPainter(
+      getComputedStyle(wrap).fontFamily || "monospace",
+      channelsRef.current,
+      activeRef.current,
+    );
     if (!painter) {
       renderer.dispose();
       setStatus("failed");
@@ -384,6 +510,8 @@ export default function RetroMac({ className, fallback, scrollProgress }: RetroM
     let clock = 0;
     let radius = 1;
     let intro = reduced ? 0 : 1;
+    /* A little jolt of the whole set on every channel change. */
+    let kick = 0;
     const pointer = { x: 0, y: 0 };
     const eased = { x: 0, y: 0 };
 
@@ -415,15 +543,16 @@ export default function RetroMac({ className, fallback, scrollProgress }: RetroM
 
     const applyPose = () => {
       const progress = scrollProgress?.get() ?? 0;
-      pivot.rotation.y = BASE_YAW + eased.x * MAX_YAW + progress * 0.55 - intro * 1.15;
-      pivot.rotation.x = BASE_PITCH + eased.y * MAX_PITCH - progress * 0.1 + intro * 0.18;
-      pivot.rotation.z = reduced ? 0 : Math.sin(clock * 0.7) * 0.012;
+      const jolt = reduced ? 0 : Math.sin(kick * 18) * kick * 0.05;
+      pivot.rotation.y = BASE_YAW + eased.x * MAX_YAW + (progress - 0.5) * 0.5 - intro * 1.15;
+      pivot.rotation.x = BASE_PITCH + eased.y * MAX_PITCH - progress * 0.08 + intro * 0.18;
+      pivot.rotation.z = (reduced ? 0 : Math.sin(clock * 0.7) * 0.012) + jolt;
       pivot.position.y = reduced ? 0 : Math.sin(clock * 1.15) * 0.028;
     };
 
     const renderOnce = () => {
       if (!ready || cancelled) return;
-      if (reduced ? painter.paintStatic() : painter.update(clock * 1000)) {
+      if (reduced ? painter.paintStatic() : painter.update(performance.now())) {
         screenTexture.needsUpdate = true;
       }
       applyPose();
@@ -452,7 +581,9 @@ export default function RetroMac({ className, fallback, scrollProgress }: RetroM
       eased.x += (pointer.x - eased.x) * follow;
       eased.y += (pointer.y - eased.y) * follow;
       intro += (0 - intro) * (1 - Math.exp(-dt * 2.8));
-      if (painter.update(clock * 1000)) screenTexture.needsUpdate = true;
+      kick += (0 - kick) * (1 - Math.exp(-dt * 4));
+      // Wall-clock time, so a throttled tab still finishes a channel switch on time.
+      if (painter.update(now)) screenTexture.needsUpdate = true;
       applyPose();
       renderer.render(scene, camera);
     };
@@ -469,12 +600,18 @@ export default function RetroMac({ className, fallback, scrollProgress }: RetroM
       }
     };
 
+    tuneRef.current = (index) => {
+      painter.setTarget(index);
+      kick = 1;
+      if (reduced) renderOnce();
+    };
+
     painter.onContent(() => {
       if (reduced) renderOnce();
     });
 
     new GLTFLoader().load(
-      hero.monitor.model,
+      showcase.monitor.model,
       (gltf) => {
         const model = gltf.scene;
         if (cancelled) {
@@ -565,6 +702,7 @@ export default function RetroMac({ className, fallback, scrollProgress }: RetroM
       cancelled = true;
       ready = false;
       running = false;
+      tuneRef.current = null;
       cancelAnimationFrame(raf);
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
@@ -589,7 +727,7 @@ export default function RetroMac({ className, fallback, scrollProgress }: RetroM
     <div
       ref={wrapRef}
       role="img"
-      aria-label={hero.monitor.alt}
+      aria-label={showcase.monitor.alt}
       className={cn("relative size-full font-mono", className)}
     >
       {fallback ? (
