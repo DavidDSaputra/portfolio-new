@@ -69,15 +69,15 @@ function readPalette(): Palette {
   const css = getComputedStyle(document.documentElement);
   const token = (name: string, fallback: string) => css.getPropertyValue(name).trim() || fallback;
   return {
-    bg: token("--color-bg", "#faf6f0"),
-    ink: token("--color-ink", "#35322c"),
-    inkSoft: token("--color-ink-soft", "#6b665c"),
-    card: token("--color-card", "#ffffff"),
-    line: token("--color-line", "#eadfd2"),
-    accent: token("--color-accent", "#f2a7b8"),
-    butter: token("--color-butter", "#fff4c9"),
-    mint: token("--color-mint", "#d9efe2"),
-    sageInk: token("--color-sage-ink", "#4f6b58"),
+    bg: token("--color-bg", "#fdfbe6"),
+    ink: token("--color-ink", "#133458"),
+    inkSoft: token("--color-ink-soft", "#4a5e78"),
+    card: token("--color-card", "#fffef7"),
+    line: token("--color-line", "#ebe5c2"),
+    accent: token("--color-accent", "#d99b21"),
+    butter: token("--color-butter", "#faf7bb"),
+    mint: token("--color-mint", "#ecedcc"),
+    sageInk: token("--color-sage-ink", "#5a5f14"),
   };
 }
 
@@ -165,7 +165,7 @@ function createScreenPainter(
   overlay.height = SCREEN_H;
   const octx = overlay.getContext("2d");
   if (octx) {
-    octx.fillStyle = "rgba(20, 18, 14, 0.07)";
+    octx.fillStyle = "rgba(8, 22, 38, 0.07)";
     for (let y = 0; y < SCREEN_H; y += 6) octx.fillRect(0, y, SCREEN_W, 2);
     const vignette = octx.createRadialGradient(
       SCREEN_W / 2,
@@ -175,8 +175,8 @@ function createScreenPainter(
       SCREEN_H / 2,
       SCREEN_W * 0.72,
     );
-    vignette.addColorStop(0, "rgba(20, 18, 14, 0)");
-    vignette.addColorStop(1, "rgba(20, 18, 14, 0.38)");
+    vignette.addColorStop(0, "rgba(8, 22, 38, 0)");
+    vignette.addColorStop(1, "rgba(8, 22, 38, 0.38)");
     octx.fillStyle = vignette;
     octx.fillRect(0, 0, SCREEN_W, SCREEN_H);
     const sheen = octx.createLinearGradient(0, 0, SCREEN_W * 0.7, SCREEN_H);
@@ -285,7 +285,7 @@ function createScreenPainter(
       ctx.fillStyle = color;
       ctx.fill();
       ctx.lineWidth = 1.5;
-      ctx.strokeStyle = "rgba(53, 50, 44, 0.22)";
+      ctx.strokeStyle = "rgba(19, 52, 88, 0.22)";
       ctx.stroke();
     });
 
@@ -310,9 +310,9 @@ function createScreenPainter(
     ctx.textBaseline = "alphabetic";
     ctx.textAlign = "left";
     ctx.lineWidth = 8;
-    ctx.strokeStyle = "rgba(20, 18, 14, 0.55)";
+    ctx.strokeStyle = "rgba(8, 22, 38, 0.55)";
     ctx.strokeText(text, 40, SCREEN_H - 36);
-    ctx.fillStyle = "#b8f5c8";
+    ctx.fillStyle = "#faf7bb";
     ctx.fillText(text, 40, SCREEN_H - 36);
     ctx.restore();
   };

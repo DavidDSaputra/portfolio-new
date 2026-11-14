@@ -28,8 +28,10 @@ const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1
 /* Page content made inert while the menu is open (the header is outside both). */
 const INERT_TARGETS = "main, footer";
 
-const glassPill =
-  "pointer-events-auto inline-flex h-10 shrink-0 items-center rounded-full border border-line bg-card/80 text-sm font-semibold text-ink shadow-soft backdrop-blur-md transition-[transform,box-shadow,background-color] duration-500 ease-out-expo";
+/* Header items use the site's tab shape (see the tab utility in globals.css). */
+const tab =
+  "tab pointer-events-auto inline-flex h-10 shrink-0 items-center bg-card text-sm font-semibold text-ink";
+const tabPress = "tab-press";
 
 type TintStyle = CSSProperties & { "--tint": string };
 
@@ -217,11 +219,7 @@ export default function SiteHeader() {
               aria-expanded={open}
               aria-controls={MENU_ID}
               onClick={() => (open ? closeMenu(false) : setOpen(true))}
-              className={cn(
-                glassPill,
-                "gap-2.5 px-3.5 hover:-translate-y-0.5 hover:bg-card hover:shadow-lift sm:px-4",
-                open && "bg-card",
-              )}
+              className={cn(tab, tabPress, "gap-2.5 px-3.5 sm:px-4", open && "bg-butter")}
             >
               <MenuGlyph open={open} />
               <span>{open ? nav.closeLabel : nav.menuLabel}</span>
@@ -231,10 +229,7 @@ export default function SiteHeader() {
               onClick={() => {
                 if (open) closeMenu(false);
               }}
-              className={cn(
-                glassPill,
-                "hidden px-4 hover:-translate-y-0.5 hover:bg-butter hover:shadow-lift md:inline-flex",
-              )}
+              className={cn(tab, tabPress, "hidden px-4 hover:bg-butter md:inline-flex")}
             >
               {nav.aboutPill.label}
             </a>
@@ -245,14 +240,11 @@ export default function SiteHeader() {
             href={HOME_HREF}
             onClick={onHomeClick}
             aria-label={site.name}
-            className={cn(
-              glassPill,
-              "group/mark gap-2.5 p-1 hover:-translate-y-0.5 hover:bg-card hover:shadow-lift sm:pr-4",
-            )}
+            className={cn(tab, tabPress, "group/mark gap-2.5 py-1 pr-1 pl-1 sm:pr-4")}
           >
             <span
               aria-hidden="true"
-              className="grid size-8 place-items-center rounded-full bg-ink font-display text-[0.95rem] leading-none tracking-wide text-bg transition-transform duration-500 ease-out-expo group-hover/mark:-rotate-12 group-hover/mark:scale-105"
+              className="grid size-[1.875rem] place-items-center rounded-[3px] bg-ink font-display text-[0.95rem] leading-none tracking-wide text-butter transition-transform duration-300 ease-out-expo group-hover/mark:-rotate-6"
             >
               {site.initials}
             </span>
@@ -263,25 +255,19 @@ export default function SiteHeader() {
 
           {/* Right: status + CTA */}
           <div className="flex min-w-0 items-center justify-end gap-2">
-            <p
-              className={cn(
-                glassPill,
-                "label-mono hidden gap-2.5 px-4 font-normal text-ink-soft xl:inline-flex",
-              )}
-            >
+            <p className={cn(tab, "label-mono hidden gap-2.5 px-3.5 font-normal text-ink-soft xl:inline-flex")}>
               <AvailabilityDot animated={!reduce} />
               <span className="text-ink">{site.availability}</span>
-              <span aria-hidden="true" className="h-3 w-px bg-line" />
-              <LocalTime className="tabular-nums" />
+              <span aria-hidden="true" className="h-4 w-[1.5px] bg-ink/25" />
+              <LocalTime withSeconds className="tabular-nums text-ink" />
             </p>
-            <PillButton
+            <a
               href={nav.cta.href}
-              variant="ink"
-              size="sm"
-              className="pointer-events-auto"
+              className={cn(tab, tabPress, "group/cta gap-2 bg-accent pr-2.5 pl-4 whitespace-nowrap")}
             >
-              {nav.cta.label}
-            </PillButton>
+              <span>{nav.cta.label}</span>
+              <ArrowIcon className="size-4 transition-transform duration-300 ease-out-expo group-hover/cta:translate-x-0.5" />
+            </a>
           </div>
         </div>
       </motion.div>
@@ -350,9 +336,9 @@ export default function SiteHeader() {
                             </span>
                             <span
                               aria-hidden="true"
-                              className="grid size-9 shrink-0 -rotate-45 scale-75 place-items-center rounded-full bg-ink text-bg opacity-0 transition-[transform,opacity] duration-500 ease-out-expo group-hover/link:scale-100 group-hover/link:rotate-0 group-hover/link:opacity-100 group-focus-visible/link:scale-100 group-focus-visible/link:rotate-0 group-focus-visible/link:opacity-100"
+                              className="grid size-9 shrink-0 scale-75 place-items-center rounded-[4px] bg-ink text-bg opacity-0 transition-[transform,opacity] duration-500 ease-out-expo group-hover/link:scale-100 group-hover/link:opacity-100 group-focus-visible/link:scale-100 group-focus-visible/link:opacity-100"
                             >
-                              <ArrowIcon className="size-4" />
+                              <ArrowIcon className="size-4 -rotate-45 transition-transform duration-500 ease-out-expo group-hover/link:rotate-0 group-focus-visible/link:rotate-0" />
                             </span>
                           </a>
                         </li>
@@ -401,7 +387,7 @@ export default function SiteHeader() {
                             href={social.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="label-mono inline-flex h-8 items-center rounded-full border border-ink/15 bg-card/70 px-3 text-ink transition-[transform,background-color] duration-500 ease-out-expo hover:-translate-y-0.5 hover:bg-card"
+                            className="tab tab-press label-mono inline-flex h-8 items-center bg-card px-3 text-ink [--tab-depth:2px]"
                           >
                             {social.label}
                           </a>

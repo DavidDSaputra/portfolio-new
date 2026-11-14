@@ -165,7 +165,7 @@ function PhotoSticker() {
             {/* Tape */}
             <span
               aria-hidden="true"
-              className="absolute -top-3.5 left-1/2 z-10 h-7 w-28 -translate-x-1/2 rotate-[4deg] rounded-[3px] border border-ink/5 bg-butter/85 shadow-[0_1px_2px_rgb(53_50_44/0.08)]"
+              className="absolute -top-3.5 left-1/2 z-10 h-7 w-28 -translate-x-1/2 rotate-[4deg] rounded-[3px] border border-ink/5 bg-butter/85 shadow-[0_1px_2px_rgb(19_52_88/0.08)]"
             />
             <img
               src={about.photo.src}

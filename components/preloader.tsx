@@ -192,7 +192,7 @@ export default function Preloader() {
                   event.stopPropagation();
                   open();
                 }}
-                className="group/open inline-flex h-14 items-center gap-3 rounded-full bg-bg pr-2 pl-7 text-base font-semibold text-ink shadow-lift focus-visible:outline-bg"
+                className="tab tab-press group/open inline-flex h-14 items-center gap-3 bg-bg pr-2 pl-7 text-base font-semibold text-ink [--tab-depth:4px] [--tab-line:var(--color-bg)] [--tab-shadow:var(--color-accent)] focus-visible:outline-bg"
                 initial={reduced ? false : { opacity: 0, y: 16, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ type: "spring", stiffness: 320, damping: 22 }}
@@ -200,7 +200,7 @@ export default function Preloader() {
                 <span>{preloader.ready}</span>
                 <span
                   aria-hidden="true"
-                  className="grid size-10 place-items-center rounded-full bg-accent text-bg transition-transform duration-500 ease-out-expo group-hover/open:scale-110"
+                  className="grid size-10 place-items-center rounded-[3px] bg-accent text-ink transition-transform duration-500 ease-out-expo group-hover/open:scale-110"
                 >
                   {/* two arrows parting, like the curtain */}
                   <svg viewBox="0 0 20 20" fill="none" className="size-[48%]">

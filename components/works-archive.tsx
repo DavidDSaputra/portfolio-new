@@ -60,7 +60,7 @@ function ArchiveCard({ project, index }: { project: Project; index: number }) {
             "absolute inset-0 size-full transition-transform duration-[900ms] ease-out-expo",
             "motion-reduce:transition-none motion-reduce:group-hover/card:scale-100",
             contain
-              ? "object-contain p-2.5 drop-shadow-[0_8px_14px_rgb(53_50_44/0.22)] group-hover/card:scale-[1.05] sm:p-3.5"
+              ? "object-contain p-2.5 drop-shadow-[0_8px_14px_rgb(19_52_88/0.22)] group-hover/card:scale-[1.05] sm:p-3.5"
               : "object-cover object-top group-hover/card:scale-[1.06]",
           )}
         />
@@ -68,7 +68,7 @@ function ArchiveCard({ project, index }: { project: Project; index: number }) {
           <span
             aria-hidden="true"
             className={cn(
-              "absolute top-2 right-2 grid size-8 scale-75 place-items-center rounded-full bg-card text-ink opacity-0 shadow-soft",
+              "absolute top-2 right-2 grid size-8 scale-75 place-items-center rounded-[4px] border-[1.5px] border-ink bg-card text-ink opacity-0 shadow-[2px_2px_0_0_var(--color-ink)]",
               "transition-[opacity,scale,rotate] duration-500 ease-out-expo",
               "group-hover/card:scale-100 group-hover/card:opacity-100 group-focus-visible/card:scale-100 group-focus-visible/card:opacity-100",
               project.href ? "-rotate-45 group-hover/card:rotate-0" : "rotate-90",
@@ -184,19 +184,18 @@ export default function WorksArchive() {
                   aria-pressed={on}
                   onClick={() => setFilter(item.key)}
                   className={cn(
-                    "relative isolate inline-flex h-11 items-center gap-2 rounded-full border px-4 text-sm font-semibold",
-                    "transition-colors duration-300",
-                    on ? "border-transparent text-bg" : "border-line bg-card text-ink hover:border-ink/40",
+                    "tab tab-press relative isolate inline-flex h-11 items-center gap-2 px-4 text-sm font-semibold",
+                    on ? "text-bg" : "bg-card text-ink",
                   )}
                 >
                   {on &&
                     (reduced ? (
-                      <span aria-hidden="true" className="absolute -inset-px -z-10 rounded-full bg-ink" />
+                      <span aria-hidden="true" className="absolute inset-0 -z-10 rounded-[4.5px] bg-ink" />
                     ) : (
                       <motion.span
                         aria-hidden="true"
                         layoutId="archive-filter-pill"
-                        className="absolute -inset-px -z-10 rounded-full bg-ink"
+                        className="absolute inset-0 -z-10 rounded-[4.5px] bg-ink"
                         transition={{ duration: 0.6, ease: EASE }}
                       />
                     ))}

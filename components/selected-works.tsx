@@ -124,7 +124,7 @@ function ProjectAction({ project }: { project: Project }) {
     );
   }
   return (
-    <span className="inline-flex h-12 items-center rounded-full border border-dashed border-ink/30 px-5 text-[0.95rem] font-semibold text-ink/80">
+    <span className="inline-flex h-12 items-center rounded-[6px] border-[1.5px] border-dashed border-ink/30 px-5 text-[0.95rem] font-semibold text-ink/80">
       {works.privateLabel}
     </span>
   );

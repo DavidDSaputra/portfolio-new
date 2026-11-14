@@ -587,7 +587,7 @@ export default function Experience() {
         </div>
 
         {/* CV download for small screens (the panel footer is desktop-only) */}
-        <Reveal className="mt-8 flex items-center justify-between gap-4 rounded-full border border-line bg-card py-2 pr-2 pl-5 shadow-soft lg:hidden">
+        <Reveal className="mt-8 flex items-center justify-between gap-4 rounded-[8px] border border-line bg-card py-2 pr-2.5 pl-4 lg:hidden">
           <span className="label-mono flex min-w-0 items-center gap-2 normal-case">
             <KindIcon kind="doc" className="size-4 shrink-0" />
             <span className="truncate">{experience.cvFile.name}</span>

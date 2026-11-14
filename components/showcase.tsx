@@ -87,17 +87,20 @@ const RetroMac = dynamic(() => import("@/components/retro-mac"), {
   ),
 });
 
+/* These sit inside the active (navy) channel row, so the shadow goes mustard. */
+const ON_DARK = "[--tab-line:var(--color-card)] [--tab-shadow:var(--color-accent)]";
+
 function EntryLink({ entry }: { entry: Entry }) {
   if (entry.href) {
     return (
-      <PillButton href={entry.href} variant="white">
+      <PillButton href={entry.href} variant="white" className={ON_DARK}>
         {showcase.visitLabel}
       </PillButton>
     );
   }
   if (entry.download) {
     return (
-      <PillButton href={entry.download} variant="white" download>
+      <PillButton href={entry.download} variant="white" download className={ON_DARK}>
         {showcase.downloadLabel}
       </PillButton>
     );
@@ -208,7 +211,7 @@ export default function Showcase() {
                 type="button"
                 onClick={() => setAuto((value) => !value)}
                 aria-pressed={auto}
-                className="flex items-center gap-2 rounded-full border border-line px-3 py-1 text-ink transition-colors hover:bg-card"
+                className="tab tab-press flex items-center gap-2 bg-card px-3 py-1 text-ink [--tab-depth:2px]"
               >
                 <span
                   aria-hidden="true"
@@ -225,7 +228,7 @@ export default function Showcase() {
                   <li key={entry.key}>
                     <div
                       className={cn(
-                        "relative overflow-hidden rounded-2xl transition-colors duration-500 ease-out-expo",
+                        "relative overflow-hidden rounded-[6px] transition-colors duration-500 ease-out-expo",
                         on ? "bg-ink text-bg" : "text-ink hover:bg-card",
                       )}
                     >

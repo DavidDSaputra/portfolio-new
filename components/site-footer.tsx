@@ -18,12 +18,12 @@ function BackToTop() {
     <button
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" })}
-      className="group/top inline-flex h-12 shrink-0 items-center gap-3 rounded-full border border-line bg-card pr-2 pl-5 text-[0.95rem] font-semibold whitespace-nowrap text-ink shadow-soft transition-[transform,box-shadow] duration-500 ease-out-expo hover:-translate-y-0.5 hover:shadow-lift"
+      className="tab tab-press group/top inline-flex h-12 shrink-0 items-center gap-3 bg-card pr-2 pl-5 text-[0.95rem] font-semibold whitespace-nowrap text-ink"
     >
       <span>{footer.backToTop}</span>
       <span
         aria-hidden="true"
-        className="relative grid size-8 place-items-center overflow-hidden rounded-full bg-ink text-bg"
+        className="relative grid size-8 place-items-center overflow-hidden rounded-[3px] bg-ink text-bg"
       >
         <ArrowIcon className="size-[45%] -rotate-90 transition-transform duration-500 ease-out-expo group-hover/top:-translate-y-[220%] group-focus-visible/top:-translate-y-[220%]" />
         <ArrowIcon className="absolute size-[45%] translate-y-[220%] -rotate-90 transition-transform duration-500 ease-out-expo group-hover/top:translate-y-0 group-focus-visible/top:translate-y-0" />

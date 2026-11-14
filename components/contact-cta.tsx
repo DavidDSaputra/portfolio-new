@@ -228,7 +228,7 @@ function ChannelRow({ channel, index }: { channel: Channel; index: number }) {
         {/* Arrow circle: one arrow leaves top-right while another slides in. */}
         <span
           aria-hidden="true"
-          className="relative col-start-2 row-span-2 row-start-1 grid size-9 place-items-center overflow-hidden rounded-full border border-ink/15 bg-card text-ink transition-colors duration-500 ease-out-expo group-hover:border-ink group-hover:bg-ink group-hover:text-bg group-focus-visible:border-ink group-focus-visible:bg-ink group-focus-visible:text-bg md:col-start-4 md:row-span-1 md:size-12"
+          className="relative col-start-2 row-span-2 row-start-1 grid size-9 place-items-center overflow-hidden rounded-[4px] border-[1.5px] border-ink bg-card text-ink transition-colors duration-500 ease-out-expo group-hover:border-ink group-hover:bg-ink group-hover:text-bg group-focus-visible:border-ink group-focus-visible:bg-ink group-focus-visible:text-bg md:col-start-4 md:row-span-1 md:size-12"
         >
           <ArrowIcon className="size-[42%] -rotate-45 transition-transform duration-500 ease-out-expo group-hover:translate-x-[170%] group-hover:-translate-y-[170%] group-focus-visible:translate-x-[170%] group-focus-visible:-translate-y-[170%]" />
           <ArrowIcon className="absolute size-[42%] -translate-x-[170%] translate-y-[170%] -rotate-45 transition-transform duration-500 ease-out-expo group-hover:translate-x-0 group-hover:translate-y-0 group-focus-visible:translate-x-0 group-focus-visible:translate-y-0" />
@@ -303,7 +303,7 @@ export default function ContactCta() {
                 </PillButton>
               </Magnetic>
 
-              <p className="inline-flex items-center gap-3 rounded-full border border-card bg-card/70 py-2.5 pr-5 pl-4 text-sm font-medium text-ink shadow-soft backdrop-blur-sm">
+              <p className="tab inline-flex items-center gap-3 bg-card py-2.5 pr-5 pl-4 text-sm font-medium text-ink">
                 <span aria-hidden="true" className="relative grid size-2.5 place-items-center">
                   <span className="absolute inset-0 rounded-full bg-sage motion-safe:animate-ping" />
                   <span className="relative size-2.5 rounded-full bg-sage-ink" />

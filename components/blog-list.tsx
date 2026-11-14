@@ -170,7 +170,7 @@ function CodeBlock({ code }: { code: string }) {
           type="button"
           onClick={() => copy(code)}
           className={cn(
-            "label-mono inline-flex h-8 items-center gap-1.5 rounded-full border px-3 text-[0.64rem]",
+            "label-mono inline-flex h-8 items-center gap-1.5 rounded-[4px] border-[1.5px] px-3 text-[0.64rem]",
             "transition-colors duration-300 focus-visible:outline-bg",
             copied
               ? "border-mint bg-mint text-ink"
@@ -200,9 +200,7 @@ function ShareRow({ post }: { post: BlogPost }) {
   const text = encodeURIComponent(post.title + blogPage.share.textSuffix);
 
   const pill = cn(
-    "label-mono inline-flex h-9 items-center gap-2 rounded-full border border-line bg-card px-3.5 text-[0.66rem] text-ink",
-    "transition-[transform,border-color,box-shadow] duration-500 ease-out-expo",
-    "hover:-translate-y-0.5 hover:border-ink hover:shadow-soft",
+    "tab tab-press label-mono inline-flex h-9 items-center gap-2 bg-card px-3.5 text-[0.66rem] text-ink [--tab-depth:2px]",
   );
 
   return (
@@ -225,7 +223,7 @@ function ShareRow({ post }: { post: BlogPost }) {
         <button
           type="button"
           onClick={() => copy(pageUrl)}
-          className={cn(pill, copied && "border-sage bg-mint")}
+          className={cn(pill, copied && "bg-mint")}
         >
           <Icon d={copied ? ICON_CHECK : ICON_COPY} className="size-3.5" />
           <span aria-live="polite">
@@ -362,8 +360,8 @@ function ArticleDialog({ post, onClose }: { post: BlogPost; onClose: () => void 
             onClick={onClose}
             aria-label={blogPage.dialog.closeLabel}
             className={cn(
-              "group/close grid size-10 shrink-0 place-items-center rounded-full border border-ink/15 bg-card text-ink",
-              "transition-colors duration-300 hover:bg-ink hover:text-bg",
+              "tab tab-press group/close grid size-10 shrink-0 place-items-center bg-card text-ink",
+              "hover:bg-ink hover:text-bg",
             )}
           >
             <svg
@@ -480,14 +478,13 @@ function PostCard({
           <span
             aria-hidden="true"
             className={cn(
-              "grid size-11 -rotate-45 place-items-center rounded-full border border-ink/10 text-ink",
-              "transition-[transform,background-color,color] duration-500 ease-out-expo",
-              "group-hover:rotate-0 group-hover:bg-ink! group-hover:text-bg group-focus-within:rotate-0",
-              "motion-reduce:rotate-0",
+              "grid size-11 place-items-center rounded-[4px] border-[1.5px] border-ink text-ink",
+              "transition-[background-color,color] duration-500 ease-out-expo",
+              "group-hover:bg-ink! group-hover:text-bg",
             )}
             style={{ backgroundColor: tint }}
           >
-            <ArrowIcon className="size-4" />
+            <ArrowIcon className="size-4 -rotate-45 transition-transform duration-500 ease-out-expo group-hover:rotate-0 group-focus-within:rotate-0 motion-reduce:rotate-0" />
           </span>
         </div>
       </div>
