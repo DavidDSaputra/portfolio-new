@@ -15,7 +15,7 @@ import FigLabel from "@/components/ui/fig-label";
 import PillButton, { ArrowIcon } from "@/components/ui/pill-button";
 import { Reveal, RevealTitle } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
-import { TINTS, about, contactCta, hero, tintVar } from "@/lib/content";
+import { TINTS, contactCta, hero, tintVar } from "@/lib/content";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -47,17 +47,6 @@ const stickers: StickerSpec[] = [
     className:
       "top-5 -right-6 w-[6.25rem] sm:top-8 sm:right-6 sm:w-[clamp(9rem,20vw,17.5rem)] lg:top-[7%] lg:right-[5%]",
     frameClassName: "rounded-xl sm:rounded-2xl",
-  },
-  {
-    src: about.mascots[0].src,
-    width: 1024,
-    height: 1024,
-    rotate: -8,
-    depth: 28,
-    floatDelay: 1.6,
-    className:
-      "-right-3 bottom-4 w-[5.75rem] sm:right-[5%] sm:bottom-[7%] sm:w-[clamp(7rem,14.5vw,13rem)]",
-    frameClassName: "rounded-2xl sm:rounded-[1.75rem]",
   },
   {
     src: hero.stickers[2],

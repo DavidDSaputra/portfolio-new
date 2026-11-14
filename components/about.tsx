@@ -123,12 +123,7 @@ function TraitChips() {
   );
 }
 
-/* ── Sticker photo + halo + mascots ──────────────────────────────────────── */
-
-const MASCOT_SPOTS = [
-  { position: "left-0 bottom-[4%] sm:left-[2%]", tilt: "-rotate-[9deg]", delay: "0s" },
-  { position: "right-0 top-[2%] sm:right-[2%]", tilt: "rotate-[8deg]", delay: "-3s" },
-];
+/* ── Sticker photo + halo ────────────────────────────────────────────────── */
 
 function PhotoSticker() {
   const reduced = useReducedMotion();
@@ -137,7 +132,6 @@ function PhotoSticker() {
   const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.4 });
   const photoY = useTransform(smooth, [0, 1], [36, -36]);
   const haloY = useTransform(smooth, [0, 1], [-24, 24]);
-  const mascotY = useTransform(smooth, [0, 1], [56, -56]);
 
   return (
     <div ref={ref} className="relative isolate mx-auto w-full max-w-[26rem] px-6 py-10 sm:px-10 sm:py-12">
@@ -183,41 +177,6 @@ function PhotoSticker() {
           </motion.figure>
         </Reveal>
       </motion.div>
-
-      {/* Mascot stickers */}
-      {about.mascots.map((mascot, index) => {
-        const spot = MASCOT_SPOTS[index % MASCOT_SPOTS.length];
-        return (
-          <motion.div
-            key={mascot.src}
-            aria-hidden="true"
-            className={cn("pointer-events-none absolute z-10 w-[26%] max-w-28", spot.position)}
-            style={reduced ? undefined : { y: mascotY }}
-          >
-            <Reveal delay={0.25 + index * 0.12} y={24}>
-              <div className={spot.tilt}>
-                <div
-                  className={cn(
-                    "overflow-hidden rounded-[1.1rem] border-[5px] border-card bg-card shadow-soft",
-                    !reduced && "animate-float",
-                  )}
-                  style={{ animationDelay: spot.delay }}
-                >
-                  <img
-                    src={mascot.src}
-                    alt=""
-                    width={1024}
-                    height={1024}
-                    loading="lazy"
-                    decoding="async"
-                    className="aspect-square w-full rounded-[0.8rem] object-cover"
-                  />
-                </div>
-              </div>
-            </Reveal>
-          </motion.div>
-        );
-      })}
     </div>
   );
 }

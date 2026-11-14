@@ -114,10 +114,6 @@ export const about = {
     alt: "Portrait of David Saputra",
     caption: "David Saputra — Web Developer & Visual Designer",
   },
-  mascots: [
-    { src: "/src/opt/mascot-noodle.webp", alt: "" },
-    { src: "/src/opt/mascot-runner.webp", alt: "" },
-  ],
   meta: [
     { label: "Based in", value: "Tangerang, Indonesia" },
     { label: "Education", value: "SMKN 5 Kab. Tangerang — Software Engineering (RPL)" },
